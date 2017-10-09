@@ -1,4 +1,30 @@
-{literal}
+<?php /* Smarty version 3.1.27, created on 2017-10-08 12:26:37
+         compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:29428241859da43adda2195_10983518%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '6f7ab4b22b3765f67e0e24aa243ceca8b94e1e5d' => 
+    array (
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl',
+      1 => 1507476396,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '29428241859da43adda2195_10983518',
+  'has_nocache_code' => false,
+  'version' => '3.1.27',
+  'unifunc' => 'content_59da43addd3257_15529098',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_59da43addd3257_15529098')) {
+function content_59da43addd3257_15529098 ($_smarty_tpl) {
+
+$_smarty_tpl->properties['nocache_hash'] = '29428241859da43adda2195_10983518';
+?>
+
 <style>
 
 		.preview__header{font-size:12px;height:54px;background-color:#262626;z-index:100;line-height:54px;margin-bottom:1px}
@@ -32,7 +58,7 @@
 		.navbar-brand label {color: #6f9a37; font-weight: 500; cursor: pointer}
 		
 </style>
-{/literal}
+
 	
 		<div class="preview__header navbar-fixed-top" data-view="ctaHeader">
 		
@@ -66,4 +92,6 @@
 	  		</div>
 			</div>
 		</div>		
-	
+	<?php }
+}
+?>
