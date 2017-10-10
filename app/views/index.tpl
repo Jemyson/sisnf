@@ -11,7 +11,7 @@
     <div class="row-fluid">
         <div class="centering text-center">
 		      <h1>
-		      	<strong>INVOICE</strong><span style="font-weight: normal;">SISTEM</span>
+		      	<strong>GAME</strong><span style="font-weight: normal;">STATION</span>
 					</h1>
 		      
 		      <p>M&oacute;dulo de Administra&ccedil;&atilde;o</p>
