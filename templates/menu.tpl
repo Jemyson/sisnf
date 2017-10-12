@@ -41,13 +41,13 @@
 	  	</div>
  			
 				<div class="preview__action--close">
-					<a href="cliente"><i class="glyphicon glyphicon-user"></i> Clientes</a>
+					<a href="{$basePath}cliente"><i class="glyphicon glyphicon-user"></i> Clientes</a>
 		  	</div>
 				<div class="preview__action--close">
 					<a href="facturas.php"><i class="glyphicon glyphicon-list-alt"></i> Faturas <span class="sr-only">(current)</span></a>
 		  	</div>
 				<div class="preview__action--close">
-					<a href="productos.php"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
+					<a href="{$basePath}produto"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
 		  	</div>
 				<div class="preview__action--close">
 					<a href="usuarios.php"><i class="glyphicon glyphicon-lock"></i> Usuarios</a>

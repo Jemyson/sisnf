@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-09 21:19:09
+<?php /* Smarty version 3.1.27, created on 2017-10-12 16:38:17
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:159961399559dc11fd36e7b0_83631357%%*/
+/*%%SmartyHeaderCode:117770216159dfc4a99d9390_28778865%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,20 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6f7ab4b22b3765f67e0e24aa243ceca8b94e1e5d' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl',
-      1 => 1507594747,
+      1 => 1507837095,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '159961399559dc11fd36e7b0_83631357',
+  'nocache_hash' => '117770216159dfc4a99d9390_28778865',
+  'variables' => 
+  array (
+    'basePath' => 0,
+  ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59dc11fd39deb2_16363273',
+  'unifunc' => 'content_59dfc4a9a03ac0_17543251',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59dc11fd39deb2_16363273')) {
-function content_59dc11fd39deb2_16363273 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59dfc4a9a03ac0_17543251')) {
+function content_59dfc4a9a03ac0_17543251 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '159961399559dc11fd36e7b0_83631357';
+$_smarty_tpl->properties['nocache_hash'] = '117770216159dfc4a99d9390_28778865';
 ?>
 
 <style>
@@ -67,13 +71,15 @@ $_smarty_tpl->properties['nocache_hash'] = '159961399559dc11fd36e7b0_83631357';
 	  	</div>
  			
 				<div class="preview__action--close">
-					<a href="clientes"><i class="glyphicon glyphicon-user"></i> Clientes</a>
+					<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+cliente"><i class="glyphicon glyphicon-user"></i> Clientes</a>
 		  	</div>
 				<div class="preview__action--close">
 					<a href="facturas.php"><i class="glyphicon glyphicon-list-alt"></i> Faturas <span class="sr-only">(current)</span></a>
 		  	</div>
 				<div class="preview__action--close">
-					<a href="productos.php"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
+					<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+produto"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
 		  	</div>
 				<div class="preview__action--close">
 					<a href="usuarios.php"><i class="glyphicon glyphicon-lock"></i> Usuarios</a>

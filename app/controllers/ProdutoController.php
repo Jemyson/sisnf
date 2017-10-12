@@ -1,16 +1,18 @@
 <?php
 
-require_once MODELS.'ClienteModel.php';
+require_once MODELS.'ProdutoModel.php';
 
-class ClienteController extends AppController{
+class ProdutoController extends AppController{
 	
 	public function indexAction(){
-		$this->renderizar('clienteGrid.tpl');
+		
+		$this->renderizar('produtoGrid.tpl');
+		
 	}
 	
 	public function dadosAction(){
 
-		$model = new ClienteModel();
+		$model = new ProdutoModel();
 		
 		$where = null;
 		
@@ -39,19 +41,19 @@ class ClienteController extends AppController{
 			$this->atribuir('id', $_GET['id']);
 		}
 		
-		$this->renderizar('clienteForm.tpl');
+		$this->renderizar('produtoForm.tpl');
 	}
 	
 	public function formVisualizarAction(){
 
 		$this->atribuir('id', $_GET['id']);
 		$this->atribuir('visualizar', '1');
-		$this->renderizar('clienteForm.tpl');
+		$this->renderizar('produtoForm.tpl');
 	}
-	
+
 	public function dadosFormAction(){
 		
-		$model = new ClienteModel();
+		$model = new ProdutoModel();
 		
 		$dados = array();
 		
@@ -74,7 +76,7 @@ class ClienteController extends AppController{
 		print_r(json_encode($dados));
 		
 	}
-
+	
 	public function salvarAction(){
 
 		if(!isset($_REQUEST['id']) || !isset($_REQUEST['hash'])){
@@ -89,7 +91,7 @@ class ClienteController extends AppController{
 			die();
 		}
 		
-		$model = new ClienteModel();
+		$model = new ProdutoModel();
 
 		$dados = $model->pesquisar("id = {$_REQUEST['id']}");
 			
@@ -123,5 +125,6 @@ class ClienteController extends AppController{
 		
 		die();	
 	}
+	
 	
 }

@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-09 21:12:11
+<?php /* Smarty version 3.1.27, created on 2017-10-12 20:38:07
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/topo.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:6900315959dc105ba530c6_94164611%%*/
+/*%%SmartyHeaderCode:44344568559dffcdfa94576_92210083%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'a5e2819c855b65e13c4797acd02cf380dd9efc21' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/topo.tpl',
-      1 => 1507594330,
+      1 => 1507851485,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '6900315959dc105ba530c6_94164611',
+  'nocache_hash' => '44344568559dffcdfa94576_92210083',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59dc105ba8d3d6_05592381',
+  'unifunc' => 'content_59dffcdfae69f5_12252940',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59dc105ba8d3d6_05592381')) {
-function content_59dc105ba8d3d6_05592381 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59dffcdfae69f5_12252940')) {
+function content_59dffcdfae69f5_12252940 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '6900315959dc105ba530c6_94164611';
+$_smarty_tpl->properties['nocache_hash'] = '44344568559dffcdfa94576_92210083';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -41,10 +41,17 @@ $_smarty_tpl->properties['nocache_hash'] = '6900315959dc105ba530c6_94164611';
 		<!-- <link rel="stylesheet" href="public/css/style.css" /> -->
 				
 				
+		<!-- 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		 -->
 
 		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+
+		<!-- 
+		 -->
+		<link href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+css/bootstrap.min.css" rel="styleSheet">
 
 
 
@@ -92,10 +99,10 @@ js/Form.js"><?php echo '</script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 js/Campos.js"><?php echo '</script'; ?>
 >
-    <?php echo '<script'; ?>
+    <!-- <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 js/Formatter.js"><?php echo '</script'; ?>
->
+> -->
     <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 js/App.js"><?php echo '</script'; ?>
