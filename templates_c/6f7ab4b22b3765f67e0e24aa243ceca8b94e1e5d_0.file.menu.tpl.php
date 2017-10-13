@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-12 22:40:30
+<?php /* Smarty version 3.1.27, created on 2017-10-13 00:02:03
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:47764743959e0198ed89c03_80263195%%*/
+/*%%SmartyHeaderCode:180201073159e02cab180575_48446326%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6f7ab4b22b3765f67e0e24aa243ceca8b94e1e5d' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl',
-      1 => 1507858828,
+      1 => 1507863721,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '47764743959e0198ed89c03_80263195',
+  'nocache_hash' => '180201073159e02cab180575_48446326',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e0198edc3c08_32549455',
+  'unifunc' => 'content_59e02cab1bc251_06436170',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e0198edc3c08_32549455')) {
-function content_59e0198edc3c08_32549455 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e02cab1bc251_06436170')) {
+function content_59e02cab1bc251_06436170 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '47764743959e0198ed89c03_80263195';
+$_smarty_tpl->properties['nocache_hash'] = '180201073159e02cab180575_48446326';
 ?>
 
 <style>
@@ -46,13 +46,25 @@ $_smarty_tpl->properties['nocache_hash'] = '47764743959e0198ed89c03_80263195';
 		.preview__action--purchase-form{display:inline-block}
 		.preview__action--item-details{display:inline-block}
 		.preview__action--close{border-left:1px solid #333333}
-		.preview__action--close a{color:#999999;text-decoration:none}
-		.preview__action--close a:hover{color:white}
-		.preview__action--close a i{color:white;font-size:10px;margin-right:10px}
+		.navbar-default .navbar-nav>li>a{color:#999999;text-decoration:none}
+		.navbar-default .navbar-nav>li>a:hover{color:white}
+		.navbar-default .navbar-nav>li>a i{color:white;font-size:10px;margin-right:10px}
 
 		.navbar-default {
 		    background-color: #000;
 		    border-color: #000;
+		}
+		
+		.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+		    background-color: #333;
+		}
+		
+		.navbar-default .navbar-toggle {
+		    border-color: #333;
+		}
+		
+		.navbar-default .navbar-toggle .icon-bar {
+		    background-color: #fff;
 		}
 		
 		.navbar-nav {
@@ -74,7 +86,7 @@ $_smarty_tpl->properties['nocache_hash'] = '47764743959e0198ed89c03_80263195';
 	
 		<div class="navbar-header">
 		
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
 			
 				<span class="sr-only">Menu Navega&ccedil;&atilde;o</span>
 				<span class="icon-bar"></span>

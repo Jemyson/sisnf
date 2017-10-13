@@ -16,13 +16,25 @@
 		.preview__action--purchase-form{display:inline-block}
 		.preview__action--item-details{display:inline-block}
 		.preview__action--close{border-left:1px solid #333333}
-		.preview__action--close a{color:#999999;text-decoration:none}
-		.preview__action--close a:hover{color:white}
-		.preview__action--close a i{color:white;font-size:10px;margin-right:10px}
+		.navbar-default .navbar-nav>li>a{color:#999999;text-decoration:none}
+		.navbar-default .navbar-nav>li>a:hover{color:white}
+		.navbar-default .navbar-nav>li>a i{color:white;font-size:10px;margin-right:10px}
 
 		.navbar-default {
 		    background-color: #000;
 		    border-color: #000;
+		}
+		
+		.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+		    background-color: #333;
+		}
+		
+		.navbar-default .navbar-toggle {
+		    border-color: #333;
+		}
+		
+		.navbar-default .navbar-toggle .icon-bar {
+		    background-color: #fff;
 		}
 		
 		.navbar-nav {
@@ -44,7 +56,7 @@
 	
 		<div class="navbar-header">
 		
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
 			
 				<span class="sr-only">Menu Navega&ccedil;&atilde;o</span>
 				<span class="icon-bar"></span>
