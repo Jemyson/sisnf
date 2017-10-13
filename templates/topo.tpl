@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-		<title>Franquia</title>
+		<title>Invoice System</title>
+		<link  href="{$basePath}img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 
 		<!-- <link rel="stylesheet" href="public/css/style.css" /> -->
 				

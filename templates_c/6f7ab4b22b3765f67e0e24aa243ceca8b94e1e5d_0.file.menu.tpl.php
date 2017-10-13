@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-12 16:38:17
+<?php /* Smarty version 3.1.27, created on 2017-10-12 22:40:30
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:117770216159dfc4a99d9390_28778865%%*/
+/*%%SmartyHeaderCode:47764743959e0198ed89c03_80263195%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6f7ab4b22b3765f67e0e24aa243ceca8b94e1e5d' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl',
-      1 => 1507837095,
+      1 => 1507858828,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '117770216159dfc4a99d9390_28778865',
+  'nocache_hash' => '47764743959e0198ed89c03_80263195',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59dfc4a9a03ac0_17543251',
+  'unifunc' => 'content_59e0198edc3c08_32549455',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59dfc4a9a03ac0_17543251')) {
-function content_59dfc4a9a03ac0_17543251 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e0198edc3c08_32549455')) {
+function content_59e0198edc3c08_32549455 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '117770216159dfc4a99d9390_28778865';
+$_smarty_tpl->properties['nocache_hash'] = '47764743959e0198ed89c03_80263195';
 ?>
 
 <style>
@@ -49,13 +49,19 @@ $_smarty_tpl->properties['nocache_hash'] = '117770216159dfc4a99d9390_28778865';
 		.preview__action--close a{color:#999999;text-decoration:none}
 		.preview__action--close a:hover{color:white}
 		.preview__action--close a i{color:white;font-size:10px;margin-right:10px}
-		@media (max-width: 568px){
-			.preview__action--close a i{margin-right:0}
-		}
-		@media (max-width: 568px){
-			.preview__action--close a span{display:none}
-		}
 
+		.navbar-default {
+		    background-color: #000;
+		    border-color: #000;
+		}
+		
+		.navbar-nav {
+				background-color: #000;
+				padding-right: 0px;
+		    float: none;
+		    margin: 0;
+		}		
+		
 		.navbar-brand a {color: #fff; text-transform: uppercase; #font-weight: bold; text-decoration: none; font-weight: 500}
 		.navbar-brand a:hover {text-decoration: none}
 		
@@ -64,40 +70,58 @@ $_smarty_tpl->properties['nocache_hash'] = '117770216159dfc4a99d9390_28778865';
 </style>
 
 	
-		<div class="preview__header navbar-fixed-top" data-view="ctaHeader">
+	<nav role="navigation" class="preview__header nav navbar-default navbar-fixed-top">
+	
+		<div class="navbar-header">
+		
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+			
+				<span class="sr-only">Menu Navega&ccedil;&atilde;o</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			
+			</button>
 		
 			<div class="navbar-brand">
-	    	<a href="#"><label>Invoice</label> System</a>
+	    	<a href="#"><label>Franchise</label> System</a>
 	  	</div>
+
+		</div>
+			
+		<div class="collapse navbar-collapse" id="menu" style="padding-left: 0px; padding-right: 0px;">
  			
-				<div class="preview__action--close">
+			<ul class="nav navbar-nav">
+ 			
+				<li class="preview__action--close">
 					<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 cliente"><i class="glyphicon glyphicon-user"></i> Clientes</a>
-		  	</div>
-				<div class="preview__action--close">
+		  	</li>
+				<li class="preview__action--close">
 					<a href="facturas.php"><i class="glyphicon glyphicon-list-alt"></i> Faturas <span class="sr-only">(current)</span></a>
-		  	</div>
-				<div class="preview__action--close">
+		  	</li>
+				<li class="preview__action--close">
 					<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 produto"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
-		  	</div>
-				<div class="preview__action--close">
+		  	</li>
+				<li class="preview__action--close">
 					<a href="usuarios.php"><i class="glyphicon glyphicon-lock"></i> Usuarios</a>
-		  	</div>
-				<div class="preview__action--close">
+		  	</li>
+				<li class="preview__action--close">
 					<a href="perfil.php"><i class="glyphicon glyphicon-cog"></i> Configura&ccedil;&atilde;o</a>
-		  	</div>
- 			
-   	<div class="preview__actions">
-				<div class="preview__action--close" style="border-left: 0;">
-					<a href="usuarios.php"><i class="glyphicon glyphicon-user"></i>Usuario: Jemyson Vagner Rosa da Silva</a>
-		  	</div>
+		  	</li>
+	 			
+					<li class="preview__action--close" style="border-left: 0;">
+						<a href="usuarios.php"><i class="glyphicon glyphicon-user"></i> Usuario: Jemyson Vagner Rosa da Silva</a>
+			  	</li>
 	
-	  		<div class="preview__action--close">
-	    		<a href="login.php?logout"><i class="glyphicon glyphicon-off"></i> Sair</a>  
-	  		</div>
-			</div>
-		</div>		
+		  		<li class="preview__action--close">
+		    		<a href="login.php?logout"><i class="glyphicon glyphicon-off"></i> Sair</a>  
+		  		</li>
+			
+			</ul>
+		</div>	
+	</nav>	
 	<?php }
 }
 ?>

@@ -19,13 +19,19 @@
 		.preview__action--close a{color:#999999;text-decoration:none}
 		.preview__action--close a:hover{color:white}
 		.preview__action--close a i{color:white;font-size:10px;margin-right:10px}
-		@media (max-width: 568px){
-			.preview__action--close a i{margin-right:0}
-		}
-		@media (max-width: 568px){
-			.preview__action--close a span{display:none}
-		}
 
+		.navbar-default {
+		    background-color: #000;
+		    border-color: #000;
+		}
+		
+		.navbar-nav {
+				background-color: #000;
+				padding-right: 0px;
+		    float: none;
+		    margin: 0;
+		}		
+		
 		.navbar-brand a {color: #fff; text-transform: uppercase; #font-weight: bold; text-decoration: none; font-weight: 500}
 		.navbar-brand a:hover {text-decoration: none}
 		
@@ -34,36 +40,54 @@
 </style>
 {/literal}
 	
-		<div class="preview__header navbar-fixed-top" data-view="ctaHeader">
+	<nav role="navigation" class="preview__header nav navbar-default navbar-fixed-top">
+	
+		<div class="navbar-header">
+		
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+			
+				<span class="sr-only">Menu Navega&ccedil;&atilde;o</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			
+			</button>
 		
 			<div class="navbar-brand">
-	    	<a href="#"><label>Invoice</label> System</a>
+	    	<a href="#"><label>Franchise</label> System</a>
 	  	</div>
+
+		</div>
+			
+		<div class="collapse navbar-collapse" id="menu" style="padding-left: 0px; padding-right: 0px;">
  			
-				<div class="preview__action--close">
+			<ul class="nav navbar-nav">
+ 			
+				<li class="preview__action--close">
 					<a href="{$basePath}cliente"><i class="glyphicon glyphicon-user"></i> Clientes</a>
-		  	</div>
-				<div class="preview__action--close">
+		  	</li>
+				<li class="preview__action--close">
 					<a href="facturas.php"><i class="glyphicon glyphicon-list-alt"></i> Faturas <span class="sr-only">(current)</span></a>
-		  	</div>
-				<div class="preview__action--close">
+		  	</li>
+				<li class="preview__action--close">
 					<a href="{$basePath}produto"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
-		  	</div>
-				<div class="preview__action--close">
+		  	</li>
+				<li class="preview__action--close">
 					<a href="usuarios.php"><i class="glyphicon glyphicon-lock"></i> Usuarios</a>
-		  	</div>
-				<div class="preview__action--close">
+		  	</li>
+				<li class="preview__action--close">
 					<a href="perfil.php"><i class="glyphicon glyphicon-cog"></i> Configura&ccedil;&atilde;o</a>
-		  	</div>
- 			
-   	<div class="preview__actions">
-				<div class="preview__action--close" style="border-left: 0;">
-					<a href="usuarios.php"><i class="glyphicon glyphicon-user"></i>Usuario: Jemyson Vagner Rosa da Silva</a>
-		  	</div>
+		  	</li>
+	 			
+					<li class="preview__action--close" style="border-left: 0;">
+						<a href="usuarios.php"><i class="glyphicon glyphicon-user"></i> Usuario: Jemyson Vagner Rosa da Silva</a>
+			  	</li>
 	
-	  		<div class="preview__action--close">
-	    		<a href="login.php?logout"><i class="glyphicon glyphicon-off"></i> Sair</a>  
-	  		</div>
-			</div>
-		</div>		
+		  		<li class="preview__action--close">
+		    		<a href="login.php?logout"><i class="glyphicon glyphicon-off"></i> Sair</a>  
+		  		</li>
+			
+			</ul>
+		</div>	
+	</nav>	
 	

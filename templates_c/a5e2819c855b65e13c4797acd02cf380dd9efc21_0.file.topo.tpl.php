@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-12 20:38:07
+<?php /* Smarty version 3.1.27, created on 2017-10-12 21:44:21
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/topo.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:44344568559dffcdfa94576_92210083%%*/
+/*%%SmartyHeaderCode:2263172459e00c65b328f1_76554912%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'a5e2819c855b65e13c4797acd02cf380dd9efc21' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/topo.tpl',
-      1 => 1507851485,
+      1 => 1507855459,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '44344568559dffcdfa94576_92210083',
+  'nocache_hash' => '2263172459e00c65b328f1_76554912',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59dffcdfae69f5_12252940',
+  'unifunc' => 'content_59e00c65b8c693_00654856',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59dffcdfae69f5_12252940')) {
-function content_59dffcdfae69f5_12252940 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e00c65b8c693_00654856')) {
+function content_59e00c65b8c693_00654856 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '44344568559dffcdfa94576_92210083';
+$_smarty_tpl->properties['nocache_hash'] = '2263172459e00c65b328f1_76554912';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -36,7 +36,9 @@ $_smarty_tpl->properties['nocache_hash'] = '44344568559dffcdfa94576_92210083';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-		<title>Franquia</title>
+		<title>Invoice System</title>
+		<link  href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 
 		<!-- <link rel="stylesheet" href="public/css/style.css" /> -->
 				
