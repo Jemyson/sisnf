@@ -44,6 +44,13 @@
 		    margin: 0;
 		}		
 		
+		.nav>li>a {
+	    position: relative;
+	    display: block;
+			padding-left: 0px;
+			padding-right: 0px;
+		}
+
 		.navbar-brand a {color: #fff; text-transform: uppercase; #font-weight: bold; text-decoration: none; font-weight: 500}
 		.navbar-brand a:hover {text-decoration: none}
 		
@@ -76,28 +83,30 @@
 			<ul class="nav navbar-nav">
  			
 				<li class="preview__action--close">
-					<a href="{$basePath}cliente"><i class="glyphicon glyphicon-user"></i> Clientes</a>
+					<a href="{$basePath}cliente"><i class="glyphicon glyphicon-briefcase"></i> Clientes</a>
 		  	</li>
 				<li class="preview__action--close">
-					<a href="facturas.php"><i class="glyphicon glyphicon-list-alt"></i> Faturas <span class="sr-only">(current)</span></a>
+					<a href="{$basePath}fornecedor"><i class="glyphicon glyphicon-bed"></i> Fornecedor</a>
 		  	</li>
 				<li class="preview__action--close">
 					<a href="{$basePath}produto"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
 		  	</li>
 				<li class="preview__action--close">
-					<a href="usuarios.php"><i class="glyphicon glyphicon-lock"></i> Usuarios</a>
+					<a href="venda"><i class="glyphicon glyphicon-shopping-cart"></i> Vendas <span class="sr-only">(current)</span></a>
+		  	</li>
+				<li class="preview__action--close">
+					<a href="facturas.php"><i class="glyphicon glyphicon-send"></i> Faturas <span class="sr-only">(current)</span></a>
 		  	</li>
 				<li class="preview__action--close">
 					<a href="perfil.php"><i class="glyphicon glyphicon-cog"></i> Configura&ccedil;&atilde;o</a>
 		  	</li>
 	 			
-					<li class="preview__action--close" style="border-left: 0;">
-						<a href="usuarios.php"><i class="glyphicon glyphicon-user"></i> Usuario: Jemyson Vagner Rosa da Silva</a>
-			  	</li>
-	
-		  		<li class="preview__action--close">
-		    		<a href="login.php?logout"><i class="glyphicon glyphicon-off"></i> Sair</a>  
-		  		</li>
+	  		<li class="preview__action--close pull-right">
+	    		<a href="login.php?logout"><i class="glyphicon glyphicon-off"></i> Sair</a>  
+	  		</li>
+				<li class="preview__action--close pull-right" style="border-left: 0;">
+					<a href="usuarios.php"><i class="glyphicon glyphicon-user"></i> Usuario: Jemyson Vagner Rosa da Silva</a>
+		  	</li>
 			
 			</ul>
 		</div>	

@@ -9,7 +9,7 @@
 		config.basePath = '{/literal}{$basePath}{literal}';
 		
 		config.pk     = 'id';
-		config.modelo = 'produtoForm';
+		config.modelo = 'clienteForm';
 	
 		config.url    = '{/literal}{$basePath}{literal}cliente/dados-form{/literal}{if isset($id)}?id={$id}{/if}{literal}';
 		config.form   = '{/literal}{$basePath}{literal}cliente/form';
@@ -29,28 +29,32 @@
 		config.botoes = ['b','s'];
 
 		config.colunas = [];
-		config.colunas.push({'nome':'id',	'titulo':'C&oacute;digo',	'tipo':'text',			'span':'2',	'classe':'input-mini',		'obrigatorio':'1', 'disabled':'readonly'});
+		config.colunas.push({'nome':'id',	'titulo':'C&oacute;digo',	'tipo':'text',			'span':'1',	'classe':'input-mini',		'obrigatorio':'1', 'disabled':'readonly'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'nome',	'titulo':'Nome',		'tipo':'text',			'span':'5',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		config.colunas.push({'tipo':'linha'});
-		config.colunas.push({'nome':'cpf','titulo':'CPF',		'tipo':'text',			'span':'2',	'classe':'input-xlarge',	'obrigatorio':'0'});
-		config.colunas.push({'nome':'cnpj','titulo':'CNPJ',		'tipo':'text',			'span':'2',	'classe':'input-xlarge',	'obrigatorio':'0'});
+		config.colunas.push({'nome':'cpf','titulo':'CPF',		'tipo':'text',			'span':'3',	'classe':'input-xlarge',	'obrigatorio':'0'});
+		config.colunas.push({'tipo':'linha'});
+		config.colunas.push({'nome':'cnpj','titulo':'CNPJ',		'tipo':'text',			'span':'3',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'cep','titulo':'CEP',		'tipo':'text',			'span':'2',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'endereco','titulo':'Endere&ccedil;o',		'tipo':'text',			'span':'4',	'classe':'input-xlarge',	'obrigatorio':'0'});
-		config.colunas.push({'nome':'numero','titulo':'N&uacute;mero',		'tipo':'text',			'span':'2',	'classe':'input-xlarge',	'obrigatorio':'0'});
+		config.colunas.push({'tipo':'linha'});
+		config.colunas.push({'nome':'numero','titulo':'N&uacute;mero',		'tipo':'text',			'span':'1',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'bairro','titulo':'Bairro',		'tipo':'text',			'span':'3',	'classe':'input-xlarge',	'obrigatorio':'0'});
+		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'cidade','titulo':'Cidade',		'tipo':'text',			'span':'3',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'nome':'cod_cidade','titulo':'C&oacute;d. Cidade',		'tipo':'hide',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'telefone','titulo':'Telefone',		'tipo':'text',			'span':'2',	'classe':'input-xlarge',	'obrigatorio':'0'});
+		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'celular','titulo':'Celular',		'tipo':'text',			'span':'2',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
-		config.colunas.push({'nome':'email','titulo':'E-mail',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'0'});
+		config.colunas.push({'nome':'email','titulo':'E-mail',		'tipo':'text',			'span':'5',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		
-		var form = new Form('campeonatoForm', config);
+		var form = new Form('clienteForm', config);
 
 		$(document).ready(function(){
 	

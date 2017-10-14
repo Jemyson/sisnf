@@ -27,7 +27,7 @@
 
 		<style>
 		
-		.corpo{ padding: 20px; padding-top: 85px;}
+		.corpo{ padding: 20px; padding-top: 70px;}
 		.page-wrapper h1{ margin-top: 0}
 		
 		div.dataTables_paginate ul.pagination {

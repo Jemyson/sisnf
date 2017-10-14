@@ -1,19 +1,19 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-13 20:01:55
-         compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/clienteForm.tpl" */ ?>
+<?php /* Smarty version 3.1.27, created on 2017-10-13 20:02:14
+         compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/fornecedorForm.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:80595769659e145e3996151_70520998%%*/
+/*%%SmartyHeaderCode:79999059059e145f6957747_91096570%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '6a78353d8c486d84ca6f53ca7d0a0caa1cf46bc3' => 
+    '8cc75a8aeb3c3f801653c2c063c533b3bd220ef8' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/clienteForm.tpl',
-      1 => 1507935714,
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/fornecedorForm.tpl',
+      1 => 1507935729,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '80595769659e145e3996151_70520998',
+  'nocache_hash' => '79999059059e145f6957747_91096570',
   'variables' => 
   array (
     'basePath' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e145e39da196_94482513',
+  'unifunc' => 'content_59e145f69a0a72_01238512',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e145e39da196_94482513')) {
-function content_59e145e39da196_94482513 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e145f69a0a72_01238512')) {
+function content_59e145f69a0a72_01238512 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '80595769659e145e3996151_70520998';
+$_smarty_tpl->properties['nocache_hash'] = '79999059059e145f6957747_91096570';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -44,17 +44,17 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 ';
 		
 		config.pk     = 'id';
-		config.modelo = 'clienteForm';
+		config.modelo = 'fornecedorForm';
 	
 		config.url    = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente/dados-form<?php if (isset($_smarty_tpl->tpl_vars['id']->value)) {?>?id=<?php echo $_smarty_tpl->tpl_vars['id']->value;
+fornecedor/dados-form<?php if (isset($_smarty_tpl->tpl_vars['id']->value)) {?>?id=<?php echo $_smarty_tpl->tpl_vars['id']->value;
 }?>';
 		config.form   = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente/form';
+fornecedor/form';
 		config.salvar = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente/salvar';
+fornecedor/salvar';
 		config.voltar = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente';
+fornecedor';
 	
 		
 
@@ -94,7 +94,7 @@ cliente';
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'email','titulo':'E-mail',		'tipo':'text',			'span':'5',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		
-		var form = new Form('clienteForm', config);
+		var form = new Form('fornecedorForm', config);
 
 		$(document).ready(function(){
 	
@@ -113,7 +113,7 @@ cliente';
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header"><a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente">Cliente</a> / Cadastro</h1>
+fornecedor">Fornecedor</a> / Cadastro</h1>
 				</div>
 			</div>	
 
@@ -125,7 +125,7 @@ cliente">Cliente</a> / Cadastro</h1>
 					
 						<div class="panel-heading">
 							<a class="pull-right btn btn-primary btn-xs" href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente">
+fornecedor">
 								Voltar  <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
 							</a>Novo Registro
 						</div>

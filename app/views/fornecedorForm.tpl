@@ -1,70 +1,30 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-13 20:01:55
-         compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/clienteForm.tpl" */ ?>
-<?php
-/*%%SmartyHeaderCode:80595769659e145e3996151_70520998%%*/
-if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-$_valid = $_smarty_tpl->decodeProperties(array (
-  'file_dependency' => 
-  array (
-    '6a78353d8c486d84ca6f53ca7d0a0caa1cf46bc3' => 
-    array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/clienteForm.tpl',
-      1 => 1507935714,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '80595769659e145e3996151_70520998',
-  'variables' => 
-  array (
-    'basePath' => 0,
-    'id' => 0,
-    'visualizar' => 0,
-  ),
-  'has_nocache_code' => false,
-  'version' => '3.1.27',
-  'unifunc' => 'content_59e145e39da196_94482513',
-),false);
-/*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e145e39da196_94482513')) {
-function content_59e145e39da196_94482513 ($_smarty_tpl) {
+{include file="../../templates/topo.tpl"}
 
-$_smarty_tpl->properties['nocache_hash'] = '80595769659e145e3996151_70520998';
-echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
-?>
+{literal}
 
-
-
-
-	<?php echo '<script'; ?>
- type="text/javascript" language="javascript">
+	<script type="text/javascript" language="javascript">
 
 		var config = {};
 	
-		config.basePath = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-';
+		config.basePath = '{/literal}{$basePath}{literal}';
 		
 		config.pk     = 'id';
-		config.modelo = 'clienteForm';
+		config.modelo = 'fornecedorForm';
 	
-		config.url    = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente/dados-form<?php if (isset($_smarty_tpl->tpl_vars['id']->value)) {?>?id=<?php echo $_smarty_tpl->tpl_vars['id']->value;
-}?>';
-		config.form   = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente/form';
-		config.salvar = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente/salvar';
-		config.voltar = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente';
+		config.url    = '{/literal}{$basePath}{literal}fornecedor/dados-form{/literal}{if isset($id)}?id={$id}{/if}{literal}';
+		config.form   = '{/literal}{$basePath}{literal}fornecedor/form';
+		config.salvar = '{/literal}{$basePath}{literal}fornecedor/salvar';
+		config.voltar = '{/literal}{$basePath}{literal}fornecedor';
 	
-		
+		{/literal}
 
-		<?php if (isset($_smarty_tpl->tpl_vars['visualizar']->value) && $_smarty_tpl->tpl_vars['visualizar']->value == '1') {?>
+		{if isset($visualizar) && $visualizar == '1'}
 
 		config.visualizar = '1';
 		
-		<?php }?>
+		{/if}
 			
-		
+		{literal}
 				
 		config.botoes = ['b','s'];
 
@@ -94,7 +54,7 @@ cliente';
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'email','titulo':'E-mail',		'tipo':'text',			'span':'5',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		
-		var form = new Form('clienteForm', config);
+		var form = new Form('fornecedorForm', config);
 
 		$(document).ready(function(){
 	
@@ -104,16 +64,14 @@ cliente';
 	
 		});
 
-	<?php echo '</script'; ?>
->
-
+	</script>
+{/literal}
 
 		<div class="page-wrapper">
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header"><a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente">Cliente</a> / Cadastro</h1>
+					<h1 class="page-header"><a href="{$basePath}fornecedor">Fornecedor</a> / Cadastro</h1>
 				</div>
 			</div>	
 
@@ -124,8 +82,7 @@ cliente">Cliente</a> / Cadastro</h1>
 					<div class="panel panel-default">
 					
 						<div class="panel-heading">
-							<a class="pull-right btn btn-primary btn-xs" href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente">
+							<a class="pull-right btn btn-primary btn-xs" href="{$basePath}fornecedor">
 								Voltar  <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
 							</a>Novo Registro
 						</div>
@@ -146,8 +103,4 @@ cliente">
 		
 		
 
-<?php echo $_smarty_tpl->getSubTemplate ("../../templates/base.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
-
-}
-}
-?>
+{include file="../../templates/base.tpl"}
