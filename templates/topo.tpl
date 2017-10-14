@@ -51,12 +51,13 @@
     <script src="{$basePath}js/Grid.js"></script>
     <script src="{$basePath}js/Form.js"></script>
     <script src="{$basePath}js/Campos.js"></script>
-    <!-- <script src="{$basePath}js/Formatter.js"></script> -->
+    <script src="{$basePath}js/Formatter.js"></script>
     <script src="{$basePath}js/App.js"></script>
 
 		<script type="text/javascript">
 		
 			App = new App();
+			Formatter = new Formatter();
 		
 		</script>
 

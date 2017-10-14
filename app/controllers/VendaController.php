@@ -1,16 +1,21 @@
 <?php
 
-require_once MODELS.'ClienteModel.php';
+require_once MODELS.'VendaModel.php';
+require_once CONTROLLERS.'ClienteController.php';
 
-class ClienteController extends AppController{
+class VendaController extends AppController{
 	
 	public function indexAction(){
-		$this->renderizar('clienteGrid.tpl');
+		
+		$clienteController = new ClienteController();
+		$this->atribuir('dadosCliente', $clienteController->dadosEntidade());
+		
+		$this->renderizar('vendaGrid.tpl');
 	}
 	
 	public function dadosAction(){
 
-		$model = new ClienteModel();
+		$model = new VendaModel();
 		
 		$where = null;
 		
@@ -39,19 +44,19 @@ class ClienteController extends AppController{
 			$this->atribuir('id', $_GET['id']);
 		}
 		
-		$this->renderizar('clienteForm.tpl');
+		$this->renderizar('vendaForm.tpl');
 	}
 	
 	public function formVisualizarAction(){
 
 		$this->atribuir('id', $_GET['id']);
 		$this->atribuir('visualizar', '1');
-		$this->renderizar('clienteForm.tpl');
+		$this->renderizar('vendaForm.tpl');
 	}
 	
 	public function dadosFormAction(){
 		
-		$model = new ClienteModel();
+		$model = new VendaModel();
 		
 		$dados = array();
 		
@@ -89,7 +94,7 @@ class ClienteController extends AppController{
 			die();
 		}
 		
-		$model = new ClienteModel();
+		$model = new VendaModel();
 
 		$dados = $model->pesquisar("id = {$_REQUEST['id']}");
 			
@@ -122,20 +127,6 @@ class ClienteController extends AppController{
 		}
 		
 		die();	
-	}
-	
-	public function dadosEntidade(){
-		$model = new ClienteModel();
-		
-		$dados = $model->pesquisar(null, array('id', 'nome AS valor')); 
-		
-		$dadosSaida = array();
-		
-		foreach($dados as $valor){
-			$dadosSaida[$valor['id']] = $valor['valor'];
-		}
-		
-		return json_encode($dadosSaida);
 	}
 	
 }

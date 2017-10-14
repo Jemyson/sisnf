@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-13 20:09:07
+<?php /* Smarty version 3.1.27, created on 2017-10-14 15:01:18
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/topo.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:42770321359e14793b6f3c3_49512094%%*/
+/*%%SmartyHeaderCode:157980668759e250eeed9b01_60434614%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'a5e2819c855b65e13c4797acd02cf380dd9efc21' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/topo.tpl',
-      1 => 1507936144,
+      1 => 1508004076,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '42770321359e14793b6f3c3_49512094',
+  'nocache_hash' => '157980668759e250eeed9b01_60434614',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e14793baa5d2_10745233',
+  'unifunc' => 'content_59e250eef15315_29506471',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e14793baa5d2_10745233')) {
-function content_59e14793baa5d2_10745233 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e250eef15315_29506471')) {
+function content_59e250eef15315_29506471 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '42770321359e14793b6f3c3_49512094';
+$_smarty_tpl->properties['nocache_hash'] = '157980668759e250eeed9b01_60434614';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -101,10 +101,10 @@ js/Form.js"><?php echo '</script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 js/Campos.js"><?php echo '</script'; ?>
 >
-    <!-- <?php echo '<script'; ?>
+    <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 js/Formatter.js"><?php echo '</script'; ?>
-> -->
+>
     <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 js/App.js"><?php echo '</script'; ?>
@@ -114,6 +114,7 @@ js/App.js"><?php echo '</script'; ?>
  type="text/javascript">
 		
 			App = new App();
+			Formatter = new Formatter();
 		
 		<?php echo '</script'; ?>
 >
