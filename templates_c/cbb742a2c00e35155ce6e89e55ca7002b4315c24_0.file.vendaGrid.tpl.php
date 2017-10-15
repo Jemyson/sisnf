@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-14 14:59:48
+<?php /* Smarty version 3.1.27, created on 2017-10-14 18:52:05
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaGrid.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:36288077459e25094f27698_57361369%%*/
+/*%%SmartyHeaderCode:96668799959e2870549dda8_51887316%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cbb742a2c00e35155ce6e89e55ca7002b4315c24' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaGrid.tpl',
-      1 => 1508003986,
+      1 => 1508017920,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '36288077459e25094f27698_57361369',
+  'nocache_hash' => '96668799959e2870549dda8_51887316',
   'variables' => 
   array (
     'basePath' => 0,
@@ -21,13 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e2509503f768_33839634',
+  'unifunc' => 'content_59e287054f4324_66742688',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e2509503f768_33839634')) {
-function content_59e2509503f768_33839634 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e287054f4324_66742688')) {
+function content_59e287054f4324_66742688 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '36288077459e25094f27698_57361369';
+$_smarty_tpl->properties['nocache_hash'] = '96668799959e2870549dda8_51887316';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -66,12 +66,13 @@ venda/excluir';
 		config.filtrosDados.tipo.push({"id":"4","value":"Excluir"});
 		
 		config.colunas = [];
-		config.colunas.push({'nome':'id',		'titulo':'#' 		,'width':'5%', 	'cssbody':'text-align:center'});
-		config.colunas.push({'nome':'id_cliente',		'titulo':'CLIENTE'	,								'cssbody':'text-align:left', 'formatterDados':'<?php echo $_smarty_tpl->tpl_vars['dadosCliente']->value;?>
+		config.colunas.push({'nome':'id',						'titulo':'#', 			'cssbody':'text-align:center', 	'width':'5%'});
+		config.colunas.push({'nome':'id_cliente',		'titulo':'CLIENTE',	'cssbody':'text-align:left', 		'formatterDados':'<?php echo $_smarty_tpl->tpl_vars['dadosCliente']->value;?>
 '});
-		config.colunas.push({'nome':'tipo',		'titulo':'TIPO'	,								'cssbody':'text-align:center', 'formatterDados':'{"1":"Or&ccedil;amento", "2":"Venda"}'});
-		config.colunas.push({'nome':'data_venda',		'titulo':'DATA'	,								'cssbody':'text-align:center',	'funcaoFormatter':'Formatter.data'});
-		config.colunas.push({'nome':'valor',	'titulo':'VALOR'	, 'width':'20%', 								'cssbody':'text-align:right'});
+		config.colunas.push({'nome':'tipo',					'titulo':'TIPO',		'cssbody':'text-align:center', 	'formatterDados':'{"1":"Or&ccedil;amento", "2":"Venda"}'});
+		config.colunas.push({'nome':'data_venda',		'titulo':'DATA',		'cssbody':'text-align:center',	'funcaoFormatter':'Formatter.data'});
+		config.colunas.push({'nome':'valor',				'titulo':'VALOR',  	'cssbody':'text-align:right'});
+		config.colunas.push({'nome':'status',				'titulo':'STATUS',  'cssbody':'text-align:center', 	'formatterDados':'{"0":"Aguardando", "1":"Pendente", "2":"Pago"}'});
 	
 		var grid = new Grid('vendaGrid', config);
 

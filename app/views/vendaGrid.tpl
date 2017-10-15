@@ -29,11 +29,12 @@
 		config.filtrosDados.tipo.push({"id":"4","value":"Excluir"});
 		
 		config.colunas = [];
-		config.colunas.push({'nome':'id',		'titulo':'#' 		,'width':'5%', 	'cssbody':'text-align:center'});
-		config.colunas.push({'nome':'id_cliente',		'titulo':'CLIENTE'	,								'cssbody':'text-align:left', 'formatterDados':'{/literal}{$dadosCliente}{literal}'});
-		config.colunas.push({'nome':'tipo',		'titulo':'TIPO'	,								'cssbody':'text-align:center', 'formatterDados':'{"1":"Or&ccedil;amento", "2":"Venda"}'});
-		config.colunas.push({'nome':'data_venda',		'titulo':'DATA'	,								'cssbody':'text-align:center',	'funcaoFormatter':'Formatter.data'});
-		config.colunas.push({'nome':'valor',	'titulo':'VALOR'	, 'width':'20%', 								'cssbody':'text-align:right'});
+		config.colunas.push({'nome':'id',						'titulo':'#', 			'cssbody':'text-align:center', 	'width':'5%'});
+		config.colunas.push({'nome':'id_cliente',		'titulo':'CLIENTE',	'cssbody':'text-align:left', 		'formatterDados':'{/literal}{$dadosCliente}{literal}'});
+		config.colunas.push({'nome':'tipo',					'titulo':'TIPO',		'cssbody':'text-align:center', 	'formatterDados':'{"1":"Or&ccedil;amento", "2":"Venda"}'});
+		config.colunas.push({'nome':'data_venda',		'titulo':'DATA',		'cssbody':'text-align:center',	'funcaoFormatter':'Formatter.data'});
+		config.colunas.push({'nome':'valor',				'titulo':'VALOR',  	'cssbody':'text-align:right'});
+		config.colunas.push({'nome':'status',				'titulo':'STATUS',  'cssbody':'text-align:center', 	'formatterDados':'{"0":"Aguardando", "1":"Pendente", "2":"Pago"}'});
 	
 		var grid = new Grid('vendaGrid', config);
 

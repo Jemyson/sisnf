@@ -129,4 +129,8 @@ class VendaController extends AppController{
 		die();	
 	}
 	
+	public function iniciarAction(){
+		$this->renderizar('vendaInicio.tpl');
+	}
+	
 }
