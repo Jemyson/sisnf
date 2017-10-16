@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-14 23:51:47
+<?php /* Smarty version 3.1.27, created on 2017-10-15 00:01:04
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaInicio.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:175034056659e2cd436b2b60_98701872%%*/
+/*%%SmartyHeaderCode:4613675259e2cf70621956_17016636%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7387dbf499fb4c9ece5a9098bf473ba09b763f8f' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaInicio.tpl',
-      1 => 1508035906,
+      1 => 1508036463,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '175034056659e2cd436b2b60_98701872',
+  'nocache_hash' => '4613675259e2cf70621956_17016636',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e2cd436ee8b5_58229600',
+  'unifunc' => 'content_59e2cf70665125_50328685',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e2cd436ee8b5_58229600')) {
-function content_59e2cd436ee8b5_58229600 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e2cf70665125_50328685')) {
+function content_59e2cf70665125_50328685 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '175034056659e2cd436b2b60_98701872';
+$_smarty_tpl->properties['nocache_hash'] = '4613675259e2cf70621956_17016636';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -130,6 +130,15 @@ venda">
 							<form>
 							
 								<div class="row">
+									<div class="form-group col-md-2" style="undefined">
+										<label>Categoria*</label>
+										<select class="form-control">
+											<option>Selecione</option>
+											<option>Audio</option>
+											<option>Mixer</option>
+											<option>Caixas</option>
+										</select>
+									</div>
 									<div class="form-group col-md-3" style="undefined">
 										<label>Produto*</label>
 										<select class="form-control">

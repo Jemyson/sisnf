@@ -34,7 +34,7 @@
 							
 								<div class="form-group">
 							    <label for="inputEmail3" class="col-sm-2 control-label">Tipo</label>
-							    <div class="col-sm-6">
+							    <div class="col-sm-3">
 							      <select class="form-control">
 										  <option value="0">Selecione</option>
 										  <option value="1">Or&ccedil;amento</option>
@@ -44,7 +44,7 @@
 							  </div>							
 								<div class="form-group">
 							    <label for="inputEmail3" class="col-sm-2 control-label">Cliente</label>
-							    <div class="col-sm-6">
+							    <div class="col-sm-3">
 							      <select class="form-control">
 										  <option value="0">Selecione</option>
 										  <option value="1">Jemyson Vagner Rosa da Silva</option>

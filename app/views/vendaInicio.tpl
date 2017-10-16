@@ -95,6 +95,15 @@
 							<form>
 							
 								<div class="row">
+									<div class="form-group col-md-2" style="undefined">
+										<label>Categoria*</label>
+										<select class="form-control">
+											<option>Selecione</option>
+											<option>Audio</option>
+											<option>Mixer</option>
+											<option>Caixas</option>
+										</select>
+									</div>
 									<div class="form-group col-md-3" style="undefined">
 										<label>Produto*</label>
 										<select class="form-control">
