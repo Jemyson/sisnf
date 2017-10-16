@@ -132,10 +132,10 @@ class Model {
 		$stm = $this->db->prepare("UPDATE {$this->_tabela} SET {$campos} WHERE {$primaryKey} = :{$primaryKey} ");
 		
 		foreach($dados as $chave=>$valor){
-			$stm->bindParam(":{$chave}", $a = $valor);
+			$stm->bindValue(":{$chave}", $valor);
 		}
 		
-		$stm->bindParam(":{$primaryKey}", $a = $valorPrimaryKey);
+		$stm->bindValue(":{$primaryKey}", $valorPrimaryKey);
 
 		return $stm->execute();
 		

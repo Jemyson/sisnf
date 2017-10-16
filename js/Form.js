@@ -39,8 +39,8 @@ Form = function(nome, opcoes){
 		
 		$('select[obrigatorio=obrigatorio]').each(function(){
 			
-			//console.log(this);
-			//console.log($(this).val());
+			console.log(this);
+			console.log($(this).val());
 			
 			if(!App.isset($(this).val()) || $(this).val() == '-1' || ($(this).val() == '0' && App.isset($(this).attr('entidade')) )){
 				erro = 1;

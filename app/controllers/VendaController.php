@@ -40,9 +40,22 @@ class VendaController extends AppController{
 	
 	public function formAction(){
 
-		if(isset($_GET['id'])){
-			$this->atribuir('id', $_GET['id']);
+		$model = new VendaModel();
+		
+		if(!isset($_REQUEST['id'])){
+			
+			$codigo = $model->nextKey();
+			$this->atribuir('id', $codigo);
+			$this->atribuir('hash', md5('sisnf'.$codigo));
+			
+		}else{
+			
+			$codigo = $_REQUEST['id'];
+			$this->atribuir('id', $codigo);
+			$this->atribuir('hash', md5('sisnf'.$codigo));
+			
 		}
+		
 		
 		$this->renderizar('vendaForm.tpl');
 	}
@@ -50,6 +63,7 @@ class VendaController extends AppController{
 	public function formVisualizarAction(){
 
 		$this->atribuir('id', $_GET['id']);
+		
 		$this->atribuir('visualizar', '1');
 		$this->renderizar('vendaForm.tpl');
 	}
