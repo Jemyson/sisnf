@@ -47,7 +47,7 @@ class Model {
 		$stm = $this->db->prepare("INSERT INTO {$this->_tabela} ({$campos}) VALUES ({$camposValores}) ");
 
 		foreach($dados as $chave=>$valor){
-			$stm->bindParam(":{$chave}", $a = $valor);
+			$stm->bindValue(":{$chave}", $valor);
 		}
 
 		return $stm->execute();

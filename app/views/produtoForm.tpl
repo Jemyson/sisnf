@@ -31,6 +31,10 @@
 		config.colunas = [];
 		config.colunas.push({'nome':'id',	'titulo':'C&oacute;digo',	'tipo':'text',			'span':'6',	'classe':'input-mini',		'obrigatorio':'1', 'disabled':'readonly'});
 		config.colunas.push({'tipo':'linha'});
+		config.colunas.push({'nome':'id_categoria',	'titulo':'Categoria',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
+		config.colunas.push({'tipo':'linha'});
+		config.colunas.push({'nome':'id_subcategoria',	'titulo':'Sub-Categoria',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
+		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'nome',	'titulo':'Nome',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'preco_custo','titulo':'Pre&ccedil;o Custo',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
