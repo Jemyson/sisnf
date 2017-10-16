@@ -1,38 +1,6 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-16 22:23:38
-         compiled from "C:\xampp\htdocs\sisnf\app\views\vendaInicio.tpl" */ ?>
-<?php
-/*%%SmartyHeaderCode:34648610259e5154ac08d86_55560928%%*/
-if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-$_valid = $_smarty_tpl->decodeProperties(array (
-  'file_dependency' => 
-  array (
-    '2292cb1deda25df23aa173d42cf3a182964dd397' => 
-    array (
-      0 => 'C:\\xampp\\htdocs\\sisnf\\app\\views\\vendaInicio.tpl',
-      1 => 1508185417,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '34648610259e5154ac08d86_55560928',
-  'variables' => 
-  array (
-    'id' => 0,
-    'basePath' => 0,
-  ),
-  'has_nocache_code' => false,
-  'version' => '3.1.27',
-  'unifunc' => 'content_59e5154ac670c5_14138788',
-),false);
-/*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e5154ac670c5_14138788')) {
-function content_59e5154ac670c5_14138788 ($_smarty_tpl) {
+{include file="../../templates/topo.tpl"}
 
-$_smarty_tpl->properties['nocache_hash'] = '34648610259e5154ac08d86_55560928';
-echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
-?>
-
-
-
+{literal}
 
 	<style>
 	
@@ -46,15 +14,14 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 	
 	</style>
 
-	<?php echo '<script'; ?>
- type="text/javascript" language="javascript">
+	<script type="text/javascript" language="javascript">
 
 	Venda = function(opcoes){
 
 		this.opcoes = opcoes;
 
 		this.nova = function(){
-			window.location = _this.opcoes.urlNova;
+			window.location = this.opcoes.urlNova;
 		}
 		
 		this.validarCampoObrigatorio = function(){
@@ -132,14 +99,10 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 	var config = {};
 
-	config.id						= '<?php echo $_smarty_tpl->tpl_vars['id']->value;?>
-';
-	config.urlNova			= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda/form';
-	config.urlIniciar		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda/iniciar';
-	config.urlSalvar		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda/salvar';
+	config.id						= '{/literal}{$id}{literal}';
+	config.urlNova			= '{/literal}{$basePath}{literal}venda/form';
+	config.urlIniciar		= '{/literal}{$basePath}{literal}venda/iniciar';
+	config.urlSalvar		= '{/literal}{$basePath}{literal}venda/salvar';
 
 	$(document).ready(function(){
 
@@ -147,16 +110,14 @@ venda/salvar';
 
 	});	
 			
-	<?php echo '</script'; ?>
->
-
+	</script>
+{/literal}
 	
 		<div class="page-wrapper">
 		
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header"><a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda">Vendas</a> / Cadastro</h1>
+					<h1 class="page-header"><a href="{$basePath}venda">Vendas</a> / Cadastro</h1>
 				</div>
 			</div>	
 		
@@ -167,8 +128,7 @@ venda">Vendas</a> / Cadastro</h1>
 					<div class="panel panel-default">
 					
 						<div class="panel-heading">
-							<a class="pull-right btn btn-primary btn-xs" href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda">
+							<a class="pull-right btn btn-primary btn-xs" href="{$basePath}venda">
 								Voltar  <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
 							</a>Novo Registro: 1462
 						</div>
@@ -326,8 +286,4 @@ venda">
 
 
 
-<?php echo $_smarty_tpl->getSubTemplate ("../../templates/base.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
-
-}
-}
-?>
+{include file="../../templates/base.tpl"}

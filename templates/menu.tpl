@@ -73,7 +73,7 @@
 			</button>
 		
 			<div class="navbar-brand">
-	    	<a href="#"><label>Franchise</label> System</a>
+	    	<a href="#"><label>Invoice</label> System</a>
 	  	</div>
 
 		</div>

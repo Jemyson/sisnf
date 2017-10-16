@@ -56,16 +56,28 @@ class VendaController extends AppController{
 			
 		}
 		
-		
 		$this->renderizar('vendaForm.tpl');
 	}
-	
-	public function formVisualizarAction(){
 
-		$this->atribuir('id', $_GET['id']);
+	public function iniciarAction(){
+
+		$model = new VendaModel();
 		
-		$this->atribuir('visualizar', '1');
-		$this->renderizar('vendaForm.tpl');
+		if(!isset($_REQUEST['id'])){
+			
+			$codigo = $model->nextKey();
+			$this->atribuir('id', $codigo);
+			$this->atribuir('hash', md5('sisnf'.$codigo));
+			
+		}else{
+			
+			$codigo = $_REQUEST['id'];
+			$this->atribuir('id', $codigo);
+			$this->atribuir('hash', md5('sisnf'.$codigo));
+			
+		}
+		
+		$this->renderizar('vendaIniciar.tpl');
 	}
 	
 	public function dadosFormAction(){
@@ -141,10 +153,6 @@ class VendaController extends AppController{
 		}
 		
 		die();	
-	}
-	
-	public function iniciarAction(){
-		$this->renderizar('vendaInicio.tpl');
 	}
 	
 }

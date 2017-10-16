@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-16 18:29:01
+<?php /* Smarty version 3.1.27, created on 2017-10-16 22:13:07
          compiled from "C:\xampp\htdocs\sisnf\templates\menu.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:36839840859e4de4d93d372_67599325%%*/
+/*%%SmartyHeaderCode:29006468259e512d3582128_96870239%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '00ddb9e9109d8ddb1e381eabafc726f6f101e4d2' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\templates\\menu.tpl',
-      1 => 1508160652,
+      1 => 1508184783,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '36839840859e4de4d93d372_67599325',
+  'nocache_hash' => '29006468259e512d3582128_96870239',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e4de4d940e56_88789724',
+  'unifunc' => 'content_59e512d35dd6f2_88418620',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e4de4d940e56_88789724')) {
-function content_59e4de4d940e56_88789724 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e512d35dd6f2_88418620')) {
+function content_59e512d35dd6f2_88418620 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '36839840859e4de4d93d372_67599325';
+$_smarty_tpl->properties['nocache_hash'] = '29006468259e512d3582128_96870239';
 ?>
 
 <style>
@@ -103,7 +103,7 @@ $_smarty_tpl->properties['nocache_hash'] = '36839840859e4de4d93d372_67599325';
 			</button>
 		
 			<div class="navbar-brand">
-	    	<a href="#"><label>Franchise</label> System</a>
+	    	<a href="#"><label>Invoice</label> System</a>
 	  	</div>
 
 		</div>
