@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-16 19:06:00
+<?php /* Smarty version 3.1.27, created on 2017-10-17 20:36:50
          compiled from "C:\xampp\htdocs\sisnf\app\views\produtoForm.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:115469138959e4e6f85197b3_17797766%%*/
+/*%%SmartyHeaderCode:168000333559e64dc2a01783_19233795%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '510e76067982462fb7bbf96b2e382e039bad3b29' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\app\\views\\produtoForm.tpl',
-      1 => 1508173559,
+      1 => 1508265401,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '115469138959e4e6f85197b3_17797766',
+  'nocache_hash' => '168000333559e64dc2a01783_19233795',
   'variables' => 
   array (
     'basePath' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e4e6f868c4c6_90429806',
+  'unifunc' => 'content_59e64dc2a78c61_64086826',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e4e6f868c4c6_90429806')) {
-function content_59e4e6f868c4c6_90429806 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e64dc2a78c61_64086826')) {
+function content_59e64dc2a78c61_64086826 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '115469138959e4e6f85197b3_17797766';
+$_smarty_tpl->properties['nocache_hash'] = '168000333559e64dc2a01783_19233795';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -71,9 +71,11 @@ produto';
 		config.colunas = [];
 		config.colunas.push({'nome':'id',	'titulo':'C&oacute;digo',	'tipo':'text',			'span':'6',	'classe':'input-mini',		'obrigatorio':'1', 'disabled':'readonly'});
 		config.colunas.push({'tipo':'linha'});
-		config.colunas.push({'nome':'id_categoria',	'titulo':'Categoria',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
+		config.colunas.push({'nome':'id_categoria',	'titulo':'Categoria',		'tipo':'entidade',	'carregaDadosEntidade':'<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+categoria',	'filho':'id_subcategoria',	'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		config.colunas.push({'tipo':'linha'});
-		config.colunas.push({'nome':'id_subcategoria',	'titulo':'Sub-Categoria',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
+		config.colunas.push({'nome':'id_subcategoria',	'titulo':'Sub-Categoria',		'tipo':'entidade',	'carregaDadosEntidade':'<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+subcategoria', 'dependencia':'id_categoria', 'tituloDependencia':'Categoria',				'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'nome',	'titulo':'Nome',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		config.colunas.push({'tipo':'linha'});

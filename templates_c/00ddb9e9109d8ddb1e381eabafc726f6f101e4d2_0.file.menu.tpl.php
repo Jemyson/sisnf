@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-17 15:16:19
+<?php /* Smarty version 3.1.27, created on 2017-10-17 20:21:18
          compiled from "C:\xampp\htdocs\sisnf\templates\menu.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:160186092559e602a31b2ba7_36964875%%*/
+/*%%SmartyHeaderCode:46104957259e64a1ea7e045_26161588%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '00ddb9e9109d8ddb1e381eabafc726f6f101e4d2' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\templates\\menu.tpl',
-      1 => 1508244784,
+      1 => 1508264470,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '160186092559e602a31b2ba7_36964875',
+  'nocache_hash' => '46104957259e64a1ea7e045_26161588',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e602a31b7792_01831470',
+  'unifunc' => 'content_59e64a1eabd6b8_12984198',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e602a31b7792_01831470')) {
-function content_59e602a31b7792_01831470 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e64a1eabd6b8_12984198')) {
+function content_59e64a1eabd6b8_12984198 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '160186092559e602a31b2ba7_36964875';
+$_smarty_tpl->properties['nocache_hash'] = '46104957259e64a1ea7e045_26161588';
 ?>
 
 <style>
@@ -118,7 +118,7 @@ cliente"><i class="glyphicon glyphicon-briefcase"></i> Clientes</a>
 		  	</li>
 				<li class="preview__action--close">
 					<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-fornecedor"><i class="glyphicon glyphicon-bed"></i> Fornecedor</a>
+fornecedor"><i class="glyphicon glyphicon-bed"></i> Transportadoras</a>
 		  	</li>
 				<li class="preview__action--close">
 					<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>

@@ -67,7 +67,7 @@ Form = function(nome, opcoes){
 		
 		_this.reset();
 		
-		$('.btn-primary').hide();
+		$('.salvar').hide();
 		$('.disabled').show();
 		
 		if(this.validarCampoObrigatorio()){
@@ -101,7 +101,7 @@ Form = function(nome, opcoes){
 		}else{
 
 			alert("Os Campos em vermelho sao obrigatorios.");
-			$('.btn-success').show();
+			$('.salvar').show();
 			$('.disabled').hide();
 			
 		}
@@ -226,7 +226,7 @@ Form = function(nome, opcoes){
 		
 		if(!App.isset(this.opcoes.visualizar)){
 			
-			this.addHtml('<a type="button" href="javascript:form.salvar()" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Salvar</a>');
+			this.addHtml('<a type="button" href="javascript:form.salvar()" class="btn btn-lg btn-primary salvar"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Salvar</a>');
 			this.addHtml('<button style="display: none" type="button" class="btn btn-lg btn-primary disabled"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> aguarde...</button>');
 			this.addHtml('&nbsp;');
 			

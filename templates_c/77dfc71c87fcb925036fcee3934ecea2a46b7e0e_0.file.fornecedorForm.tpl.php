@@ -1,30 +1,70 @@
-{include file="../../templates/topo.tpl"}
+<?php /* Smarty version 3.1.27, created on 2017-10-17 20:21:53
+         compiled from "C:\xampp\htdocs\sisnf\app\views\fornecedorForm.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:26250075659e64a41ce2e19_34682556%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '77dfc71c87fcb925036fcee3934ecea2a46b7e0e' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\sisnf\\app\\views\\fornecedorForm.tpl',
+      1 => 1508264510,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '26250075659e64a41ce2e19_34682556',
+  'variables' => 
+  array (
+    'basePath' => 0,
+    'id' => 0,
+    'visualizar' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => '3.1.27',
+  'unifunc' => 'content_59e64a41d5c999_25546524',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_59e64a41d5c999_25546524')) {
+function content_59e64a41d5c999_25546524 ($_smarty_tpl) {
 
-{literal}
+$_smarty_tpl->properties['nocache_hash'] = '26250075659e64a41ce2e19_34682556';
+echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
+?>
 
-	<script type="text/javascript" language="javascript">
+
+
+
+	<?php echo '<script'; ?>
+ type="text/javascript" language="javascript">
 
 		var config = {};
 	
-		config.basePath = '{/literal}{$basePath}{literal}';
+		config.basePath = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+';
 		
 		config.pk     = 'id';
 		config.modelo = 'fornecedorForm';
 	
-		config.url    = '{/literal}{$basePath}{literal}fornecedor/dados-form{/literal}{if isset($id)}?id={$id}{/if}{literal}';
-		config.form   = '{/literal}{$basePath}{literal}fornecedor/form';
-		config.salvar = '{/literal}{$basePath}{literal}fornecedor/salvar';
-		config.voltar = '{/literal}{$basePath}{literal}fornecedor';
+		config.url    = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+fornecedor/dados-form<?php if (isset($_smarty_tpl->tpl_vars['id']->value)) {?>?id=<?php echo $_smarty_tpl->tpl_vars['id']->value;
+}?>';
+		config.form   = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+fornecedor/form';
+		config.salvar = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+fornecedor/salvar';
+		config.voltar = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+fornecedor';
 	
-		{/literal}
+		
 
-		{if isset($visualizar) && $visualizar == '1'}
+		<?php if (isset($_smarty_tpl->tpl_vars['visualizar']->value) && $_smarty_tpl->tpl_vars['visualizar']->value == '1') {?>
 
 		config.visualizar = '1';
 		
-		{/if}
+		<?php }?>
 			
-		{literal}
+		
 				
 		config.botoes = ['b','s'];
 
@@ -64,14 +104,16 @@
 	
 		});
 
-	</script>
-{/literal}
+	<?php echo '</script'; ?>
+>
+
 
 		<div class="page-wrapper">
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header"><a href="{$basePath}fornecedor">Transportadora</a> / Cadastro</h1>
+					<h1 class="page-header"><a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+fornecedor">Transportadora</a> / Cadastro</h1>
 				</div>
 			</div>	
 
@@ -82,7 +124,8 @@
 					<div class="panel panel-default">
 					
 						<div class="panel-heading">
-							<a class="pull-right btn btn-primary btn-xs" href="{$basePath}fornecedor">
+							<a class="pull-right btn btn-primary btn-xs" href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+fornecedor">
 								Voltar  <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
 							</a>Novo Registro
 						</div>
@@ -103,4 +146,8 @@
 		
 		
 
-{include file="../../templates/base.tpl"}
+<?php echo $_smarty_tpl->getSubTemplate ("../../templates/base.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
+
+}
+}
+?>

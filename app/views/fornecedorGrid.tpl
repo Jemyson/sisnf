@@ -48,7 +48,7 @@
 		<div class="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Fornecedor</h1>
+					<h1 class="page-header">Transportadora</h1>
 				</div>
 			</div>	
 		

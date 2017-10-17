@@ -108,7 +108,7 @@ Campos = function(){
 		
 		var data = jQuery.parseJSON(dados);
 		
-		var html = '<div class="span'+campo.span+'">';
+		var html = '<div class="form-group col-md-'+campo.span+'">';
 		
 		var obrigatorio = '';
 		
@@ -127,9 +127,9 @@ Campos = function(){
 		
 		if(App.isset(campo.carregaDependente)){
 			form.carregarDependencia('teste', 'testando');
-			html += '<select '+obrigatorio+' '+entidade+' class="'+campo.classe+'" '+campo.disabled+' id="'+campo.nome+'" name="'+campo.nome+'" >';
+			html += '<select '+obrigatorio+' '+entidade+' class="form-control '+campo.classe+'" '+campo.disabled+' id="'+campo.nome+'" name="'+campo.nome+'" >';
 		}else{
-			html += '<select '+obrigatorio+' '+entidade+' class="'+campo.classe+'" '+campo.disabled+' id="'+campo.nome+'" name="'+campo.nome+'" >';
+			html += '<select '+obrigatorio+' '+entidade+' class="form-control '+campo.classe+'" '+campo.disabled+' id="'+campo.nome+'" name="'+campo.nome+'" >';
 		}
 		
 		
@@ -142,7 +142,7 @@ Campos = function(){
 			}
 			
 		}else{
-			html += '<option value="0"> Nenhum(a) ' + campo.dependencia + ' selecionado(a) </option>';
+			html += '<option value="0"> Nenhum(a) ' + campo.tituloDependencia + ' selecionado(a) </option>';
 		}
 		
 		html += '</select>';
