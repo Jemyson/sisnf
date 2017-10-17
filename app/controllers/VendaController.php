@@ -123,6 +123,11 @@ class VendaController extends AppController{
 
 	public function salvarAction(){
 
+		echo "<pre>";
+		print_r($_REQUEST);
+		echo "</pre>";
+		die();
+		
 		if(!isset($_REQUEST['id']) || !isset($_REQUEST['hash'])){
 			// [901] Erro de seguranca - Tentativa de alterar id manualmente
 			print_r(json_encode(array('error'=>'1', 'msg'=>'Houve um erro ao tentar propressar os dados! Por favor tente novamente. Cod-901')));

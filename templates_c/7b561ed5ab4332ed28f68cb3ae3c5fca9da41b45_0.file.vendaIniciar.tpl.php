@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-17 01:08:48
+<?php /* Smarty version 3.1.27, created on 2017-10-17 02:10:49
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:64487858559e58250360275_15302750%%*/
+/*%%SmartyHeaderCode:214366273759e590d94319e1_70861753%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7b561ed5ab4332ed28f68cb3ae3c5fca9da41b45' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl',
-      1 => 1508213327,
+      1 => 1508217048,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '64487858559e58250360275_15302750',
+  'nocache_hash' => '214366273759e590d94319e1_70861753',
   'variables' => 
   array (
     'id' => 0,
@@ -21,13 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e582503b0820_03437133',
+  'unifunc' => 'content_59e590d9496f48_50823342',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e582503b0820_03437133')) {
-function content_59e582503b0820_03437133 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e590d9496f48_50823342')) {
+function content_59e590d9496f48_50823342 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '64487858559e58250360275_15302750';
+$_smarty_tpl->properties['nocache_hash'] = '214366273759e590d94319e1_70861753';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -100,6 +100,11 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 				$("#qtdProdutos").html(App.count(this.produtos) + ' item');
 			}else{
 				$("#qtdProdutos").html(App.count(this.produtos) + ' itens');
+			}
+			if(App.count(this.produtos) > 0){
+				$('#btnFinalizarVenda').removeAttr('disabled');
+			}else{
+				$('#btnFinalizarVenda').attr('disabled', 'disabled');
 			}
 		}
 
@@ -192,6 +197,22 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 			
 		}
 
+		this.finalizarVenda = function(){
+
+			$('#btnFinalizarVenda').attr('disabled', 'disabled');
+			$('#divFormaPagamento').show();
+			$('#divAdicionarProduto').hide();
+			
+		}
+
+		this.continuarVenda = function(){
+
+			$('#btnFinalizarVenda').removeAttr('disabled');
+			$('#divFormaPagamento').hide();
+			$('#divAdicionarProduto').show();
+			
+		}
+		
 		this.salvar = function(){
 
 			var _this = this;
@@ -318,7 +339,7 @@ venda">
 							  <div class="form-group" style="margin-top: 15px">
 							    <div class="col-sm-offset-2 col-sm-10">
 							      <button type="button" style="width: 120px" class="btn btn-primary" disabled="disabled" >Iniciar Venda</button>
-							      <button type="button" style="width: 120px" class="btn btn-success">Finalizar Venda</button>
+							      <button type="button" style="width: 120px" class="btn btn-success" disabled="disabled" onclick="javascript:venda.finalizarVenda()" id="btnFinalizarVenda">Finalizar Venda</button>
 							      <button type="button" style="width: 120px" class="btn btn-danger" disabled="disabled">Excluir Venda</button>
 							      <button type="button" style="width: 120px" class="btn btn-warning" onclick="venda.nova()" >Nova Venda</button>
 							    </div>
@@ -330,36 +351,83 @@ venda">
 							<hr>
 						
 							<form>
-							
-								<div class="row">
-									<div class="form-group col-md-2" style="undefined">
-										<label>Categoria*</label>
-										<select class="form-control" id="id_categoria" name="id_categoria">
-											<option>Selecione</option>
-											<option>Audio</option>
-											<option>Mixer</option>
-											<option>Caixas</option>
-										</select>
-									</div>
-									<div class="form-group col-md-3" style="undefined">
-										<label>Produto*</label>
-										<select class="form-control" id="id_produto" name="id_produto" obrigatorio="obrigatorio" entidade="entidade">
-											<option value="0">Selecione</option>
-											<option value="1">Placa M-audio</option>
-											<option value="2">Controlador Behringer UMX610</option>
-											<option value="3">Mesa Behringer X32</option>
-										</select>
-									</div>
-									<div class="form-group col-md-1" style="undefined">
-										<label>Qtd*</label>
-										<input class="form-control" type="text" id="qtd" name="qtd" obrigatorio="obrigatorio"/>
-									</div>
-									<div class="form-group col-md-2" style="undefined">
-										<label>&nbsp;</label>
-										<br>
-										<button type="button" class="btn btn-primary" onclick="venda.adicionarProduto()">Adicionar</button>
+								<!-- ADICIONAR PRODUTO -->
+								<div id="divAdicionarProduto">
+									<div class="row">
+										<div class="form-group col-md-2" style="undefined">
+											<label>Categoria*</label>
+											<select class="form-control" id="id_categoria" name="id_categoria">
+												<option>Selecione</option>
+												<option>Audio</option>
+												<option>Mixer</option>
+												<option>Caixas</option>
+											</select>
+										</div>
+										<div class="form-group col-md-3" style="undefined">
+											<label>Produto*</label>
+											<select class="form-control" id="id_produto" name="id_produto" obrigatorio="obrigatorio" entidade="entidade">
+												<option value="0">Selecione</option>
+												<option value="1">Placa M-audio</option>
+												<option value="2">Controlador Behringer UMX610</option>
+												<option value="3">Mesa Behringer X32</option>
+											</select>
+										</div>
+										<div class="form-group col-md-1" style="undefined">
+											<label>Qtd*</label>
+											<input class="form-control" type="text" id="qtd" name="qtd" obrigatorio="obrigatorio"/>
+										</div>
+										<div class="form-group col-md-2" style="undefined">
+											<label>&nbsp;</label>
+											<br>
+											<button type="button" class="btn btn-primary" onclick="venda.adicionarProduto()">Adicionar</button>
+										</div>
 									</div>
 								</div>
+								<!-- FORMA DE PAGAMENTO  -->
+								<div id="divFormaPagamento" style="display: none">
+									<div class="row">
+										<div class="form-group col-md-2" style="undefined">
+											<label>Forma de Pagamento*</label>
+											<select class="form-control" id="pagamento" name="pagamento">
+												<option>Selecione</option>
+												<option>Boleto</option>
+												<option>Cheque</option>
+												<option>Cr&eacute;dito</option>
+												<option>D&eacute;bito</option>
+												<option>Dinheiro</option>
+											</select>
+										</div>
+										<div class="form-group col-md-1" style="undefined">
+											<label>Parcelas*</label>
+											<select class="form-control" id="id_produto" name="parcelas">
+												<option value="0">Selecione</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+												<option value="8">8</option>
+												<option value="9">9</option>
+												<option value="10">10</option>
+												<option value="11">11</option>
+												<option value="12">12</option>
+											</select>
+										</div>
+										<div class="form-group col-md-1" style="undefined">
+											<label>&nbsp;</label>
+											<br>
+											<button type="button" class="btn btn-success" onclick="venda.salvar()" style="width: 100px">Confirmar</button>
+										</div>
+										<div class="form-group col-md-1" style="undefined">
+											<label>&nbsp;</label>
+											<br>
+											<button type="button" class="btn btn-info" onclick="venda.continuarVenda()" style="width: 130px">Continuar venda</button>
+										</div>
+									</div>
+								</div>
+							
 						
 								<br>
 								<br>
@@ -422,6 +490,8 @@ venda">
 			</div>		
 		
 		</div>
+		
+		
 
 
 

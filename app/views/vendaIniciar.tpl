@@ -68,6 +68,11 @@
 			}else{
 				$("#qtdProdutos").html(App.count(this.produtos) + ' itens');
 			}
+			if(App.count(this.produtos) > 0){
+				$('#btnFinalizarVenda').removeAttr('disabled');
+			}else{
+				$('#btnFinalizarVenda').attr('disabled', 'disabled');
+			}
 		}
 
 		this.adicionarProduto = function(){
@@ -159,39 +164,58 @@
 			
 		}
 
+		this.finalizarVenda = function(){
+
+			$('#btnFinalizarVenda').attr('disabled', 'disabled');
+			$('#divFormaPagamento').show();
+			$('#divAdicionarProduto').hide();
+			
+		}
+
+		this.continuarVenda = function(){
+
+			$('#btnFinalizarVenda').removeAttr('disabled');
+			$('#divFormaPagamento').hide();
+			$('#divAdicionarProduto').show();
+			
+		}
+		
 		this.salvar = function(){
 
 			var _this = this;
 
-			if(this.validarCampoObrigatorio()){
+			var venda = {};
 
-				$.ajax({
-					type:'POST',
-					global:true,
-					url:_this.opcoes.urlSalvar,
-					dataType:'json',
-					data:$('#form').serialize(),
-					success: function(data){
-
-						if(data.error == 0){
-							window.location = _this.opcoes.urlIniciar + '?id=' + _this.opcoes.id;
-						}else{
-							$('#divError').show();
-							$('#divError').html(data.msg);
-						}
-						
-					},
-					error: function(){
-					}
-				});
-
-			}else{
-
-				alert("Os Campos em vermelho sao obrigatorios.");
-				$('.btn-success').show();
-				$('.disabled').hide();
-
+			for(var produto in this.produtos){
+				venda[produto] = _this.produtos[produto];
 			}
+
+			venda['olimpiadas'] = _this.opcoes.olimpiadas;
+			venda['server'] = _this.opcoes.server;
+			venda['apostador'] = $('#apostador').val();
+			venda['id_cambista'] = 0;
+			venda['valor_apostado'] = _this.valorApostado;
+			
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlSalvar,
+				dataType:'json',
+				data:$('#form').serialize(),
+				success: function(data){
+
+					if(data.error == 0){
+						window.location = _this.opcoes.urlIniciar + '?id=' + _this.opcoes.id;
+					}else{
+						$('#divError').show();
+						$('#divError').html(data.msg);
+					}
+					
+				},
+				error: function(){
+				}
+			});
+
 			
 		}
 
@@ -276,7 +300,7 @@
 							  <div class="form-group" style="margin-top: 15px">
 							    <div class="col-sm-offset-2 col-sm-10">
 							      <button type="button" style="width: 120px" class="btn btn-primary" disabled="disabled" >Iniciar Venda</button>
-							      <button type="button" style="width: 120px" class="btn btn-success">Finalizar Venda</button>
+							      <button type="button" style="width: 120px" class="btn btn-success" disabled="disabled" onclick="javascript:venda.finalizarVenda()" id="btnFinalizarVenda">Finalizar Venda</button>
 							      <button type="button" style="width: 120px" class="btn btn-danger" disabled="disabled">Excluir Venda</button>
 							      <button type="button" style="width: 120px" class="btn btn-warning" onclick="venda.nova()" >Nova Venda</button>
 							    </div>
@@ -288,36 +312,83 @@
 							<hr>
 						
 							<form>
-							
-								<div class="row">
-									<div class="form-group col-md-2" style="undefined">
-										<label>Categoria*</label>
-										<select class="form-control" id="id_categoria" name="id_categoria">
-											<option>Selecione</option>
-											<option>Audio</option>
-											<option>Mixer</option>
-											<option>Caixas</option>
-										</select>
-									</div>
-									<div class="form-group col-md-3" style="undefined">
-										<label>Produto*</label>
-										<select class="form-control" id="id_produto" name="id_produto" obrigatorio="obrigatorio" entidade="entidade">
-											<option value="0">Selecione</option>
-											<option value="1">Placa M-audio</option>
-											<option value="2">Controlador Behringer UMX610</option>
-											<option value="3">Mesa Behringer X32</option>
-										</select>
-									</div>
-									<div class="form-group col-md-1" style="undefined">
-										<label>Qtd*</label>
-										<input class="form-control" type="text" id="qtd" name="qtd" obrigatorio="obrigatorio"/>
-									</div>
-									<div class="form-group col-md-2" style="undefined">
-										<label>&nbsp;</label>
-										<br>
-										<button type="button" class="btn btn-primary" onclick="venda.adicionarProduto()">Adicionar</button>
+								<!-- ADICIONAR PRODUTO -->
+								<div id="divAdicionarProduto">
+									<div class="row">
+										<div class="form-group col-md-2" style="undefined">
+											<label>Categoria*</label>
+											<select class="form-control" id="id_categoria" name="id_categoria">
+												<option>Selecione</option>
+												<option>Audio</option>
+												<option>Mixer</option>
+												<option>Caixas</option>
+											</select>
+										</div>
+										<div class="form-group col-md-3" style="undefined">
+											<label>Produto*</label>
+											<select class="form-control" id="id_produto" name="id_produto" obrigatorio="obrigatorio" entidade="entidade">
+												<option value="0">Selecione</option>
+												<option value="1">Placa M-audio</option>
+												<option value="2">Controlador Behringer UMX610</option>
+												<option value="3">Mesa Behringer X32</option>
+											</select>
+										</div>
+										<div class="form-group col-md-1" style="undefined">
+											<label>Qtd*</label>
+											<input class="form-control" type="text" id="qtd" name="qtd" obrigatorio="obrigatorio"/>
+										</div>
+										<div class="form-group col-md-2" style="undefined">
+											<label>&nbsp;</label>
+											<br>
+											<button type="button" class="btn btn-primary" onclick="venda.adicionarProduto()">Adicionar</button>
+										</div>
 									</div>
 								</div>
+								<!-- FORMA DE PAGAMENTO  -->
+								<div id="divFormaPagamento" style="display: none">
+									<div class="row">
+										<div class="form-group col-md-2" style="undefined">
+											<label>Forma de Pagamento*</label>
+											<select class="form-control" id="pagamento" name="pagamento">
+												<option>Selecione</option>
+												<option>Boleto</option>
+												<option>Cheque</option>
+												<option>Cr&eacute;dito</option>
+												<option>D&eacute;bito</option>
+												<option>Dinheiro</option>
+											</select>
+										</div>
+										<div class="form-group col-md-1" style="undefined">
+											<label>Parcelas*</label>
+											<select class="form-control" id="id_produto" name="parcelas">
+												<option value="0">Selecione</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+												<option value="8">8</option>
+												<option value="9">9</option>
+												<option value="10">10</option>
+												<option value="11">11</option>
+												<option value="12">12</option>
+											</select>
+										</div>
+										<div class="form-group col-md-1" style="undefined">
+											<label>&nbsp;</label>
+											<br>
+											<button type="button" class="btn btn-success" onclick="venda.salvar()" style="width: 100px">Confirmar</button>
+										</div>
+										<div class="form-group col-md-1" style="undefined">
+											<label>&nbsp;</label>
+											<br>
+											<button type="button" class="btn btn-info" onclick="venda.continuarVenda()" style="width: 130px">Continuar venda</button>
+										</div>
+									</div>
+								</div>
+							
 						
 								<br>
 								<br>
@@ -380,6 +451,8 @@
 			</div>		
 		
 		</div>
+		
+		
 
 
 
