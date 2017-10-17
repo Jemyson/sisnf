@@ -80,6 +80,8 @@ CREATE TABLE vendas (
 	cpf_cliente VARCHAR(255),
 	telefone_cliente VARCHAR(255),
 	tipo INT,
+	forma_pagamento VARCHAR(255),
+	parcelas INT,
 	data_venda DATE,
 	data_realizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
 	valor FLOAT(10,2),

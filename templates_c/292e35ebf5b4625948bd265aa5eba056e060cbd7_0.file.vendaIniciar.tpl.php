@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-16 22:26:53
+<?php /* Smarty version 3.1.27, created on 2017-10-17 16:36:29
          compiled from "C:\xampp\htdocs\sisnf\app\views\vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:23816600659e5160d712fc9_85052984%%*/
+/*%%SmartyHeaderCode:104977020959e6156d646ee2_83517770%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '292e35ebf5b4625948bd265aa5eba056e060cbd7' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\app\\views\\vendaIniciar.tpl',
-      1 => 1508185611,
+      1 => 1508250858,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '23816600659e5160d712fc9_85052984',
+  'nocache_hash' => '104977020959e6156d646ee2_83517770',
   'variables' => 
   array (
     'id' => 0,
@@ -21,13 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e5160d788de2_07004059',
+  'unifunc' => 'content_59e6156d6a7fb6_40039311',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e5160d788de2_07004059')) {
-function content_59e5160d788de2_07004059 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e6156d6a7fb6_40039311')) {
+function content_59e6156d6a7fb6_40039311 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '23816600659e5160d712fc9_85052984';
+$_smarty_tpl->properties['nocache_hash'] = '104977020959e6156d646ee2_83517770';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -52,6 +52,7 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 	Venda = function(opcoes){
 
 		this.opcoes = opcoes;
+		this.produtos = {};
 
 		this.nova = function(){
 			window.location = this.opcoes.urlNova;
@@ -64,10 +65,10 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 				
 				if(!App.isset($(this).val()) || $(this).val() == ''){
 					erro = 1;
-					$(this).parent().addClass( "control-group error" );
+					$(this).parent().addClass( "has-error" );
 					$(this).parent().css("color", "#b94a48");
 				}else{
-					$(this).parent().removeClass( "control-group error" );
+					$(this).parent().removeClass( "has-error" );
 					$(this).parent().css("color", "");
 				}
 				
@@ -77,9 +78,11 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 				
 				if(!App.isset($(this).val()) || $(this).val() == '-1' || ($(this).val() == '0' && App.isset($(this).attr('entidade')) )){
 					erro = 1;
-					$(this).parent().parent().addClass( "has-error" );
+					$(this).parent().addClass( "has-error" );
+					$(this).parent().css("color", "#b94a48");
 				}else{
-					$(this).parent().parent().removeClass( "has-error" );
+					$(this).parent().removeClass( "has-error" );
+					$(this).parent().css("color", "");
 				}
 				
 			});
@@ -91,40 +94,191 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 			}
 			
 		}
-		
-		this.iniciar = function(){
+
+		this.atualizarQtdProdutos = function(){
+			if(App.count(this.produtos) == 1){
+				$("#qtdProdutos").html(App.count(this.produtos) + ' item');
+			}else{
+				$("#qtdProdutos").html(App.count(this.produtos) + ' itens');
+			}
+			if(App.count(this.produtos) > 0){
+				$('#btnFinalizarVenda').removeAttr('disabled');
+			}else{
+				$('#btnFinalizarVenda').attr('disabled', 'disabled');
+			}
+		}
+
+		this.carregarProdutos = function(){
 
 			var _this = this;
+			
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlProduto,
+				dataType:'json',
+				data:'id=all',
+				success: function(data){
+
+					if(data.error == 0){
+
+						$('#id_produto');
+
+						var htmlProdutos = '<option value="0">Selecione</option>';
+						for(var chave in data.produtos){
+
+							htmlProdutos += '<option value="'+data.produtos[chave].id+'">'+data.produtos[chave].nome+'</option>';
+						}
+						
+						$('#id_produto').html(htmlProdutos);
+						
+					}
+
+				}
+
+			});
+						
+		}
+
+		this.adicionarProduto = function(){
+
+			_this = this;
+			
+			var id_produto 	= $('#id_produto').val();
+			var qtd					= $('#qtd').val();	
 
 			if(this.validarCampoObrigatorio()){
-
+			
+				htmlProduto  = '';
 				$.ajax({
 					type:'POST',
 					global:true,
-					url:_this.opcoes.urlSalvar,
+					url:_this.opcoes.urlProduto,
 					dataType:'json',
-					data:$('#form').serialize(),
+					data:'id='+id_produto,
 					success: function(data){
-
+	
 						if(data.error == 0){
-							window.location = _this.opcoes.urlIniciar + '?id=' + _this.opcoes.id;
-						}else{
-							$('#divError').show();
-							$('#divError').html(data.msg);
-						}
+	
+							$('#produto_'+data.id).remove();
+							
+							if(_this.produtos.hasOwnProperty(data.id)){
+								delete _this.produtos[data.id];
+							}
+							
+							htmlProduto += '<tr id="produto_'+data.id+'">';
+							htmlProduto += '<td style="text-align: center;"><a href="javascript:venda.removerProduto('+data.id+')"><i class="glyphicon glyphicon-trash"></i></a></td>';
+							htmlProduto += '<td>'+data.nome+'</td>';
+							htmlProduto += '<td style="text-align: right;">'+qtd+'</td>';
+							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda(data.preco_venda, 2,',','.')+'</td>';
+							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda((data.preco_venda * qtd), 2,',','.')+'</td>';
+							htmlProduto += '<td style="text-align: center;">n/d</td>';
+							htmlProduto += '<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>';
+							htmlProduto += '</tr>';
+	
+							_this.produtos[data.id] = {'id':data.id, 'produto':data.nome, 'preco_venda':data.preco_venda, 'qtd':qtd};
+	
+							_this.atualizarQtdProdutos();
+							_this.calcularRetornoPossivel();
+							$('table tbody').append(htmlProduto);
+
+							}else{
+								alert(data.msg);
+
+							}
 						
-					},
+
+						},
+
 					error: function(){
-					}
-				});
 
-			}else{
+						}
 
-				alert("Os Campos em vermelho sao obrigatorios.");
-				$('.btn-success').show();
-				$('.disabled').hide();
+					});
 
+				}else{
+					alert("Os Campos em vermelho sao obrigatorios.");
+				}
+
+		}
+
+			
+		this.removerProduto = function(id){
+
+			delete this.produtos[id];
+			
+			$('#produto_'+id).remove();
+
+			this.atualizarQtdProdutos();
+			this.calcularRetornoPossivel();
+			
+		}
+
+		this.calcularRetornoPossivel = function(){
+
+			var _this = this;
+			
+			var retornoPossivel = 0;
+
+			for(var produto in this.produtos){
+				retornoPossivel = parseFloat(retornoPossivel) + this.produtos[produto].qtd * parseFloat(this.produtos[produto].preco_venda);
+				console.log(retornoPossivel);
 			}
+
+			$('#valorProdutos').html('&nbsp;' + Formatter.moeda(retornoPossivel, 2,',','.'));
+			
+		}
+
+		this.finalizarVenda = function(){
+
+			$('#btnFinalizarVenda').attr('disabled', 'disabled');
+			$('#divFormaPagamento').show();
+			$('#divAdicionarProduto').hide();
+			
+		}
+
+		this.continuarVenda = function(){
+
+			$('#btnFinalizarVenda').removeAttr('disabled');
+			$('#divFormaPagamento').hide();
+			$('#divAdicionarProduto').show();
+			
+		}
+		
+		this.salvar = function(){
+
+			var _this = this;
+
+			var venda = {};
+
+			for(var produto in this.produtos){
+				venda[produto] = _this.produtos[produto];
+			}
+
+			venda['id'] = _this.opcoes.id;
+			venda['forma_pagamento'] = $('#pagamento').val();
+			venda['parcelas'] = $('#parcelas').val();
+			
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlSalvar,
+				dataType:'json',
+				data:venda,
+				success: function(data){
+
+					if(data.error == 0){
+						//window.location = _this.opcoes.urlIniciar + '?id=' + _this.opcoes.id;
+					}else{
+						$('#divError').show();
+						$('#divError').html(data.msg);
+					}
+					
+				},
+				error: function(){
+				}
+			});
+
 			
 		}
 
@@ -138,12 +292,15 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 venda/form';
 	config.urlIniciar		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 venda/iniciar';
+	config.urlProduto		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/pesquisar-produto';
 	config.urlSalvar		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda/salvar';
+venda/finalizar-venda';
 
 	$(document).ready(function(){
 
 		venda = new Venda(config);
+		venda.carregarProdutos();
 
 	});	
 			
@@ -170,7 +327,8 @@ venda">Vendas</a> / Cadastro</h1>
 							<a class="pull-right btn btn-primary btn-xs" href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 venda">
 								Voltar  <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
-							</a>Novo Registro: 1462
+							</a>Novo Registro: <?php echo $_smarty_tpl->tpl_vars['id']->value;?>
+
 						</div>
 					
 						<div class="panel-body" id="divHTML">
@@ -214,52 +372,96 @@ venda">
 						    </div>		
 							  <div class="form-group" style="margin-top: 15px">
 							    <div class="col-sm-offset-2 col-sm-10">
-							      <button type="button" disabled="disabled" class="btn btn-primary">Iniciar Venda</button>
-							      <button type="button" class="btn btn-danger">Finalizar Venda</button>
-							      <button type="button" onclick="venda.nova()" class="btn btn-warning">Nova Venda</button>
+							      <button type="button" style="width: 120px" class="btn btn-primary" disabled="disabled" >Iniciar Venda</button>
+							      <button type="button" style="width: 120px" class="btn btn-success" disabled="disabled" onclick="javascript:venda.finalizarVenda()" id="btnFinalizarVenda">Finalizar Venda</button>
+							      <button type="button" style="width: 120px" class="btn btn-danger" disabled="disabled">Excluir Venda</button>
+							      <button type="button" style="width: 120px" class="btn btn-warning" onclick="venda.nova()" >Nova Venda</button>
 							    </div>
 							  </div>					
 							
 							</form>
 						
-							<h3 style="#margin-top: 0px">3 itens / Total R$ 19.748,00</h3>
+							<h3 style="#margin-top: 0px"><span id="qtdProdutos">0 itens</span> / Total R$ <span id="valorProdutos">0,00</span></h3>
 							<hr>
 						
 							<form>
-							
-								<div class="row">
-									<div class="form-group col-md-2" style="undefined">
-										<label>Categoria*</label>
-										<select class="form-control">
-											<option>Selecione</option>
-											<option>Audio</option>
-											<option>Mixer</option>
-											<option>Caixas</option>
-										</select>
-									</div>
-									<div class="form-group col-md-3" style="undefined">
-										<label>Produto*</label>
-										<select class="form-control">
-											<option>Selecione</option>
-											<option>Placa M-audio</option>
-											<option>Controlador Behringer UMX610</option>
-											<option>Mesa Behringer X32</option>
-										</select>
-									</div>
-									<div class="form-group col-md-1" style="undefined">
-										<label>Qtd*</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div class="form-group col-md-2" style="undefined">
-										<label>Total*</label>
-										<input class="form-control" type="text" />
-									</div>
-									<div class="form-group col-md-2" style="undefined">
-										<label>&nbsp;</label>
-										<br>
-										<button type="submit" class="btn btn-primary">Adicionar</button>
+								<!-- ADICIONAR PRODUTO -->
+								<div id="divAdicionarProduto">
+									<div class="row">
+										<div class="form-group col-md-2" style="display: none">
+											<label>Categoria*</label>
+											<select class="form-control" id="id_categoria" name="id_categoria">
+												<option>Selecione</option>
+												<option>Audio</option>
+												<option>Mixer</option>
+												<option>Caixas</option>
+											</select>
+										</div>
+										<div class="form-group col-md-3" style="undefined">
+											<label>Produto*</label>
+											<select class="form-control" id="id_produto" name="id_produto" obrigatorio="obrigatorio" entidade="entidade">
+												<option value="0">Selecione</option>
+												<option value="1">Placa M-audio</option>
+												<option value="2">Controlador Behringer UMX610</option>
+												<option value="3">Mesa Behringer X32</option>
+											</select>
+										</div>
+										<div class="form-group col-md-1" style="undefined">
+											<label>Qtd*</label>
+											<input class="form-control" type="text" id="qtd" name="qtd" obrigatorio="obrigatorio"/>
+										</div>
+										<div class="form-group col-md-2" style="undefined">
+											<label>&nbsp;</label>
+											<br>
+											<button type="button" class="btn btn-primary" onclick="venda.adicionarProduto()">Adicionar</button>
+										</div>
 									</div>
 								</div>
+								<!-- FORMA DE PAGAMENTO  -->
+								<div id="divFormaPagamento" style="display: none">
+									<div class="row">
+										<div class="form-group col-md-2" style="undefined">
+											<label>Forma de Pagamento*</label>
+											<select class="form-control" id="pagamento" name="pagamento">
+												<option value="0">Selecione</option>
+												<option value="boleto">Boleto</option>
+												<option value="cheque">Cheque</option>
+												<option value="credito">Cr&eacute;dito</option>
+												<option value="debito">D&eacute;bito</option>
+												<option value="dinheiro">Dinheiro</option>
+											</select>
+										</div>
+										<div class="form-group col-md-1" style="undefined">
+											<label>Parcelas*</label>
+											<select class="form-control" id="parcelas" name="parcelas">
+												<option value="0">Selecione</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+												<option value="8">8</option>
+												<option value="9">9</option>
+												<option value="10">10</option>
+												<option value="11">11</option>
+												<option value="12">12</option>
+											</select>
+										</div>
+										<div class="form-group col-md-1" style="undefined">
+											<label>&nbsp;</label>
+											<br>
+											<button type="button" class="btn btn-success" onclick="venda.salvar()" style="width: 93px">Confirmar</button>
+										</div>
+										<div class="form-group col-md-1" style="undefined">
+											<label>&nbsp;</label>
+											<br>
+											<button type="button" class="btn btn-info" onclick="venda.continuarVenda()" style="width: 130px">Continuar venda</button>
+										</div>
+									</div>
+								</div>
+							
 						
 								<br>
 								<br>
@@ -278,6 +480,7 @@ venda">
 										</tr>
 									</thead>
 									<tbody>
+										<!-- 
 										<tr>
 											<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
 											<td>Mesa Behringer X32</td>
@@ -305,6 +508,7 @@ venda">
 											<td style="text-align: center;">n/d</td>
 											<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>
 										</tr>
+										 -->
 									</tbody>
 								
 								</table>
@@ -320,6 +524,8 @@ venda">
 			</div>		
 		
 		</div>
+		
+		
 
 
 

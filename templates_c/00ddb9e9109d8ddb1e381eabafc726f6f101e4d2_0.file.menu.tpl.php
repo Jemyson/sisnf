@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-16 22:13:07
+<?php /* Smarty version 3.1.27, created on 2017-10-17 15:16:19
          compiled from "C:\xampp\htdocs\sisnf\templates\menu.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:29006468259e512d3582128_96870239%%*/
+/*%%SmartyHeaderCode:160186092559e602a31b2ba7_36964875%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '00ddb9e9109d8ddb1e381eabafc726f6f101e4d2' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\templates\\menu.tpl',
-      1 => 1508184783,
+      1 => 1508244784,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '29006468259e512d3582128_96870239',
+  'nocache_hash' => '160186092559e602a31b2ba7_36964875',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e512d35dd6f2_88418620',
+  'unifunc' => 'content_59e602a31b7792_01831470',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e512d35dd6f2_88418620')) {
-function content_59e512d35dd6f2_88418620 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e602a31b7792_01831470')) {
+function content_59e602a31b7792_01831470 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '29006468259e512d3582128_96870239';
+$_smarty_tpl->properties['nocache_hash'] = '160186092559e602a31b2ba7_36964875';
 ?>
 
 <style>
@@ -125,7 +125,8 @@ fornecedor"><i class="glyphicon glyphicon-bed"></i> Fornecedor</a>
 produto"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
 		  	</li>
 				<li class="preview__action--close">
-					<a href="venda"><i class="glyphicon glyphicon-shopping-cart"></i> Vendas <span class="sr-only">(current)</span></a>
+					<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda"><i class="glyphicon glyphicon-shopping-cart"></i> Vendas <span class="sr-only">(current)</span></a>
 		  	</li>
 				<li class="preview__action--close">
 					<a href="facturas.php"><i class="glyphicon glyphicon-send"></i> Faturas <span class="sr-only">(current)</span></a>

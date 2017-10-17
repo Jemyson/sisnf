@@ -1,6 +1,7 @@
 <?php
 
 require_once MODELS.'VendaModel.php';
+require_once MODELS.'VendaProdutoModel.php';
 require_once MODELS.'ProdutoModel.php';
 require_once CONTROLLERS.'ClienteController.php';
 
@@ -84,12 +85,25 @@ class VendaController extends AppController{
 	public function pesquisarProdutoAction(){
 
 		$produtoModel = new ProdutoModel();
-		$produto = $produtoModel->pesquisar('id = ' . (int) $_REQUEST['id']);
 		
-		if(count($produto) > 0){
-			print_r(json_encode(array_merge(array('error'=>0), current($produto))));
+		if($_REQUEST['id'] == 'all'){
+			
+			$produtos = $produtoModel->pesquisar();
+			if(count($produtos) > 0){
+				print_r(json_encode(array_merge(array('error'=>0), array('produtos'=>$produtos))));
+			}else{
+				print_r(json_encode(array('error'=>1, 'msg'=>'Produto inexistente!')));
+			}
+						
 		}else{
-			print_r(json_encode(array('error'=>1, 'msg'=>'Produto inexistente!')));
+			$produto = $produtoModel->pesquisar('id = ' . (int) $_REQUEST['id']);
+			
+			if(count($produto) > 0){
+				print_r(json_encode(array_merge(array('error'=>0), current($produto))));
+			}else{
+				print_r(json_encode(array('error'=>1, 'msg'=>'Produto inexistente!')));
+			}
+			
 		}
 		
 		
@@ -123,11 +137,6 @@ class VendaController extends AppController{
 
 	public function salvarAction(){
 
-		echo "<pre>";
-		print_r($_REQUEST);
-		echo "</pre>";
-		die();
-		
 		if(!isset($_REQUEST['id']) || !isset($_REQUEST['hash'])){
 			// [901] Erro de seguranca - Tentativa de alterar id manualmente
 			print_r(json_encode(array('error'=>'1', 'msg'=>'Houve um erro ao tentar propressar os dados! Por favor tente novamente. Cod-901')));
@@ -173,6 +182,80 @@ class VendaController extends AppController{
 		}
 		
 		die();	
+	}
+	
+	public function finalizarVendaAction(){
+		
+		$venda = array();
+		
+		$venda['id'] = $_REQUEST['id'];
+		$venda['forma_pagamento'] = $_REQUEST['forma_pagamento'];
+		$venda['parcelas'] = $_REQUEST['parcelas'];
+		$venda['data_venda'] = date('Y-m-d');
+		$venda['valor'] = 0;
+		
+		$model = new VendaModel();
+		$modelProduto = new VendaProdutoModel();
+		
+		$dados = $model->pesquisar("id = {$_REQUEST['id']}");
+		
+		unset($_REQUEST['id']);
+		unset($_REQUEST['forma_pagamento']);
+		unset($_REQUEST['parcelas']);
+		
+		$produtos = $_REQUEST;
+		
+		foreach($produtos as $produto){
+			$venda['valor'] += $produto['qtd'] * $produto['preco_venda'];
+		}
+		
+		if(count($dados) != 0){
+			
+			if($model->atualizar($venda, 'id')){
+				
+				foreach($produtos as $produto){
+					$modelProduto->delete(array('id_venda'=>$venda['id']), 'id_venda');
+					$modelProduto->inserir(array(
+																		'id_venda'=>$venda['id'], 
+																		'id_produto'=>$produto['id'], 
+																		'valor_produto'=>$produto['preco_venda'], 
+																		'qtd_produto'=>$produto['qtd']
+																		)
+																 );
+				}
+				
+				// Registro atualizado
+				print_r(json_encode(array('error'=>'0', 'msg'=>'Registro alterado com sucesso.')));
+				die();
+			}else{
+				// [801] Erro de banco - Falha na tentativa de atualizar os dados
+				print_r(json_encode(array('error'=>'1', 'msg'=>'Houve um erro ao tentar propressar os dados! Por favor tente novamente. Cod-801')));
+				die();
+			}
+						
+		}else{
+			
+			if($model->inserir($venda)){
+				// Registro inserido
+				print_r(json_encode(array('error'=>'0', 'msg'=>'Registro inserido com sucesso.')));
+				die();
+			}else{
+				// [701] Erro de banco - Falha na tentativa de inserir os dados
+				print_r(json_encode(array('error'=>'1', 'msg'=>'Houve um erro ao tentar propressar os dados! Por favor tente novamente. Cod-701')));
+				die();
+			}
+					
+		}
+		
+		echo "<pre>";
+		print_r($dados);
+		echo "</pre>";
+		die();
+		
+		echo "<pre>";
+		print_r($_REQUEST);
+		echo "</pre>";
+		die();
 	}
 	
 }
