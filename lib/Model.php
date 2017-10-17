@@ -144,7 +144,7 @@ class Model {
 	public function delete(Array $dados, $primaryKey, $where = null){
 		
 		$stm = $this->db->prepare("DELETE FROM {$this->_tabela} WHERE {$primaryKey} = :{$primaryKey} ");
-		$stm->bindParam(":{$primaryKey}", $a = $dados[$primaryKey]);
+		$stm->bindValue(":{$primaryKey}", $dados[$primaryKey]);
 		
 		return $stm->execute();
 		

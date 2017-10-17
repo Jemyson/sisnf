@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-17 22:47:27
+<?php /* Smarty version 3.1.27, created on 2017-10-17 22:16:03
          compiled from "C:\xampp\htdocs\sisnf\app\views\vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:65799943759e66c5f6bf139_95647796%%*/
+/*%%SmartyHeaderCode:146207956259e66503b0f690_32515156%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '292e35ebf5b4625948bd265aa5eba056e060cbd7' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\app\\views\\vendaIniciar.tpl',
-      1 => 1508273245,
+      1 => 1508271359,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '65799943759e66c5f6bf139_95647796',
+  'nocache_hash' => '146207956259e66503b0f690_32515156',
   'variables' => 
   array (
     'id' => 0,
@@ -21,13 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e66c5f723066_58876619',
+  'unifunc' => 'content_59e66503b7de03_75904226',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e66c5f723066_58876619')) {
-function content_59e66c5f723066_58876619 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e66503b7de03_75904226')) {
+function content_59e66503b7de03_75904226 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '65799943759e66c5f6bf139_95647796';
+$_smarty_tpl->properties['nocache_hash'] = '146207956259e66503b0f690_32515156';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -67,32 +67,28 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 				global:true,
 				url:_this.opcoes.urlProdutoVenda,
 				dataType:'json',
-				data:'id='+_this.opcoes.id,
+				data:'id=all',
 				success: function(data){
-				
+
 					if(data.error == 0){
 
-						for(var chave in data.produtos){
-						
-							var htmlProduto = '';
+						console.log(data);
 
-							htmlProduto += '<tr id="produto_'+data.produtos[chave].id_produto+'">';
-							htmlProduto += '<td style="text-align: center;"><a href="javascript:venda.removerProduto('+data.produtos[chave].id_produto+')"><i class="glyphicon glyphicon-trash"></i></a></td>';
-							htmlProduto += '<td>'+data.produtos[chave].nome_produto+'</td>';
-							htmlProduto += '<td style="text-align: right;">'+data.produtos[chave].qtd_produto+'</td>';
-							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda(data.produtos[chave].valor_produto, 2,',','.')+'</td>';
-							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda((data.produtos[chave].valor_produto * data.produtos[chave].qtd_produto), 2,',','.')+'</td>';
-							htmlProduto += '<td style="text-align: center;">n/d</td>';
-							htmlProduto += '<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>';
-							htmlProduto += '</tr>';
-	
-							_this.produtos[data.produtos[chave].id_produto] = {'id':data.produtos[chave].id_produto, 'produto':data.produtos[chave].nome_produto, 'preco_venda':data.produtos[chave].valor_produto, 'qtd':data.produtos[chave].qtd_produto};
-							$('table tbody').append(htmlProduto);
-							
-						}
+						htmlProduto += '<tr id="produto_'+data.id+'">';
+						htmlProduto += '<td style="text-align: center;"><a href="javascript:venda.removerProduto('+data.id+')"><i class="glyphicon glyphicon-trash"></i></a></td>';
+						htmlProduto += '<td>'+data.nome+'</td>';
+						htmlProduto += '<td style="text-align: right;">'+qtd+'</td>';
+						htmlProduto += '<td style="text-align: right;">'+Formatter.moeda(data.preco_venda, 2,',','.')+'</td>';
+						htmlProduto += '<td style="text-align: right;">'+Formatter.moeda((data.preco_venda * qtd), 2,',','.')+'</td>';
+						htmlProduto += '<td style="text-align: center;">n/d</td>';
+						htmlProduto += '<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>';
+						htmlProduto += '</tr>';
+
+						_this.produtos[data.id] = {'id':data.id, 'produto':data.nome, 'preco_venda':data.preco_venda, 'qtd':qtd};
 
 						_this.atualizarQtdProdutos();
 						_this.calcularRetornoPossivel();
+						$('table tbody').append(htmlProduto);
 						
 						
 					}
@@ -313,7 +309,7 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 				success: function(data){
 
 					if(data.error == 0){
-						window.location = _this.opcoes.urlVenda;
+						//window.location = _this.opcoes.urlIniciar + '?id=' + _this.opcoes.id;
 					}else{
 						$('#divError').show();
 						$('#divError').html(data.msg);
@@ -333,8 +329,6 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 	config.id								= '<?php echo $_smarty_tpl->tpl_vars['id']->value;?>
 ';
-	config.urlVenda 				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda/grid';
 	config.urlNova					= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 venda/form';
 	config.urlIniciar				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>

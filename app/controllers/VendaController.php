@@ -81,6 +81,20 @@ class VendaController extends AppController{
 		
 		$this->renderizar('vendaIniciar.tpl');
 	}
+
+	public function pesquisarProdutoVendaAction(){
+		
+		$produtoModel = new VendaProdutoModel();
+		
+		$produtos = $produtoModel->pesquisar('id_venda = ' . (int) $_REQUEST['id']);
+		
+		if(count($produtos) > 0){
+			print_r(json_encode(array_merge(array('error'=>0), array('produtos'=>$produtos))));
+		}else{
+			print_r(json_encode(array('error'=>1, 'msg'=>'Nenhum produto encontrado!')));
+		}
+				
+	}
 	
 	public function pesquisarProdutoAction(){
 
@@ -105,7 +119,6 @@ class VendaController extends AppController{
 			}
 			
 		}
-		
 		
 	}
 	
@@ -213,11 +226,14 @@ class VendaController extends AppController{
 			
 			if($model->atualizar($venda, 'id')){
 				
+				$modelProduto->delete(array('id_venda'=>$venda['id']), 'id_venda');
+				
 				foreach($produtos as $produto){
-					$modelProduto->delete(array('id_venda'=>$venda['id']), 'id_venda');
+					
 					$modelProduto->inserir(array(
 																		'id_venda'=>$venda['id'], 
 																		'id_produto'=>$produto['id'], 
+																		'nome_produto'=>$produto['produto'], 
 																		'valor_produto'=>$produto['preco_venda'], 
 																		'qtd_produto'=>$produto['qtd']
 																		)

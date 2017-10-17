@@ -12,7 +12,7 @@
 		config.modelo = 'venda';
 		
 		config.url    	= '{/literal}{$basePath}{literal}venda/dados';
-		config.form   	= '{/literal}{$basePath}{literal}venda/form';
+		config.form   	= '{/literal}{$basePath}{literal}venda/iniciar';
 		config.excluir  = '{/literal}{$basePath}{literal}venda/excluir';
 		config.botoes 	= ['i','v','a','e'];
 		

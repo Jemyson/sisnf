@@ -95,6 +95,7 @@ CREATE TABLE vendas_produtos (
 	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	id_venda INT NOT NULL,
 	id_produto VARCHAR(255), 
+	nome_produto VARCHAR(255),
 	valor_produto FLOAT(10,2),
 	qtd_produto VARCHAR(255),
 	medida_produto VARCHAR(255),

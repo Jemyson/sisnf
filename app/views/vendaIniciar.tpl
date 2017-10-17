@@ -24,6 +24,51 @@
 		this.nova = function(){
 			window.location = this.opcoes.urlNova;
 		}
+
+		this.carregarProdutosVenda = function(){
+
+			var _this = this;
+			
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlProdutoVenda,
+				dataType:'json',
+				data:'id='+_this.opcoes.id,
+				success: function(data){
+				
+					if(data.error == 0){
+
+						for(var chave in data.produtos){
+						
+							var htmlProduto = '';
+
+							htmlProduto += '<tr id="produto_'+data.produtos[chave].id_produto+'">';
+							htmlProduto += '<td style="text-align: center;"><a href="javascript:venda.removerProduto('+data.produtos[chave].id_produto+')"><i class="glyphicon glyphicon-trash"></i></a></td>';
+							htmlProduto += '<td>'+data.produtos[chave].nome_produto+'</td>';
+							htmlProduto += '<td style="text-align: right;">'+data.produtos[chave].qtd_produto+'</td>';
+							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda(data.produtos[chave].valor_produto, 2,',','.')+'</td>';
+							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda((data.produtos[chave].valor_produto * data.produtos[chave].qtd_produto), 2,',','.')+'</td>';
+							htmlProduto += '<td style="text-align: center;">n/d</td>';
+							htmlProduto += '<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>';
+							htmlProduto += '</tr>';
+	
+							_this.produtos[data.produtos[chave].id_produto] = {'id':data.produtos[chave].id_produto, 'produto':data.produtos[chave].nome_produto, 'preco_venda':data.produtos[chave].valor_produto, 'qtd':data.produtos[chave].qtd_produto};
+							$('table tbody').append(htmlProduto);
+							
+						}
+
+						_this.atualizarQtdProdutos();
+						_this.calcularRetornoPossivel();
+						
+						
+					}
+
+				}
+
+			});
+			
+		}
 		
 		this.validarCampoObrigatorio = function(){
 			var erro = 0;
@@ -235,7 +280,7 @@
 				success: function(data){
 
 					if(data.error == 0){
-						//window.location = _this.opcoes.urlIniciar + '?id=' + _this.opcoes.id;
+						window.location = _this.opcoes.urlVenda;
 					}else{
 						$('#divError').show();
 						$('#divError').html(data.msg);
@@ -253,16 +298,19 @@
 
 	var config = {};
 
-	config.id						= '{/literal}{$id}{literal}';
-	config.urlNova			= '{/literal}{$basePath}{literal}venda/form';
-	config.urlIniciar		= '{/literal}{$basePath}{literal}venda/iniciar';
-	config.urlProduto		= '{/literal}{$basePath}{literal}venda/pesquisar-produto';
-	config.urlSalvar		= '{/literal}{$basePath}{literal}venda/finalizar-venda';
+	config.id								= '{/literal}{$id}{literal}';
+	config.urlVenda 				= '{/literal}{$basePath}{literal}venda/grid';
+	config.urlNova					= '{/literal}{$basePath}{literal}venda/form';
+	config.urlIniciar				= '{/literal}{$basePath}{literal}venda/iniciar';
+	config.urlProduto				= '{/literal}{$basePath}{literal}venda/pesquisar-produto';
+	config.urlProdutoVenda	= '{/literal}{$basePath}{literal}venda/pesquisar-produto-venda';
+	config.urlSalvar				= '{/literal}{$basePath}{literal}venda/finalizar-venda';
 
 	$(document).ready(function(){
 
 		venda = new Venda(config);
 		venda.carregarProdutos();
+		venda.carregarProdutosVenda();
 
 	});	
 			
