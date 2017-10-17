@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-13 20:21:20
+<?php /* Smarty version 3.1.27, created on 2017-10-17 01:03:13
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:333978559e14a70a0d9f8_16763672%%*/
+/*%%SmartyHeaderCode:76926102259e581016172c2_04699950%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6f7ab4b22b3765f67e0e24aa243ceca8b94e1e5d' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl',
-      1 => 1507936878,
+      1 => 1508212992,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '333978559e14a70a0d9f8_16763672',
+  'nocache_hash' => '76926102259e581016172c2_04699950',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e14a70a3cb08_34719585',
+  'unifunc' => 'content_59e5810164f544_44075848',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e14a70a3cb08_34719585')) {
-function content_59e14a70a3cb08_34719585 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e5810164f544_44075848')) {
+function content_59e5810164f544_44075848 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '333978559e14a70a0d9f8_16763672';
+$_smarty_tpl->properties['nocache_hash'] = '76926102259e581016172c2_04699950';
 ?>
 
 <style>
@@ -103,7 +103,7 @@ $_smarty_tpl->properties['nocache_hash'] = '333978559e14a70a0d9f8_16763672';
 			</button>
 		
 			<div class="navbar-brand">
-	    	<a href="#"><label>Franchise</label> System</a>
+	    	<a href="#"><label>Invoice</label> System</a>
 	  	</div>
 
 		</div>
@@ -125,7 +125,8 @@ fornecedor"><i class="glyphicon glyphicon-bed"></i> Fornecedor</a>
 produto"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
 		  	</li>
 				<li class="preview__action--close">
-					<a href="venda"><i class="glyphicon glyphicon-shopping-cart"></i> Vendas <span class="sr-only">(current)</span></a>
+					<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda"><i class="glyphicon glyphicon-shopping-cart"></i> Vendas <span class="sr-only">(current)</span></a>
 		  	</li>
 				<li class="preview__action--close">
 					<a href="facturas.php"><i class="glyphicon glyphicon-send"></i> Faturas <span class="sr-only">(current)</span></a>

@@ -1,6 +1,7 @@
 <?php
 
 require_once MODELS.'VendaModel.php';
+require_once MODELS.'ProdutoModel.php';
 require_once CONTROLLERS.'ClienteController.php';
 
 class VendaController extends AppController{
@@ -78,6 +79,20 @@ class VendaController extends AppController{
 		}
 		
 		$this->renderizar('vendaIniciar.tpl');
+	}
+	
+	public function pesquisarProdutoAction(){
+
+		$produtoModel = new ProdutoModel();
+		$produto = $produtoModel->pesquisar('id = ' . (int) $_REQUEST['id']);
+		
+		if(count($produto) > 0){
+			print_r(json_encode(array_merge(array('error'=>0), current($produto))));
+		}else{
+			print_r(json_encode(array('error'=>1, 'msg'=>'Produto inexistente!')));
+		}
+		
+		
 	}
 	
 	public function dadosFormAction(){

@@ -92,7 +92,7 @@
 					<a href="{$basePath}produto"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
 		  	</li>
 				<li class="preview__action--close">
-					<a href="venda"><i class="glyphicon glyphicon-shopping-cart"></i> Vendas <span class="sr-only">(current)</span></a>
+					<a href="{$basePath}venda"><i class="glyphicon glyphicon-shopping-cart"></i> Vendas <span class="sr-only">(current)</span></a>
 		  	</li>
 				<li class="preview__action--close">
 					<a href="facturas.php"><i class="glyphicon glyphicon-send"></i> Faturas <span class="sr-only">(current)</span></a>
