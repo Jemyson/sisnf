@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-12 20:26:30
+<?php /* Smarty version 3.1.27, created on 2017-10-17 21:50:31
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/produtoForm.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:143440369759dffa26076c30_85204325%%*/
+/*%%SmartyHeaderCode:25214062159e6a557288d73_87790564%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'a3e062f276792b6d3aee684a443adc5e72f08722' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/produtoForm.tpl',
-      1 => 1507850787,
+      1 => 1508283150,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '143440369759dffa26076c30_85204325',
+  'nocache_hash' => '25214062159e6a557288d73_87790564',
   'variables' => 
   array (
     'basePath' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59dffa260b9c97_54030043',
+  'unifunc' => 'content_59e6a5572e12e4_92141240',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59dffa260b9c97_54030043')) {
-function content_59dffa260b9c97_54030043 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e6a5572e12e4_92141240')) {
+function content_59e6a5572e12e4_92141240 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '143440369759dffa26076c30_85204325';
+$_smarty_tpl->properties['nocache_hash'] = '25214062159e6a557288d73_87790564';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -70,6 +70,12 @@ produto';
 
 		config.colunas = [];
 		config.colunas.push({'nome':'id',	'titulo':'C&oacute;digo',	'tipo':'text',			'span':'6',	'classe':'input-mini',		'obrigatorio':'1', 'disabled':'readonly'});
+		config.colunas.push({'tipo':'linha'});
+		config.colunas.push({'nome':'id_categoria',	'titulo':'Categoria',		'tipo':'entidade',	'carregaDadosEntidade':'<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+categoria',	'filho':'id_subcategoria',	'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
+		config.colunas.push({'tipo':'linha'});
+		config.colunas.push({'nome':'id_subcategoria',	'titulo':'Sub-Categoria',		'tipo':'entidade',	'carregaDadosEntidade':'<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+subcategoria', 'dependencia':'id_categoria', 'tituloDependencia':'Categoria',				'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'nome',	'titulo':'Nome',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		config.colunas.push({'tipo':'linha'});

@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-17 02:10:49
+<?php /* Smarty version 3.1.27, created on 2017-10-17 22:44:17
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:214366273759e590d94319e1_70861753%%*/
+/*%%SmartyHeaderCode:170986008259e6b1f131df58_35113262%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7b561ed5ab4332ed28f68cb3ae3c5fca9da41b45' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl',
-      1 => 1508217048,
+      1 => 1508291043,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '214366273759e590d94319e1_70861753',
+  'nocache_hash' => '170986008259e6b1f131df58_35113262',
   'variables' => 
   array (
     'id' => 0,
@@ -21,13 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e590d9496f48_50823342',
+  'unifunc' => 'content_59e6b1f1386df7_59234250',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e590d9496f48_50823342')) {
-function content_59e590d9496f48_50823342 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e6b1f1386df7_59234250')) {
+function content_59e6b1f1386df7_59234250 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '214366273759e590d94319e1_70861753';
+$_smarty_tpl->properties['nocache_hash'] = '170986008259e6b1f131df58_35113262';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -56,6 +56,51 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 		this.nova = function(){
 			window.location = this.opcoes.urlNova;
+		}
+
+		this.carregarProdutosVenda = function(){
+
+			var _this = this;
+			
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlProdutoVenda,
+				dataType:'json',
+				data:'id='+_this.opcoes.id,
+				success: function(data){
+				
+					if(data.error == 0){
+
+						for(var chave in data.produtos){
+						
+							var htmlProduto = '';
+
+							htmlProduto += '<tr id="produto_'+data.produtos[chave].id_produto+'">';
+							htmlProduto += '<td style="text-align: center;"><a href="javascript:venda.removerProduto('+data.produtos[chave].id_produto+')"><i class="glyphicon glyphicon-trash"></i></a></td>';
+							htmlProduto += '<td>'+data.produtos[chave].nome_produto+'</td>';
+							htmlProduto += '<td style="text-align: right;">'+data.produtos[chave].qtd_produto+'</td>';
+							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda(data.produtos[chave].valor_produto, 2,',','.')+'</td>';
+							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda((data.produtos[chave].valor_produto * data.produtos[chave].qtd_produto), 2,',','.')+'</td>';
+							htmlProduto += '<td style="text-align: center;">n/d</td>';
+							htmlProduto += '<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>';
+							htmlProduto += '</tr>';
+	
+							_this.produtos[data.produtos[chave].id_produto] = {'id':data.produtos[chave].id_produto, 'produto':data.produtos[chave].nome_produto, 'preco_venda':data.produtos[chave].valor_produto, 'qtd':data.produtos[chave].qtd_produto};
+							$('table tbody').append(htmlProduto);
+							
+						}
+
+						_this.atualizarQtdProdutos();
+						_this.calcularRetornoPossivel();
+						
+						
+					}
+
+				}
+
+			});
+			
 		}
 		
 		this.validarCampoObrigatorio = function(){
@@ -106,6 +151,38 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 			}else{
 				$('#btnFinalizarVenda').attr('disabled', 'disabled');
 			}
+		}
+
+		this.carregarProdutos = function(){
+
+			var _this = this;
+			
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlProduto,
+				dataType:'json',
+				data:'id=all',
+				success: function(data){
+
+					if(data.error == 0){
+
+						$('#id_produto');
+
+						var htmlProdutos = '<option value="0">Selecione</option>';
+						for(var chave in data.produtos){
+
+							htmlProdutos += '<option value="'+data.produtos[chave].id+'">'+data.produtos[chave].nome+'</option>';
+						}
+						
+						$('#id_produto').html(htmlProdutos);
+						
+					}
+
+				}
+
+			});
+						
 		}
 
 		this.adicionarProduto = function(){
@@ -217,35 +294,36 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 			var _this = this;
 
-			if(this.validarCampoObrigatorio()){
+			var venda = {};
 
-				$.ajax({
-					type:'POST',
-					global:true,
-					url:_this.opcoes.urlSalvar,
-					dataType:'json',
-					data:$('#form').serialize(),
-					success: function(data){
-
-						if(data.error == 0){
-							window.location = _this.opcoes.urlIniciar + '?id=' + _this.opcoes.id;
-						}else{
-							$('#divError').show();
-							$('#divError').html(data.msg);
-						}
-						
-					},
-					error: function(){
-					}
-				});
-
-			}else{
-
-				alert("Os Campos em vermelho sao obrigatorios.");
-				$('.btn-success').show();
-				$('.disabled').hide();
-
+			for(var produto in this.produtos){
+				venda[produto] = _this.produtos[produto];
 			}
+
+			venda['id'] = _this.opcoes.id;
+			venda['forma_pagamento'] = $('#pagamento').val();
+			venda['parcelas'] = $('#parcelas').val();
+			
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlSalvar,
+				dataType:'json',
+				data:venda,
+				success: function(data){
+
+					if(data.error == 0){
+						window.location = _this.opcoes.urlVenda;
+					}else{
+						$('#divError').show();
+						$('#divError').html(data.msg);
+					}
+					
+				},
+				error: function(){
+				}
+			});
+
 			
 		}
 
@@ -253,20 +331,26 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 	var config = {};
 
-	config.id						= '<?php echo $_smarty_tpl->tpl_vars['id']->value;?>
+	config.id								= '<?php echo $_smarty_tpl->tpl_vars['id']->value;?>
 ';
-	config.urlNova			= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+	config.urlVenda 				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda';
+	config.urlNova					= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 venda/form';
-	config.urlIniciar		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+	config.urlIniciar				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 venda/iniciar';
-	config.urlProduto		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+	config.urlProduto				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 venda/pesquisar-produto';
-	config.urlSalvar		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda/salvar';
+	config.urlProdutoVenda	= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/pesquisar-produto-venda';
+	config.urlSalvar				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/finalizar-venda';
 
 	$(document).ready(function(){
 
 		venda = new Venda(config);
+		venda.carregarProdutos();
+		venda.carregarProdutosVenda();
 
 	});	
 			
@@ -354,7 +438,7 @@ venda">
 								<!-- ADICIONAR PRODUTO -->
 								<div id="divAdicionarProduto">
 									<div class="row">
-										<div class="form-group col-md-2" style="undefined">
+										<div class="form-group col-md-2" style="display: none">
 											<label>Categoria*</label>
 											<select class="form-control" id="id_categoria" name="id_categoria">
 												<option>Selecione</option>
@@ -389,17 +473,17 @@ venda">
 										<div class="form-group col-md-2" style="undefined">
 											<label>Forma de Pagamento*</label>
 											<select class="form-control" id="pagamento" name="pagamento">
-												<option>Selecione</option>
-												<option>Boleto</option>
-												<option>Cheque</option>
-												<option>Cr&eacute;dito</option>
-												<option>D&eacute;bito</option>
-												<option>Dinheiro</option>
+												<option value="0">Selecione</option>
+												<option value="boleto">Boleto</option>
+												<option value="cheque">Cheque</option>
+												<option value="credito">Cr&eacute;dito</option>
+												<option value="debito">D&eacute;bito</option>
+												<option value="dinheiro">Dinheiro</option>
 											</select>
 										</div>
 										<div class="form-group col-md-1" style="undefined">
 											<label>Parcelas*</label>
-											<select class="form-control" id="id_produto" name="parcelas">
+											<select class="form-control" id="parcelas" name="parcelas">
 												<option value="0">Selecione</option>
 												<option value="1">1</option>
 												<option value="2">2</option>
@@ -418,7 +502,7 @@ venda">
 										<div class="form-group col-md-1" style="undefined">
 											<label>&nbsp;</label>
 											<br>
-											<button type="button" class="btn btn-success" onclick="venda.salvar()" style="width: 100px">Confirmar</button>
+											<button type="button" class="btn btn-success" onclick="venda.salvar()" style="width: 93px">Confirmar</button>
 										</div>
 										<div class="form-group col-md-1" style="undefined">
 											<label>&nbsp;</label>

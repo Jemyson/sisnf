@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-14 18:52:05
+<?php /* Smarty version 3.1.27, created on 2017-10-17 21:47:37
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaGrid.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:96668799959e2870549dda8_51887316%%*/
+/*%%SmartyHeaderCode:122082438359e6a4a93fe607_51506591%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cbb742a2c00e35155ce6e89e55ca7002b4315c24' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaGrid.tpl',
-      1 => 1508017920,
+      1 => 1508283150,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '96668799959e2870549dda8_51887316',
+  'nocache_hash' => '122082438359e6a4a93fe607_51506591',
   'variables' => 
   array (
     'basePath' => 0,
@@ -21,13 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e287054f4324_66742688',
+  'unifunc' => 'content_59e6a4a944d459_76964558',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e287054f4324_66742688')) {
-function content_59e287054f4324_66742688 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e6a4a944d459_76964558')) {
+function content_59e6a4a944d459_76964558 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '96668799959e2870549dda8_51887316';
+$_smarty_tpl->properties['nocache_hash'] = '122082438359e6a4a93fe607_51506591';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -48,7 +48,7 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 		config.url    	= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 venda/dados';
 		config.form   	= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda/form';
+venda/iniciar';
 		config.excluir  = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 venda/excluir';
 		config.botoes 	= ['i','v','a','e'];

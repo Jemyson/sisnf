@@ -299,7 +299,7 @@
 	var config = {};
 
 	config.id								= '{/literal}{$id}{literal}';
-	config.urlVenda 				= '{/literal}{$basePath}{literal}venda/grid';
+	config.urlVenda 				= '{/literal}{$basePath}{literal}venda';
 	config.urlNova					= '{/literal}{$basePath}{literal}venda/form';
 	config.urlIniciar				= '{/literal}{$basePath}{literal}venda/iniciar';
 	config.urlProduto				= '{/literal}{$basePath}{literal}venda/pesquisar-produto';

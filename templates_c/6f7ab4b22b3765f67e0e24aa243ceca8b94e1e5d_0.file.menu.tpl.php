@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-17 01:03:13
+<?php /* Smarty version 3.1.27, created on 2017-10-17 21:23:59
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:76926102259e581016172c2_04699950%%*/
+/*%%SmartyHeaderCode:152212594759e69f1f42f355_28873894%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6f7ab4b22b3765f67e0e24aa243ceca8b94e1e5d' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl',
-      1 => 1508212992,
+      1 => 1508283150,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '76926102259e581016172c2_04699950',
+  'nocache_hash' => '152212594759e69f1f42f355_28873894',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e5810164f544_44075848',
+  'unifunc' => 'content_59e69f1f43a386_11364242',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e5810164f544_44075848')) {
-function content_59e5810164f544_44075848 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e69f1f43a386_11364242')) {
+function content_59e69f1f43a386_11364242 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '76926102259e581016172c2_04699950';
+$_smarty_tpl->properties['nocache_hash'] = '152212594759e69f1f42f355_28873894';
 ?>
 
 <style>
@@ -118,7 +118,7 @@ cliente"><i class="glyphicon glyphicon-briefcase"></i> Clientes</a>
 		  	</li>
 				<li class="preview__action--close">
 					<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-fornecedor"><i class="glyphicon glyphicon-bed"></i> Fornecedor</a>
+fornecedor"><i class="glyphicon glyphicon-bed"></i> Transportadoras</a>
 		  	</li>
 				<li class="preview__action--close">
 					<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
