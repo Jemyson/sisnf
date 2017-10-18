@@ -5,12 +5,12 @@ require_once MODELS.'CategoriaModel.php';
 class CategoriaController extends AppController{
 	
 	public function indexAction(){
-		$this->renderizar('clienteGrid.tpl');
+		$this->renderizar('categoriaGrid.tpl');
 	}
 	
 	public function dadosAction(){
 
-		$model = new ClienteModel();
+		$model = new CategoriaModel();
 		
 		$where = null;
 		
@@ -39,19 +39,19 @@ class CategoriaController extends AppController{
 			$this->atribuir('id', $_GET['id']);
 		}
 		
-		$this->renderizar('clienteForm.tpl');
+		$this->renderizar('categoriaForm.tpl');
 	}
 	
 	public function formVisualizarAction(){
 
 		$this->atribuir('id', $_GET['id']);
 		$this->atribuir('visualizar', '1');
-		$this->renderizar('clienteForm.tpl');
+		$this->renderizar('categoriaForm.tpl');
 	}
 	
 	public function dadosFormAction(){
 		
-		$model = new ClienteModel();
+		$model = new CategoriaModel();
 		
 		$dados = array();
 		
@@ -89,7 +89,7 @@ class CategoriaController extends AppController{
 			die();
 		}
 		
-		$model = new ClienteModel();
+		$model = new CategoriaModel();
 
 		$dados = $model->pesquisar("id = {$_REQUEST['id']}");
 			

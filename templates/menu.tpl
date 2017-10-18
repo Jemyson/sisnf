@@ -73,7 +73,7 @@
 			</button>
 		
 			<div class="navbar-brand">
-	    	<a href="#"><label>Invoice</label> System</a>
+	    	<a href="{$basePath}index"><label>Invoice</label> System</a>
 	  	</div>
 
 		</div>
@@ -82,15 +82,23 @@
  			
 			<ul class="nav navbar-nav">
  			
-				<li class="preview__action--close">
-					<a href="{$basePath}cliente"><i class="glyphicon glyphicon-briefcase"></i> Clientes</a>
-		  	</li>
-				<li class="preview__action--close">
-					<a href="{$basePath}fornecedor"><i class="glyphicon glyphicon-bed"></i> Transportadoras</a>
-		  	</li>
-				<li class="preview__action--close">
-					<a href="{$basePath}produto"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
-		  	</li>
+ 				<li class="preview__action--close">
+ 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+ 						<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Cadastros 
+ 						<span class="caret"></span>
+ 					</a>
+ 					<ul class="dropdown-menu">
+						<li class="preview__action--close">
+							<a href="{$basePath}cliente"><i class="glyphicon glyphicon-briefcase"></i> Clientes</a>
+				  	</li>
+						<li class="preview__action--close">
+							<a href="{$basePath}fornecedor"><i class="glyphicon glyphicon-bed"></i> Transportadoras</a>
+				  	</li>
+						<li class="preview__action--close">
+							<a href="{$basePath}produto"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
+				  	</li>
+ 					</ul>
+ 				</li>
 				<li class="preview__action--close">
 					<a href="{$basePath}venda"><i class="glyphicon glyphicon-shopping-cart"></i> Vendas <span class="sr-only">(current)</span></a>
 		  	</li>
@@ -98,7 +106,18 @@
 					<a href="facturas.php"><i class="glyphicon glyphicon-send"></i> Faturas <span class="sr-only">(current)</span></a>
 		  	</li>
 				<li class="preview__action--close">
-					<a href="perfil.php"><i class="glyphicon glyphicon-cog"></i> Configura&ccedil;&atilde;o</a>
+ 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						<i class="glyphicon glyphicon-cog"></i> Configura&ccedil;&atilde;o
+ 						<span class="caret"></span>
+					</a>
+ 					<ul class="dropdown-menu">
+						<li class="preview__action--close">
+							<a href="{$basePath}categoria"><i class="glyphicon glyphicon-briefcase"></i> Categoria</a>
+				  	</li>
+						<li class="preview__action--close">
+							<a href="{$basePath}subcategoria"><i class="glyphicon glyphicon-briefcase"></i> Sub-Categoria</a>
+				  	</li>
+					</ul>					
 		  	</li>
 	 			
 	  		<li class="preview__action--close pull-right">

@@ -41,7 +41,7 @@
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'preco_venda','titulo':'Pre&ccedil;o Venda',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		
-		var form = new Form('campeonatoForm', config);
+		var form = new Form('produtoForm', config);
 
 		$(document).ready(function(){
 	

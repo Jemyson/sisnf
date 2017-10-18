@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-17 20:21:18
+<?php /* Smarty version 3.1.27, created on 2017-10-18 19:01:51
          compiled from "C:\xampp\htdocs\sisnf\templates\menu.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:46104957259e64a1ea7e045_26161588%%*/
+/*%%SmartyHeaderCode:201122943659e788ff53d3c6_16772866%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '00ddb9e9109d8ddb1e381eabafc726f6f101e4d2' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\templates\\menu.tpl',
-      1 => 1508264470,
+      1 => 1508346110,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '46104957259e64a1ea7e045_26161588',
+  'nocache_hash' => '201122943659e788ff53d3c6_16772866',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e64a1eabd6b8_12984198',
+  'unifunc' => 'content_59e788ff586597_04871877',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e64a1eabd6b8_12984198')) {
-function content_59e64a1eabd6b8_12984198 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e788ff586597_04871877')) {
+function content_59e788ff586597_04871877 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '46104957259e64a1ea7e045_26161588';
+$_smarty_tpl->properties['nocache_hash'] = '201122943659e788ff53d3c6_16772866';
 ?>
 
 <style>
@@ -103,7 +103,8 @@ $_smarty_tpl->properties['nocache_hash'] = '46104957259e64a1ea7e045_26161588';
 			</button>
 		
 			<div class="navbar-brand">
-	    	<a href="#"><label>Invoice</label> System</a>
+	    	<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+index"><label>Invoice</label> System</a>
 	  	</div>
 
 		</div>
@@ -112,18 +113,26 @@ $_smarty_tpl->properties['nocache_hash'] = '46104957259e64a1ea7e045_26161588';
  			
 			<ul class="nav navbar-nav">
  			
-				<li class="preview__action--close">
-					<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+ 				<li class="preview__action--close">
+ 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+ 						<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Cadastros 
+ 						<span class="caret"></span>
+ 					</a>
+ 					<ul class="dropdown-menu">
+						<li class="preview__action--close">
+							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 cliente"><i class="glyphicon glyphicon-briefcase"></i> Clientes</a>
-		  	</li>
-				<li class="preview__action--close">
-					<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+				  	</li>
+						<li class="preview__action--close">
+							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 fornecedor"><i class="glyphicon glyphicon-bed"></i> Transportadoras</a>
-		  	</li>
-				<li class="preview__action--close">
-					<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+				  	</li>
+						<li class="preview__action--close">
+							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 produto"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
-		  	</li>
+				  	</li>
+ 					</ul>
+ 				</li>
 				<li class="preview__action--close">
 					<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 venda"><i class="glyphicon glyphicon-shopping-cart"></i> Vendas <span class="sr-only">(current)</span></a>
@@ -132,7 +141,20 @@ venda"><i class="glyphicon glyphicon-shopping-cart"></i> Vendas <span class="sr-
 					<a href="facturas.php"><i class="glyphicon glyphicon-send"></i> Faturas <span class="sr-only">(current)</span></a>
 		  	</li>
 				<li class="preview__action--close">
-					<a href="perfil.php"><i class="glyphicon glyphicon-cog"></i> Configura&ccedil;&atilde;o</a>
+ 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						<i class="glyphicon glyphicon-cog"></i> Configura&ccedil;&atilde;o
+ 						<span class="caret"></span>
+					</a>
+ 					<ul class="dropdown-menu">
+						<li class="preview__action--close">
+							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+categoria"><i class="glyphicon glyphicon-briefcase"></i> Categoria</a>
+				  	</li>
+						<li class="preview__action--close">
+							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+subcategoria"><i class="glyphicon glyphicon-briefcase"></i> Sub-Categoria</a>
+				  	</li>
+					</ul>					
 		  	</li>
 	 			
 	  		<li class="preview__action--close pull-right">
