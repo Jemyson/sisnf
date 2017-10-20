@@ -138,4 +138,20 @@ class ClienteController extends AppController{
 		return json_encode($dadosSaida);
 	}
 	
+	public function dadosEntidadeAction(){
+		$model = new ClienteModel();
+		
+		$dados = $model->pesquisar(null, array('id', 'nome AS valor')); 
+		
+		$dadosSaida = array();
+		
+		foreach($dados as $valor){
+			$dadosSaida[$valor['id']] = $valor['valor'];
+		}
+		
+		print_r(json_encode($dadosSaida));
+		die();
+		
+	}
+	
 }

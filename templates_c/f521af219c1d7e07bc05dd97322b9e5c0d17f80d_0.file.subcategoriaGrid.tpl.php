@@ -1,32 +1,32 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-17 22:50:13
-         compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/fornecedorGrid.tpl" */ ?>
+<?php /* Smarty version 3.1.27, created on 2017-10-19 23:50:53
+         compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/subcategoriaGrid.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:4254837459e6b3559a0295_36050023%%*/
+/*%%SmartyHeaderCode:32299090559e9648de63385_27307398%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '2df87fd6132efd3bbc4a31b7f126d5b8004039f1' => 
+    'f521af219c1d7e07bc05dd97322b9e5c0d17f80d' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/fornecedorGrid.tpl',
-      1 => 1508283150,
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/subcategoriaGrid.tpl',
+      1 => 1508467743,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '4254837459e6b3559a0295_36050023',
+  'nocache_hash' => '32299090559e9648de63385_27307398',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e6b3559de762_88649140',
+  'unifunc' => 'content_59e9648dea4722_52346189',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e6b3559de762_88649140')) {
-function content_59e6b3559de762_88649140 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e9648dea4722_52346189')) {
+function content_59e9648dea4722_52346189 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '4254837459e6b3559a0295_36050023';
+$_smarty_tpl->properties['nocache_hash'] = '32299090559e9648de63385_27307398';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -42,14 +42,14 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 ';
 		
 		config.pk     = 'id';
-		config.modelo = 'fornecedor';
+		config.modelo = 'subcategoria';
 		
 		config.url    	= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-fornecedor/dados';
+subcategoria/dados';
 		config.form   	= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-fornecedor/form';
+subcategoria/form';
 		config.excluir  = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-fornecedor/excluir';
+subcategoria/excluir';
 		config.botoes 	= ['i','v','a','e'];
 		
 		config.filtros = {}
@@ -65,10 +65,10 @@ fornecedor/excluir';
 		config.filtrosDados.tipo.push({"id":"4","value":"Excluir"});
 		
 		config.colunas = [];
-		config.colunas.push({'nome':'id',		'titulo':'#',			'width':'5%', 'cssbody':'text-align:center'});
-		config.colunas.push({'nome':'nome',	'titulo':'NOME',								'cssbody':'text-align:left'});
+		config.colunas.push({'nome':'id',		'titulo':'#' 		,'width':'5%', 	'cssbody':'text-align:center'});
+		config.colunas.push({'nome':'nome',		'titulo':'NOME'	,								'cssbody':'text-align:left'});
 	
-		var grid = new Grid('fornecedorGrid', config);
+		var grid = new Grid('subcategoriaGrid', config);
 
 		$(document).ready(function(){
 
@@ -83,9 +83,10 @@ fornecedor/excluir';
 
 	
 		<div class="page-wrapper">
+		
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Transportadora</h1>
+					<h1 class="page-header">Sub-Categorias</h1>
 				</div>
 			</div>	
 		
@@ -97,7 +98,7 @@ fornecedor/excluir';
 					
 						<div class="panel-heading">
 							<a class="pull-right btn btn-primary btn-xs" href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-fornecedor/form">
+subcategoria/form">
 								<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Novo registro
 							</a>Lista de Registros
 						</div>

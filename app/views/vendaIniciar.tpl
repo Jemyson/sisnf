@@ -25,6 +25,59 @@
 			window.location = this.opcoes.urlNova;
 		}
 
+		this.carregarVenda = function(){
+
+			var _this = this;
+
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlDadosVenda + '?id=' + _this.opcoes.id,
+				dataType:'json',
+				data:'',
+				success: function(data){
+
+					if(data.registros.tipo == 1){
+						$('#tipo').html('Or&ccedil;amento');
+					}else{
+						$('#tipo').html('Venda');
+					}
+					
+					
+				},
+				error: function(){
+				}
+			});
+
+		}
+		
+		this.carregarCliente = function(){
+
+			var _this = this;
+
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlCliente + '?id=' + _this.opcoes.idCliente,
+				dataType:'json',
+				data:'',
+				success: function(data){
+
+					$('#labelCliente').html(data.registros.nome);
+					$('#labelEndereco').html(data.registros.endereco);
+					$('#labelBairro').html(data.registros.bairro);
+					$('#labelCidade').html(data.registros.cidade);
+					$('#labelCPF').html(data.registros.cpf);
+					$('#labelTelefone').html(data.registros.celular);
+					$('#labelEmail').html(data.registros.email);
+					
+				},
+				error: function(){
+				}
+			});
+			
+		}
+
 		this.carregarProdutosVenda = function(){
 
 			var _this = this;
@@ -299,6 +352,9 @@
 	var config = {};
 
 	config.id								= '{/literal}{$id}{literal}';
+	config.idCliente				= '{/literal}{$idCliente}{literal}';
+	config.urlDadosVenda		= '{/literal}{$basePath}{literal}venda/dados-form';
+	config.urlCliente				= '{/literal}{$basePath}{literal}cliente/dados-form';
 	config.urlVenda 				= '{/literal}{$basePath}{literal}venda';
 	config.urlNova					= '{/literal}{$basePath}{literal}venda/form';
 	config.urlIniciar				= '{/literal}{$basePath}{literal}venda/iniciar';
@@ -309,6 +365,8 @@
 	$(document).ready(function(){
 
 		venda = new Venda(config);
+		venda.carregarVenda();
+		venda.carregarCliente();
 		venda.carregarProdutos();
 		venda.carregarProdutosVenda();
 
@@ -347,33 +405,33 @@
 								<div class="form-group">
 							    <label for="inputEmail3" class="col-sm-2 control-label">Tipo</label>
 									<div class="col-sm-10">
-							        <label class="control-label">Or&ccedil;amento</label>
+							        <label class="control-label" id="tipo">Or&ccedil;amento</label>
 							    </div>							  
 							  </div>							
 								<div class="form-group">
 							    <label for="inputEmail3" class="col-sm-2 control-label">Cliente</label>
 									<div class="col-sm-10">
-							        <label class="control-label">Jemyson Vagner Rosa da Silva</label>
+							        <label class="control-label" id="labelCliente" name="labelCliente"></label>
 							    </div>							  
 						    </div>		
 								<div class="form-group">
 							    <label for="inputEmail3" class="col-sm-2 control-label">Endere&ccedil;o</label>
 									<div class="col-sm-10">
-							        <label class="control-label" style="font-weight: normal">Rua Maria Augusta de Fran&ccedil;a Ferreira</label>
+							        <label class="control-label" style="font-weight: normal" id="labelEndereco" name="labelEndereco"></label>
 							        <label class="control-label">Bairro</label>
-							        <label class="control-label" style="font-weight: normal">Ouro Preto</label>
+							        <label class="control-label" style="font-weight: normal" id="labelBairro" name="labelBairro"></label>
 							        <label class="control-label">Cidade</label>
-							        <label class="control-label" style="font-weight: normal">Olinda</label>
+							        <label class="control-label" style="font-weight: normal" id="labelCidade" name="labelCidade"></label>
 							    </div>							  
 						    </div>		
 								<div class="form-group">
 							    <label for="inputEmail3" class="col-sm-2 control-label">CPF</label>
 									<div class="col-sm-10">
-							        <label class="control-label" style="font-weight: normal">097.328.164-22</label>
+							        <label class="control-label" style="font-weight: normal" id="labelCPF" name="labelCPF"></label>
 							        <label class="control-label">Fone</label>
-							        <label class="control-label" style="font-weight: normal">(81) 99800-6555</label>
+							        <label class="control-label" style="font-weight: normal"  id="labelTelefone" name="labelTelefone"></label>
 							        <label class="control-label">E-mail</label>
-							        <label class="control-label" style="font-weight: normal">jemyson.vagner@gmail.com</label>
+							        <label class="control-label" style="font-weight: normal" id="labelEmail" name="labelEmail"></label>
 							    </div>							  
 						    </div>		
 							  <div class="form-group" style="margin-top: 15px">

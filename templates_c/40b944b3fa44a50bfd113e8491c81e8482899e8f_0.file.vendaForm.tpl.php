@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-16 20:56:22
+<?php /* Smarty version 3.1.27, created on 2017-10-20 00:22:37
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaForm.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:38485028559e5472646d9a0_41998788%%*/
+/*%%SmartyHeaderCode:1839635359e96bfddf95a5_61576990%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '40b944b3fa44a50bfd113e8491c81e8482899e8f' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaForm.tpl',
-      1 => 1508198158,
+      1 => 1508469757,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '38485028559e5472646d9a0_41998788',
+  'nocache_hash' => '1839635359e96bfddf95a5_61576990',
   'variables' => 
   array (
     'id' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e547264a5e00_52368277',
+  'unifunc' => 'content_59e96bfde49776_29762071',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e547264a5e00_52368277')) {
-function content_59e547264a5e00_52368277 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e96bfde49776_29762071')) {
+function content_59e96bfde49776_29762071 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '38485028559e5472646d9a0_41998788';
+$_smarty_tpl->properties['nocache_hash'] = '1839635359e96bfddf95a5_61576990';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -76,6 +76,34 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 			}
 			
 		}
+
+		this.pesquisarCliente = function(){
+
+			var _this = this;
+
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlCliente,
+				dataType:'json',
+				data:'',
+				success: function(data){
+
+					var select = '<option value="0">Selecione</option>';
+					for(var chave in data){
+
+						select += '<option value="'+chave+'">'+data[chave]+'</option>';
+						
+					}						
+
+					$('#id_cliente').html(select);
+					
+				},
+				error: function(){
+				}
+			});
+		
+		}
 		
 		this.iniciar = function(){
 
@@ -121,12 +149,15 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 ';
 	config.urlIniciar		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 venda/iniciar';
+	config.urlCliente		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+cliente/dados-entidade';
 	config.urlSalvar		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 venda/salvar';
 
 	$(document).ready(function(){
 
 		venda = new Venda(config);
+		venda.pesquisarCliente();
 
 	});	
 			
@@ -183,8 +214,6 @@ venda">
 							    <label for="inputEmail3" class="col-sm-2 control-label">Cliente*</label>
 							    <div class="col-sm-3">
 							      <select class="form-control" id="id_cliente" name="id_cliente" obrigatorio="obrigatorio" entidade="entidade">
-										  <option value="0">Selecione</option>
-										  <option value="1">Jemyson Vagner Rosa da Silva</option>
 										</select>
 							    </div>
 							  </div>		

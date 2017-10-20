@@ -73,8 +73,11 @@ class VendaController extends AppController{
 			
 		}else{
 			
-			$codigo = $_REQUEST['id'];
+			$codigo = (int) $_REQUEST['id'];
+			$dados = current($model->read('id = ' . $codigo));
+			
 			$this->atribuir('id', $codigo);
+			$this->atribuir('idCliente', $dados['id_cliente']);
 			$this->atribuir('hash', md5('sisnf'.$codigo));
 			
 		}
@@ -147,7 +150,7 @@ class VendaController extends AppController{
 		print_r(json_encode($dados));
 		
 	}
-
+	
 	public function salvarAction(){
 
 		if(!isset($_REQUEST['id']) || !isset($_REQUEST['hash'])){

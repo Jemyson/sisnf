@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-17 22:44:17
+<?php /* Smarty version 3.1.27, created on 2017-10-20 00:55:40
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:170986008259e6b1f131df58_35113262%%*/
+/*%%SmartyHeaderCode:210387447059e973bce13828_46661735%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,25 +9,26 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7b561ed5ab4332ed28f68cb3ae3c5fca9da41b45' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl',
-      1 => 1508291043,
+      1 => 1508471735,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '170986008259e6b1f131df58_35113262',
+  'nocache_hash' => '210387447059e973bce13828_46661735',
   'variables' => 
   array (
     'id' => 0,
+    'idCliente' => 0,
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e6b1f1386df7_59234250',
+  'unifunc' => 'content_59e973bce83772_79168539',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e6b1f1386df7_59234250')) {
-function content_59e6b1f1386df7_59234250 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59e973bce83772_79168539')) {
+function content_59e973bce83772_79168539 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '170986008259e6b1f131df58_35113262';
+$_smarty_tpl->properties['nocache_hash'] = '210387447059e973bce13828_46661735';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -56,6 +57,59 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 		this.nova = function(){
 			window.location = this.opcoes.urlNova;
+		}
+
+		this.carregarVenda = function(){
+
+			var _this = this;
+
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlDadosVenda + '?id=' + _this.opcoes.id,
+				dataType:'json',
+				data:'',
+				success: function(data){
+
+					if(data.registros.tipo == 1){
+						$('#tipo').html('Or&ccedil;amento');
+					}else{
+						$('#tipo').html('Venda');
+					}
+					
+					
+				},
+				error: function(){
+				}
+			});
+
+		}
+		
+		this.carregarCliente = function(){
+
+			var _this = this;
+
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlCliente + '?id=' + _this.opcoes.idCliente,
+				dataType:'json',
+				data:'',
+				success: function(data){
+
+					$('#labelCliente').html(data.registros.nome);
+					$('#labelEndereco').html(data.registros.endereco);
+					$('#labelBairro').html(data.registros.bairro);
+					$('#labelCidade').html(data.registros.cidade);
+					$('#labelCPF').html(data.registros.cpf);
+					$('#labelTelefone').html(data.registros.celular);
+					$('#labelEmail').html(data.registros.email);
+					
+				},
+				error: function(){
+				}
+			});
+			
 		}
 
 		this.carregarProdutosVenda = function(){
@@ -333,6 +387,12 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 	config.id								= '<?php echo $_smarty_tpl->tpl_vars['id']->value;?>
 ';
+	config.idCliente				= '<?php echo $_smarty_tpl->tpl_vars['idCliente']->value;?>
+';
+	config.urlDadosVenda		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/dados-form';
+	config.urlCliente				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+cliente/dados-form';
 	config.urlVenda 				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 venda';
 	config.urlNova					= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
@@ -349,6 +409,8 @@ venda/finalizar-venda';
 	$(document).ready(function(){
 
 		venda = new Venda(config);
+		venda.carregarVenda();
+		venda.carregarCliente();
 		venda.carregarProdutos();
 		venda.carregarProdutosVenda();
 
@@ -391,33 +453,33 @@ venda">
 								<div class="form-group">
 							    <label for="inputEmail3" class="col-sm-2 control-label">Tipo</label>
 									<div class="col-sm-10">
-							        <label class="control-label">Or&ccedil;amento</label>
+							        <label class="control-label" id="tipo">Or&ccedil;amento</label>
 							    </div>							  
 							  </div>							
 								<div class="form-group">
 							    <label for="inputEmail3" class="col-sm-2 control-label">Cliente</label>
 									<div class="col-sm-10">
-							        <label class="control-label">Jemyson Vagner Rosa da Silva</label>
+							        <label class="control-label" id="labelCliente" name="labelCliente"></label>
 							    </div>							  
 						    </div>		
 								<div class="form-group">
 							    <label for="inputEmail3" class="col-sm-2 control-label">Endere&ccedil;o</label>
 									<div class="col-sm-10">
-							        <label class="control-label" style="font-weight: normal">Rua Maria Augusta de Fran&ccedil;a Ferreira</label>
+							        <label class="control-label" style="font-weight: normal" id="labelEndereco" name="labelEndereco"></label>
 							        <label class="control-label">Bairro</label>
-							        <label class="control-label" style="font-weight: normal">Ouro Preto</label>
+							        <label class="control-label" style="font-weight: normal" id="labelBairro" name="labelBairro"></label>
 							        <label class="control-label">Cidade</label>
-							        <label class="control-label" style="font-weight: normal">Olinda</label>
+							        <label class="control-label" style="font-weight: normal" id="labelCidade" name="labelCidade"></label>
 							    </div>							  
 						    </div>		
 								<div class="form-group">
 							    <label for="inputEmail3" class="col-sm-2 control-label">CPF</label>
 									<div class="col-sm-10">
-							        <label class="control-label" style="font-weight: normal">097.328.164-22</label>
+							        <label class="control-label" style="font-weight: normal" id="labelCPF" name="labelCPF"></label>
 							        <label class="control-label">Fone</label>
-							        <label class="control-label" style="font-weight: normal">(81) 99800-6555</label>
+							        <label class="control-label" style="font-weight: normal"  id="labelTelefone" name="labelTelefone"></label>
 							        <label class="control-label">E-mail</label>
-							        <label class="control-label" style="font-weight: normal">jemyson.vagner@gmail.com</label>
+							        <label class="control-label" style="font-weight: normal" id="labelEmail" name="labelEmail"></label>
 							    </div>							  
 						    </div>		
 							  <div class="form-group" style="margin-top: 15px">

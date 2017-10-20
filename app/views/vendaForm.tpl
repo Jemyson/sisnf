@@ -42,6 +42,34 @@
 			}
 			
 		}
+
+		this.pesquisarCliente = function(){
+
+			var _this = this;
+
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlCliente,
+				dataType:'json',
+				data:'',
+				success: function(data){
+
+					var select = '<option value="0">Selecione</option>';
+					for(var chave in data){
+
+						select += '<option value="'+chave+'">'+data[chave]+'</option>';
+						
+					}						
+
+					$('#id_cliente').html(select);
+					
+				},
+				error: function(){
+				}
+			});
+		
+		}
 		
 		this.iniciar = function(){
 
@@ -85,11 +113,13 @@
 
 	config.id						= '{/literal}{$id}{literal}';
 	config.urlIniciar		= '{/literal}{$basePath}{literal}venda/iniciar';
+	config.urlCliente		= '{/literal}{$basePath}{literal}cliente/dados-entidade';
 	config.urlSalvar		= '{/literal}{$basePath}{literal}venda/salvar';
 
 	$(document).ready(function(){
 
 		venda = new Venda(config);
+		venda.pesquisarCliente();
 
 	});	
 			
@@ -140,8 +170,6 @@
 							    <label for="inputEmail3" class="col-sm-2 control-label">Cliente*</label>
 							    <div class="col-sm-3">
 							      <select class="form-control" id="id_cliente" name="id_cliente" obrigatorio="obrigatorio" entidade="entidade">
-										  <option value="0">Selecione</option>
-										  <option value="1">Jemyson Vagner Rosa da Silva</option>
 										</select>
 							    </div>
 							  </div>		
