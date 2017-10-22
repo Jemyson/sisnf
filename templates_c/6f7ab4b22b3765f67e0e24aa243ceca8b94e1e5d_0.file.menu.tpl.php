@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-19 23:50:14
+<?php /* Smarty version 3.1.27, created on 2017-10-21 20:29:02
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:28931953759e96466a699e6_52421792%%*/
+/*%%SmartyHeaderCode:64286080859ebd83ec1c8a9_98286209%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6f7ab4b22b3765f67e0e24aa243ceca8b94e1e5d' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl',
-      1 => 1508467743,
+      1 => 1508628539,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '28931953759e96466a699e6_52421792',
+  'nocache_hash' => '64286080859ebd83ec1c8a9_98286209',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e96466a7c174_01205342',
+  'unifunc' => 'content_59ebd83ec666b3_74922061',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e96466a7c174_01205342')) {
-function content_59e96466a7c174_01205342 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59ebd83ec666b3_74922061')) {
+function content_59ebd83ec666b3_74922061 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '28931953759e96466a699e6_52421792';
+$_smarty_tpl->properties['nocache_hash'] = '64286080859ebd83ec1c8a9_98286209';
 ?>
 
 <style>
@@ -148,11 +148,11 @@ venda"><i class="glyphicon glyphicon-shopping-cart"></i> Vendas <span class="sr-
  					<ul class="dropdown-menu">
 						<li class="preview__action--close">
 							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-categoria"><i class="glyphicon glyphicon-briefcase"></i> Categoria</a>
+categoria"><i class="glyphicon glyphicon-th"></i> Categoria</a>
 				  	</li>
 						<li class="preview__action--close">
 							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-subcategoria"><i class="glyphicon glyphicon-briefcase"></i> Sub-Categoria</a>
+subcategoria"><i class="glyphicon glyphicon-th-list"></i> Sub-Categoria</a>
 				  	</li>
 					</ul>					
 		  	</li>

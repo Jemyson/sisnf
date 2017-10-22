@@ -330,7 +330,7 @@ Grid = function(nome, opcoes){
 	
 	this.operatorFilter = function(tipo, campo) {
 		
-		var operator = '&nbsp;<select id="id_filtro_operador" onChange="grid.changeOperator(this.options[this.selectedIndex].value, \''+tipo+'\', \''+campo+'\')">';
+		var operator = '&nbsp;<select id="id_filtro_operador" class="form-control input-sm" onChange="grid.changeOperator(this.options[this.selectedIndex].value, \''+tipo+'\', \''+campo+'\')">';
 		
 		if(tipo == 'combo')  {
 
@@ -392,7 +392,7 @@ Grid = function(nome, opcoes){
 		
 		if(tipo == 'combo')  {
 
-			field = '<select id="'+ campo +'">';
+			field = '<select id="'+ campo +'" class="form-control input-sm">';
 			filtrosDados = this.opcoes.filtrosDados[campo];
 			for(var i = 0 ; i < filtrosDados.length ; i++) {
 				field+= '<option value="'+ filtrosDados[i].id +'">'+ filtrosDados[i].value +'</option>';
@@ -401,22 +401,22 @@ Grid = function(nome, opcoes){
 			
 		} else if(tipo == 'numero') {
 			
-			field = '<input id="'+ campo +'" type="text" class="kapane-grid-field-number" dir="rtl" onKeyUp="this.value=this.value.replace(/([^\-0-9])/,\'\');'+ keyPressField +'">';
+			field = '<input id="'+ campo +'" type="text" class="kapane-grid-field-number form-control input-sm" dir="rtl" onKeyUp="this.value=this.value.replace(/([^\-0-9])/,\'\');'+ keyPressField +'">';
 			
 		} else if(tipo == 'moeda') {
 			
-			field = '<input id="'+ campo +'" type="text" class="kapane-grid-field-money" dir="rtl" onKeyUp="this.value=Kapane.Format.money(this.value);'+ keyPressField +'">';
+			field = '<input id="'+ campo +'" type="text" class="kapane-grid-field-money form-control input-sm" dir="rtl" onKeyUp="this.value=Kapane.Format.money(this.value);'+ keyPressField +'">';
 			
 		} else if(tipo == 'data')   {
 
 			if(operador == 'BETWEEN') {
 
 				fiel  = '<div id="data1_datepicker" class="input-append">';
-				fiel += '<input data-format="dd/MM/yyyy" class="input input-small" type="text" id="'+campo+'1" name="'+campo+'1" placeholder="Data">';
+				fiel += '<input data-format="dd/MM/yyyy" class="input input-small form-control input-sm" type="text" id="'+campo+'1" name="'+campo+'1" placeholder="Data">';
 				fiel += '<span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar" class="icon-calendar"></i></span></div>';
 
 				fiel += '&nbsp;<div id="data2_datepicker" class="input-append">';
-				fiel += '<input data-format="dd/MM/yyyy" class="input input-small" type="text" id="'+campo+'2" name="'+campo+'2" placeholder="Data">';
+				fiel += '<input data-format="dd/MM/yyyy" class="input input-small form-control input-sm" type="text" id="'+campo+'2" name="'+campo+'2" placeholder="Data">';
 				fiel += '<span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar" class="icon-calendar"></i></span></div>';
 
 				field = fiel;
@@ -424,7 +424,7 @@ Grid = function(nome, opcoes){
 			} else {
 				
 				fiel  = '<div id="data_datepicker" class="input-append">';
-				fiel += '<input data-format="dd/MM/yyyy" class="input input-small" type="text" id="'+campo+'" name="'+campo+'" placeholder="Data">';
+				fiel += '<input data-format="dd/MM/yyyy" class="input input-small form-control input-sm" type="text" id="'+campo+'" name="'+campo+'" placeholder="Data">';
 				fiel += '<span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar" class="icon-calendar"></i></span></div>';
 
 				field = fiel;
@@ -433,7 +433,7 @@ Grid = function(nome, opcoes){
 			
 		} else if(tipo == 'texto')  {
 
-			field = '<input id="'+ campo +'" type="text" class="" onKeyUp="'+ keyPressField +'">';
+			field = '<input id="'+ campo +'" type="text" class="form-control input-sm" onKeyUp="'+ keyPressField +'">';
 		}
 
 		return field;
@@ -626,7 +626,7 @@ Grid = function(nome, opcoes){
 		if(App.count(this.opcoes.filtros) > 0) {
 			
 			var filtro = null;
-			var filtros = 'Novo filtro: <select id="id_filtro" onChange="grid.showFilter(this.options[this.selectedIndex].value)">';
+			var filtros = 'Novo filtro: <select id="id_filtro" class="form-control input-sm" onChange="grid.showFilter(this.options[this.selectedIndex].value)">';
 			filtros+= '<option value="">-- Selecionar Filtro --</option>';
 			for(var x in this.opcoes.filtros) {
 				filtro = this.opcoes.filtros[x];
@@ -749,7 +749,7 @@ Grid = function(nome, opcoes){
 		var indiceInicio = resultSet.indiceInicio;
 		var indiceFim = resultSet.indiceFim;
 
-		var itensPorPagina = '<select id="_limite_"'+this.nome+' onChange="grid.setItensPagina(this.options[this.selectedIndex].value)" style="font-size:11px; width: 150px">';
+		var itensPorPagina = '<select id="_limite_"'+this.nome+' class="form-control input-sm" onChange="grid.setItensPagina(this.options[this.selectedIndex].value)" style="font-size:11px; width: 150px">';
 		itensPorPagina+= '<option value=""></option>';
 		itensPorPagina+= '<option '+(this.data.limite == '10'  ? 'selected' : '')+' value="10">10 por p&aacute;gina</option>';
 		itensPorPagina+= '<option '+(this.data.limite == '50'  ? 'selected' : '')+' value="50">50 por p&aacute;gina</option>';

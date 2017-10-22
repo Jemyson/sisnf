@@ -19,8 +19,8 @@
 		config.filtros = {}
 		config.filtrosDados = {}
 
-		config.filtros.CD_ESPORTE  = {'titulo':'id','campo':'id' ,'tipo':'numero'};
-		config.filtros.DS_ESPORTE  = {'titulo':'Nome','campo':'nome' ,'tipo':'texto'};
+		config.filtros.id  		= {'titulo':'id','campo':'id' ,'tipo':'numero'};
+		config.filtros.nome  	= {'titulo':'Nome','campo':'nome' ,'tipo':'texto'};
 		
 		config.filtrosDados.tipo = [];
 		config.filtrosDados.tipo.push({"id":"1","value":"Visualizar"});

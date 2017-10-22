@@ -112,10 +112,10 @@
 					</a>
  					<ul class="dropdown-menu">
 						<li class="preview__action--close">
-							<a href="{$basePath}categoria"><i class="glyphicon glyphicon-briefcase"></i> Categoria</a>
+							<a href="{$basePath}categoria"><i class="glyphicon glyphicon-th"></i> Categoria</a>
 				  	</li>
 						<li class="preview__action--close">
-							<a href="{$basePath}subcategoria"><i class="glyphicon glyphicon-briefcase"></i> Sub-Categoria</a>
+							<a href="{$basePath}subcategoria"><i class="glyphicon glyphicon-th-list"></i> Sub-Categoria</a>
 				  	</li>
 					</ul>					
 		  	</li>

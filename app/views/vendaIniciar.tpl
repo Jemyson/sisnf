@@ -78,6 +78,34 @@
 			
 		}
 
+		this.carregarCategoria = function(){
+
+			var _this = this;
+
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlCategoria,
+				dataType:'json',
+				data:'',
+				success: function(data){
+
+					var htmlCategoria = '<option value="0">Selecione</option>';
+					for(var chave in data){
+
+						htmlCategoria += '<option value="'+data[chave].id+'">'+data[chave].valor+'</option>';
+
+					}
+					
+					$('#id_categoria').html(htmlCategoria);
+					
+				},
+				error: function(){
+				}
+			});
+			
+		}
+
 		this.carregarProdutosVenda = function(){
 
 			var _this = this;
@@ -107,7 +135,7 @@
 							htmlProduto += '</tr>';
 	
 							_this.produtos[data.produtos[chave].id_produto] = {'id':data.produtos[chave].id_produto, 'produto':data.produtos[chave].nome_produto, 'preco_venda':data.produtos[chave].valor_produto, 'qtd':data.produtos[chave].qtd_produto};
-							$('table tbody').append(htmlProduto);
+							$('#tabelaProdutosVenda tbody').append(htmlProduto);
 							
 						}
 
@@ -176,26 +204,40 @@
 		this.carregarProdutos = function(){
 
 			var _this = this;
+
+			$('#modalPesquisarProduto').modal();
+
+			var filtros = {};
+			filtros['idCategoria'] = $('#id_categoria').val();
+			filtros['idSubcategoria'] = $('#id_subcategoria').val();
+			filtros['produto'] = $('#produto').val().toLowerCase();
 			
 			$.ajax({
 				type:'POST',
 				global:true,
 				url:_this.opcoes.urlProduto,
 				dataType:'json',
-				data:'id=all',
+				data:filtros,
 				success: function(data){
 
 					if(data.error == 0){
 
-						$('#id_produto');
-
-						var htmlProdutos = '<option value="0">Selecione</option>';
+						console.log(data.produtos);
+						
+						var tabelaProdutos = '';
 						for(var chave in data.produtos){
 
-							htmlProdutos += '<option value="'+data.produtos[chave].id+'">'+data.produtos[chave].nome+'</option>';
+							tabelaProdutos += '<tr>';
+							tabelaProdutos += '<td style="text-align: center;"><input type="radio" id="produto[]" name="produto[]" value="'+data.produtos[chave].id+'" /></td>';
+							tabelaProdutos += '<td>'+data.produtos[chave].nome+'</td>';
+							tabelaProdutos += '<td style="text-align: right;">1</td>';
+							tabelaProdutos += '<td style="text-align: right;">'+Formatter.moeda(data.produtos[chave].preco_venda, 2,',','.')+'</td>';
+							tabelaProdutos += '<td style="text-align: right;">'+Formatter.moeda((data.produtos[chave].preco_venda * 1), 2,',','.')+'</td>';
+							tabelaProdutos += '</tr>';
+							
 						}
 						
-						$('#id_produto').html(htmlProdutos);
+						$('#tabelaPesquisarProdutos tbody').html(tabelaProdutos);
 						
 					}
 
@@ -245,7 +287,7 @@
 	
 							_this.atualizarQtdProdutos();
 							_this.calcularRetornoPossivel();
-							$('table tbody').append(htmlProduto);
+							$('#tabelaProdutosVenda tbody').append(htmlProduto);
 
 							}else{
 								alert(data.msg);
@@ -356,6 +398,7 @@
 	config.urlDadosVenda		= '{/literal}{$basePath}{literal}venda/dados-form';
 	config.urlCliente				= '{/literal}{$basePath}{literal}cliente/dados-form';
 	config.urlVenda 				= '{/literal}{$basePath}{literal}venda';
+	config.urlCategoria			= '{/literal}{$basePath}{literal}categoria/dados-entidade';
 	config.urlNova					= '{/literal}{$basePath}{literal}venda/form';
 	config.urlIniciar				= '{/literal}{$basePath}{literal}venda/iniciar';
 	config.urlProduto				= '{/literal}{$basePath}{literal}venda/pesquisar-produto';
@@ -367,7 +410,8 @@
 		venda = new Venda(config);
 		venda.carregarVenda();
 		venda.carregarCliente();
-		venda.carregarProdutos();
+		venda.carregarCategoria();
+		//venda.carregarProdutos();
 		venda.carregarProdutosVenda();
 
 	});	
@@ -448,39 +492,38 @@
 							<h3 style="#margin-top: 0px"><span id="qtdProdutos">0 itens</span> / Total R$ <span id="valorProdutos">0,00</span></h3>
 							<hr>
 						
-							<form>
+							<form action="teste" method="post" id="formAdicionarProduto" name="formAdicionarProduto">
 								<!-- ADICIONAR PRODUTO -->
 								<div id="divAdicionarProduto">
 									<div class="row">
-										<div class="form-group col-md-2" style="display: none">
-											<label>Categoria*</label>
+										<div class="form-group col-md-2">
+											<label>Categoria</label>
 											<select class="form-control" id="id_categoria" name="id_categoria">
-												<option>Selecione</option>
-												<option>Audio</option>
-												<option>Mixer</option>
-												<option>Caixas</option>
 											</select>
 										</div>
-										<div class="form-group col-md-3" style="undefined">
-											<label>Produto*</label>
-											<select class="form-control" id="id_produto" name="id_produto" obrigatorio="obrigatorio" entidade="entidade">
-												<option value="0">Selecione</option>
-												<option value="1">Placa M-audio</option>
-												<option value="2">Controlador Behringer UMX610</option>
-												<option value="3">Mesa Behringer X32</option>
+										<div class="form-group col-md-2">
+											<label>Sub-Categoria</label>
+											<select class="form-control" id="id_subcategoria" name="id_subcategoria">
 											</select>
 										</div>
-										<div class="form-group col-md-1" style="undefined">
-											<label>Qtd*</label>
-											<input class="form-control" type="text" id="qtd" name="qtd" obrigatorio="obrigatorio"/>
+										<div class="form-group col-md-3">
+											<label>Produto</label>
+											<input type="text" class="form-control" id="produto" name="produto" />
+										</div>
+										<div class="form-group col-md-1" style="display: none">
+											<label>Qtd</label>
+											<input class="form-control" type="text" id="qtd" name="qtd" />
 										</div>
 										<div class="form-group col-md-2" style="undefined">
 											<label>&nbsp;</label>
 											<br>
-											<button type="button" class="btn btn-primary" onclick="venda.adicionarProduto()">Adicionar</button>
+											<button type="button" class="btn btn-primary" onclick="venda.adicionarProduto()" style="display: none">Adicionar</button>
+											<button type="button" class="btn btn-primary" onclick="venda.carregarProdutos()">Pesquisar</button>
 										</div>
 									</div>
 								</div>
+							</form>
+							<form>
 								<!-- FORMA DE PAGAMENTO  -->
 								<div id="divFormaPagamento" style="display: none">
 									<div class="row">
@@ -530,7 +573,7 @@
 								<br>
 								<br>
 						
-								<table class="table table-condensed table-striped">
+								<table id="tabelaProdutosVenda" class="table table-condensed table-striped">
 								
 									<thead>
 										<tr>
@@ -544,35 +587,6 @@
 										</tr>
 									</thead>
 									<tbody>
-										<!-- 
-										<tr>
-											<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
-											<td>Mesa Behringer X32</td>
-											<td style="text-align: right;">1</td>
-											<td style="text-align: right;">15.500,00</td>
-											<td style="text-align: right;">15.500,00</td>
-											<td style="text-align: center;">n/d</td>
-											<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>
-										</tr>
-										<tr>
-											<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
-											<td>Controlador Behringer UMX610</td>
-											<td style="text-align: right;">2</td>
-											<td style="text-align: right;">999,00</td>
-											<td style="text-align: right;">1.998,00</td>
-											<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-file" style="color: pink"></i></td>
-											<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-remove-sign" style="color: brown"></i></a></td>
-										</tr>
-										<tr>
-											<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
-											<td>Placa M-audio</td>
-											<td style="text-align: right;">5</td>
-											<td style="text-align: right;">450,00</td>
-											<td style="text-align: right;">2.250,00</td>
-											<td style="text-align: center;">n/d</td>
-											<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>
-										</tr>
-										 -->
 									</tbody>
 								
 								</table>
@@ -589,6 +603,38 @@
 		
 		</div>
 		
+		<div class="modal fade" tabindex="-1" role="dialog" id="modalPesquisarProduto">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Pesquisar Produtos</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p>Selecione o produto:</p>
+						<table id="tabelaPesquisarProdutos" class="table table-condensed table-striped">
+						
+							<thead>
+								<tr>
+									<th style="text-align: center"></th>
+									<th style="text-align: center">Produto</th>
+									<th style="text-align: center">Qtd</th>
+									<th style="text-align: center">Val unit</th>
+									<th style="text-align: center">Total</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						
+						</table>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+		        <button type="button" class="btn btn-primary">Adicionar</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 		
 
 

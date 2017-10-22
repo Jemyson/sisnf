@@ -103,26 +103,25 @@ class VendaController extends AppController{
 
 		$produtoModel = new ProdutoModel();
 		
-		if($_REQUEST['id'] == 'all'){
-			
-			$produtos = $produtoModel->pesquisar();
-			if(count($produtos) > 0){
-				print_r(json_encode(array_merge(array('error'=>0), array('produtos'=>$produtos))));
-			}else{
-				print_r(json_encode(array('error'=>1, 'msg'=>'Produto inexistente!')));
-			}
-						
-		}else{
-			$produto = $produtoModel->pesquisar('id = ' . (int) $_REQUEST['id']);
-			
-			if(count($produto) > 0){
-				print_r(json_encode(array_merge(array('error'=>0), current($produto))));
-			}else{
-				print_r(json_encode(array('error'=>1, 'msg'=>'Produto inexistente!')));
-			}
-			
+		$filtros = array();
+		if($_REQUEST['idCategoria'] != '' && $_REQUEST['idCategoria'] > 0){
+			$filtros['id_categoria'] = array('id_categoria = '. (int) $_REQUEST['idCategoria']);
+		}
+		if($_REQUEST['idSubcategoria'] != '' && $_REQUEST['idSubcategoria'] > 0){
+			$filtros['id_subcategoria'] = array('id_subcategoria = ' . (int) $_REQUEST['idSubcategoria']);
+		}
+		if($_REQUEST['produto'] != ''){
+			$filtros['nome'] = array("LOWER(nome) LIKE '%{$_REQUEST['produto']}%'");
 		}
 		
+		$produtos = $produtoModel->pesquisar($filtros);
+		
+		if(count($produtos) > 0){
+			print_r(json_encode(array_merge(array('error'=>0), array('produtos'=>$produtos))));
+		}else{
+			print_r(json_encode(array('error'=>1, 'msg'=>'Produto inexistente!')));
+		}
+			
 	}
 	
 	public function dadosFormAction(){
@@ -266,15 +265,6 @@ class VendaController extends AppController{
 					
 		}
 		
-		echo "<pre>";
-		print_r($dados);
-		echo "</pre>";
-		die();
-		
-		echo "<pre>";
-		print_r($_REQUEST);
-		echo "</pre>";
-		die();
 	}
 	
 }
