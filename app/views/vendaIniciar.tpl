@@ -222,17 +222,15 @@
 
 					if(data.error == 0){
 
-						console.log(data.produtos);
-						
 						var tabelaProdutos = '';
 						for(var chave in data.produtos){
 
 							tabelaProdutos += '<tr>';
-							tabelaProdutos += '<td style="text-align: center;"><input type="radio" id="produto[]" name="produto[]" value="'+data.produtos[chave].id+'" /></td>';
+							tabelaProdutos += '<td style="text-align: center;"><input type="radio" id="radioProduto" name="radioProduto" value="'+data.produtos[chave].id+'" onclick="javascript:venda.selecionarProduto()" /></td>';
 							tabelaProdutos += '<td>'+data.produtos[chave].nome+'</td>';
 							tabelaProdutos += '<td style="text-align: right;">1</td>';
 							tabelaProdutos += '<td style="text-align: right;">'+Formatter.moeda(data.produtos[chave].preco_venda, 2,',','.')+'</td>';
-							tabelaProdutos += '<td style="text-align: right;">'+Formatter.moeda((data.produtos[chave].preco_venda * 1), 2,',','.')+'</td>';
+							//tabelaProdutos += '<td style="text-align: right;">'+Formatter.moeda((data.produtos[chave].preco_venda * 1), 2,',','.')+'</td>';
 							tabelaProdutos += '</tr>';
 							
 						}
@@ -245,6 +243,53 @@
 
 			});
 						
+		}
+
+		this.selecionarProduto = function(){
+
+			$('#qtdProduto').removeAttr('disabled');
+			$('#qtdProduto').val('1');
+			$('#qtdProduto').focus();
+			this.calcularValorProduto();
+			
+		}
+
+		this.calcularValorProduto = function(){
+
+			var _this = this;
+			
+			var idProdutoSelecionado = $("input[name='radioProduto']:checked").val();
+			var qtdProduto = $("#qtdProduto").val();
+			
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlProduto,
+				dataType:'json',
+				data:'id='+idProdutoSelecionado,
+				success: function(data){
+
+					var produto = data.produtos;
+
+					$('#valorProduto').val(Formatter.moeda((qtdProduto * produto.preco_venda), 2,',','.'));
+					
+					console.log(data);
+				
+				}
+
+			});
+			
+		}
+
+		this.aplicarDesconto = function(){
+
+			console.log($('#permitirDesconto').prop("checked"));
+			
+			if($('#permitirDesconto').prop("checked")){
+				$('#valorProduto').removeAttr('disabled');
+			}else{
+				$('#valorProduto').attr('disabled');
+			}
 		}
 
 		this.adicionarProduto = function(){
@@ -329,7 +374,6 @@
 
 			for(var produto in this.produtos){
 				retornoPossivel = parseFloat(retornoPossivel) + this.produtos[produto].qtd * parseFloat(this.produtos[produto].preco_venda);
-				console.log(retornoPossivel);
 			}
 
 			$('#valorProdutos').html('&nbsp;' + Formatter.moeda(retornoPossivel, 2,',','.'));
@@ -611,7 +655,6 @@
 		        <h4 class="modal-title">Pesquisar Produtos</h4>
 		      </div>
 		      <div class="modal-body">
-		        <p>Selecione o produto:</p>
 						<table id="tabelaPesquisarProdutos" class="table table-condensed table-striped">
 						
 							<thead>
@@ -620,7 +663,6 @@
 									<th style="text-align: center">Produto</th>
 									<th style="text-align: center">Qtd</th>
 									<th style="text-align: center">Val unit</th>
-									<th style="text-align: center">Total</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -629,6 +671,22 @@
 						</table>
 		      </div>
 		      <div class="modal-footer">
+		      	<form class="form-horizontal col-sm-8" style="padding-left: 0px">
+							<div class="form-group">
+						    <label for="inputEmail3" class="col-sm-2 control-label">Qtd*</label>
+						    <div class="col-sm-2" style="padding-left: 5px; padding-right: 5px">
+									<input class="form-control" type="text" id="qtdProduto" name="qtdProduto" onkeyup="javascript:venda.calcularValorProduto()" disabled="disabled" />
+						    </div>
+						    <div class="col-sm-4" style="padding-left: 0px; padding-right: 10px">
+									<input class="form-control" type="text" id="valorProduto" name="valorProduto" disabled="disabled" style="text-align: right" />
+						    </div>
+						    <div class="col-sm-2 checkbox" style="padding-left: 0px">
+							    <label>
+							      <input id="permitirDesconto" name="permitirDesconto"  type="checkbox" onclick="javascript:venda.aplicarDesconto()"> desconto
+							    </label>
+							  </div>
+						  </div>
+		      	</form>
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 		        <button type="button" class="btn btn-primary">Adicionar</button>
 		      </div>

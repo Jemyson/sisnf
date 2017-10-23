@@ -102,26 +102,42 @@ class VendaController extends AppController{
 	public function pesquisarProdutoAction(){
 
 		$produtoModel = new ProdutoModel();
-		
 		$filtros = array();
-		if($_REQUEST['idCategoria'] != '' && $_REQUEST['idCategoria'] > 0){
-			$filtros['id_categoria'] = array('id_categoria = '. (int) $_REQUEST['idCategoria']);
-		}
-		if($_REQUEST['idSubcategoria'] != '' && $_REQUEST['idSubcategoria'] > 0){
-			$filtros['id_subcategoria'] = array('id_subcategoria = ' . (int) $_REQUEST['idSubcategoria']);
-		}
-		if($_REQUEST['produto'] != ''){
-			$filtros['nome'] = array("LOWER(nome) LIKE '%{$_REQUEST['produto']}%'");
-		}
 		
-		$produtos = $produtoModel->pesquisar($filtros);
-		
-		if(count($produtos) > 0){
-			print_r(json_encode(array_merge(array('error'=>0), array('produtos'=>$produtos))));
-		}else{
-			print_r(json_encode(array('error'=>1, 'msg'=>'Produto inexistente!')));
-		}
+		if(isset($_REQUEST['id'])){
 			
+			$filtros['id'] = array('id = '. (int) $_REQUEST['id']);
+			
+			$produtos = $produtoModel->pesquisar($filtros);
+			
+			if(count($produtos) > 0){
+				print_r(json_encode(array_merge(array('error'=>0), array('produtos'=>current($produtos)))));
+			}else{
+				print_r(json_encode(array('error'=>1, 'msg'=>'Produto inexistente!')));
+			}
+			
+		}else{
+			
+			if($_REQUEST['idCategoria'] != '' && $_REQUEST['idCategoria'] > 0){
+				$filtros['id_categoria'] = array('id_categoria = '. (int) $_REQUEST['idCategoria']);
+			}
+			if($_REQUEST['idSubcategoria'] != '' && $_REQUEST['idSubcategoria'] > 0){
+				$filtros['id_subcategoria'] = array('id_subcategoria = ' . (int) $_REQUEST['idSubcategoria']);
+			}
+			if($_REQUEST['produto'] != ''){
+				$filtros['nome'] = array("LOWER(nome) LIKE '%{$_REQUEST['produto']}%'");
+			}
+			
+			$produtos = $produtoModel->pesquisar($filtros);
+			
+			if(count($produtos) > 0){
+				print_r(json_encode(array_merge(array('error'=>0), array('produtos'=>$produtos))));
+			}else{
+				print_r(json_encode(array('error'=>1, 'msg'=>'Produto inexistente!')));
+			}
+				
+		}
+		
 	}
 	
 	public function dadosFormAction(){

@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-17 22:47:27
+<?php /* Smarty version 3.1.27, created on 2017-10-23 21:44:21
          compiled from "C:\xampp\htdocs\sisnf\app\views\vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:65799943759e66c5f6bf139_95647796%%*/
+/*%%SmartyHeaderCode:86577394359ee4695a3cfe1_68031071%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,25 +9,26 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '292e35ebf5b4625948bd265aa5eba056e060cbd7' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\app\\views\\vendaIniciar.tpl',
-      1 => 1508273245,
+      1 => 1508787860,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '65799943759e66c5f6bf139_95647796',
+  'nocache_hash' => '86577394359ee4695a3cfe1_68031071',
   'variables' => 
   array (
     'id' => 0,
+    'idCliente' => 0,
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e66c5f723066_58876619',
+  'unifunc' => 'content_59ee4695aad220_45331408',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e66c5f723066_58876619')) {
-function content_59e66c5f723066_58876619 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59ee4695aad220_45331408')) {
+function content_59ee4695aad220_45331408 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '65799943759e66c5f6bf139_95647796';
+$_smarty_tpl->properties['nocache_hash'] = '86577394359ee4695a3cfe1_68031071';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -56,6 +57,87 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 		this.nova = function(){
 			window.location = this.opcoes.urlNova;
+		}
+
+		this.carregarVenda = function(){
+
+			var _this = this;
+
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlDadosVenda + '?id=' + _this.opcoes.id,
+				dataType:'json',
+				data:'',
+				success: function(data){
+
+					if(data.registros.tipo == 1){
+						$('#tipo').html('Or&ccedil;amento');
+					}else{
+						$('#tipo').html('Venda');
+					}
+					
+					
+				},
+				error: function(){
+				}
+			});
+
+		}
+		
+		this.carregarCliente = function(){
+
+			var _this = this;
+
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlCliente + '?id=' + _this.opcoes.idCliente,
+				dataType:'json',
+				data:'',
+				success: function(data){
+
+					$('#labelCliente').html(data.registros.nome);
+					$('#labelEndereco').html(data.registros.endereco);
+					$('#labelBairro').html(data.registros.bairro);
+					$('#labelCidade').html(data.registros.cidade);
+					$('#labelCPF').html(data.registros.cpf);
+					$('#labelTelefone').html(data.registros.celular);
+					$('#labelEmail').html(data.registros.email);
+					
+				},
+				error: function(){
+				}
+			});
+			
+		}
+
+		this.carregarCategoria = function(){
+
+			var _this = this;
+
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlCategoria,
+				dataType:'json',
+				data:'',
+				success: function(data){
+
+					var htmlCategoria = '<option value="0">Selecione</option>';
+					for(var chave in data){
+
+						htmlCategoria += '<option value="'+data[chave].id+'">'+data[chave].valor+'</option>';
+
+					}
+					
+					$('#id_categoria').html(htmlCategoria);
+					
+				},
+				error: function(){
+				}
+			});
+			
 		}
 
 		this.carregarProdutosVenda = function(){
@@ -87,7 +169,7 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 							htmlProduto += '</tr>';
 	
 							_this.produtos[data.produtos[chave].id_produto] = {'id':data.produtos[chave].id_produto, 'produto':data.produtos[chave].nome_produto, 'preco_venda':data.produtos[chave].valor_produto, 'qtd':data.produtos[chave].qtd_produto};
-							$('table tbody').append(htmlProduto);
+							$('#tabelaProdutosVenda tbody').append(htmlProduto);
 							
 						}
 
@@ -156,26 +238,38 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 		this.carregarProdutos = function(){
 
 			var _this = this;
+
+			$('#modalPesquisarProduto').modal();
+
+			var filtros = {};
+			filtros['idCategoria'] = $('#id_categoria').val();
+			filtros['idSubcategoria'] = $('#id_subcategoria').val();
+			filtros['produto'] = $('#produto').val().toLowerCase();
 			
 			$.ajax({
 				type:'POST',
 				global:true,
 				url:_this.opcoes.urlProduto,
 				dataType:'json',
-				data:'id=all',
+				data:filtros,
 				success: function(data){
 
 					if(data.error == 0){
 
-						$('#id_produto');
-
-						var htmlProdutos = '<option value="0">Selecione</option>';
+						var tabelaProdutos = '';
 						for(var chave in data.produtos){
 
-							htmlProdutos += '<option value="'+data.produtos[chave].id+'">'+data.produtos[chave].nome+'</option>';
+							tabelaProdutos += '<tr>';
+							tabelaProdutos += '<td style="text-align: center;"><input type="radio" id="radioProduto" name="radioProduto" value="'+data.produtos[chave].id+'" onclick="javascript:venda.selecionarProduto()" /></td>';
+							tabelaProdutos += '<td>'+data.produtos[chave].nome+'</td>';
+							tabelaProdutos += '<td style="text-align: right;">1</td>';
+							tabelaProdutos += '<td style="text-align: right;">'+Formatter.moeda(data.produtos[chave].preco_venda, 2,',','.')+'</td>';
+							//tabelaProdutos += '<td style="text-align: right;">'+Formatter.moeda((data.produtos[chave].preco_venda * 1), 2,',','.')+'</td>';
+							tabelaProdutos += '</tr>';
+							
 						}
 						
-						$('#id_produto').html(htmlProdutos);
+						$('#tabelaPesquisarProdutos tbody').html(tabelaProdutos);
 						
 					}
 
@@ -183,6 +277,53 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 			});
 						
+		}
+
+		this.selecionarProduto = function(){
+
+			$('#qtdProduto').removeAttr('disabled');
+			$('#qtdProduto').val('1');
+			$('#qtdProduto').focus();
+			this.calcularValorProduto();
+			
+		}
+
+		this.calcularValorProduto = function(){
+
+			var _this = this;
+			
+			var idProdutoSelecionado = $("input[name='radioProduto']:checked").val();
+			var qtdProduto = $("#qtdProduto").val();
+			
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlProduto,
+				dataType:'json',
+				data:'id='+idProdutoSelecionado,
+				success: function(data){
+
+					var produto = data.produtos;
+
+					$('#valorProduto').val(Formatter.moeda((qtdProduto * produto.preco_venda), 2,',','.'));
+					
+					console.log(data);
+				
+				}
+
+			});
+			
+		}
+
+		this.aplicarDesconto = function(){
+
+			console.log($('#permitirDesconto').prop("checked"));
+			
+			if($('#permitirDesconto').prop("checked")){
+				$('#valorProduto').removeAttr('disabled');
+			}else{
+				$('#valorProduto').attr('disabled');
+			}
 		}
 
 		this.adicionarProduto = function(){
@@ -225,7 +366,7 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 	
 							_this.atualizarQtdProdutos();
 							_this.calcularRetornoPossivel();
-							$('table tbody').append(htmlProduto);
+							$('#tabelaProdutosVenda tbody').append(htmlProduto);
 
 							}else{
 								alert(data.msg);
@@ -267,7 +408,6 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 			for(var produto in this.produtos){
 				retornoPossivel = parseFloat(retornoPossivel) + this.produtos[produto].qtd * parseFloat(this.produtos[produto].preco_venda);
-				console.log(retornoPossivel);
 			}
 
 			$('#valorProdutos').html('&nbsp;' + Formatter.moeda(retornoPossivel, 2,',','.'));
@@ -333,8 +473,16 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 	config.id								= '<?php echo $_smarty_tpl->tpl_vars['id']->value;?>
 ';
+	config.idCliente				= '<?php echo $_smarty_tpl->tpl_vars['idCliente']->value;?>
+';
+	config.urlDadosVenda		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/dados-form';
+	config.urlCliente				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+cliente/dados-form';
 	config.urlVenda 				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda/grid';
+venda';
+	config.urlCategoria			= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+categoria/dados-entidade';
 	config.urlNova					= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 venda/form';
 	config.urlIniciar				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
@@ -349,7 +497,10 @@ venda/finalizar-venda';
 	$(document).ready(function(){
 
 		venda = new Venda(config);
-		venda.carregarProdutos();
+		venda.carregarVenda();
+		venda.carregarCliente();
+		venda.carregarCategoria();
+		//venda.carregarProdutos();
 		venda.carregarProdutosVenda();
 
 	});	
@@ -391,33 +542,33 @@ venda">
 								<div class="form-group">
 							    <label for="inputEmail3" class="col-sm-2 control-label">Tipo</label>
 									<div class="col-sm-10">
-							        <label class="control-label">Or&ccedil;amento</label>
+							        <label class="control-label" id="tipo">Or&ccedil;amento</label>
 							    </div>							  
 							  </div>							
 								<div class="form-group">
 							    <label for="inputEmail3" class="col-sm-2 control-label">Cliente</label>
 									<div class="col-sm-10">
-							        <label class="control-label">Jemyson Vagner Rosa da Silva</label>
+							        <label class="control-label" id="labelCliente" name="labelCliente"></label>
 							    </div>							  
 						    </div>		
 								<div class="form-group">
 							    <label for="inputEmail3" class="col-sm-2 control-label">Endere&ccedil;o</label>
 									<div class="col-sm-10">
-							        <label class="control-label" style="font-weight: normal">Rua Maria Augusta de Fran&ccedil;a Ferreira</label>
+							        <label class="control-label" style="font-weight: normal" id="labelEndereco" name="labelEndereco"></label>
 							        <label class="control-label">Bairro</label>
-							        <label class="control-label" style="font-weight: normal">Ouro Preto</label>
+							        <label class="control-label" style="font-weight: normal" id="labelBairro" name="labelBairro"></label>
 							        <label class="control-label">Cidade</label>
-							        <label class="control-label" style="font-weight: normal">Olinda</label>
+							        <label class="control-label" style="font-weight: normal" id="labelCidade" name="labelCidade"></label>
 							    </div>							  
 						    </div>		
 								<div class="form-group">
 							    <label for="inputEmail3" class="col-sm-2 control-label">CPF</label>
 									<div class="col-sm-10">
-							        <label class="control-label" style="font-weight: normal">097.328.164-22</label>
+							        <label class="control-label" style="font-weight: normal" id="labelCPF" name="labelCPF"></label>
 							        <label class="control-label">Fone</label>
-							        <label class="control-label" style="font-weight: normal">(81) 99800-6555</label>
+							        <label class="control-label" style="font-weight: normal"  id="labelTelefone" name="labelTelefone"></label>
 							        <label class="control-label">E-mail</label>
-							        <label class="control-label" style="font-weight: normal">jemyson.vagner@gmail.com</label>
+							        <label class="control-label" style="font-weight: normal" id="labelEmail" name="labelEmail"></label>
 							    </div>							  
 						    </div>		
 							  <div class="form-group" style="margin-top: 15px">
@@ -434,39 +585,38 @@ venda">
 							<h3 style="#margin-top: 0px"><span id="qtdProdutos">0 itens</span> / Total R$ <span id="valorProdutos">0,00</span></h3>
 							<hr>
 						
-							<form>
+							<form action="teste" method="post" id="formAdicionarProduto" name="formAdicionarProduto">
 								<!-- ADICIONAR PRODUTO -->
 								<div id="divAdicionarProduto">
 									<div class="row">
-										<div class="form-group col-md-2" style="display: none">
-											<label>Categoria*</label>
+										<div class="form-group col-md-2">
+											<label>Categoria</label>
 											<select class="form-control" id="id_categoria" name="id_categoria">
-												<option>Selecione</option>
-												<option>Audio</option>
-												<option>Mixer</option>
-												<option>Caixas</option>
 											</select>
 										</div>
-										<div class="form-group col-md-3" style="undefined">
-											<label>Produto*</label>
-											<select class="form-control" id="id_produto" name="id_produto" obrigatorio="obrigatorio" entidade="entidade">
-												<option value="0">Selecione</option>
-												<option value="1">Placa M-audio</option>
-												<option value="2">Controlador Behringer UMX610</option>
-												<option value="3">Mesa Behringer X32</option>
+										<div class="form-group col-md-2">
+											<label>Sub-Categoria</label>
+											<select class="form-control" id="id_subcategoria" name="id_subcategoria">
 											</select>
 										</div>
-										<div class="form-group col-md-1" style="undefined">
-											<label>Qtd*</label>
-											<input class="form-control" type="text" id="qtd" name="qtd" obrigatorio="obrigatorio"/>
+										<div class="form-group col-md-3">
+											<label>Produto</label>
+											<input type="text" class="form-control" id="produto" name="produto" />
+										</div>
+										<div class="form-group col-md-1" style="display: none">
+											<label>Qtd</label>
+											<input class="form-control" type="text" id="qtd" name="qtd" />
 										</div>
 										<div class="form-group col-md-2" style="undefined">
 											<label>&nbsp;</label>
 											<br>
-											<button type="button" class="btn btn-primary" onclick="venda.adicionarProduto()">Adicionar</button>
+											<button type="button" class="btn btn-primary" onclick="venda.adicionarProduto()" style="display: none">Adicionar</button>
+											<button type="button" class="btn btn-primary" onclick="venda.carregarProdutos()">Pesquisar</button>
 										</div>
 									</div>
 								</div>
+							</form>
+							<form>
 								<!-- FORMA DE PAGAMENTO  -->
 								<div id="divFormaPagamento" style="display: none">
 									<div class="row">
@@ -516,7 +666,7 @@ venda">
 								<br>
 								<br>
 						
-								<table class="table table-condensed table-striped">
+								<table id="tabelaProdutosVenda" class="table table-condensed table-striped">
 								
 									<thead>
 										<tr>
@@ -530,35 +680,6 @@ venda">
 										</tr>
 									</thead>
 									<tbody>
-										<!-- 
-										<tr>
-											<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
-											<td>Mesa Behringer X32</td>
-											<td style="text-align: right;">1</td>
-											<td style="text-align: right;">15.500,00</td>
-											<td style="text-align: right;">15.500,00</td>
-											<td style="text-align: center;">n/d</td>
-											<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>
-										</tr>
-										<tr>
-											<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
-											<td>Controlador Behringer UMX610</td>
-											<td style="text-align: right;">2</td>
-											<td style="text-align: right;">999,00</td>
-											<td style="text-align: right;">1.998,00</td>
-											<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-file" style="color: pink"></i></td>
-											<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-remove-sign" style="color: brown"></i></a></td>
-										</tr>
-										<tr>
-											<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-trash"></i></a></td>
-											<td>Placa M-audio</td>
-											<td style="text-align: right;">5</td>
-											<td style="text-align: right;">450,00</td>
-											<td style="text-align: right;">2.250,00</td>
-											<td style="text-align: center;">n/d</td>
-											<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>
-										</tr>
-										 -->
 									</tbody>
 								
 								</table>
@@ -575,6 +696,52 @@ venda">
 		
 		</div>
 		
+		<div class="modal fade" tabindex="-1" role="dialog" id="modalPesquisarProduto">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Pesquisar Produtos</h4>
+		      </div>
+		      <div class="modal-body">
+						<table id="tabelaPesquisarProdutos" class="table table-condensed table-striped">
+						
+							<thead>
+								<tr>
+									<th style="text-align: center"></th>
+									<th style="text-align: center">Produto</th>
+									<th style="text-align: center">Qtd</th>
+									<th style="text-align: center">Val unit</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						
+						</table>
+		      </div>
+		      <div class="modal-footer">
+		      	<form class="form-horizontal col-sm-8" style="padding-left: 0px">
+							<div class="form-group">
+						    <label for="inputEmail3" class="col-sm-2 control-label">Qtd*</label>
+						    <div class="col-sm-2" style="padding-left: 5px; padding-right: 5px">
+									<input class="form-control" type="text" id="qtdProduto" name="qtdProduto" onkeyup="javascript:venda.calcularValorProduto()" disabled="disabled" />
+						    </div>
+						    <div class="col-sm-4" style="padding-left: 0px; padding-right: 10px">
+									<input class="form-control" type="text" id="valorProduto" name="valorProduto" disabled="disabled" style="text-align: right" />
+						    </div>
+						    <div class="col-sm-2 checkbox" style="padding-left: 0px">
+							    <label>
+							      <input id="permitirDesconto" name="permitirDesconto"  type="checkbox" onclick="javascript:venda.aplicarDesconto()"> desconto
+							    </label>
+							  </div>
+						  </div>
+		      	</form>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+		        <button type="button" class="btn btn-primary">Adicionar</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 		
 
 

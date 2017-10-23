@@ -74,7 +74,9 @@ class Model {
 				
 				$where .= implode(' AND ', $valor);
 				
-				if($chave != end(array_keys($whereParametro)) ){
+				$keyParametro = array_keys($whereParametro);
+				
+				if($chave != end($keyParametro)){
 					
 					$where .= ' AND ';
 					
@@ -98,7 +100,9 @@ class Model {
 				
 				$order .= $valor2;
 				
-				if($chave2 != end(array_keys($orderParametro)) ){
+				$keyOrder = array_keys($orderParametro);
+				
+				if($chave2 != end($keyOrder)){
 					
 					$order .= ' , ';
 					

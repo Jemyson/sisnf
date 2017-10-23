@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-18 19:01:51
+<?php /* Smarty version 3.1.27, created on 2017-10-23 05:33:18
          compiled from "C:\xampp\htdocs\sisnf\templates\menu.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:201122943659e788ff53d3c6_16772866%%*/
+/*%%SmartyHeaderCode:86252311459ed62fe8138c4_08035608%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '00ddb9e9109d8ddb1e381eabafc726f6f101e4d2' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\templates\\menu.tpl',
-      1 => 1508346110,
+      1 => 1508729576,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '201122943659e788ff53d3c6_16772866',
+  'nocache_hash' => '86252311459ed62fe8138c4_08035608',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e788ff586597_04871877',
+  'unifunc' => 'content_59ed62fe8818a2_92099020',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e788ff586597_04871877')) {
-function content_59e788ff586597_04871877 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59ed62fe8818a2_92099020')) {
+function content_59ed62fe8818a2_92099020 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '201122943659e788ff53d3c6_16772866';
+$_smarty_tpl->properties['nocache_hash'] = '86252311459ed62fe8138c4_08035608';
 ?>
 
 <style>
@@ -148,11 +148,11 @@ venda"><i class="glyphicon glyphicon-shopping-cart"></i> Vendas <span class="sr-
  					<ul class="dropdown-menu">
 						<li class="preview__action--close">
 							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-categoria"><i class="glyphicon glyphicon-briefcase"></i> Categoria</a>
+categoria"><i class="glyphicon glyphicon-th"></i> Categoria</a>
 				  	</li>
 						<li class="preview__action--close">
 							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-subcategoria"><i class="glyphicon glyphicon-briefcase"></i> Sub-Categoria</a>
+subcategoria"><i class="glyphicon glyphicon-th-list"></i> Sub-Categoria</a>
 				  	</li>
 					</ul>					
 		  	</li>

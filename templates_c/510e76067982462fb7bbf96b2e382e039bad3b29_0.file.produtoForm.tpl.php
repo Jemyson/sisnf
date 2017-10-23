@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-17 20:36:50
+<?php /* Smarty version 3.1.27, created on 2017-10-23 05:34:19
          compiled from "C:\xampp\htdocs\sisnf\app\views\produtoForm.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:168000333559e64dc2a01783_19233795%%*/
+/*%%SmartyHeaderCode:104436052359ed633b13f658_48376495%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '510e76067982462fb7bbf96b2e382e039bad3b29' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\app\\views\\produtoForm.tpl',
-      1 => 1508265401,
+      1 => 1508349309,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '168000333559e64dc2a01783_19233795',
+  'nocache_hash' => '104436052359ed633b13f658_48376495',
   'variables' => 
   array (
     'basePath' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e64dc2a78c61_64086826',
+  'unifunc' => 'content_59ed633b1b6fb0_91372474',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e64dc2a78c61_64086826')) {
-function content_59e64dc2a78c61_64086826 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59ed633b1b6fb0_91372474')) {
+function content_59ed633b1b6fb0_91372474 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '168000333559e64dc2a01783_19233795';
+$_smarty_tpl->properties['nocache_hash'] = '104436052359ed633b13f658_48376495';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -83,7 +83,7 @@ subcategoria', 'dependencia':'id_categoria', 'tituloDependencia':'Categoria',			
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'preco_venda','titulo':'Pre&ccedil;o Venda',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		
-		var form = new Form('campeonatoForm', config);
+		var form = new Form('produtoForm', config);
 
 		$(document).ready(function(){
 	
