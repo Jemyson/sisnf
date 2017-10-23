@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-23 22:20:31
+<?php /* Smarty version 3.1.27, created on 2017-10-23 22:57:00
          compiled from "C:\xampp\htdocs\sisnf\app\views\vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:214362293159ee4f0febbb36_52037861%%*/
+/*%%SmartyHeaderCode:175615296059ee579ca27f16_40184119%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '292e35ebf5b4625948bd265aa5eba056e060cbd7' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\app\\views\\vendaIniciar.tpl',
-      1 => 1508790029,
+      1 => 1508792218,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '214362293159ee4f0febbb36_52037861',
+  'nocache_hash' => '175615296059ee579ca27f16_40184119',
   'variables' => 
   array (
     'id' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59ee4f0ff26f33_05851703',
+  'unifunc' => 'content_59ee579ca8a178_99732800',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59ee4f0ff26f33_05851703')) {
-function content_59ee4f0ff26f33_05851703 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59ee579ca8a178_99732800')) {
+function content_59ee579ca8a178_99732800 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '214362293159ee4f0febbb36_52037861';
+$_smarty_tpl->properties['nocache_hash'] = '175615296059ee579ca27f16_40184119';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -54,6 +54,7 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 		this.opcoes = opcoes;
 		this.produtos = {};
+		this.formaPagamento = {};
 
 		this.nova = function(){
 			window.location = this.opcoes.urlNova;
@@ -224,8 +225,6 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 		this.atualizarQtdProdutos = function(){
 
-			console.log(this.produtos);
-			
 			if(App.count(this.produtos) == 1){
 				$("#qtdProdutos").html(App.count(this.produtos) + ' item');
 			}else{
@@ -435,6 +434,12 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 			$('#btnFinalizarVenda').removeAttr('disabled');
 			$('#divFormaPagamento').hide();
 			$('#divAdicionarProduto').show();
+			
+		}
+
+		this.adicionarFormaPagamento = function(){
+
+			this.formaPagamento[App.count(this.formaPagamento)] = {'tipo':$('#pagamento').val(), 'parcelas':$('#parcelas').val(), 'valor':$('#valorPagamento').val()};
 			
 		}
 		
@@ -657,16 +662,26 @@ venda">
 												<option value="12">12</option>
 											</select>
 										</div>
-										<div class="form-group col-md-1" style="undefined">
+										<div class="form-group col-md-2">
+											<input type="text" class="form-control" id="valorPagamento" name="valorPagamento" />
+										</div>
+										<div class="form-group col-md-1">
 											<label>&nbsp;</label>
 											<br>
-											<button type="button" class="btn btn-success" onclick="venda.salvar()" style="width: 93px">Confirmar</button>
+											<button type="button" class="btn btn-success" onclick="venda.salvar()" disabled="disabled" style="width: 93px">Confirmar</button>
 										</div>
 										<div class="form-group col-md-1" style="undefined">
 											<label>&nbsp;</label>
 											<br>
 											<button type="button" class="btn btn-info" onclick="venda.continuarVenda()" style="width: 130px">Continuar venda</button>
 										</div>
+									</div>
+									<div class="row">
+
+										<h5>Formas de pagamento:</h5>									
+									
+										<hr>
+									
 									</div>
 								</div>
 							

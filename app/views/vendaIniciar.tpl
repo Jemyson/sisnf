@@ -20,7 +20,10 @@
 
 		this.opcoes = opcoes;
 		this.produtos = {};
-
+		this.valorVenda = 0;
+		this.formaPagamento = {};
+		this.valorRestante = 0;
+		
 		this.nova = function(){
 			window.location = this.opcoes.urlNova;
 		}
@@ -190,8 +193,6 @@
 
 		this.atualizarQtdProdutos = function(){
 
-			console.log(this.produtos);
-			
 			if(App.count(this.produtos) == 1){
 				$("#qtdProdutos").html(App.count(this.produtos) + ' item');
 			}else{
@@ -384,6 +385,8 @@
 				retornoPossivel = parseFloat(retornoPossivel) + this.produtos[produto].qtd * parseFloat(this.produtos[produto].preco_venda);
 			}
 
+			_this.valorVenda = retornoPossivel;
+			_this.valorRestante = retornoPossivel;
 			$('#valorProdutos').html('&nbsp;' + Formatter.moeda(retornoPossivel, 2,',','.'));
 			
 		}
@@ -401,6 +404,12 @@
 			$('#btnFinalizarVenda').removeAttr('disabled');
 			$('#divFormaPagamento').hide();
 			$('#divAdicionarProduto').show();
+			
+		}
+
+		this.adicionarFormaPagamento = function(){
+
+			this.formaPagamento[App.count(this.formaPagamento)] = {'tipo':$('#pagamento').val(), 'parcelas':$('#parcelas').val(), 'valor':$('#valorPagamento').val()};
 			
 		}
 		
@@ -579,6 +588,10 @@
 								<!-- FORMA DE PAGAMENTO  -->
 								<div id="divFormaPagamento" style="display: none">
 									<div class="row">
+									
+										<h3 style="#margin-top: 0px"><span id="qtdFormaPagamento">0 formas de pagamento</span> / Valor Restante R$ <span id="valorRestantePagamento">0,00</span></h3>
+										<hr>
+									
 										<div class="form-group col-md-2" style="undefined">
 											<label>Forma de Pagamento*</label>
 											<select class="form-control" id="pagamento" name="pagamento">
@@ -608,7 +621,10 @@
 												<option value="12">12</option>
 											</select>
 										</div>
-										<div class="form-group col-md-1" style="undefined">
+										<div class="form-group col-md-2">
+											<input type="text" class="form-control" id="valorPagamento" name="valorPagamento" />
+										</div>
+										<div class="form-group col-md-1">
 											<label>&nbsp;</label>
 											<br>
 											<button type="button" class="btn btn-success" onclick="venda.salvar()" disabled="disabled" style="width: 93px">Confirmar</button>
@@ -618,11 +634,7 @@
 											<br>
 											<button type="button" class="btn btn-info" onclick="venda.continuarVenda()" style="width: 130px">Continuar venda</button>
 										</div>
-									</div>
-									<div class="row">
-									
-									
-									
+
 									</div>
 								</div>
 							
