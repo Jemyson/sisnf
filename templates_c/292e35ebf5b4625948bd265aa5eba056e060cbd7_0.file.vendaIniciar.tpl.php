@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-23 21:44:21
+<?php /* Smarty version 3.1.27, created on 2017-10-23 22:20:31
          compiled from "C:\xampp\htdocs\sisnf\app\views\vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:86577394359ee4695a3cfe1_68031071%%*/
+/*%%SmartyHeaderCode:214362293159ee4f0febbb36_52037861%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '292e35ebf5b4625948bd265aa5eba056e060cbd7' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\app\\views\\vendaIniciar.tpl',
-      1 => 1508787860,
+      1 => 1508790029,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '86577394359ee4695a3cfe1_68031071',
+  'nocache_hash' => '214362293159ee4f0febbb36_52037861',
   'variables' => 
   array (
     'id' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59ee4695aad220_45331408',
+  'unifunc' => 'content_59ee4f0ff26f33_05851703',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59ee4695aad220_45331408')) {
-function content_59ee4695aad220_45331408 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59ee4f0ff26f33_05851703')) {
+function content_59ee4f0ff26f33_05851703 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '86577394359ee4695a3cfe1_68031071';
+$_smarty_tpl->properties['nocache_hash'] = '214362293159ee4f0febbb36_52037861';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -223,6 +223,9 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 		}
 
 		this.atualizarQtdProdutos = function(){
+
+			console.log(this.produtos);
+			
 			if(App.count(this.produtos) == 1){
 				$("#qtdProdutos").html(App.count(this.produtos) + ' item');
 			}else{
@@ -317,12 +320,12 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 		this.aplicarDesconto = function(){
 
-			console.log($('#permitirDesconto').prop("checked"));
-			
 			if($('#permitirDesconto').prop("checked")){
 				$('#valorProduto').removeAttr('disabled');
+				$('#valorProduto').focus();
 			}else{
-				$('#valorProduto').attr('disabled');
+				$('#valorProduto').attr('disabled', 'disabled');
+				this.calcularValorProduto();
 			}
 		}
 
@@ -330,9 +333,10 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 			_this = this;
 			
-			var id_produto 	= $('#id_produto').val();
-			var qtd					= $('#qtd').val();	
-
+			var id_produto 		= $("input[name='radioProduto']:checked").val();
+			var qtd						= $('#qtdProduto').val();	
+			var valorProduto	= $('#valorProduto').val();
+			
 			if(this.validarCampoObrigatorio()){
 			
 				htmlProduto  = '';
@@ -345,36 +349,40 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 					success: function(data){
 	
 						if(data.error == 0){
-	
-							$('#produto_'+data.id).remove();
+
+							var produto = data.produtos;
 							
-							if(_this.produtos.hasOwnProperty(data.id)){
-								delete _this.produtos[data.id];
+							$('#produto_'+produto.id).remove();
+							
+							if(_this.produtos.hasOwnProperty(produto.id)){
+								delete _this.produtos[produto.id];
 							}
 							
-							htmlProduto += '<tr id="produto_'+data.id+'">';
-							htmlProduto += '<td style="text-align: center;"><a href="javascript:venda.removerProduto('+data.id+')"><i class="glyphicon glyphicon-trash"></i></a></td>';
-							htmlProduto += '<td>'+data.nome+'</td>';
+							htmlProduto += '<tr id="produto_'+produto.id+'">';
+							htmlProduto += '<td style="text-align: center;"><a href="javascript:venda.removerProduto('+produto.id+')"><i class="glyphicon glyphicon-trash"></i></a></td>';
+							htmlProduto += '<td>'+produto.nome+'</td>';
 							htmlProduto += '<td style="text-align: right;">'+qtd+'</td>';
-							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda(data.preco_venda, 2,',','.')+'</td>';
-							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda((data.preco_venda * qtd), 2,',','.')+'</td>';
+							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda(produto.preco_venda, 2,',','.')+'</td>';
+							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda((produto.preco_venda * qtd), 2,',','.')+'</td>';
 							htmlProduto += '<td style="text-align: center;">n/d</td>';
 							htmlProduto += '<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>';
 							htmlProduto += '</tr>';
 	
-							_this.produtos[data.id] = {'id':data.id, 'produto':data.nome, 'preco_venda':data.preco_venda, 'qtd':qtd};
+							_this.produtos[produto.id] = {'id':produto.id, 'produto':produto.nome, 'preco_venda':produto.preco_venda, 'qtd':qtd};
 	
 							_this.atualizarQtdProdutos();
 							_this.calcularRetornoPossivel();
 							$('#tabelaProdutosVenda tbody').append(htmlProduto);
 
-							}else{
-								alert(data.msg);
+							$('#modalPesquisarProduto').modal('hide');
+							
+						}else{
+							alert(data.msg);
 
-							}
-						
+						}
+					
 
-						},
+					},
 
 					error: function(){
 
@@ -737,7 +745,7 @@ venda">
 						  </div>
 		      	</form>
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-		        <button type="button" class="btn btn-primary">Adicionar</button>
+		        <button type="button" class="btn btn-primary" onclick="javascript:venda.adicionarProduto()">Adicionar</button>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->

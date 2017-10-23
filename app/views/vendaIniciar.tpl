@@ -189,6 +189,9 @@
 		}
 
 		this.atualizarQtdProdutos = function(){
+
+			console.log(this.produtos);
+			
 			if(App.count(this.produtos) == 1){
 				$("#qtdProdutos").html(App.count(this.produtos) + ' item');
 			}else{
@@ -283,12 +286,12 @@
 
 		this.aplicarDesconto = function(){
 
-			console.log($('#permitirDesconto').prop("checked"));
-			
 			if($('#permitirDesconto').prop("checked")){
 				$('#valorProduto').removeAttr('disabled');
+				$('#valorProduto').focus();
 			}else{
-				$('#valorProduto').attr('disabled');
+				$('#valorProduto').attr('disabled', 'disabled');
+				this.calcularValorProduto();
 			}
 		}
 
@@ -296,9 +299,10 @@
 
 			_this = this;
 			
-			var id_produto 	= $('#id_produto').val();
-			var qtd					= $('#qtd').val();	
-
+			var id_produto 		= $("input[name='radioProduto']:checked").val();
+			var qtd						= $('#qtdProduto').val();	
+			var valorProduto	= $('#valorProduto').val();
+			
 			if(this.validarCampoObrigatorio()){
 			
 				htmlProduto  = '';
@@ -311,36 +315,40 @@
 					success: function(data){
 	
 						if(data.error == 0){
-	
-							$('#produto_'+data.id).remove();
+
+							var produto = data.produtos;
 							
-							if(_this.produtos.hasOwnProperty(data.id)){
-								delete _this.produtos[data.id];
+							$('#produto_'+produto.id).remove();
+							
+							if(_this.produtos.hasOwnProperty(produto.id)){
+								delete _this.produtos[produto.id];
 							}
 							
-							htmlProduto += '<tr id="produto_'+data.id+'">';
-							htmlProduto += '<td style="text-align: center;"><a href="javascript:venda.removerProduto('+data.id+')"><i class="glyphicon glyphicon-trash"></i></a></td>';
-							htmlProduto += '<td>'+data.nome+'</td>';
+							htmlProduto += '<tr id="produto_'+produto.id+'">';
+							htmlProduto += '<td style="text-align: center;"><a href="javascript:venda.removerProduto('+produto.id+')"><i class="glyphicon glyphicon-trash"></i></a></td>';
+							htmlProduto += '<td>'+produto.nome+'</td>';
 							htmlProduto += '<td style="text-align: right;">'+qtd+'</td>';
-							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda(data.preco_venda, 2,',','.')+'</td>';
-							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda((data.preco_venda * qtd), 2,',','.')+'</td>';
+							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda(produto.preco_venda, 2,',','.')+'</td>';
+							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda((produto.preco_venda * qtd), 2,',','.')+'</td>';
 							htmlProduto += '<td style="text-align: center;">n/d</td>';
 							htmlProduto += '<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>';
 							htmlProduto += '</tr>';
 	
-							_this.produtos[data.id] = {'id':data.id, 'produto':data.nome, 'preco_venda':data.preco_venda, 'qtd':qtd};
+							_this.produtos[produto.id] = {'id':produto.id, 'produto':produto.nome, 'preco_venda':produto.preco_venda, 'qtd':qtd};
 	
 							_this.atualizarQtdProdutos();
 							_this.calcularRetornoPossivel();
 							$('#tabelaProdutosVenda tbody').append(htmlProduto);
 
-							}else{
-								alert(data.msg);
+							$('#modalPesquisarProduto').modal('hide');
+							
+						}else{
+							alert(data.msg);
 
-							}
-						
+						}
+					
 
-						},
+					},
 
 					error: function(){
 
@@ -603,13 +611,18 @@
 										<div class="form-group col-md-1" style="undefined">
 											<label>&nbsp;</label>
 											<br>
-											<button type="button" class="btn btn-success" onclick="venda.salvar()" style="width: 93px">Confirmar</button>
+											<button type="button" class="btn btn-success" onclick="venda.salvar()" disabled="disabled" style="width: 93px">Confirmar</button>
 										</div>
 										<div class="form-group col-md-1" style="undefined">
 											<label>&nbsp;</label>
 											<br>
 											<button type="button" class="btn btn-info" onclick="venda.continuarVenda()" style="width: 130px">Continuar venda</button>
 										</div>
+									</div>
+									<div class="row">
+									
+									
+									
 									</div>
 								</div>
 							
@@ -688,7 +701,7 @@
 						  </div>
 		      	</form>
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-		        <button type="button" class="btn btn-primary">Adicionar</button>
+		        <button type="button" class="btn btn-primary" onclick="javascript:venda.adicionarProduto()">Adicionar</button>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
