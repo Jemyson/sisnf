@@ -219,9 +219,10 @@ class VendaController extends AppController{
 		
 		$venda = array();
 		
+		$formaPagamento = array();
+		
 		$venda['id'] = $_REQUEST['id'];
-		$venda['forma_pagamento'] = $_REQUEST['forma_pagamento'];
-		$venda['parcelas'] = $_REQUEST['parcelas'];
+		$venda['forma_pagamento'] = implode($_REQUEST['forma_pagamento'], ';');
 		$venda['data_venda'] = date('Y-m-d');
 		$venda['valor'] = 0;
 		

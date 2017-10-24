@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-21 20:29:02
+<?php /* Smarty version 3.1.27, created on 2017-10-23 23:47:59
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:64286080859ebd83ec1c8a9_98286209%%*/
+/*%%SmartyHeaderCode:8470272859eea9dfc176f8_14901157%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,25 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6f7ab4b22b3765f67e0e24aa243ceca8b94e1e5d' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl',
-      1 => 1508628539,
+      1 => 1508813278,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '64286080859ebd83ec1c8a9_98286209',
+  'nocache_hash' => '8470272859eea9dfc176f8_14901157',
   'variables' => 
   array (
     'basePath' => 0,
+    'nomeUsuario' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59ebd83ec666b3_74922061',
+  'unifunc' => 'content_59eea9dfc4e9f3_93295037',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59ebd83ec666b3_74922061')) {
-function content_59ebd83ec666b3_74922061 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59eea9dfc4e9f3_93295037')) {
+function content_59eea9dfc4e9f3_93295037 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '64286080859ebd83ec1c8a9_98286209';
+$_smarty_tpl->properties['nocache_hash'] = '8470272859eea9dfc176f8_14901157';
 ?>
 
 <style>
@@ -103,8 +104,13 @@ $_smarty_tpl->properties['nocache_hash'] = '64286080859ebd83ec1c8a9_98286209';
 			</button>
 		
 			<div class="navbar-brand">
+			
 	    	<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-index"><label>Invoice</label> System</a>
+index">
+					<img alt="logo" src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+img/logo_min.png" class="img-responsive" style="margin-top: -7px; margin-right: 10px; width: 140px; height: 40px">
+	    		<!-- <label>Invoice</label> System -->
+    		</a>
 	  	</div>
 
 		</div>
@@ -158,10 +164,12 @@ subcategoria"><i class="glyphicon glyphicon-th-list"></i> Sub-Categoria</a>
 		  	</li>
 	 			
 	  		<li class="preview__action--close pull-right">
-	    		<a href="login.php?logout"><i class="glyphicon glyphicon-off"></i> Sair</a>  
+	    		<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+login/logout"><i class="glyphicon glyphicon-off"></i> Sair</a>  
 	  		</li>
 				<li class="preview__action--close pull-right" style="border-left: 0;">
-					<a href="usuarios.php"><i class="glyphicon glyphicon-user"></i> Usuario: Jemyson Vagner Rosa da Silva</a>
+					<a href="usuarios.php"><i class="glyphicon glyphicon-user"></i> Usuario: <?php echo $_smarty_tpl->tpl_vars['nomeUsuario']->value;?>
+</a>
 		  	</li>
 			
 			</ul>

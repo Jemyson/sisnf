@@ -68,6 +68,19 @@ Formatter = function(){
 		
 	}
 	
+	this.converteMoedaFloat = function(valor){
+	      
+		if(valor === ""){
+	  		valor =  0;
+  		}else{
+	  		valor = valor.replace(".","");
+     		valor = valor.replace(",",".");
+     		valor = parseFloat(valor);
+  		}
+  		return valor;
+
+	}
+	
 	this.formatReal = function(record, coluna){
 		
 		var data = '';

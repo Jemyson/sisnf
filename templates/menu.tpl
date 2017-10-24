@@ -73,7 +73,11 @@
 			</button>
 		
 			<div class="navbar-brand">
-	    	<a href="{$basePath}index"><label>Invoice</label> System</a>
+			
+	    	<a href="{$basePath}index">
+					<img alt="logo" src="{$basePath}img/logo_min.png" class="img-responsive" style="margin-top: -7px; margin-right: 10px; width: 140px; height: 40px">
+	    		<!-- <label>Invoice</label> System -->
+    		</a>
 	  	</div>
 
 		</div>
@@ -121,10 +125,10 @@
 		  	</li>
 	 			
 	  		<li class="preview__action--close pull-right">
-	    		<a href="login.php?logout"><i class="glyphicon glyphicon-off"></i> Sair</a>  
+	    		<a href="{$basePath}login/logout"><i class="glyphicon glyphicon-off"></i> Sair</a>  
 	  		</li>
 				<li class="preview__action--close pull-right" style="border-left: 0;">
-					<a href="usuarios.php"><i class="glyphicon glyphicon-user"></i> Usuario: Jemyson Vagner Rosa da Silva</a>
+					<a href="usuarios.php"><i class="glyphicon glyphicon-user"></i> Usuario: {$nomeUsuario}</a>
 		  	</li>
 			
 			</ul>

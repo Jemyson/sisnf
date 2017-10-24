@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-23 21:02:41
+<?php /* Smarty version 3.1.27, created on 2017-10-24 00:10:00
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:55792628059ee8321b71ec0_57103254%%*/
+/*%%SmartyHeaderCode:147272232759eeaf0852c9a1_07304512%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7b561ed5ab4332ed28f68cb3ae3c5fca9da41b45' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl',
-      1 => 1508803360,
+      1 => 1508814598,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '55792628059ee8321b71ec0_57103254',
+  'nocache_hash' => '147272232759eeaf0852c9a1_07304512',
   'variables' => 
   array (
     'id' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59ee8321bd73b9_16133914',
+  'unifunc' => 'content_59eeaf085a7217_96242956',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59ee8321bd73b9_16133914')) {
-function content_59ee8321bd73b9_16133914 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59eeaf085a7217_96242956')) {
+function content_59eeaf085a7217_96242956 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '55792628059ee8321b71ec0_57103254';
+$_smarty_tpl->properties['nocache_hash'] = '147272232759eeaf0852c9a1_07304512';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -188,10 +188,10 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 			
 		}
 		
-		this.validarCampoObrigatorio = function(){
+		this.validarCampoObrigatorio = function(form){
 			var erro = 0;
 			
-			$('input[obrigatorio=obrigatorio]').each(function(){
+			$('#' + form + ' input[obrigatorio=obrigatorio]').each(function(){
 				
 				if(!App.isset($(this).val()) || $(this).val() == ''){
 					erro = 1;
@@ -203,8 +203,10 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 				}
 				
 			});
+
+			console.log('#' + form + ' select[obrigatorio=obrigatorio]');
 			
-			$('select[obrigatorio=obrigatorio]').each(function(){
+			$('#' + form + ' select[obrigatorio=obrigatorio]').each(function(){
 				
 				if(!App.isset($(this).val()) || $(this).val() == '-1' || ($(this).val() == '0' && App.isset($(this).attr('entidade')) )){
 					erro = 1;
@@ -233,9 +235,9 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 				$("#qtdProdutos").html(App.count(this.produtos) + ' itens');
 			}
 			if(App.count(this.produtos) > 0){
-				$('#btnFinalizarVenda').removeAttr('disabled');
+				$('#btnPagamento').removeAttr('disabled');
 			}else{
-				$('#btnFinalizarVenda').attr('disabled', 'disabled');
+				$('#btnPagamento').attr('disabled', 'disabled');
 			}
 		}
 
@@ -243,6 +245,10 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 			var _this = this;
 
+			$('#qtdProduto').val('');
+			$('#qtdProduto').attr('disabled', 'disabled');
+			$('#valorProduto').val('');
+			
 			$('#modalPesquisarProduto').modal();
 
 			var filtros = {};
@@ -338,7 +344,7 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 			var qtd						= $('#qtdProduto').val();	
 			var valorProduto	= $('#valorProduto').val();
 			
-			if(this.validarCampoObrigatorio()){
+			if(this.validarCampoObrigatorio('formPesquisarProduto')){
 			
 				htmlProduto  = '';
 				$.ajax({
@@ -376,6 +382,8 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 							$('#tabelaProdutosVenda tbody').append(htmlProduto);
 
 							$('#modalPesquisarProduto').modal('hide');
+
+							$('#produto').focus();
 							
 						}else{
 							alert(data.msg);
@@ -429,7 +437,7 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 		this.finalizarVenda = function(){
 
-			$('#btnFinalizarVenda').attr('disabled', 'disabled');
+			$('#btnPagamento').attr('disabled', 'disabled');
 			$('#divFormaPagamento').show();
 			$('#divAdicionarProduto').hide();
 			
@@ -437,7 +445,7 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 		this.continuarVenda = function(){
 
-			$('#btnFinalizarVenda').removeAttr('disabled');
+			$('#btnPagamento').removeAttr('disabled');
 			$('#divFormaPagamento').hide();
 			$('#divAdicionarProduto').show();
 			
@@ -446,19 +454,32 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 		this.adicionarFormaPagamento = function(){
 
 			var _this = this;
+
+			if(this.validarCampoObrigatorio('formPagamento')){
 			
-			_this.formaPagamento[App.count(_this.formaPagamento)] = {'tipo':$('#pagamento').val(), 'parcelas':$('#parcelas').val(), 'valor':$('#valorPagamento').val()};
+				_this.formaPagamento[App.count(_this.formaPagamento)] = {'tipo':$('#pagamento').val(), 'parcelas':$('#parcelas').val(), 'valor': Formatter.converteMoedaFloat($('#valorPagamento').val())};
 
-			_this.atualizarQtdPagamento();
-			_this.calcularValorRestante();
+				_this.atualizarQtdPagamento();
+				_this.calcularValorRestante();
 
-			$('#divFormasPagamento').append('<p>' + App.count(_this.formaPagamento) + ' - ' + $('#pagamento').val() + ':' + $('#parcelas').val() + ' [' + $('#valorPagamento').val() + ']</p>');
+				$('#divFormasPagamento').append('<p>Tipo: ' + $('#pagamento').val() + ' Parcelas: ' + $('#parcelas').val() + ' Valor:' + $('#valorPagamento').val() + '</p>');
+
+				$('#pagamento').val('-1');
+				$('#parcelas').val('-1');
+				$('#valorPagamento').val(Formatter.moeda(_this.valorRestante, 2,',','.'));
+				
+			}
 			
 		}
 
 		this.atualizarQtdPagamento = function(){
 
-			$('#qtdFormaPagamento').html(App.count(this.formaPagamento));
+			if(App.count(this.formaPagamento) == 1){
+				$("#qtdFormaPagamento").html(App.count(this.formaPagamento) + ' forma de pagamento');
+			}else{
+				$("#qtdFormaPagamento").html(App.count(this.formaPagamento) + ' formas de pagamento');
+			}
+			
 			
 		}
 
@@ -476,6 +497,13 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 			_this.valorRestante = valorRestante;
 			$('#valorRestantePagamento').html('&nbsp;' + Formatter.moeda(_this.valorRestante, 2,',','.'));
+
+			if(_this.valorRestante == 0){
+				$('#btnFinalizarVenda').removeAttr('disabled');
+			}else{
+				$('#btnFinalizarVenda').attr('disabled', 'disabled');
+			}
+
 		}
 		
 		this.salvar = function(){
@@ -483,13 +511,18 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 			var _this = this;
 
 			var venda = {};
+			var formaPagamento = {};
 
 			for(var produto in this.produtos){
 				venda[produto] = _this.produtos[produto];
 			}
 
+			for(var pagamento in this.formaPagamento){
+				formaPagamento[pagamento] = this.formaPagamento[pagamento].tipo + ' / ' + this.formaPagamento[pagamento].parcelas + ' - ' + Formatter.moeda(this.formaPagamento[pagamento].valor, 2,',','.');
+			}
+			
 			venda['id'] = _this.opcoes.id;
-			venda['forma_pagamento'] = $('#pagamento').val();
+			venda['forma_pagamento'] = formaPagamento;
 			venda['parcelas'] = $('#parcelas').val();
 			
 			$.ajax({
@@ -551,6 +584,20 @@ venda/finalizar-venda';
 		//venda.carregarProdutos();
 		venda.carregarProdutosVenda();
 
+		$('#formPagamento').submit(function(e){
+			e.preventDefault();
+			venda.adicionarFormaPagamento();
+		});
+
+		$('#formAdicionarProduto').submit(function(e){
+			e.preventDefault();
+			venda.carregarProdutos();
+		});
+		
+		$('#formPesquisarProduto').submit(function(e){
+			e.preventDefault();
+		});
+		
 	});	
 			
 	<?php echo '</script'; ?>
@@ -621,9 +668,9 @@ venda">
 						    </div>		
 							  <div class="form-group" style="margin-top: 15px">
 							    <div class="col-sm-offset-2 col-sm-10">
-							      <button type="button" style="width: 120px" class="btn btn-success"  onclick="javascript:venda.finalizarVenda()" id="btnFinalizarVenda">Pagamento</button>
+							      <button type="button" style="width: 120px" class="btn btn-success"  onclick="javascript:venda.finalizarVenda()" id="btnPagamento">Pagamento</button>
 							      <button type="button" style="width: 120px" class="btn btn-primary" disabled="disabled"  onclick="javascript:venda.salvar()" id="btnFinalizarVenda">Finalizar Venda</button>
-							      <button type="button" style="width: 120px" class="btn btn-danger" disabled="disabled">Excluir Venda</button>
+							      <button type="button" style="width: 120px; display: none" class="btn btn-danger" disabled="disabled">Excluir Venda</button>
 							      <button type="button" style="width: 120px" class="btn btn-warning" onclick="venda.nova()" >Nova Venda</button>
 							    </div>
 							  </div>					
@@ -633,7 +680,7 @@ venda">
 							<h3 style="#margin-top: 0px"><span id="qtdProdutos">0 itens</span> / Total R$ <span id="valorProdutos">0,00</span></h3>
 							<hr>
 						
-							<form action="teste" method="post" id="formAdicionarProduto" name="formAdicionarProduto">
+							<form action="#" method="post" id="formAdicionarProduto" name="formAdicionarProduto">
 								<!-- ADICIONAR PRODUTO -->
 								<div id="divAdicionarProduto">
 									<div class="row">
@@ -654,22 +701,21 @@ venda">
 										<div class="form-group col-md-2" style="padding-left: 5px">
 											<label>&nbsp;</label>
 											<br>
-											<button type="button" class="btn btn-primary" onclick="venda.adicionarProduto()" style="display: none">Adicionar</button>
 											<button type="button" class="btn btn-primary" onclick="venda.carregarProdutos()">Pesquisar</button>
 										</div>
 									</div>
 								</div>
 							</form>
 							
-							<form>
+							<form id="formPagamento" action="#">
 								<!-- FORMA DE PAGAMENTO  -->
 								<div id="divFormaPagamento" style="display: none">
 									<div class="row">
 									
 										<div class="form-group col-md-2" style="">
 											<label>Forma de Pagamento*</label>
-											<select class="form-control" id="pagamento" name="pagamento">
-												<option value="0">Selecione</option>
+											<select class="form-control" id="pagamento" name="pagamento" obrigatorio="obrigatorio">
+												<option value="-1">Selecione</option>
 												<option value="boleto">Boleto</option>
 												<option value="cheque">Cheque</option>
 												<option value="credito">Cr&eacute;dito</option>
@@ -679,8 +725,8 @@ venda">
 										</div>
 										<div class="form-group col-md-1" style="padding-left: 5px">
 											<label>Parcelas*</label>
-											<select class="form-control" id="parcelas" name="parcelas">
-												<option value="0">Selecione</option>
+											<select class="form-control" id="parcelas" name="parcelas" obrigatorio="obrigatorio">
+												<option value="-1">Selecione</option>
 												<option value="1">1</option>
 												<option value="2">2</option>
 												<option value="3">3</option>
@@ -697,7 +743,7 @@ venda">
 										</div>
 										<div class="form-group col-md-2" style="padding-left: 5px">
 											<label>Valor</label>
-											<input type="text" class="form-control" id="valorPagamento" name="valorPagamento" style="text-align: right" />
+											<input type="text" class="form-control" id="valorPagamento" name="valorPagamento" obrigatorio="obrigatorio" style="text-align: right" />
 										</div>
 										<div class="form-group col-md-1" style="padding-left: 5px">
 											<label>&nbsp;</label>
@@ -711,15 +757,17 @@ venda">
 										<div class="form-group col-md-1" style="undefined">
 											<label>&nbsp;</label>
 											<br>
-											<button type="button" class="btn btn-info" onclick="venda.continuarVenda()" style="width: 130px">Continuar venda</button>
+											<button type="button" class="btn btn-default" onclick="venda.continuarVenda()" style="width: 150px">
+												<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Continuar venda
+											</button>
 										</div>
 
 									</div>
 								</div>
 							</form>
 
-							<h3 style="#margin-top: 0px"><span id="qtdFormaPagamento">0 formas de pagamento</span> / Valor Restante R$ <span id="valorRestantePagamento">0,00</span></h3>
 							<hr>
+							<h3 style="#margin-top: 0px"><span id="qtdFormaPagamento">0 formas de pagamento</span> / Valor Restante R$ <span id="valorRestantePagamento">0,00</span></h3>
 						
 								<div id="divFormasPagamento">
 								
@@ -781,14 +829,14 @@ venda">
 						</table>
 		      </div>
 		      <div class="modal-footer">
-		      	<form class="form-horizontal col-sm-8" style="padding-left: 0px">
+		      	<form id="formPesquisarProduto" action="#" class="form-horizontal col-sm-8" style="padding-left: 0px">
 							<div class="form-group">
 						    <label for="inputEmail3" class="col-sm-2 control-label">Qtd*</label>
 						    <div class="col-sm-2" style="padding-left: 5px; padding-right: 5px">
-									<input class="form-control" type="text" id="qtdProduto" name="qtdProduto" onkeyup="javascript:venda.calcularValorProduto()" disabled="disabled" />
+									<input class="form-control" type="text" id="qtdProduto" name="qtdProduto" obrigatorio="obrigatorio" onkeyup="javascript:venda.calcularValorProduto()" disabled="disabled" />
 						    </div>
 						    <div class="col-sm-4" style="padding-left: 0px; padding-right: 10px">
-									<input class="form-control" type="text" id="valorProduto" name="valorProduto" disabled="disabled" style="text-align: right" />
+									<input class="form-control" type="text" id="valorProduto" name="valorProduto" obrigatorio="obrigatorio" disabled="disabled" style="text-align: right" />
 						    </div>
 						    <div class="col-sm-2 checkbox" style="padding-left: 0px">
 							    <label>
@@ -804,12 +852,6 @@ venda">
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
 		
-
-
-
-
-
-
 <?php echo $_smarty_tpl->getSubTemplate ("../../templates/base.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 
 }
