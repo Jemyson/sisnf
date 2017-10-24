@@ -388,6 +388,8 @@
 			_this.valorVenda = retornoPossivel;
 			_this.valorRestante = retornoPossivel;
 			$('#valorProdutos').html('&nbsp;' + Formatter.moeda(retornoPossivel, 2,',','.'));
+			$('#valorRestantePagamento').html('&nbsp;' + Formatter.moeda(_this.valorRestante, 2,',','.'));
+			$('#valorPagamento').val(Formatter.moeda(_this.valorRestante, 2,',','.'));
 			
 		}
 
@@ -409,8 +411,37 @@
 
 		this.adicionarFormaPagamento = function(){
 
-			this.formaPagamento[App.count(this.formaPagamento)] = {'tipo':$('#pagamento').val(), 'parcelas':$('#parcelas').val(), 'valor':$('#valorPagamento').val()};
+			var _this = this;
 			
+			_this.formaPagamento[App.count(_this.formaPagamento)] = {'tipo':$('#pagamento').val(), 'parcelas':$('#parcelas').val(), 'valor':$('#valorPagamento').val()};
+
+			_this.atualizarQtdPagamento();
+			_this.calcularValorRestante();
+
+			$('#divFormasPagamento').append('<p>Tipo: ' + $('#pagamento').val() + ' Parcelas: ' + $('#parcelas').val() + ' Valor:' + $('#valorPagamento').val() + '</p>');
+			
+		}
+
+		this.atualizarQtdPagamento = function(){
+
+			$('#qtdFormaPagamento').html(App.count(this.formaPagamento));
+			
+		}
+
+		this.calcularValorRestante = function(){
+
+			var _this = this;
+			
+			var valorRestante = _this.valorVenda;
+
+			console.log(_this.formaPagamento);
+			
+			for(var pagamento in _this.formaPagamento){
+				valorRestante = parseFloat(valorRestante) - _this.formaPagamento[pagamento].valor;
+			}
+
+			_this.valorRestante = valorRestante;
+			$('#valorRestantePagamento').html('&nbsp;' + Formatter.moeda(_this.valorRestante, 2,',','.'));
 		}
 		
 		this.salvar = function(){
@@ -541,8 +572,8 @@
 						    </div>		
 							  <div class="form-group" style="margin-top: 15px">
 							    <div class="col-sm-offset-2 col-sm-10">
-							      <button type="button" style="width: 120px" class="btn btn-primary" disabled="disabled" >Iniciar Venda</button>
-							      <button type="button" style="width: 120px" class="btn btn-success" disabled="disabled" onclick="javascript:venda.finalizarVenda()" id="btnFinalizarVenda">Finalizar Venda</button>
+							      <button type="button" style="width: 120px" class="btn btn-success"  onclick="javascript:venda.finalizarVenda()" id="btnFinalizarVenda">Pagamento</button>
+							      <button type="button" style="width: 120px" class="btn btn-primary" disabled="disabled"  onclick="javascript:venda.salvar()" id="btnFinalizarVenda">Finalizar Venda</button>
 							      <button type="button" style="width: 120px" class="btn btn-danger" disabled="disabled">Excluir Venda</button>
 							      <button type="button" style="width: 120px" class="btn btn-warning" onclick="venda.nova()" >Nova Venda</button>
 							    </div>
@@ -562,20 +593,16 @@
 											<select class="form-control" id="id_categoria" name="id_categoria">
 											</select>
 										</div>
-										<div class="form-group col-md-2">
+										<div class="form-group col-md-2" style="padding-left: 5px">
 											<label>Sub-Categoria</label>
 											<select class="form-control" id="id_subcategoria" name="id_subcategoria">
 											</select>
 										</div>
-										<div class="form-group col-md-3">
+										<div class="form-group col-md-3" style="padding-left: 5px">
 											<label>Produto</label>
 											<input type="text" class="form-control" id="produto" name="produto" />
 										</div>
-										<div class="form-group col-md-1" style="display: none">
-											<label>Qtd</label>
-											<input class="form-control" type="text" id="qtd" name="qtd" />
-										</div>
-										<div class="form-group col-md-2" style="undefined">
+										<div class="form-group col-md-2" style="padding-left: 5px">
 											<label>&nbsp;</label>
 											<br>
 											<button type="button" class="btn btn-primary" onclick="venda.adicionarProduto()" style="display: none">Adicionar</button>
@@ -584,15 +611,13 @@
 									</div>
 								</div>
 							</form>
+							
 							<form>
 								<!-- FORMA DE PAGAMENTO  -->
 								<div id="divFormaPagamento" style="display: none">
 									<div class="row">
 									
-										<h3 style="#margin-top: 0px"><span id="qtdFormaPagamento">0 formas de pagamento</span> / Valor Restante R$ <span id="valorRestantePagamento">0,00</span></h3>
-										<hr>
-									
-										<div class="form-group col-md-2" style="undefined">
+										<div class="form-group col-md-2" style="">
 											<label>Forma de Pagamento*</label>
 											<select class="form-control" id="pagamento" name="pagamento">
 												<option value="0">Selecione</option>
@@ -603,7 +628,7 @@
 												<option value="dinheiro">Dinheiro</option>
 											</select>
 										</div>
-										<div class="form-group col-md-1" style="undefined">
+										<div class="form-group col-md-1" style="padding-left: 5px">
 											<label>Parcelas*</label>
 											<select class="form-control" id="parcelas" name="parcelas">
 												<option value="0">Selecione</option>
@@ -621,13 +646,18 @@
 												<option value="12">12</option>
 											</select>
 										</div>
-										<div class="form-group col-md-2">
-											<input type="text" class="form-control" id="valorPagamento" name="valorPagamento" />
+										<div class="form-group col-md-2" style="padding-left: 5px">
+											<label>Valor</label>
+											<input type="text" class="form-control" id="valorPagamento" name="valorPagamento" style="text-align: right" />
 										</div>
-										<div class="form-group col-md-1">
+										<div class="form-group col-md-1" style="padding-left: 5px">
 											<label>&nbsp;</label>
 											<br>
-											<button type="button" class="btn btn-success" onclick="venda.salvar()" disabled="disabled" style="width: 93px">Confirmar</button>
+											<button type="button" class="btn btn-success" onclick="venda.adicionarFormaPagamento()" style="">
+												&nbsp;
+												<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+												&nbsp;	
+											</button>
 										</div>
 										<div class="form-group col-md-1" style="undefined">
 											<label>&nbsp;</label>
@@ -637,7 +667,14 @@
 
 									</div>
 								</div>
-							
+							</form>
+
+							<h3 style="#margin-top: 0px"><span id="qtdFormaPagamento">0 formas de pagamento</span> / Valor Restante R$ <span id="valorRestantePagamento">0,00</span></h3>
+							<hr>
+						
+								<div id="divFormasPagamento">
+								
+								</div>
 						
 								<br>
 								<br>
@@ -660,7 +697,6 @@
 								
 								</table>
 
-							</form>
 						
 						</div>
 						

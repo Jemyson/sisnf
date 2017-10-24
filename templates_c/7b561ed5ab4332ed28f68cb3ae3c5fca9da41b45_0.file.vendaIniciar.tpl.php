@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-21 23:43:33
+<?php /* Smarty version 3.1.27, created on 2017-10-23 21:02:41
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:156066529759ec05d5c4fe82_43513873%%*/
+/*%%SmartyHeaderCode:55792628059ee8321b71ec0_57103254%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7b561ed5ab4332ed28f68cb3ae3c5fca9da41b45' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl',
-      1 => 1508640212,
+      1 => 1508803360,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '156066529759ec05d5c4fe82_43513873',
+  'nocache_hash' => '55792628059ee8321b71ec0_57103254',
   'variables' => 
   array (
     'id' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59ec05d5caac76_92352746',
+  'unifunc' => 'content_59ee8321bd73b9_16133914',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59ec05d5caac76_92352746')) {
-function content_59ec05d5caac76_92352746 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59ee8321bd73b9_16133914')) {
+function content_59ee8321bd73b9_16133914 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '156066529759ec05d5c4fe82_43513873';
+$_smarty_tpl->properties['nocache_hash'] = '55792628059ee8321b71ec0_57103254';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -54,7 +54,10 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 		this.opcoes = opcoes;
 		this.produtos = {};
-
+		this.valorVenda = 0;
+		this.formaPagamento = {};
+		this.valorRestante = 0;
+		
 		this.nova = function(){
 			window.location = this.opcoes.urlNova;
 		}
@@ -223,6 +226,7 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 		}
 
 		this.atualizarQtdProdutos = function(){
+
 			if(App.count(this.produtos) == 1){
 				$("#qtdProdutos").html(App.count(this.produtos) + ' item');
 			}else{
@@ -256,17 +260,15 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 					if(data.error == 0){
 
-						console.log(data.produtos);
-						
 						var tabelaProdutos = '';
 						for(var chave in data.produtos){
 
 							tabelaProdutos += '<tr>';
-							tabelaProdutos += '<td style="text-align: center;"><input type="radio" id="produto[]" name="produto[]" value="'+data.produtos[chave].id+'" /></td>';
+							tabelaProdutos += '<td style="text-align: center;"><input type="radio" id="radioProduto" name="radioProduto" value="'+data.produtos[chave].id+'" onclick="javascript:venda.selecionarProduto()" /></td>';
 							tabelaProdutos += '<td>'+data.produtos[chave].nome+'</td>';
 							tabelaProdutos += '<td style="text-align: right;">1</td>';
 							tabelaProdutos += '<td style="text-align: right;">'+Formatter.moeda(data.produtos[chave].preco_venda, 2,',','.')+'</td>';
-							tabelaProdutos += '<td style="text-align: right;">'+Formatter.moeda((data.produtos[chave].preco_venda * 1), 2,',','.')+'</td>';
+							//tabelaProdutos += '<td style="text-align: right;">'+Formatter.moeda((data.produtos[chave].preco_venda * 1), 2,',','.')+'</td>';
 							tabelaProdutos += '</tr>';
 							
 						}
@@ -281,13 +283,61 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 						
 		}
 
+		this.selecionarProduto = function(){
+
+			$('#qtdProduto').removeAttr('disabled');
+			$('#qtdProduto').val('1');
+			$('#qtdProduto').focus();
+			this.calcularValorProduto();
+			
+		}
+
+		this.calcularValorProduto = function(){
+
+			var _this = this;
+			
+			var idProdutoSelecionado = $("input[name='radioProduto']:checked").val();
+			var qtdProduto = $("#qtdProduto").val();
+			
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlProduto,
+				dataType:'json',
+				data:'id='+idProdutoSelecionado,
+				success: function(data){
+
+					var produto = data.produtos;
+
+					$('#valorProduto').val(Formatter.moeda((qtdProduto * produto.preco_venda), 2,',','.'));
+					
+					console.log(data);
+				
+				}
+
+			});
+			
+		}
+
+		this.aplicarDesconto = function(){
+
+			if($('#permitirDesconto').prop("checked")){
+				$('#valorProduto').removeAttr('disabled');
+				$('#valorProduto').focus();
+			}else{
+				$('#valorProduto').attr('disabled', 'disabled');
+				this.calcularValorProduto();
+			}
+		}
+
 		this.adicionarProduto = function(){
 
 			_this = this;
 			
-			var id_produto 	= $('#id_produto').val();
-			var qtd					= $('#qtd').val();	
-
+			var id_produto 		= $("input[name='radioProduto']:checked").val();
+			var qtd						= $('#qtdProduto').val();	
+			var valorProduto	= $('#valorProduto').val();
+			
 			if(this.validarCampoObrigatorio()){
 			
 				htmlProduto  = '';
@@ -300,36 +350,40 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 					success: function(data){
 	
 						if(data.error == 0){
-	
-							$('#produto_'+data.id).remove();
+
+							var produto = data.produtos;
 							
-							if(_this.produtos.hasOwnProperty(data.id)){
-								delete _this.produtos[data.id];
+							$('#produto_'+produto.id).remove();
+							
+							if(_this.produtos.hasOwnProperty(produto.id)){
+								delete _this.produtos[produto.id];
 							}
 							
-							htmlProduto += '<tr id="produto_'+data.id+'">';
-							htmlProduto += '<td style="text-align: center;"><a href="javascript:venda.removerProduto('+data.id+')"><i class="glyphicon glyphicon-trash"></i></a></td>';
-							htmlProduto += '<td>'+data.nome+'</td>';
+							htmlProduto += '<tr id="produto_'+produto.id+'">';
+							htmlProduto += '<td style="text-align: center;"><a href="javascript:venda.removerProduto('+produto.id+')"><i class="glyphicon glyphicon-trash"></i></a></td>';
+							htmlProduto += '<td>'+produto.nome+'</td>';
 							htmlProduto += '<td style="text-align: right;">'+qtd+'</td>';
-							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda(data.preco_venda, 2,',','.')+'</td>';
-							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda((data.preco_venda * qtd), 2,',','.')+'</td>';
+							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda(produto.preco_venda, 2,',','.')+'</td>';
+							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda((produto.preco_venda * qtd), 2,',','.')+'</td>';
 							htmlProduto += '<td style="text-align: center;">n/d</td>';
 							htmlProduto += '<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>';
 							htmlProduto += '</tr>';
 	
-							_this.produtos[data.id] = {'id':data.id, 'produto':data.nome, 'preco_venda':data.preco_venda, 'qtd':qtd};
+							_this.produtos[produto.id] = {'id':produto.id, 'produto':produto.nome, 'preco_venda':produto.preco_venda, 'qtd':qtd};
 	
 							_this.atualizarQtdProdutos();
 							_this.calcularRetornoPossivel();
 							$('#tabelaProdutosVenda tbody').append(htmlProduto);
 
-							}else{
-								alert(data.msg);
+							$('#modalPesquisarProduto').modal('hide');
+							
+						}else{
+							alert(data.msg);
 
-							}
-						
+						}
+					
 
-						},
+					},
 
 					error: function(){
 
@@ -363,10 +417,13 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 			for(var produto in this.produtos){
 				retornoPossivel = parseFloat(retornoPossivel) + this.produtos[produto].qtd * parseFloat(this.produtos[produto].preco_venda);
-				console.log(retornoPossivel);
 			}
 
+			_this.valorVenda = retornoPossivel;
+			_this.valorRestante = retornoPossivel;
 			$('#valorProdutos').html('&nbsp;' + Formatter.moeda(retornoPossivel, 2,',','.'));
+			$('#valorRestantePagamento').html('&nbsp;' + Formatter.moeda(_this.valorRestante, 2,',','.'));
+			$('#valorPagamento').val(Formatter.moeda(_this.valorRestante, 2,',','.'));
 			
 		}
 
@@ -384,6 +441,41 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 			$('#divFormaPagamento').hide();
 			$('#divAdicionarProduto').show();
 			
+		}
+
+		this.adicionarFormaPagamento = function(){
+
+			var _this = this;
+			
+			_this.formaPagamento[App.count(_this.formaPagamento)] = {'tipo':$('#pagamento').val(), 'parcelas':$('#parcelas').val(), 'valor':$('#valorPagamento').val()};
+
+			_this.atualizarQtdPagamento();
+			_this.calcularValorRestante();
+
+			$('#divFormasPagamento').append('<p>' + App.count(_this.formaPagamento) + ' - ' + $('#pagamento').val() + ':' + $('#parcelas').val() + ' [' + $('#valorPagamento').val() + ']</p>');
+			
+		}
+
+		this.atualizarQtdPagamento = function(){
+
+			$('#qtdFormaPagamento').html(App.count(this.formaPagamento));
+			
+		}
+
+		this.calcularValorRestante = function(){
+
+			var _this = this;
+			
+			var valorRestante = _this.valorVenda;
+
+			console.log(_this.formaPagamento);
+			
+			for(var pagamento in _this.formaPagamento){
+				valorRestante = parseFloat(valorRestante) - _this.formaPagamento[pagamento].valor;
+			}
+
+			_this.valorRestante = valorRestante;
+			$('#valorRestantePagamento').html('&nbsp;' + Formatter.moeda(_this.valorRestante, 2,',','.'));
 		}
 		
 		this.salvar = function(){
@@ -529,8 +621,8 @@ venda">
 						    </div>		
 							  <div class="form-group" style="margin-top: 15px">
 							    <div class="col-sm-offset-2 col-sm-10">
-							      <button type="button" style="width: 120px" class="btn btn-primary" disabled="disabled" >Iniciar Venda</button>
-							      <button type="button" style="width: 120px" class="btn btn-success" disabled="disabled" onclick="javascript:venda.finalizarVenda()" id="btnFinalizarVenda">Finalizar Venda</button>
+							      <button type="button" style="width: 120px" class="btn btn-success"  onclick="javascript:venda.finalizarVenda()" id="btnFinalizarVenda">Pagamento</button>
+							      <button type="button" style="width: 120px" class="btn btn-primary" disabled="disabled"  onclick="javascript:venda.salvar()" id="btnFinalizarVenda">Finalizar Venda</button>
 							      <button type="button" style="width: 120px" class="btn btn-danger" disabled="disabled">Excluir Venda</button>
 							      <button type="button" style="width: 120px" class="btn btn-warning" onclick="venda.nova()" >Nova Venda</button>
 							    </div>
@@ -550,20 +642,16 @@ venda">
 											<select class="form-control" id="id_categoria" name="id_categoria">
 											</select>
 										</div>
-										<div class="form-group col-md-2">
+										<div class="form-group col-md-2" style="padding-left: 5px">
 											<label>Sub-Categoria</label>
 											<select class="form-control" id="id_subcategoria" name="id_subcategoria">
 											</select>
 										</div>
-										<div class="form-group col-md-3">
+										<div class="form-group col-md-3" style="padding-left: 5px">
 											<label>Produto</label>
 											<input type="text" class="form-control" id="produto" name="produto" />
 										</div>
-										<div class="form-group col-md-1" style="display: none">
-											<label>Qtd</label>
-											<input class="form-control" type="text" id="qtd" name="qtd" />
-										</div>
-										<div class="form-group col-md-2" style="undefined">
+										<div class="form-group col-md-2" style="padding-left: 5px">
 											<label>&nbsp;</label>
 											<br>
 											<button type="button" class="btn btn-primary" onclick="venda.adicionarProduto()" style="display: none">Adicionar</button>
@@ -572,11 +660,13 @@ venda">
 									</div>
 								</div>
 							</form>
+							
 							<form>
 								<!-- FORMA DE PAGAMENTO  -->
 								<div id="divFormaPagamento" style="display: none">
 									<div class="row">
-										<div class="form-group col-md-2" style="undefined">
+									
+										<div class="form-group col-md-2" style="">
 											<label>Forma de Pagamento*</label>
 											<select class="form-control" id="pagamento" name="pagamento">
 												<option value="0">Selecione</option>
@@ -587,7 +677,7 @@ venda">
 												<option value="dinheiro">Dinheiro</option>
 											</select>
 										</div>
-										<div class="form-group col-md-1" style="undefined">
+										<div class="form-group col-md-1" style="padding-left: 5px">
 											<label>Parcelas*</label>
 											<select class="form-control" id="parcelas" name="parcelas">
 												<option value="0">Selecione</option>
@@ -605,19 +695,35 @@ venda">
 												<option value="12">12</option>
 											</select>
 										</div>
-										<div class="form-group col-md-1" style="undefined">
+										<div class="form-group col-md-2" style="padding-left: 5px">
+											<label>Valor</label>
+											<input type="text" class="form-control" id="valorPagamento" name="valorPagamento" style="text-align: right" />
+										</div>
+										<div class="form-group col-md-1" style="padding-left: 5px">
 											<label>&nbsp;</label>
 											<br>
-											<button type="button" class="btn btn-success" onclick="venda.salvar()" style="width: 93px">Confirmar</button>
+											<button type="button" class="btn btn-success" onclick="venda.adicionarFormaPagamento()" style="">
+												&nbsp;
+												<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+												&nbsp;	
+											</button>
 										</div>
 										<div class="form-group col-md-1" style="undefined">
 											<label>&nbsp;</label>
 											<br>
 											<button type="button" class="btn btn-info" onclick="venda.continuarVenda()" style="width: 130px">Continuar venda</button>
 										</div>
+
 									</div>
 								</div>
-							
+							</form>
+
+							<h3 style="#margin-top: 0px"><span id="qtdFormaPagamento">0 formas de pagamento</span> / Valor Restante R$ <span id="valorRestantePagamento">0,00</span></h3>
+							<hr>
+						
+								<div id="divFormasPagamento">
+								
+								</div>
 						
 								<br>
 								<br>
@@ -640,7 +746,6 @@ venda">
 								
 								</table>
 
-							</form>
 						
 						</div>
 						
@@ -660,7 +765,6 @@ venda">
 		        <h4 class="modal-title">Pesquisar Produtos</h4>
 		      </div>
 		      <div class="modal-body">
-		        <p>Selecione o produto:</p>
 						<table id="tabelaPesquisarProdutos" class="table table-condensed table-striped">
 						
 							<thead>
@@ -669,7 +773,6 @@ venda">
 									<th style="text-align: center">Produto</th>
 									<th style="text-align: center">Qtd</th>
 									<th style="text-align: center">Val unit</th>
-									<th style="text-align: center">Total</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -678,8 +781,24 @@ venda">
 						</table>
 		      </div>
 		      <div class="modal-footer">
+		      	<form class="form-horizontal col-sm-8" style="padding-left: 0px">
+							<div class="form-group">
+						    <label for="inputEmail3" class="col-sm-2 control-label">Qtd*</label>
+						    <div class="col-sm-2" style="padding-left: 5px; padding-right: 5px">
+									<input class="form-control" type="text" id="qtdProduto" name="qtdProduto" onkeyup="javascript:venda.calcularValorProduto()" disabled="disabled" />
+						    </div>
+						    <div class="col-sm-4" style="padding-left: 0px; padding-right: 10px">
+									<input class="form-control" type="text" id="valorProduto" name="valorProduto" disabled="disabled" style="text-align: right" />
+						    </div>
+						    <div class="col-sm-2 checkbox" style="padding-left: 0px">
+							    <label>
+							      <input id="permitirDesconto" name="permitirDesconto"  type="checkbox" onclick="javascript:venda.aplicarDesconto()"> desconto
+							    </label>
+							  </div>
+						  </div>
+		      	</form>
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-		        <button type="button" class="btn btn-primary">Adicionar</button>
+		        <button type="button" class="btn btn-primary" onclick="javascript:venda.adicionarProduto()">Adicionar</button>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
