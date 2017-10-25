@@ -31,6 +31,8 @@
 		config.colunas = [];
 		config.colunas.push({'nome':'id',		'titulo':'#',			'width':'5%', 'cssbody':'text-align:center'});
 		config.colunas.push({'nome':'nome',	'titulo':'NOME',								'cssbody':'text-align:left'});
+		config.colunas.push({'nome':'telefone',	'titulo':'TELEFONE',								'cssbody':'text-align:center'});
+		config.colunas.push({'nome':'celular',	'titulo':'CELULAR',								'cssbody':'text-align:center'});
 	
 		var grid = new Grid('clienteGrid', config);
 

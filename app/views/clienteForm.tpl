@@ -35,7 +35,7 @@
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'cpf','titulo':'CPF',		'tipo':'text',			'span':'3',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
-		//config.colunas.push({'nome':'cnpj','titulo':'CNPJ',		'tipo':'text',			'span':'3',	'classe':'input-xlarge',	'obrigatorio':'0'});
+		config.colunas.push({'nome':'cnpj','titulo':'CNPJ',		'tipo':'text',			'span':'3',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'cep','titulo':'CEP',		'tipo':'text',			'span':'2',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
@@ -47,6 +47,8 @@
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'cidade','titulo':'Cidade',		'tipo':'text',			'span':'3',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'nome':'cod_cidade','titulo':'C&oacute;d. Cidade',		'tipo':'hide',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'0'});
+		config.colunas.push({'tipo':'linha'});
+		config.colunas.push({'nome':'uf','titulo':'UF',		'tipo':'text',			'span':'1',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'telefone','titulo':'Telefone',		'tipo':'text',			'span':'2',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
@@ -63,9 +65,39 @@
 			form.load();
 
 			$('#cpf').mask('000.000.000-00');
+			$('#cnpj').mask('00.000.000/0000-00');
 			$('#cep').mask('00000-000');
-			$('#telefone').mask('(00) 00000-0000');
+			$('#telefone').mask('(00) 0000-0000');
 			$('#celular').mask('(00) 00000-0000');
+
+			$('#cep').blur(function(){
+
+				var cep = $(this).val().replace(/\D/g, '');
+
+				if (cep != "") {
+					
+					$.ajax({
+						type:'POST',
+						global:true,
+						url:'//viacep.com.br/ws/'+ cep +'/json/?callback=?',
+						dataType:'json',
+						data:'',
+						success: function(data){
+	
+							$('#endereco').val(data.logradouro);
+							$('#bairro').val(data.bairro);
+							$('#cidade').val(data.localidade);
+							$('#cod_cidade').val(data.ibge);
+							$('#uf').val(data.uf);
+						
+						},
+						error: function(){
+						}
+					});
+
+				}
+				
+			});
 			
 		});
 

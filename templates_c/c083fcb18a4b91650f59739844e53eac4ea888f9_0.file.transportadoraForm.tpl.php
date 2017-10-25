@@ -1,19 +1,19 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-25 15:31:28
-         compiled from "C:\xampp\htdocs\sisnf\app\views\clienteForm.tpl" */ ?>
+<?php /* Smarty version 3.1.27, created on 2017-10-25 16:09:10
+         compiled from "C:\xampp\htdocs\sisnf\app\views\transportadoraForm.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:8015008259f09230235752_24775099%%*/
+/*%%SmartyHeaderCode:174963538859f09b06d83053_77176009%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    'dcfa65da06259b6ebc6ad175cd05556b446834fa' => 
+    'c083fcb18a4b91650f59739844e53eac4ea888f9' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\sisnf\\app\\views\\clienteForm.tpl',
-      1 => 1508938282,
+      0 => 'C:\\xampp\\htdocs\\sisnf\\app\\views\\transportadoraForm.tpl',
+      1 => 1508940351,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '8015008259f09230235752_24775099',
+  'nocache_hash' => '174963538859f09b06d83053_77176009',
   'variables' => 
   array (
     'basePath' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59f092302a2ad0_96093076',
+  'unifunc' => 'content_59f09b06df08f4_72727424',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59f092302a2ad0_96093076')) {
-function content_59f092302a2ad0_96093076 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59f09b06df08f4_72727424')) {
+function content_59f09b06df08f4_72727424 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '8015008259f09230235752_24775099';
+$_smarty_tpl->properties['nocache_hash'] = '174963538859f09b06d83053_77176009';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -44,17 +44,17 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 ';
 		
 		config.pk     = 'id';
-		config.modelo = 'clienteForm';
+		config.modelo = 'transportadoraForm';
 	
 		config.url    = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente/dados-form<?php if (isset($_smarty_tpl->tpl_vars['id']->value)) {?>?id=<?php echo $_smarty_tpl->tpl_vars['id']->value;
+transportadora/dados-form<?php if (isset($_smarty_tpl->tpl_vars['id']->value)) {?>?id=<?php echo $_smarty_tpl->tpl_vars['id']->value;
 }?>';
 		config.form   = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente/form';
+transportadora/form';
 		config.salvar = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente/salvar';
+transportadora/salvar';
 		config.voltar = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente';
+transportadora';
 	
 		
 
@@ -96,7 +96,7 @@ cliente';
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'email','titulo':'E-mail',		'tipo':'text',			'span':'5',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		
-		var form = new Form('clienteForm', config);
+		var form = new Form('transportadoraForm', config);
 
 		$(document).ready(function(){
 	
@@ -150,7 +150,7 @@ cliente';
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header"><a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente">Cliente</a> / Cadastro</h1>
+fornecedor">Transportadora</a> / Cadastro</h1>
 				</div>
 			</div>	
 
@@ -162,7 +162,7 @@ cliente">Cliente</a> / Cadastro</h1>
 					
 						<div class="panel-heading">
 							<a class="pull-right btn btn-primary btn-xs" href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-cliente">
+transportadora">
 								Voltar  <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
 							</a>Novo Registro
 						</div>

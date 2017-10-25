@@ -7,6 +7,8 @@ require_once CONTROLLERS.'ClienteController.php';
 
 class VendaController extends AppController{
 	
+	public final $_INICIADA = 1;
+	
 	public function indexAction(){
 		
 		$clienteController = new ClienteController();

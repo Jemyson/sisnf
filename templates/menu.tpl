@@ -96,7 +96,10 @@
 							<a href="{$basePath}cliente"><i class="glyphicon glyphicon-briefcase"></i> Clientes</a>
 				  	</li>
 						<li class="preview__action--close">
-							<a href="{$basePath}fornecedor"><i class="glyphicon glyphicon-bed"></i> Transportadoras</a>
+							<a href="{$basePath}fornecedor"><i class="glyphicon glyphicon-tags"></i> Fornecedor</a>
+				  	</li>
+						<li class="preview__action--close">
+							<a href="{$basePath}transportadora"><i class="glyphicon glyphicon-bed"></i> Transportadoras</a>
 				  	</li>
 						<li class="preview__action--close">
 							<a href="{$basePath}produto"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>

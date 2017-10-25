@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-25 15:31:28
+<?php /* Smarty version 3.1.27, created on 2017-10-25 15:12:15
          compiled from "C:\xampp\htdocs\sisnf\app\views\clienteForm.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:8015008259f09230235752_24775099%%*/
+/*%%SmartyHeaderCode:154766579159f08daf67ce46_50555406%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'dcfa65da06259b6ebc6ad175cd05556b446834fa' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\app\\views\\clienteForm.tpl',
-      1 => 1508938282,
+      1 => 1508936975,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '8015008259f09230235752_24775099',
+  'nocache_hash' => '154766579159f08daf67ce46_50555406',
   'variables' => 
   array (
     'basePath' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59f092302a2ad0_96093076',
+  'unifunc' => 'content_59f08daf716377_91878395',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59f092302a2ad0_96093076')) {
-function content_59f092302a2ad0_96093076 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59f08daf716377_91878395')) {
+function content_59f08daf716377_91878395 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '8015008259f09230235752_24775099';
+$_smarty_tpl->properties['nocache_hash'] = '154766579159f08daf67ce46_50555406';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -88,8 +88,6 @@ cliente';
 		config.colunas.push({'nome':'cidade','titulo':'Cidade',		'tipo':'text',			'span':'3',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'nome':'cod_cidade','titulo':'C&oacute;d. Cidade',		'tipo':'hide',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
-		config.colunas.push({'nome':'uf','titulo':'UF',		'tipo':'text',			'span':'1',	'classe':'input-xlarge',	'obrigatorio':'0'});
-		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'telefone','titulo':'Telefone',		'tipo':'text',			'span':'2',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'celular','titulo':'Celular',		'tipo':'text',			'span':'2',	'classe':'input-xlarge',	'obrigatorio':'0'});
@@ -110,32 +108,28 @@ cliente';
 			$('#telefone').mask('(00) 0000-0000');
 			$('#celular').mask('(00) 00000-0000');
 
-			$('#cep').blur(function(){
+			$('#cep').onchange(function(this){
 
-				var cep = $(this).val().replace(/\D/g, '');
+				var cep = $(this).val();
 
-				if (cep != "") {
+				$.ajax({
+					type:'POST',
+					global:true,
+					url:'https://viacep.com.br/ws/' + cep + '/json/',
+					dataType:'json',
+					data:'',
+					success: function(data){
+
+						$('#endereco').val(data.logradouro);
+						$('#bairro').val(data.bairro);
+						$('#cidade').val(data.localidade);
+						$('#cod_cidade').val(data.ibge);
 					
-					$.ajax({
-						type:'POST',
-						global:true,
-						url:'//viacep.com.br/ws/'+ cep +'/json/?callback=?',
-						dataType:'json',
-						data:'',
-						success: function(data){
-	
-							$('#endereco').val(data.logradouro);
-							$('#bairro').val(data.bairro);
-							$('#cidade').val(data.localidade);
-							$('#cod_cidade').val(data.ibge);
-							$('#uf').val(data.uf);
-						
-						},
-						error: function(){
-						}
-					});
+					},
+					error: function(){
+					}
+				});
 
-				}
 				
 			});
 			

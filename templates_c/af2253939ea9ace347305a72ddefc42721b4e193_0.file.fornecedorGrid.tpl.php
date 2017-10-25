@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-17 20:21:51
+<?php /* Smarty version 3.1.27, created on 2017-10-25 16:08:39
          compiled from "C:\xampp\htdocs\sisnf\app\views\fornecedorGrid.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:83509024059e64a3f5ebbc0_99129728%%*/
+/*%%SmartyHeaderCode:146685119859f09ae72e1085_88923444%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'af2253939ea9ace347305a72ddefc42721b4e193' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\app\\views\\fornecedorGrid.tpl',
-      1 => 1508264497,
+      1 => 1508939880,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '83509024059e64a3f5ebbc0_99129728',
+  'nocache_hash' => '146685119859f09ae72e1085_88923444',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e64a3f669938_93101010',
+  'unifunc' => 'content_59f09ae7342f08_76059148',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e64a3f669938_93101010')) {
-function content_59e64a3f669938_93101010 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59f09ae7342f08_76059148')) {
+function content_59f09ae7342f08_76059148 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '83509024059e64a3f5ebbc0_99129728';
+$_smarty_tpl->properties['nocache_hash'] = '146685119859f09ae72e1085_88923444';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -85,7 +85,7 @@ fornecedor/excluir';
 		<div class="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Transportadora</h1>
+					<h1 class="page-header">Fornecedor</h1>
 				</div>
 			</div>	
 		

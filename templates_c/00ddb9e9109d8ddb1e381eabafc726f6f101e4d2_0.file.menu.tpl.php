@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-24 14:43:24
+<?php /* Smarty version 3.1.27, created on 2017-10-25 16:09:05
          compiled from "C:\xampp\htdocs\sisnf\templates\menu.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:147060675559ef356c716851_07023680%%*/
+/*%%SmartyHeaderCode:102187651459f09b01e68f70_20305414%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '00ddb9e9109d8ddb1e381eabafc726f6f101e4d2' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\templates\\menu.tpl',
-      1 => 1508848984,
+      1 => 1508940542,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '147060675559ef356c716851_07023680',
+  'nocache_hash' => '102187651459f09b01e68f70_20305414',
   'variables' => 
   array (
     'basePath' => 0,
@@ -21,13 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59ef356c72f4b4_97517384',
+  'unifunc' => 'content_59f09b01ec62f2_34963850',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59ef356c72f4b4_97517384')) {
-function content_59ef356c72f4b4_97517384 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59f09b01ec62f2_34963850')) {
+function content_59f09b01ec62f2_34963850 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '147060675559ef356c716851_07023680';
+$_smarty_tpl->properties['nocache_hash'] = '102187651459f09b01e68f70_20305414';
 ?>
 
 <style>
@@ -131,7 +131,11 @@ cliente"><i class="glyphicon glyphicon-briefcase"></i> Clientes</a>
 				  	</li>
 						<li class="preview__action--close">
 							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-fornecedor"><i class="glyphicon glyphicon-bed"></i> Transportadoras</a>
+fornecedor"><i class="glyphicon glyphicon-tags"></i> Fornecedor</a>
+				  	</li>
+						<li class="preview__action--close">
+							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+transportadora"><i class="glyphicon glyphicon-bed"></i> Transportadoras</a>
 				  	</li>
 						<li class="preview__action--close">
 							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>

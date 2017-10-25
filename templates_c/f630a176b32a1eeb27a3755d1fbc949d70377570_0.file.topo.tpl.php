@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-16 18:29:01
+<?php /* Smarty version 3.1.27, created on 2017-10-25 15:12:05
          compiled from "C:\xampp\htdocs\sisnf\templates\topo.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:143403780159e4de4d8fa1e0_89411582%%*/
+/*%%SmartyHeaderCode:53802721459f08da582d8f9_73030959%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f630a176b32a1eeb27a3755d1fbc949d70377570' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\templates\\topo.tpl',
-      1 => 1508160652,
+      1 => 1508936194,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '143403780159e4de4d8fa1e0_89411582',
+  'nocache_hash' => '53802721459f08da582d8f9_73030959',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e4de4d90ab01_25973093',
+  'unifunc' => 'content_59f08da58b1466_75563325',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e4de4d90ab01_25973093')) {
-function content_59e4de4d90ab01_25973093 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59f08da58b1466_75563325')) {
+function content_59f08da58b1466_75563325 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '143403780159e4de4d8fa1e0_89411582';
+$_smarty_tpl->properties['nocache_hash'] = '53802721459f08da582d8f9_73030959';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -78,36 +78,45 @@ css/bootstrap.min.css" rel="styleSheet">
 
 		<?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-js/jquery.min.js"><?php echo '</script'; ?>
+js/jquery.min.js" type="text/javascript"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-js/jquery.cookies.js"><?php echo '</script'; ?>
+js/jquery.cookies.js" type="text/javascript"><?php echo '</script'; ?>
 >
 		<?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-js/bootstrap.min.js"><?php echo '</script'; ?>
+js/bootstrap.min.js" type="text/javascript"><?php echo '</script'; ?>
 >
+		<?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+js/jquery.maskMoney.js" type="text/javascript"><?php echo '</script'; ?>
+>
+		<?php echo '<script'; ?>
+ src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+js/jquery.mask.js" type="text/javascript"><?php echo '</script'; ?>
+>
+
 
     <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-js/Grid.js"><?php echo '</script'; ?>
+js/Grid.js" type="text/javascript"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-js/Form.js"><?php echo '</script'; ?>
+js/Form.js" type="text/javascript"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-js/Campos.js"><?php echo '</script'; ?>
+js/Campos.js" type="text/javascript"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-js/Formatter.js"><?php echo '</script'; ?>
+js/Formatter.js" type="text/javascript"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-js/App.js"><?php echo '</script'; ?>
+js/App.js" type="text/javascript"><?php echo '</script'; ?>
 >
 
 		<?php echo '<script'; ?>

@@ -9,11 +9,11 @@
 		config.basePath = '{/literal}{$basePath}{literal}';
 		
 		config.pk     = 'id';
-		config.modelo = 'fornecedor';
+		config.modelo = 'transportadora';
 		
-		config.url    	= '{/literal}{$basePath}{literal}fornecedor/dados';
-		config.form   	= '{/literal}{$basePath}{literal}fornecedor/form';
-		config.excluir  = '{/literal}{$basePath}{literal}fornecedor/excluir';
+		config.url    	= '{/literal}{$basePath}{literal}transportadora/dados';
+		config.form   	= '{/literal}{$basePath}{literal}transportadora/form';
+		config.excluir  = '{/literal}{$basePath}{literal}transportadora/excluir';
 		config.botoes 	= ['i','v','a','e'];
 		
 		config.filtros = {}
@@ -32,7 +32,7 @@
 		config.colunas.push({'nome':'id',		'titulo':'#',			'width':'5%', 'cssbody':'text-align:center'});
 		config.colunas.push({'nome':'nome',	'titulo':'NOME',								'cssbody':'text-align:left'});
 	
-		var grid = new Grid('fornecedorGrid', config);
+		var grid = new Grid('transportadoraGrid', config);
 
 		$(document).ready(function(){
 
@@ -48,7 +48,7 @@
 		<div class="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Fornecedor</h1>
+					<h1 class="page-header">Transportadora</h1>
 				</div>
 			</div>	
 		
@@ -59,7 +59,7 @@
 					<div class="panel panel-default">
 					
 						<div class="panel-heading">
-							<a class="pull-right btn btn-primary btn-xs" href="{$basePath}fornecedor/form">
+							<a class="pull-right btn btn-primary btn-xs" href="{$basePath}transportadora/form">
 								<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Novo registro
 							</a>Lista de Registros
 						</div>
