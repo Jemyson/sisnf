@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-13 20:01:55
+<?php /* Smarty version 3.1.27, created on 2017-10-24 23:23:20
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/clienteForm.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:80595769659e145e3996151_70520998%%*/
+/*%%SmartyHeaderCode:177964335859eff59855ef87_95781351%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6a78353d8c486d84ca6f53ca7d0a0caa1cf46bc3' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/clienteForm.tpl',
-      1 => 1507935714,
+      1 => 1508897878,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '80595769659e145e3996151_70520998',
+  'nocache_hash' => '177964335859eff59855ef87_95781351',
   'variables' => 
   array (
     'basePath' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e145e39da196_94482513',
+  'unifunc' => 'content_59eff5985a2d37_53006298',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e145e39da196_94482513')) {
-function content_59e145e39da196_94482513 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59eff5985a2d37_53006298')) {
+function content_59eff5985a2d37_53006298 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '80595769659e145e3996151_70520998';
+$_smarty_tpl->properties['nocache_hash'] = '177964335859eff59855ef87_95781351';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -75,7 +75,7 @@ cliente';
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'cpf','titulo':'CPF',		'tipo':'text',			'span':'3',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
-		config.colunas.push({'nome':'cnpj','titulo':'CNPJ',		'tipo':'text',			'span':'3',	'classe':'input-xlarge',	'obrigatorio':'0'});
+		//config.colunas.push({'nome':'cnpj','titulo':'CNPJ',		'tipo':'text',			'span':'3',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'cep','titulo':'CEP',		'tipo':'text',			'span':'2',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
@@ -101,7 +101,12 @@ cliente';
 			form.criarFormulario();
 			form.carregarCamposEntidade();
 			form.load();
-	
+
+			$('#cpf').mask('000.000.000-00');
+			$('#cep').mask('00000-000');
+			$('#telefone').mask('(00) 00000-0000');
+			$('#celular').mask('(00) 00000-0000');
+			
 		});
 
 	<?php echo '</script'; ?>

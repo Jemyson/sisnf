@@ -35,7 +35,7 @@
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'cpf','titulo':'CPF',		'tipo':'text',			'span':'3',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
-		config.colunas.push({'nome':'cnpj','titulo':'CNPJ',		'tipo':'text',			'span':'3',	'classe':'input-xlarge',	'obrigatorio':'0'});
+		//config.colunas.push({'nome':'cnpj','titulo':'CNPJ',		'tipo':'text',			'span':'3',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'cep','titulo':'CEP',		'tipo':'text',			'span':'2',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
@@ -61,7 +61,12 @@
 			form.criarFormulario();
 			form.carregarCamposEntidade();
 			form.load();
-	
+
+			$('#cpf').mask('000.000.000-00');
+			$('#cep').mask('00000-000');
+			$('#telefone').mask('(00) 00000-0000');
+			$('#celular').mask('(00) 00000-0000');
+			
 		});
 
 	</script>

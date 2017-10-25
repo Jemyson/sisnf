@@ -44,15 +44,18 @@
 
 {/literal}
 
-		<script src="{$basePath}js/jquery.min.js"></script>
-    <script src="{$basePath}js/jquery.cookies.js"></script>
-		<script src="{$basePath}js/bootstrap.min.js"></script>
+		<script src="{$basePath}js/jquery.min.js" type="text/javascript"></script>
+    <script src="{$basePath}js/jquery.cookies.js" type="text/javascript"></script>
+		<script src="{$basePath}js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="{$basePath}js/jquery.maskMoney.js" type="text/javascript"></script>
+		<script src="{$basePath}js/jquery.mask.js" type="text/javascript"></script>
 
-    <script src="{$basePath}js/Grid.js"></script>
-    <script src="{$basePath}js/Form.js"></script>
-    <script src="{$basePath}js/Campos.js"></script>
-    <script src="{$basePath}js/Formatter.js"></script>
-    <script src="{$basePath}js/App.js"></script>
+
+    <script src="{$basePath}js/Grid.js" type="text/javascript"></script>
+    <script src="{$basePath}js/Form.js" type="text/javascript"></script>
+    <script src="{$basePath}js/Campos.js" type="text/javascript"></script>
+    <script src="{$basePath}js/Formatter.js" type="text/javascript"></script>
+    <script src="{$basePath}js/App.js" type="text/javascript"></script>
 
 		<script type="text/javascript">
 		

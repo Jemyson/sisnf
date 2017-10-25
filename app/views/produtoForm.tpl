@@ -48,7 +48,10 @@
 			form.criarFormulario();
 			form.carregarCamposEntidade();
 			form.load();
-	
+
+			$('#preco_custo').maskMoney();
+			$('#preco_venda').maskMoney();
+			
 		});
 
 	</script>

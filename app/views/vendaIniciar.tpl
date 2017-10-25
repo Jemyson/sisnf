@@ -109,6 +109,44 @@
 			
 		}
 
+		this.carregarSubcategoria = function(){
+
+			var _this = this;
+
+			if($('#id_categoria').val() == '0'){
+
+				var htmlSubcategoria = '<option value="0">Categoria n&atilde;o informado(a)</option>';
+				
+				$('#id_subcategoria').html(htmlSubcategoria);
+				
+			}else{
+				
+				$.ajax({
+					type:'POST',
+					global:true,
+					url:_this.opcoes.urlSubcategoria,
+					dataType:'json',
+					data:'valorPai='+$('#id_categoria').val(),
+					success: function(data){
+	
+						var htmlSubcategoria = '<option value="0">Selecione</option>';
+						for(var chave in data){
+	
+							htmlSubcategoria += '<option value="'+data[chave].id+'">'+data[chave].valor+'</option>';
+	
+						}
+						
+						$('#id_subcategoria').html(htmlSubcategoria);
+						
+					},
+					error: function(){
+					}
+				});
+
+			}
+			
+		}
+
 		this.carregarProdutosVenda = function(){
 
 			var _this = this;
@@ -524,6 +562,7 @@
 	config.urlCliente				= '{/literal}{$basePath}{literal}cliente/dados-form';
 	config.urlVenda 				= '{/literal}{$basePath}{literal}venda';
 	config.urlCategoria			= '{/literal}{$basePath}{literal}categoria/dados-entidade';
+	config.urlSubcategoria	= '{/literal}{$basePath}{literal}subcategoria/dados-entidade';
 	config.urlNova					= '{/literal}{$basePath}{literal}venda/form';
 	config.urlIniciar				= '{/literal}{$basePath}{literal}venda/iniciar';
 	config.urlProduto				= '{/literal}{$basePath}{literal}venda/pesquisar-produto';
@@ -539,6 +578,9 @@
 		//venda.carregarProdutos();
 		venda.carregarProdutosVenda();
 
+		$('#valorProduto').maskMoney();
+		$('#valorPagamento').maskMoney();
+		
 		$('#formPagamento').submit(function(e){
 			e.preventDefault();
 			venda.adicionarFormaPagamento();
@@ -619,7 +661,7 @@
 						    </div>		
 							  <div class="form-group" style="margin-top: 15px">
 							    <div class="col-sm-offset-2 col-sm-10">
-							      <button type="button" style="width: 120px" class="btn btn-success"  onclick="javascript:venda.finalizarVenda()" id="btnPagamento">Pagamento</button>
+							      <button type="button" style="width: 120px" class="btn btn-success" disabled="disabled" onclick="javascript:venda.finalizarVenda()" id="btnPagamento">Pagamento</button>
 							      <button type="button" style="width: 120px" class="btn btn-primary" disabled="disabled"  onclick="javascript:venda.salvar()" id="btnFinalizarVenda">Finalizar Venda</button>
 							      <button type="button" style="width: 120px; display: none" class="btn btn-danger" disabled="disabled">Excluir Venda</button>
 							      <button type="button" style="width: 120px" class="btn btn-warning" onclick="venda.nova()" >Nova Venda</button>
@@ -637,7 +679,7 @@
 									<div class="row">
 										<div class="form-group col-md-2">
 											<label>Categoria</label>
-											<select class="form-control" id="id_categoria" name="id_categoria">
+											<select class="form-control" id="id_categoria" name="id_categoria" onchange="javascript:venda.carregarSubcategoria()">
 											</select>
 										</div>
 										<div class="form-group col-md-2" style="padding-left: 5px">
@@ -694,7 +736,7 @@
 										</div>
 										<div class="form-group col-md-2" style="padding-left: 5px">
 											<label>Valor</label>
-											<input type="text" class="form-control" id="valorPagamento" name="valorPagamento" obrigatorio="obrigatorio" style="text-align: right" />
+											<input type="text" class="form-control" id="valorPagamento" name="valorPagamento" data-thousands="." data-decimal="," obrigatorio="obrigatorio" style="text-align: right" />
 										</div>
 										<div class="form-group col-md-1" style="padding-left: 5px">
 											<label>&nbsp;</label>
@@ -787,7 +829,7 @@
 									<input class="form-control" type="text" id="qtdProduto" name="qtdProduto" obrigatorio="obrigatorio" onkeyup="javascript:venda.calcularValorProduto()" disabled="disabled" />
 						    </div>
 						    <div class="col-sm-4" style="padding-left: 0px; padding-right: 10px">
-									<input class="form-control" type="text" id="valorProduto" name="valorProduto" obrigatorio="obrigatorio" disabled="disabled" style="text-align: right" />
+									<input class="form-control" type="text" id="valorProduto" name="valorProduto" data-thousands="." data-decimal="," obrigatorio="obrigatorio" disabled="disabled" style="text-align: right" />
 						    </div>
 						    <div class="col-sm-2 checkbox" style="padding-left: 0px">
 							    <label>

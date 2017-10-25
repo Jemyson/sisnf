@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-24 00:10:00
+<?php /* Smarty version 3.1.27, created on 2017-10-24 23:35:18
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:147272232759eeaf0852c9a1_07304512%%*/
+/*%%SmartyHeaderCode:29313732259eff86646e122_63320272%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7b561ed5ab4332ed28f68cb3ae3c5fca9da41b45' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl',
-      1 => 1508814598,
+      1 => 1508898914,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '147272232759eeaf0852c9a1_07304512',
+  'nocache_hash' => '29313732259eff86646e122_63320272',
   'variables' => 
   array (
     'id' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59eeaf085a7217_96242956',
+  'unifunc' => 'content_59eff8664cde51_97857905',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59eeaf085a7217_96242956')) {
-function content_59eeaf085a7217_96242956 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59eff8664cde51_97857905')) {
+function content_59eff8664cde51_97857905 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '147272232759eeaf0852c9a1_07304512';
+$_smarty_tpl->properties['nocache_hash'] = '29313732259eff86646e122_63320272';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -140,6 +140,44 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 				error: function(){
 				}
 			});
+			
+		}
+
+		this.carregarSubcategoria = function(){
+
+			var _this = this;
+
+			if($('#id_categoria').val() == '0'){
+
+				var htmlSubcategoria = '<option value="0">Categoria n&atilde;o informado(a)</option>';
+				
+				$('#id_subcategoria').html(htmlSubcategoria);
+				
+			}else{
+				
+				$.ajax({
+					type:'POST',
+					global:true,
+					url:_this.opcoes.urlSubcategoria,
+					dataType:'json',
+					data:'valorPai='+$('#id_categoria').val(),
+					success: function(data){
+	
+						var htmlSubcategoria = '<option value="0">Selecione</option>';
+						for(var chave in data){
+	
+							htmlSubcategoria += '<option value="'+data[chave].id+'">'+data[chave].valor+'</option>';
+	
+						}
+						
+						$('#id_subcategoria').html(htmlSubcategoria);
+						
+					},
+					error: function(){
+					}
+				});
+
+			}
 			
 		}
 
@@ -564,6 +602,8 @@ cliente/dados-form';
 venda';
 	config.urlCategoria			= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 categoria/dados-entidade';
+	config.urlSubcategoria	= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+subcategoria/dados-entidade';
 	config.urlNova					= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 venda/form';
 	config.urlIniciar				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
@@ -584,6 +624,9 @@ venda/finalizar-venda';
 		//venda.carregarProdutos();
 		venda.carregarProdutosVenda();
 
+		$('#valorProduto').maskMoney();
+		$('#valorPagamento').maskMoney();
+		
 		$('#formPagamento').submit(function(e){
 			e.preventDefault();
 			venda.adicionarFormaPagamento();
@@ -668,7 +711,7 @@ venda">
 						    </div>		
 							  <div class="form-group" style="margin-top: 15px">
 							    <div class="col-sm-offset-2 col-sm-10">
-							      <button type="button" style="width: 120px" class="btn btn-success"  onclick="javascript:venda.finalizarVenda()" id="btnPagamento">Pagamento</button>
+							      <button type="button" style="width: 120px" class="btn btn-success" disabled="disabled" onclick="javascript:venda.finalizarVenda()" id="btnPagamento">Pagamento</button>
 							      <button type="button" style="width: 120px" class="btn btn-primary" disabled="disabled"  onclick="javascript:venda.salvar()" id="btnFinalizarVenda">Finalizar Venda</button>
 							      <button type="button" style="width: 120px; display: none" class="btn btn-danger" disabled="disabled">Excluir Venda</button>
 							      <button type="button" style="width: 120px" class="btn btn-warning" onclick="venda.nova()" >Nova Venda</button>
@@ -686,7 +729,7 @@ venda">
 									<div class="row">
 										<div class="form-group col-md-2">
 											<label>Categoria</label>
-											<select class="form-control" id="id_categoria" name="id_categoria">
+											<select class="form-control" id="id_categoria" name="id_categoria" onchange="javascript:venda.carregarSubcategoria()">
 											</select>
 										</div>
 										<div class="form-group col-md-2" style="padding-left: 5px">
@@ -743,7 +786,7 @@ venda">
 										</div>
 										<div class="form-group col-md-2" style="padding-left: 5px">
 											<label>Valor</label>
-											<input type="text" class="form-control" id="valorPagamento" name="valorPagamento" obrigatorio="obrigatorio" style="text-align: right" />
+											<input type="text" class="form-control" id="valorPagamento" name="valorPagamento" data-thousands="." data-decimal="," obrigatorio="obrigatorio" style="text-align: right" />
 										</div>
 										<div class="form-group col-md-1" style="padding-left: 5px">
 											<label>&nbsp;</label>
@@ -836,7 +879,7 @@ venda">
 									<input class="form-control" type="text" id="qtdProduto" name="qtdProduto" obrigatorio="obrigatorio" onkeyup="javascript:venda.calcularValorProduto()" disabled="disabled" />
 						    </div>
 						    <div class="col-sm-4" style="padding-left: 0px; padding-right: 10px">
-									<input class="form-control" type="text" id="valorProduto" name="valorProduto" obrigatorio="obrigatorio" disabled="disabled" style="text-align: right" />
+									<input class="form-control" type="text" id="valorProduto" name="valorProduto" data-thousands="." data-decimal="," obrigatorio="obrigatorio" disabled="disabled" style="text-align: right" />
 						    </div>
 						    <div class="col-sm-2 checkbox" style="padding-left: 0px">
 							    <label>
