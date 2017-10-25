@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-23 23:52:58
+<?php /* Smarty version 3.1.27, created on 2017-10-24 23:40:23
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/login.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:49950052559eeab0ab504c2_95560234%%*/
+/*%%SmartyHeaderCode:181736371759eff9972a6bb2_12387878%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '96045dc5d0ff74405e7427ee42aa49303b1c29b0' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/login.tpl',
-      1 => 1508813577,
+      1 => 1508899215,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '49950052559eeab0ab504c2_95560234',
+  'nocache_hash' => '181736371759eff9972a6bb2_12387878',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59eeab0ab7da76_30679692',
+  'unifunc' => 'content_59eff9972da4d9_87400978',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59eeab0ab7da76_30679692')) {
-function content_59eeab0ab7da76_30679692 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59eff9972da4d9_87400978')) {
+function content_59eff9972da4d9_87400978 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '49950052559eeab0ab504c2_95560234';
+$_smarty_tpl->properties['nocache_hash'] = '181736371759eff9972a6bb2_12387878';
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +40,8 @@ $_smarty_tpl->properties['nocache_hash'] = '49950052559eeab0ab504c2_95560234';
     <meta name="author" content="">
 
     <title>Signin Template for Bootstrap</title>
+		<link  href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>

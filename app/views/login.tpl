@@ -10,6 +10,7 @@
     <meta name="author" content="">
 
     <title>Signin Template for Bootstrap</title>
+		<link  href="{$basePath}img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 
     <!-- Bootstrap core CSS -->
     <link href="{$basePath}css/bootstrap.min.css" rel="styleSheet">
