@@ -7,7 +7,7 @@ require_once CONTROLLERS.'ClienteController.php';
 
 class VendaController extends AppController{
 	
-	public final $_INICIADA = 1;
+	private static $_INICIADA = 1;
 	
 	public function indexAction(){
 		
@@ -188,6 +188,8 @@ class VendaController extends AppController{
 			
 		unset($_REQUEST['hash']);
 
+		$_REQUEST['status'] = self::$_INICIADA;
+		
 		if(count($dados) != 0){
 			
 			if($model->atualizar($_REQUEST, 'id')){

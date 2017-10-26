@@ -1,32 +1,32 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-25 23:25:45
-         compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/fornecedorGrid.tpl" */ ?>
+<?php /* Smarty version 3.1.27, created on 2017-10-25 23:25:47
+         compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/transportadoraGrid.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:118662269659f147a93ca3b6_63162889%%*/
+/*%%SmartyHeaderCode:60679242259f147ab52bec9_11307980%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '2df87fd6132efd3bbc4a31b7f126d5b8004039f1' => 
+    '7db3ea38e4c04492e2f786b17547221ce53871ae' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/fornecedorGrid.tpl',
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/transportadoraGrid.tpl',
       1 => 1508984592,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '118662269659f147a93ca3b6_63162889',
+  'nocache_hash' => '60679242259f147ab52bec9_11307980',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59f147a94101d0_86133592',
+  'unifunc' => 'content_59f147ab56dad2_69538136',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59f147a94101d0_86133592')) {
-function content_59f147a94101d0_86133592 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59f147ab56dad2_69538136')) {
+function content_59f147ab56dad2_69538136 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '118662269659f147a93ca3b6_63162889';
+$_smarty_tpl->properties['nocache_hash'] = '60679242259f147ab52bec9_11307980';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -42,14 +42,14 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 ';
 		
 		config.pk     = 'id';
-		config.modelo = 'fornecedor';
+		config.modelo = 'transportadora';
 		
 		config.url    	= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-fornecedor/dados';
+transportadora/dados';
 		config.form   	= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-fornecedor/form';
+transportadora/form';
 		config.excluir  = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-fornecedor/excluir';
+transportadora/excluir';
 		config.botoes 	= ['i','v','a','e'];
 		
 		config.filtros = {}
@@ -68,7 +68,7 @@ fornecedor/excluir';
 		config.colunas.push({'nome':'id',		'titulo':'#',			'width':'5%', 'cssbody':'text-align:center'});
 		config.colunas.push({'nome':'nome',	'titulo':'NOME',								'cssbody':'text-align:left'});
 	
-		var grid = new Grid('fornecedorGrid', config);
+		var grid = new Grid('transportadoraGrid', config);
 
 		$(document).ready(function(){
 
@@ -85,7 +85,7 @@ fornecedor/excluir';
 		<div class="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Fornecedor</h1>
+					<h1 class="page-header">Transportadora</h1>
 				</div>
 			</div>	
 		
@@ -97,7 +97,7 @@ fornecedor/excluir';
 					
 						<div class="panel-heading">
 							<a class="pull-right btn btn-primary btn-xs" href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-fornecedor/form">
+transportadora/form">
 								<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Novo registro
 							</a>Lista de Registros
 						</div>
