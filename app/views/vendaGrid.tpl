@@ -33,8 +33,8 @@
 		config.colunas.push({'nome':'id_cliente',		'titulo':'CLIENTE',	'cssbody':'text-align:left', 		'formatterDados':'{/literal}{$dadosCliente}{literal}'});
 		config.colunas.push({'nome':'tipo',					'titulo':'TIPO',		'cssbody':'text-align:center', 	'formatterDados':'{"1":"Or&ccedil;amento", "2":"Venda"}'});
 		config.colunas.push({'nome':'data_venda',		'titulo':'DATA',		'cssbody':'text-align:center',	'funcaoFormatter':'Formatter.data'});
-		config.colunas.push({'nome':'valor',				'titulo':'VALOR',  	'cssbody':'text-align:right'});
-		config.colunas.push({'nome':'status',				'titulo':'STATUS',  'cssbody':'text-align:center', 	'formatterDados':'{"0":"Aguardando", "1":"Pendente", "2":"Pago"}'});
+		config.colunas.push({'nome':'valor',				'titulo':'VALOR',  	'cssbody':'text-align:right', 	'funcaoFormatter':'Formatter.formatMoedaReal'});
+		config.colunas.push({'nome':'status',				'titulo':'STATUS',  'cssbody':'text-align:center', 	'formatterDados':'{"1":"Iniciada", "2":"Aguardando", "3":"Finalizada", "4":"Emitida", "5":"Excluida"}'});
 	
 		var grid = new Grid('vendaGrid', config);
 

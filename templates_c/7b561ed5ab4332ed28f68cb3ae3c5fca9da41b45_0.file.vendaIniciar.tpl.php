@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-24 23:35:18
+<?php /* Smarty version 3.1.27, created on 2017-10-26 02:11:00
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:29313732259eff86646e122_63320272%%*/
+/*%%SmartyHeaderCode:67896300359f16e641207a6_52212387%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7b561ed5ab4332ed28f68cb3ae3c5fca9da41b45' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl',
-      1 => 1508898914,
+      1 => 1508994658,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '29313732259eff86646e122_63320272',
+  'nocache_hash' => '67896300359f16e641207a6_52212387',
   'variables' => 
   array (
     'id' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59eff8664cde51_97857905',
+  'unifunc' => 'content_59f16e64192345_89519770',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59eff8664cde51_97857905')) {
-function content_59eff8664cde51_97857905 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59f16e64192345_89519770')) {
+function content_59f16e64192345_89519770 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '29313732259eff86646e122_63320272';
+$_smarty_tpl->properties['nocache_hash'] = '67896300359f16e641207a6_52212387';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -56,12 +56,73 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 		this.produtos = {};
 		this.valorVenda = 0;
 		this.formaPagamento = {};
+		this.codFormaPagamento = 1;
 		this.valorRestante = 0;
 		
 		this.nova = function(){
 			window.location = this.opcoes.urlNova;
 		}
 
+		this.transmitirVenda = function(){
+			$('#modalTransmitir').modal();
+		}
+
+		this.excluirVenda = function(){
+
+			var _this = this;
+			
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlExcluir + '?id=' + _this.opcoes.id + '&hash=' + _this.opcoes.hash,
+				dataType:'json',
+				data:'',
+				success: function(data){
+
+					if(data.error == 0){
+						window.location = _this.opcoes.urlIniciar + '?id=' + _this.opcoes.id;
+					}else{
+						$('#divError').show();
+						$('#divError').html(data.msg);
+					}
+
+					
+					
+				},
+				error: function(){
+				}
+			});
+
+		}
+
+		this.aprovarVenda = function(){
+
+			var _this = this;
+			
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlAprovar + '?id=' + _this.opcoes.id + '&hash=' + _this.opcoes.hash,
+				dataType:'json',
+				data:'',
+				success: function(data){
+
+					if(data.error == 0){
+						window.location = _this.opcoes.urlIniciar + '?id=' + _this.opcoes.id;
+					}else{
+						$('#divError').show();
+						$('#divError').html(data.msg);
+					}
+
+					
+					
+				},
+				error: function(){
+				}
+			});
+			
+		}
+		
 		this.carregarVenda = function(){
 
 			var _this = this;
@@ -74,12 +135,66 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 				data:'',
 				success: function(data){
 
+					_this.opcoes.hash = data.hash;
+					
 					if(data.registros.tipo == 1){
 						$('#tipo').html('Or&ccedil;amento');
 					}else{
 						$('#tipo').html('Venda');
 					}
-					
+
+					if(App.isset(data.registros.forma_pagamento) && data.registros.forma_pagamento != ''){
+
+						var formaPagamento = data.registros.forma_pagamento.split(';');
+
+						for(var chave in formaPagamento){
+
+							var id = _this.codFormaPagamento;
+							var tipo = formaPagamento[chave].split(' / ');
+							var parcelas = tipo[1].split(' - ');
+							var valor = parcelas[1];
+									
+							_this.formaPagamento[id] = {'tipo':tipo[0], 'parcelas':parcelas[0], 'valor': Formatter.converteMoedaFloat(valor)};
+							
+							_this.atualizarQtdPagamento();
+							_this.calcularValorRestante();
+
+							$('#divFormasPagamento').append('<p id="formaPagamento_'+id+'">Tipo: ' + tipo[0] + ' Parcelas: ' + parcelas[0] + ' Valor:' + valor + '</p>');
+
+							_this.codFormaPagamento++;
+
+						}
+
+						
+					}
+
+					if(data.registros.status == 1){
+						$('#tipo').html($('#tipo').html() + ' [ Venda Iniciada ]');
+					}else if(data.registros.status == 2){
+						$('#tipo').html($('#tipo').html() + ' [ Venda Aguardando ]');
+						$('#formAdicionarProduto').hide();
+						$('#btnPagamento').hide();
+						$('#btnFinalizarVenda').hide();
+						$('#btnAprovar').show();
+						$('#btnExcluir').show();
+					}else if(data.registros.status == 3){
+						$('#tipo').html($('#tipo').html() + ' [ Venda Finalizada ]');
+						$('#formAdicionarProduto').hide();
+						$('#btnPagamento').hide();
+						$('#btnFinalizarVenda').hide();
+						$('#btnTransmitir').show();
+						$('#btnExcluir').show();
+					}else if(data.registros.status == 4){
+						$('#tipo').html($('#tipo').html() + ' [ Venda Transmitida ]');
+						$('#formAdicionarProduto').hide();
+						$('#btnPagamento').hide();
+						$('#btnFinalizarVenda').hide();
+					}else if(data.registros.status == 5){
+						$('#tipo').html($('#tipo').html() + ' [ Venda Excluida ]');
+						$('#formAdicionarProduto').hide();
+						$('#btnPagamento').hide();
+						$('#btnFinalizarVenda').hide();
+					}
 					
 				},
 				error: function(){
@@ -470,6 +585,8 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 			$('#valorProdutos').html('&nbsp;' + Formatter.moeda(retornoPossivel, 2,',','.'));
 			$('#valorRestantePagamento').html('&nbsp;' + Formatter.moeda(_this.valorRestante, 2,',','.'));
 			$('#valorPagamento').val(Formatter.moeda(_this.valorRestante, 2,',','.'));
+
+			this.calcularValorRestante();
 			
 		}
 
@@ -494,20 +611,38 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 			var _this = this;
 
 			if(this.validarCampoObrigatorio('formPagamento')){
-			
-				_this.formaPagamento[App.count(_this.formaPagamento)] = {'tipo':$('#pagamento').val(), 'parcelas':$('#parcelas').val(), 'valor': Formatter.converteMoedaFloat($('#valorPagamento').val())};
 
+				var id = _this.codFormaPagamento;
+				
+				_this.formaPagamento[id] = {'tipo':$('#pagamento').val(), 'parcelas':$('#parcelas').val(), 'valor': $('#valorPagamento').maskMoney('unmasked')[0]};
+
+				console.log(_this.formaPagamento);
+				
 				_this.atualizarQtdPagamento();
 				_this.calcularValorRestante();
 
-				$('#divFormasPagamento').append('<p>Tipo: ' + $('#pagamento').val() + ' Parcelas: ' + $('#parcelas').val() + ' Valor:' + $('#valorPagamento').val() + '</p>');
+				$('#divFormasPagamento').append('<p id="formaPagamento_'+id+'">Tipo: ' + _this.formaPagamento[id].tipo + ' Parcelas: ' + _this.formaPagamento[id].parcelas + ' Valor:' + Formatter.moeda(_this.formaPagamento[id].valor, 2,',','.') + ' <a href="javascript:venda.excluirFormaPagamento('+id+')" >Excluir</a></p>');
 
+				_this.codFormaPagamento++;
+				
 				$('#pagamento').val('-1');
 				$('#parcelas').val('-1');
-				$('#valorPagamento').val(Formatter.moeda(_this.valorRestante, 2,',','.'));
 				
 			}
 			
+		}
+
+		this.excluirFormaPagamento = function(id){
+
+			var _this = this;
+			
+			delete _this.formaPagamento[id];
+			
+			$('#formaPagamento_'+id).remove();
+
+			_this.atualizarQtdPagamento();
+			_this.calcularValorRestante();
+
 		}
 
 		this.atualizarQtdPagamento = function(){
@@ -542,6 +677,8 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 				$('#btnFinalizarVenda').attr('disabled', 'disabled');
 			}
 
+			$('#valorPagamento').val(Formatter.moeda(_this.valorRestante, 2,',','.'));
+						
 		}
 		
 		this.salvar = function(){
@@ -592,6 +729,7 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 
 	config.id								= '<?php echo $_smarty_tpl->tpl_vars['id']->value;?>
 ';
+	config.hash							= '';
 	config.idCliente				= '<?php echo $_smarty_tpl->tpl_vars['idCliente']->value;?>
 ';
 	config.urlDadosVenda		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
@@ -614,6 +752,10 @@ venda/pesquisar-produto';
 venda/pesquisar-produto-venda';
 	config.urlSalvar				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 venda/finalizar-venda';
+	config.urlAprovar				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/aprovar-venda';
+	config.urlExcluir				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/excluir-venda';
 
 	$(document).ready(function(){
 
@@ -680,7 +822,7 @@ venda">
 								<div class="form-group">
 							    <label for="inputEmail3" class="col-sm-2 control-label">Tipo</label>
 									<div class="col-sm-10">
-							        <label class="control-label" id="tipo">Or&ccedil;amento</label>
+							        <label class="control-label" id="tipo"></label>
 							    </div>							  
 							  </div>							
 								<div class="form-group">
@@ -712,8 +854,10 @@ venda">
 							  <div class="form-group" style="margin-top: 15px">
 							    <div class="col-sm-offset-2 col-sm-10">
 							      <button type="button" style="width: 120px" class="btn btn-success" disabled="disabled" onclick="javascript:venda.finalizarVenda()" id="btnPagamento">Pagamento</button>
+							      <button type="button" style="width: 120px; display: none" class="btn btn-success" onclick="javascript:venda.aprovarVenda()" id="btnAprovar">Aprovar Venda</button>
+							      <button type="button" style="width: 120px; display: none" class="btn btn-success" onclick="javascript:venda.transmitirVenda()" id="btnTransmitir">Emitir NFE</button>
 							      <button type="button" style="width: 120px" class="btn btn-primary" disabled="disabled"  onclick="javascript:venda.salvar()" id="btnFinalizarVenda">Finalizar Venda</button>
-							      <button type="button" style="width: 120px; display: none" class="btn btn-danger" disabled="disabled">Excluir Venda</button>
+							      <button type="button" style="width: 120px; display: none" class="btn btn-danger" id="btnExcluir" onclick="javascript:venda.excluirVenda()">Excluir Venda</button>
 							      <button type="button" style="width: 120px" class="btn btn-warning" onclick="venda.nova()" >Nova Venda</button>
 							    </div>
 							  </div>					
@@ -735,6 +879,7 @@ venda">
 										<div class="form-group col-md-2" style="padding-left: 5px">
 											<label>Sub-Categoria</label>
 											<select class="form-control" id="id_subcategoria" name="id_subcategoria">
+												<option>Categoria n&atilde;o informado(a)</option>
 											</select>
 										</div>
 										<div class="form-group col-md-3" style="padding-left: 5px">
@@ -890,6 +1035,22 @@ venda">
 		      	</form>
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 		        <button type="button" class="btn btn-primary" onclick="javascript:venda.adicionarProduto()">Adicionar</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		
+		<div class="modal fade" tabindex="-1" role="dialog" id="modalTransmitir">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Transmitir Venda</h4>
+		      </div>
+		      <div class="modal-body">
+		      	<p></p>
+		      </div>
+		      <div class="modal-footer">
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->

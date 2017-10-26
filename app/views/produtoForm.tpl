@@ -43,14 +43,78 @@
 		
 		var form = new Form('produtoForm', config);
 
+		form.salvar = function(){
+
+			var _this = this;
+			
+			_this.reset();
+			
+			$('.salvar').hide();
+			$('.disabled').show();
+			
+			if(this.validarCampoObrigatorio()){
+
+				$('#preco_custo').val($('#preco_custo').maskMoney('unmasked')[0]);
+				$('#preco_venda').val($('#preco_venda').maskMoney('unmasked')[0]);
+
+				console.log($('#preco_custo').val());
+				
+				jQuery.ajax({
+					type:'POST',
+					global:true,
+					url:_this.opcoes.salvar,
+					dataType:'json',
+					data:$('#form_'+_this.modelo).serialize(),
+					success: function(data){
+
+						$('#preco_custo').maskMoney('mask');
+						$('#preco_venda').maskMoney('mask');
+						
+						_this.reset();
+						
+						$('.btn-primary').show();
+						$('.disabled').hide();
+						
+						if(data.error == '1'){
+							$('#divError').show();
+							$('#divError').html(data.msg);
+						}else{
+							$('#divSuccess').show();
+							$('#divSuccess').html(data.msg + ' <a style="cursor: pointer" onclick="javascript:form.novo()">clique aqui</a> para inserir um novo registro.</a>');
+						}
+						
+					},
+					failure: function(){
+					}
+				});
+				
+			}else{
+
+				alert("Os Campos em vermelho sao obrigatorios.");
+				$('.salvar').show();
+				$('.disabled').hide();
+				
+			}
+			
+		
+		}
+
+		
 		$(document).ready(function(){
 	
 			form.criarFormulario();
 			form.carregarCamposEntidade();
 			form.load();
 
+			$('#preco_custo').attr('data-thousands', '.');
+			$('#preco_custo').attr('data-decimal', ',');
 			$('#preco_custo').maskMoney();
+			$('#preco_custo').maskMoney('mask');
+			
+			$('#preco_venda').attr('data-thousands', '.');
+			$('#preco_venda').attr('data-decimal', ',');
 			$('#preco_venda').maskMoney();
+			$('#preco_venda').maskMoney('mask');
 			
 		});
 

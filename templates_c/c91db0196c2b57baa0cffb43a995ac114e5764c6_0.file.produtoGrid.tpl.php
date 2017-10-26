@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-12 20:28:37
+<?php /* Smarty version 3.1.27, created on 2017-10-26 01:22:36
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/produtoGrid.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:140102953959dffaa5affd51_23092721%%*/
+/*%%SmartyHeaderCode:34163488659f1630ce98750_12110841%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c91db0196c2b57baa0cffb43a995ac114e5764c6' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/produtoGrid.tpl',
-      1 => 1507850916,
+      1 => 1508991754,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '140102953959dffaa5affd51_23092721',
+  'nocache_hash' => '34163488659f1630ce98750_12110841',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59dffaa5b3ddb4_61871652',
+  'unifunc' => 'content_59f1630cecaa92_47079264',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59dffaa5b3ddb4_61871652')) {
-function content_59dffaa5b3ddb4_61871652 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59f1630cecaa92_47079264')) {
+function content_59f1630cecaa92_47079264 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '140102953959dffaa5affd51_23092721';
+$_smarty_tpl->properties['nocache_hash'] = '34163488659f1630ce98750_12110841';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -67,7 +67,7 @@ produto/excluir';
 		config.colunas = [];
 		config.colunas.push({'nome':'id',		'titulo':'#' 		,'width':'5%', 	'cssbody':'text-align:center'});
 		config.colunas.push({'nome':'nome',		'titulo':'NOME'	,								'cssbody':'text-align:left'});
-		config.colunas.push({'nome':'preco_venda',	'titulo':'PRE&Ccedil;O'	, 'width':'20%', 								'cssbody':'text-align:right'});
+		config.colunas.push({'nome':'preco_venda',	'titulo':'PRE&Ccedil;O'	, 'width':'20%', 	'funcaoFormatter':'Formatter.formatMoedaReal', 								'cssbody':'text-align:right'});
 	
 		var grid = new Grid('produtoGrid', config);
 

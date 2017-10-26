@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-24 23:19:42
+<?php /* Smarty version 3.1.27, created on 2017-10-26 01:20:58
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/produtoForm.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:2135163259eff4bee71c15_52955353%%*/
+/*%%SmartyHeaderCode:174348478059f162aadb7306_46138695%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'a3e062f276792b6d3aee684a443adc5e72f08722' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/produtoForm.tpl',
-      1 => 1508897981,
+      1 => 1508991657,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2135163259eff4bee71c15_52955353',
+  'nocache_hash' => '174348478059f162aadb7306_46138695',
   'variables' => 
   array (
     'basePath' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59eff4beeb4f51_57641770',
+  'unifunc' => 'content_59f162aadfc470_21070040',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59eff4beeb4f51_57641770')) {
-function content_59eff4beeb4f51_57641770 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59f162aadfc470_21070040')) {
+function content_59f162aadfc470_21070040 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '2135163259eff4bee71c15_52955353';
+$_smarty_tpl->properties['nocache_hash'] = '174348478059f162aadb7306_46138695';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -85,14 +85,78 @@ subcategoria', 'dependencia':'id_categoria', 'tituloDependencia':'Categoria',			
 		
 		var form = new Form('produtoForm', config);
 
+		form.salvar = function(){
+
+			var _this = this;
+			
+			_this.reset();
+			
+			$('.salvar').hide();
+			$('.disabled').show();
+			
+			if(this.validarCampoObrigatorio()){
+
+				$('#preco_custo').val($('#preco_custo').maskMoney('unmasked')[0]);
+				$('#preco_venda').val($('#preco_venda').maskMoney('unmasked')[0]);
+
+				console.log($('#preco_custo').val());
+				
+				jQuery.ajax({
+					type:'POST',
+					global:true,
+					url:_this.opcoes.salvar,
+					dataType:'json',
+					data:$('#form_'+_this.modelo).serialize(),
+					success: function(data){
+
+						$('#preco_custo').maskMoney('mask');
+						$('#preco_venda').maskMoney('mask');
+						
+						_this.reset();
+						
+						$('.btn-primary').show();
+						$('.disabled').hide();
+						
+						if(data.error == '1'){
+							$('#divError').show();
+							$('#divError').html(data.msg);
+						}else{
+							$('#divSuccess').show();
+							$('#divSuccess').html(data.msg + ' <a style="cursor: pointer" onclick="javascript:form.novo()">clique aqui</a> para inserir um novo registro.</a>');
+						}
+						
+					},
+					failure: function(){
+					}
+				});
+				
+			}else{
+
+				alert("Os Campos em vermelho sao obrigatorios.");
+				$('.salvar').show();
+				$('.disabled').hide();
+				
+			}
+			
+		
+		}
+
+		
 		$(document).ready(function(){
 	
 			form.criarFormulario();
 			form.carregarCamposEntidade();
 			form.load();
 
+			$('#preco_custo').attr('data-thousands', '.');
+			$('#preco_custo').attr('data-decimal', ',');
 			$('#preco_custo').maskMoney();
+			$('#preco_custo').maskMoney('mask');
+			
+			$('#preco_venda').attr('data-thousands', '.');
+			$('#preco_venda').attr('data-decimal', ',');
 			$('#preco_venda').maskMoney();
+			$('#preco_venda').maskMoney('mask');
 			
 		});
 

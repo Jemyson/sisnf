@@ -8,6 +8,10 @@ require_once CONTROLLERS.'ClienteController.php';
 class VendaController extends AppController{
 	
 	private static $_INICIADA = 1;
+	private static $_AGUARDANDO = 2;
+	private static $_FINALIZADA = 3;
+	private static $_EMITIDA = 4;
+	private static $_EXCLUIDA = 5;
 	
 	public function indexAction(){
 		
@@ -247,6 +251,12 @@ class VendaController extends AppController{
 		
 		if(count($dados) != 0){
 			
+			if($dados[0]['tipo'] == '1'){
+				$venda['status'] = self::$_AGUARDANDO;
+			}else{
+				$venda['status'] = self::$_FINALIZADA;
+			}
+			
 			if($model->atualizar($venda, 'id')){
 				
 				$modelProduto->delete(array('id_venda'=>$venda['id']), 'id_venda');
@@ -285,6 +295,87 @@ class VendaController extends AppController{
 			}
 					
 		}
+		
+	}
+	
+	public function aprovarVendaAction(){
+		
+		if(!isset($_REQUEST['id']) || !isset($_REQUEST['hash'])){
+			// [901] Erro de seguranca - Tentativa de alterar id manualmente
+			print_r(json_encode(array('error'=>'1', 'msg'=>'Houve um erro ao tentar propressar os dados! Por favor tente novamente. Cod-901')));
+			die();
+		}
+		
+		if($_REQUEST['hash'] != md5('sisnf'.$_REQUEST['id'])){
+			// [902] Erro de seguranca - Tentativa de alterar id manualmente
+			print_r(json_encode(array('error'=>'1', 'msg'=>'Houve um erro ao tentar propressar os dados! Por favor tente novamente. Cod-902')));
+			die();
+		}
+		
+		$model = new VendaModel();
+
+		$dados = $model->pesquisar("id = {$_REQUEST['id']}");
+			
+		unset($_REQUEST['hash']);
+
+		$_REQUEST['tipo'] = 2;
+		$_REQUEST['status'] = self::$_FINALIZADA;
+		
+		if(count($dados) != 0){
+			
+			if($model->atualizar($_REQUEST, 'id')){
+				// Registro atualizado
+				print_r(json_encode(array('error'=>'0', 'msg'=>'Registro alterado com sucesso.')));
+				die();
+			}else{
+				// [801] Erro de banco - Falha na tentativa de atualizar os dados
+				print_r(json_encode(array('error'=>'1', 'msg'=>'Houve um erro ao tentar propressar os dados! Por favor tente novamente. Cod-801')));
+				die();
+			}
+						
+		}
+		
+		die();	
+		
+	}
+	
+	public function excluirVendaAction(){
+
+		if(!isset($_REQUEST['id']) || !isset($_REQUEST['hash'])){
+			// [901] Erro de seguranca - Tentativa de alterar id manualmente
+			print_r(json_encode(array('error'=>'1', 'msg'=>'Houve um erro ao tentar propressar os dados! Por favor tente novamente. Cod-901')));
+			die();
+		}
+		
+		if($_REQUEST['hash'] != md5('sisnf'.$_REQUEST['id'])){
+			// [902] Erro de seguranca - Tentativa de alterar id manualmente
+			print_r(json_encode(array('error'=>'1', 'msg'=>'Houve um erro ao tentar propressar os dados! Por favor tente novamente. Cod-902')));
+			die();
+		}
+		
+		$model = new VendaModel();
+
+		$dados = $model->pesquisar("id = {$_REQUEST['id']}");
+			
+		unset($_REQUEST['hash']);
+
+		$_REQUEST['status'] = self::$_EXCLUIDA;
+		
+		if(count($dados) != 0){
+			
+			if($model->atualizar($_REQUEST, 'id')){
+				// Registro atualizado
+				print_r(json_encode(array('error'=>'0', 'msg'=>'Registro alterado com sucesso.')));
+				die();
+			}else{
+				// [801] Erro de banco - Falha na tentativa de atualizar os dados
+				print_r(json_encode(array('error'=>'1', 'msg'=>'Houve um erro ao tentar propressar os dados! Por favor tente novamente. Cod-801')));
+				die();
+			}
+						
+		}
+		
+		die();	
 		
 	}
 	

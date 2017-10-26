@@ -4,8 +4,14 @@ Formatter = function(){
 		
 		var data = '';
 		var tmp = record[coluna.nome]+'';
-		tmp = tmp.split('-');
-		data = tmp[2]+'/'+tmp[1]+'/'+tmp[0];
+		
+		if(tmp != 'null' && App.isset(tmp)){
+			tmp = tmp.split('-');
+			data = tmp[2]+'/'+tmp[1]+'/'+tmp[0];
+		}else{
+			data = '-/-/-';
+		}
+		
 		return data;
 		
 	}

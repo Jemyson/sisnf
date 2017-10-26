@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-17 21:47:37
+<?php /* Smarty version 3.1.27, created on 2017-10-26 02:08:59
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaGrid.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:122082438359e6a4a93fe607_51506591%%*/
+/*%%SmartyHeaderCode:87212187259f16deb0eb933_13475789%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cbb742a2c00e35155ce6e89e55ca7002b4315c24' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaGrid.tpl',
-      1 => 1508283150,
+      1 => 1508994430,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '122082438359e6a4a93fe607_51506591',
+  'nocache_hash' => '87212187259f16deb0eb933_13475789',
   'variables' => 
   array (
     'basePath' => 0,
@@ -21,13 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59e6a4a944d459_76964558',
+  'unifunc' => 'content_59f16deb123b25_44222418',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59e6a4a944d459_76964558')) {
-function content_59e6a4a944d459_76964558 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59f16deb123b25_44222418')) {
+function content_59f16deb123b25_44222418 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '122082438359e6a4a93fe607_51506591';
+$_smarty_tpl->properties['nocache_hash'] = '87212187259f16deb0eb933_13475789';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -71,8 +71,8 @@ venda/excluir';
 '});
 		config.colunas.push({'nome':'tipo',					'titulo':'TIPO',		'cssbody':'text-align:center', 	'formatterDados':'{"1":"Or&ccedil;amento", "2":"Venda"}'});
 		config.colunas.push({'nome':'data_venda',		'titulo':'DATA',		'cssbody':'text-align:center',	'funcaoFormatter':'Formatter.data'});
-		config.colunas.push({'nome':'valor',				'titulo':'VALOR',  	'cssbody':'text-align:right'});
-		config.colunas.push({'nome':'status',				'titulo':'STATUS',  'cssbody':'text-align:center', 	'formatterDados':'{"0":"Aguardando", "1":"Pendente", "2":"Pago"}'});
+		config.colunas.push({'nome':'valor',				'titulo':'VALOR',  	'cssbody':'text-align:right', 	'funcaoFormatter':'Formatter.formatMoedaReal'});
+		config.colunas.push({'nome':'status',				'titulo':'STATUS',  'cssbody':'text-align:center', 	'formatterDados':'{"1":"Iniciada", "2":"Aguardando", "3":"Finalizada", "4":"Emitida", "5":"Excluida"}'});
 	
 		var grid = new Grid('vendaGrid', config);
 
