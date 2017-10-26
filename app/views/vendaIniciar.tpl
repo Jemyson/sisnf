@@ -30,7 +30,21 @@
 		}
 
 		this.transmitirVenda = function(){
+			$('#processando').show();
+			$('#erroAlerta').hide();
+			$('#loading').show();
+			$('#alerta').hide();
 			$('#modalTransmitir').modal();
+
+			setTimeout(function(){
+				$('#loading').hide();
+				$('#alerta').show();
+				$('#processando').hide();
+				$('#erroAlerta').show();
+			    //do what you need here
+			}, 5000);
+			
+			
 		}
 
 		this.excluirVenda = function(){
@@ -995,10 +1009,14 @@
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title">Transmitir Venda</h4>
 		      </div>
-		      <div class="modal-body">
-		      	<p></p>
-		      </div>
-		      <div class="modal-footer">
+		      <div class="modal-body" style="text-align: center">
+		      	<p id="processando">Processando os dados. aguarde...</p>
+		      	<br>
+		      	<img src="{$basePath}img/loading.gif" id="loading" />
+		      	<img src="{$basePath}img/alerta.png" width="150px" style="display: none" id="alerta" />
+		      	<br>
+		      	<br>
+		      	<p id="erroAlerta">Erro ao processar. Sistema em desenvolvimento!</p>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->

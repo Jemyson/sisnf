@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-26 02:11:00
+<?php /* Smarty version 3.1.27, created on 2017-10-26 02:33:11
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:67896300359f16e641207a6_52212387%%*/
+/*%%SmartyHeaderCode:4044690959f17397301bf6_54239179%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7b561ed5ab4332ed28f68cb3ae3c5fca9da41b45' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl',
-      1 => 1508994658,
+      1 => 1508995989,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '67896300359f16e641207a6_52212387',
+  'nocache_hash' => '4044690959f17397301bf6_54239179',
   'variables' => 
   array (
     'id' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59f16e64192345_89519770',
+  'unifunc' => 'content_59f1739736f5a4_29980345',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59f16e64192345_89519770')) {
-function content_59f16e64192345_89519770 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59f1739736f5a4_29980345')) {
+function content_59f1739736f5a4_29980345 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '67896300359f16e641207a6_52212387';
+$_smarty_tpl->properties['nocache_hash'] = '4044690959f17397301bf6_54239179';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -64,7 +64,21 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 		}
 
 		this.transmitirVenda = function(){
+			$('#processando').show();
+			$('#erroAlerta').hide();
+			$('#loading').show();
+			$('#alerta').hide();
 			$('#modalTransmitir').modal();
+
+			setTimeout(function(){
+				$('#loading').hide();
+				$('#alerta').show();
+				$('#processando').hide();
+				$('#erroAlerta').show();
+			    //do what you need here
+			}, 5000);
+			
+			
 		}
 
 		this.excluirVenda = function(){
@@ -1047,10 +1061,16 @@ venda">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title">Transmitir Venda</h4>
 		      </div>
-		      <div class="modal-body">
-		      	<p></p>
-		      </div>
-		      <div class="modal-footer">
+		      <div class="modal-body" style="text-align: center">
+		      	<p id="processando">Processando os dados. aguarde...</p>
+		      	<br>
+		      	<img src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+img/loading.gif" id="loading" />
+		      	<img src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+img/alerta.png" width="150px" style="display: none" id="alerta" />
+		      	<br>
+		      	<br>
+		      	<p id="erroAlerta">Erro ao processar. Sistema em desenvolvimento!</p>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
