@@ -926,24 +926,27 @@
 								<br>
 								<br>
 						
-								<table id="tabelaProdutosVenda" class="table table-condensed table-striped">
-								
-									<thead>
-										<tr>
-											<th style="text-align: center"></th>
-											<th style="text-align: center">Produto</th>
-											<th style="text-align: center">Qtd</th>
-											<th style="text-align: center">Val unit</th>
-											<th style="text-align: center">Total</th>
-											<th style="text-align: center">Tributo</th>
-											<th style="text-align: center">A&ccedil;&otilde;es</th>
-										</tr>
-									</thead>
-									<tbody>
-									</tbody>
-								
-								</table>
+								<div class="box-body table-responsive no-padding">
+						
+									<table id="tabelaProdutosVenda" class="table table-condensed table-striped">
+									
+										<thead>
+											<tr>
+												<th style="text-align: center"></th>
+												<th style="text-align: center">Produto</th>
+												<th style="text-align: center">Qtd</th>
+												<th style="text-align: center">Val unit</th>
+												<th style="text-align: center">Total</th>
+												<th style="text-align: center">Tributo</th>
+												<th style="text-align: center">A&ccedil;&otilde;es</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									
+									</table>
 
+								</div>
 						
 						</div>
 						

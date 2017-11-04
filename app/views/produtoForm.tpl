@@ -40,6 +40,10 @@
 		config.colunas.push({'nome':'preco_custo','titulo':'Pre&ccedil;o Custo',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'preco_venda','titulo':'Pre&ccedil;o Venda',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
+		config.colunas.push({'tipo':'linha'});
+		config.colunas.push({'nome':'ncm','titulo':'NCM',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
+		config.colunas.push({'tipo':'linha'});
+		config.colunas.push({'nome':'cfop','titulo':'CFOP',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		
 		var form = new Form('produtoForm', config);
 

@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-21 23:08:31
+<?php /* Smarty version 3.1.27, created on 2017-11-01 22:25:13
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/clienteGrid.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:90499415059ebfd9fc3e0a3_98267270%%*/
+/*%%SmartyHeaderCode:152755697559fa73f91e63b5_80324681%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0b2737de5ede61af5f52065ba9c0deef95a17089' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/clienteGrid.tpl',
-      1 => 1508638109,
+      1 => 1508984592,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '90499415059ebfd9fc3e0a3_98267270',
+  'nocache_hash' => '152755697559fa73f91e63b5_80324681',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59ebfd9fc872f6_22718291',
+  'unifunc' => 'content_59fa73f922d681_86759626',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59ebfd9fc872f6_22718291')) {
-function content_59ebfd9fc872f6_22718291 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59fa73f922d681_86759626')) {
+function content_59fa73f922d681_86759626 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '90499415059ebfd9fc3e0a3_98267270';
+$_smarty_tpl->properties['nocache_hash'] = '152755697559fa73f91e63b5_80324681';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -67,6 +67,8 @@ cliente/excluir';
 		config.colunas = [];
 		config.colunas.push({'nome':'id',		'titulo':'#',			'width':'5%', 'cssbody':'text-align:center'});
 		config.colunas.push({'nome':'nome',	'titulo':'NOME',								'cssbody':'text-align:left'});
+		config.colunas.push({'nome':'telefone',	'titulo':'TELEFONE',								'cssbody':'text-align:center'});
+		config.colunas.push({'nome':'celular',	'titulo':'CELULAR',								'cssbody':'text-align:center'});
 	
 		var grid = new Grid('clienteGrid', config);
 

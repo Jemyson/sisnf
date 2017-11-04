@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-26 01:20:58
+<?php /* Smarty version 3.1.27, created on 2017-11-01 21:15:11
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/produtoForm.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:174348478059f162aadb7306_46138695%%*/
+/*%%SmartyHeaderCode:90785197459fa638f7c13d5_71893404%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'a3e062f276792b6d3aee684a443adc5e72f08722' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/produtoForm.tpl',
-      1 => 1508991657,
+      1 => 1509581697,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '174348478059f162aadb7306_46138695',
+  'nocache_hash' => '90785197459fa638f7c13d5_71893404',
   'variables' => 
   array (
     'basePath' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59f162aadfc470_21070040',
+  'unifunc' => 'content_59fa638f83fac3_37012467',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59f162aadfc470_21070040')) {
-function content_59f162aadfc470_21070040 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59fa638f83fac3_37012467')) {
+function content_59fa638f83fac3_37012467 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '174348478059f162aadb7306_46138695';
+$_smarty_tpl->properties['nocache_hash'] = '90785197459fa638f7c13d5_71893404';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -82,6 +82,10 @@ subcategoria', 'dependencia':'id_categoria', 'tituloDependencia':'Categoria',			
 		config.colunas.push({'nome':'preco_custo','titulo':'Pre&ccedil;o Custo',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'preco_venda','titulo':'Pre&ccedil;o Venda',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
+		config.colunas.push({'tipo':'linha'});
+		config.colunas.push({'nome':'ncm','titulo':'NCM',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
+		config.colunas.push({'tipo':'linha'});
+		config.colunas.push({'nome':'cfop','titulo':'CFOP',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		
 		var form = new Form('produtoForm', config);
 

@@ -110,7 +110,7 @@
 					<a href="{$basePath}venda"><i class="glyphicon glyphicon-shopping-cart"></i> Vendas <span class="sr-only">(current)</span></a>
 		  	</li>
 				<li class="preview__action--close">
-					<a href="facturas.php"><i class="glyphicon glyphicon-send"></i> Faturas <span class="sr-only">(current)</span></a>
+					<a href="{$basePath}nota-fiscal/emitir"><i class="glyphicon glyphicon-send"></i> Faturas <span class="sr-only">(current)</span></a>
 		  	</li>
 				<li class="preview__action--close">
  					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -118,6 +118,9 @@
  						<span class="caret"></span>
 					</a>
  					<ul class="dropdown-menu">
+						<li class="preview__action--close">
+							<a href="{$basePath}config"><i class="glyphicon glyphicon-cog"></i> Config</a>
+				  	</li>
 						<li class="preview__action--close">
 							<a href="{$basePath}categoria"><i class="glyphicon glyphicon-th"></i> Categoria</a>
 				  	</li>

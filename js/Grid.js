@@ -640,7 +640,7 @@ Grid = function(nome, opcoes){
 	
 	this.criarTabela = function(){
 		
-		this.addHtml('<table class="table table-condensed table-bordered" id="tabela_'+this.nome+'" style="padding-top: auto">');
+		this.addHtml('<table class="table table-condensed table-bordered" id="tabela" style="padding-top: auto">');
 
 		this.addHtml('<caption>');
 		
@@ -672,6 +672,12 @@ Grid = function(nome, opcoes){
 		this.addHtml('</div>');
 
 		this.addHtml('</caption>');
+
+		this.addHtml('</table>');
+		
+		this.addHtml('<div class="box-body table-responsive no-padding">');
+		
+		this.addHtml('<table class="table table-condensed table-bordered" id="tabela_'+this.nome+'" style="padding-top: auto">');
 		
 		this.addHtml('<thead>');
 		this.addHtml('<tr>');
@@ -695,6 +701,8 @@ Grid = function(nome, opcoes){
 		
 		this.addHtml('<tbody>');
 		this.addHtml('</tbody>');
+		
+		this.addHtml('</div>');
 		
 		var botaoNovo = this.novoFormatter();
 		

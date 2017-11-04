@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-26 02:33:11
+<?php /* Smarty version 3.1.27, created on 2017-11-03 22:24:59
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:4044690959f17397301bf6_54239179%%*/
+/*%%SmartyHeaderCode:198513973559fd16eb5b0278_21181227%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7b561ed5ab4332ed28f68cb3ae3c5fca9da41b45' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl',
-      1 => 1508995989,
+      1 => 1509758696,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '4044690959f17397301bf6_54239179',
+  'nocache_hash' => '198513973559fd16eb5b0278_21181227',
   'variables' => 
   array (
     'id' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59f1739736f5a4_29980345',
+  'unifunc' => 'content_59fd16eb6216c1_49376239',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59f1739736f5a4_29980345')) {
-function content_59f1739736f5a4_29980345 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59fd16eb6216c1_49376239')) {
+function content_59fd16eb6216c1_49376239 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '4044690959f17397301bf6_54239179';
+$_smarty_tpl->properties['nocache_hash'] = '198513973559fd16eb5b0278_21181227';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -978,24 +978,27 @@ venda">
 								<br>
 								<br>
 						
-								<table id="tabelaProdutosVenda" class="table table-condensed table-striped">
-								
-									<thead>
-										<tr>
-											<th style="text-align: center"></th>
-											<th style="text-align: center">Produto</th>
-											<th style="text-align: center">Qtd</th>
-											<th style="text-align: center">Val unit</th>
-											<th style="text-align: center">Total</th>
-											<th style="text-align: center">Tributo</th>
-											<th style="text-align: center">A&ccedil;&otilde;es</th>
-										</tr>
-									</thead>
-									<tbody>
-									</tbody>
-								
-								</table>
+								<div class="box-body table-responsive no-padding">
+						
+									<table id="tabelaProdutosVenda" class="table table-condensed table-striped">
+									
+										<thead>
+											<tr>
+												<th style="text-align: center"></th>
+												<th style="text-align: center">Produto</th>
+												<th style="text-align: center">Qtd</th>
+												<th style="text-align: center">Val unit</th>
+												<th style="text-align: center">Total</th>
+												<th style="text-align: center">Tributo</th>
+												<th style="text-align: center">A&ccedil;&otilde;es</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									
+									</table>
 
+								</div>
 						
 						</div>
 						

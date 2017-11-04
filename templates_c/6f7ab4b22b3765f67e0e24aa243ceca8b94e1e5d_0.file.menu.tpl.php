@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-10-25 23:25:40
+<?php /* Smarty version 3.1.27, created on 2017-11-01 21:59:03
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:68447757859f147a47ff4d9_02286639%%*/
+/*%%SmartyHeaderCode:157312062859fa6dd7a91dd6_52992800%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6f7ab4b22b3765f67e0e24aa243ceca8b94e1e5d' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl',
-      1 => 1508984592,
+      1 => 1509584342,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '68447757859f147a47ff4d9_02286639',
+  'nocache_hash' => '157312062859fa6dd7a91dd6_52992800',
   'variables' => 
   array (
     'basePath' => 0,
@@ -21,13 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59f147a4854062_56113022',
+  'unifunc' => 'content_59fa6dd7aea154_22360628',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59f147a4854062_56113022')) {
-function content_59f147a4854062_56113022 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_59fa6dd7aea154_22360628')) {
+function content_59fa6dd7aea154_22360628 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '68447757859f147a47ff4d9_02286639';
+$_smarty_tpl->properties['nocache_hash'] = '157312062859fa6dd7a91dd6_52992800';
 ?>
 
 <style>
@@ -148,7 +148,8 @@ produto"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
 venda"><i class="glyphicon glyphicon-shopping-cart"></i> Vendas <span class="sr-only">(current)</span></a>
 		  	</li>
 				<li class="preview__action--close">
-					<a href="facturas.php"><i class="glyphicon glyphicon-send"></i> Faturas <span class="sr-only">(current)</span></a>
+					<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+nota-fiscal/emitir"><i class="glyphicon glyphicon-send"></i> Faturas <span class="sr-only">(current)</span></a>
 		  	</li>
 				<li class="preview__action--close">
  					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -156,6 +157,10 @@ venda"><i class="glyphicon glyphicon-shopping-cart"></i> Vendas <span class="sr-
  						<span class="caret"></span>
 					</a>
  					<ul class="dropdown-menu">
+						<li class="preview__action--close">
+							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+config"><i class="glyphicon glyphicon-cog"></i> Config</a>
+				  	</li>
 						<li class="preview__action--close">
 							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 categoria"><i class="glyphicon glyphicon-th"></i> Categoria</a>

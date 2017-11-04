@@ -1,3 +1,20 @@
+DROP TABLE IF EXISTS config;
+
+CREATE TABLE config (
+
+	numeroNfe INT NOT NULL DEFAULT 0,
+	ambiente INT,
+	cnpj VARCHAR(255) NOT NULL PRIMARY_KEY,
+	cep VARCHAR(255),
+	endereco VARCHAR(255),
+	numero VARCHAR(255),
+	uf VARCHAR(255),
+	bairro VARCHAR(255),
+	cidade VARCHAR(255),
+	inscricaoEstadual VARCHAR(255)
+	
+);
+
 DROP TABLE IF EXISTS cliente;
 
 CREATE TABLE cliente (
@@ -89,9 +106,11 @@ CREATE TABLE produto (
 	id_categoria INT NOT NULL,
 	id_subcategoria INT NOT NULL,
 	nome VARCHAR(255),
-	unidade_medida INT,
+	unidade_medida VARCHAR(255),
 	preco_custo FLOAT(10,2),
 	preco_venda FLOAT(10,2),
+	ncm VARCHAR(255),
+	cfop VARCHAR(255),
 	excluido INT DEFAULT 0
 
 );
@@ -112,6 +131,7 @@ CREATE TABLE vendas (
 	data_realizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
 	valor FLOAT(10,2),
 	status INT,
+	chave VARCHAR(255),
 	excluido INT DEFAULT 0
 );
 
