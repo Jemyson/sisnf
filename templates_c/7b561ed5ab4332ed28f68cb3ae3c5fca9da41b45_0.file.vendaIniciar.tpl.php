@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-11-03 22:24:59
+<?php /* Smarty version 3.1.27, created on 2017-11-11 16:57:55
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:198513973559fd16eb5b0278_21181227%%*/
+/*%%SmartyHeaderCode:12152954985a07564395b339_10174030%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7b561ed5ab4332ed28f68cb3ae3c5fca9da41b45' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl',
-      1 => 1509758696,
+      1 => 1510430274,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '198513973559fd16eb5b0278_21181227',
+  'nocache_hash' => '12152954985a07564395b339_10174030',
   'variables' => 
   array (
     'id' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59fd16eb6216c1_49376239',
+  'unifunc' => 'content_5a0756439c9d80_82155652',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59fd16eb6216c1_49376239')) {
-function content_59fd16eb6216c1_49376239 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5a0756439c9d80_82155652')) {
+function content_5a0756439c9d80_82155652 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '198513973559fd16eb5b0278_21181227';
+$_smarty_tpl->properties['nocache_hash'] = '12152954985a07564395b339_10174030';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -70,11 +70,35 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 			$('#alerta').hide();
 			$('#modalTransmitir').modal();
 
+			var _this = this;
+			
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlNotaFiscal + '/emitir?id_venda=' + _this.opcoes.id + '&id_cliente=' + _this.opcoes.idCliente,
+				dataType:'json',
+				data:'',
+				success: function(data){
+
+					if(data.error == 0){
+						window.location = _this.opcoes.urlNotaFiscal + '/form?id=' + _this.opcoes.id;
+					}else{
+
+						$('#erroAlerta').html(data.msg);
+						$('#loading').hide();
+						$('#alerta').show();
+						$('#processando').hide();
+						$('#erroAlerta').show();
+
+					}
+					
+				},
+				error: function(){
+				}
+			});
+
+			
 			setTimeout(function(){
-				$('#loading').hide();
-				$('#alerta').show();
-				$('#processando').hide();
-				$('#erroAlerta').show();
 			    //do what you need here
 			}, 5000);
 			
@@ -178,7 +202,6 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 							_this.codFormaPagamento++;
 
 						}
-
 						
 					}
 
@@ -746,6 +769,8 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 	config.hash							= '';
 	config.idCliente				= '<?php echo $_smarty_tpl->tpl_vars['idCliente']->value;?>
 ';
+	config.urlNotaFiscal		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+nota-fiscal';
 	config.urlDadosVenda		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 venda/dados-form';
 	config.urlCliente				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
@@ -1043,7 +1068,7 @@ venda">
 						    <div class="col-sm-4" style="padding-left: 0px; padding-right: 10px">
 									<input class="form-control" type="text" id="valorProduto" name="valorProduto" data-thousands="." data-decimal="," obrigatorio="obrigatorio" disabled="disabled" style="text-align: right" />
 						    </div>
-						    <div class="col-sm-2 checkbox" style="padding-left: 0px">
+						    <div class="col-sm-2 checkbox" style="padding-left: 0px; display: none">
 							    <label>
 							      <input id="permitirDesconto" name="permitirDesconto"  type="checkbox" onclick="javascript:venda.aplicarDesconto()"> desconto
 							    </label>
@@ -1073,7 +1098,7 @@ img/loading.gif" id="loading" />
 img/alerta.png" width="150px" style="display: none" id="alerta" />
 		      	<br>
 		      	<br>
-		      	<p id="erroAlerta">Erro ao processar. Sistema em desenvolvimento!</p>
+		      	<p id="erroAlerta"></p>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->

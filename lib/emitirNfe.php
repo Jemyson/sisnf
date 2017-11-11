@@ -185,15 +185,18 @@ $db = $config['db']['dbname'];
 $user = $config['db']['user'];
 $pass = '';
 
+$idCliente = (int) $_REQUEST['id_cliente'];
+$idVenda = (int) $_REQUEST['id_venda'];
+
 $db = new PDO('mysql:host='.$host.';dbname='.$db, $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
 
 $emitente = $db->query("SELECT * FROM config")->fetchAll(PDO::FETCH_OBJ);
 
-$result = $db->query("SELECT * FROM cliente WHERE id = 1")->fetchAll(PDO::FETCH_OBJ);
+$result = $db->query("SELECT * FROM cliente WHERE id = {$idCliente}")->fetchAll(PDO::FETCH_OBJ);
 
 $result = current($result);
 
-$result->idVendas = 3;
+$result->idVendas = $idVenda;
 
 
 //verifica se ja foi emitida
@@ -474,7 +477,7 @@ if(!empty($dadosVenda[0]->chave)){ //já foi emitida
 	//mostra a resposta da emissão da nota
 	//o xml da nota fiscal emitida está dentro da variavel $resposta["xml"] e deve ser gravado em sua base de dados
 	//o pdf da nota fiscal emitida está dentro da variavel $resposta["pdf"] em formato texto hexadecimal
-	if($arrayResposta["cStat"]==100){ //sucesso
+	if(isset($arrayResposta["cStat"]) && $arrayResposta["cStat"]==100){ //sucesso
 		//grava xml de resposta na pasta nfe/aprovadas
 		file_put_contents("./nfe/aprovadas/nfe".$chave.".xml",base64_decode($arrayResposta["xml"]));
 		//grava pdf
@@ -482,18 +485,30 @@ if(!empty($dadosVenda[0]->chave)){ //já foi emitida
 		file_put_contents("./nfe/aprovadas/nfe".$chave.".pdf",$pdf);
 
 		//grava a chave da nfe na venda
-		$sqlUpdateVenda = "UPDATE vendas SET nfe = '".$chave."' WHERE id = '".$result->idVendas."' ";
-		$this->db->query($sqlUpdateVenda)->result();
+		$sqlUpdateVenda = "UPDATE vendas SET status = 4, nfe = '".$chave."' WHERE id = '".$result->idVendas."' ";
+		$db->query($sqlUpdateVenda)->execute();
 
 		//altera número da ultima nota emitida na empresa
-		$sqlUpdateNumero = "UPDATE emitente SET numeroNfe = '".$numeroNf."' WHERE id = '".$emitente[0]->id."' ";
-		$this->db->query($sqlUpdateNumero)->result();
+		$sqlUpdateNumero = "UPDATE config SET numeroNfe = '".$numeroNf."' ";
+		$db->query($sqlUpdateNumero)->execute();
 
+		print_r(json_encode(array('error'=>0)));
+		die();
+		
 		?>
 		<object data="data:application/pdf;base64,<?php echo base64_encode($pdf); ?>" type="application/pdf" width="100%" height="100%"></object>
 		<?php	
 	}else{ //erro na emissão (mostra o erro)
-		echo "Erro: ".$arrayResposta["cStat"]." - ".$arrayResposta["xMotivo"];
+		
+		if(isset($arrayResposta["cStat"]) && isset($arrayResposta["xMotivo"])){
+			print_r(json_encode(array('error'=>1, 'msg'=>$arrayResposta["cStat"]." - ".$arrayResposta["xMotivo"])));
+			die();
+		}else{
+			print_r(json_encode(array('error'=>1, 'msg'=>'Erro ao conectar com o servidor.')));
+			die();
+		}
+		
+		//echo "Erro: ".$arrayResposta["cStat"]." - ".$arrayResposta["xMotivo"];
 	}
 }//else (ainda não foi emitida)
 ?>

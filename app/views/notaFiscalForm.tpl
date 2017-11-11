@@ -36,40 +36,23 @@
 			$('#alerta').hide();
 			$('#modalTransmitir').modal();
 
-			var _this = this;
-			
-			$.ajax({
-				type:'POST',
-				global:true,
-				url:_this.opcoes.urlNotaFiscal + '/emitir?id_venda=' + _this.opcoes.id + '&id_cliente=' + _this.opcoes.idCliente,
-				dataType:'json',
-				data:'',
-				success: function(data){
-
-					if(data.error == 0){
-						window.location = _this.opcoes.urlNotaFiscal + '/form?id=' + _this.opcoes.id;
-					}else{
-
-						$('#erroAlerta').html(data.msg);
-						$('#loading').hide();
-						$('#alerta').show();
-						$('#processando').hide();
-						$('#erroAlerta').show();
-
-					}
-					
-				},
-				error: function(){
-				}
-			});
-
-			
 			setTimeout(function(){
+				$('#loading').hide();
+				$('#alerta').show();
+				$('#processando').hide();
+				$('#erroAlerta').show();
 			    //do what you need here
 			}, 5000);
 			
 			
 		}
+
+		this.emitirDanfe = function(){
+			window.open(this.opcoes.urlDanfe, '_blank');
+		}		
+		this.emitirXML = function(){
+			window.open(this.opcoes.urlXML, '_blank');
+		}		
 
 		this.excluirVenda = function(){
 
@@ -318,13 +301,13 @@
 							var htmlProduto = '';
 
 							htmlProduto += '<tr id="produto_'+data.produtos[chave].id_produto+'">';
-							htmlProduto += '<td style="text-align: center;"><a href="javascript:venda.removerProduto('+data.produtos[chave].id_produto+')"><i class="glyphicon glyphicon-trash"></i></a></td>';
+							htmlProduto += '<td style="text-align: center;"><span><i class="glyphicon glyphicon-trash"></i></span></td>';
 							htmlProduto += '<td>'+data.produtos[chave].nome_produto+'</td>';
 							htmlProduto += '<td style="text-align: right;">'+data.produtos[chave].qtd_produto+'</td>';
 							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda(data.produtos[chave].valor_produto, 2,',','.')+'</td>';
 							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda((data.produtos[chave].valor_produto * data.produtos[chave].qtd_produto), 2,',','.')+'</td>';
 							htmlProduto += '<td style="text-align: center;">n/d</td>';
-							htmlProduto += '<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>';
+							htmlProduto += '<td style="text-align: center;"><span><i class="glyphicon glyphicon-usd"></i></span></td>';
 							htmlProduto += '</tr>';
 	
 							_this.produtos[data.produtos[chave].id_produto] = {'id':data.produtos[chave].id_produto, 'produto':data.produtos[chave].nome_produto, 'preco_venda':data.produtos[chave].valor_produto, 'qtd':data.produtos[chave].qtd_produto};
@@ -733,7 +716,8 @@
 	config.id								= '{/literal}{$id}{literal}';
 	config.hash							= '';
 	config.idCliente				= '{/literal}{$idCliente}{literal}';
-	config.urlNotaFiscal		= '{/literal}{$basePath}{literal}nota-fiscal';
+	config.urlDanfe					= '{/literal}{$basePath}{literal}nfe/aprovadas/nfe{/literal}{$nfe}{literal}.pdf';
+	config.urlXML						= '{/literal}{$basePath}{literal}nfe/aprovadas/nfe{/literal}{$nfe}{literal}.xml';
 	config.urlDadosVenda		= '{/literal}{$basePath}{literal}venda/dados-form';
 	config.urlCliente				= '{/literal}{$basePath}{literal}cliente/dados-form';
 	config.urlVenda 				= '{/literal}{$basePath}{literal}venda';
@@ -841,9 +825,9 @@
 							    <div class="col-sm-offset-2 col-sm-10">
 							      <button type="button" style="width: 120px" class="btn btn-success" disabled="disabled" onclick="javascript:venda.finalizarVenda()" id="btnPagamento">Pagamento</button>
 							      <button type="button" style="width: 120px; display: none" class="btn btn-success" onclick="javascript:venda.aprovarVenda()" id="btnAprovar">Aprovar Venda</button>
-							      <button type="button" style="width: 120px; display: none" class="btn btn-success" onclick="javascript:venda.transmitirVenda()" id="btnTransmitir">Emitir NFE</button>
+							      <button type="button" style="width: 120px" class="btn btn-success" onclick="javascript:venda.emitirDanfe()" id="btnTransmitir">DANFE</button>
 							      <button type="button" style="width: 120px" class="btn btn-primary" disabled="disabled"  onclick="javascript:venda.salvar()" id="btnFinalizarVenda">Finalizar Venda</button>
-							      <button type="button" style="width: 120px; display: none" class="btn btn-danger" id="btnExcluir" onclick="javascript:venda.excluirVenda()">Excluir Venda</button>
+							      <button type="button" style="width: 120px" class="btn btn-danger" id="btnExcluir" onclick="javascript:venda.emitirXML()">XML</button>
 							      <button type="button" style="width: 120px" class="btn btn-warning" onclick="venda.nova()" >Nova Venda</button>
 							    </div>
 							  </div>					
@@ -1015,7 +999,7 @@
 						    <div class="col-sm-4" style="padding-left: 0px; padding-right: 10px">
 									<input class="form-control" type="text" id="valorProduto" name="valorProduto" data-thousands="." data-decimal="," obrigatorio="obrigatorio" disabled="disabled" style="text-align: right" />
 						    </div>
-						    <div class="col-sm-2 checkbox" style="padding-left: 0px; display: none">
+						    <div class="col-sm-2 checkbox" style="padding-left: 0px">
 							    <label>
 							      <input id="permitirDesconto" name="permitirDesconto"  type="checkbox" onclick="javascript:venda.aplicarDesconto()"> desconto
 							    </label>
@@ -1043,7 +1027,7 @@
 		      	<img src="{$basePath}img/alerta.png" width="150px" style="display: none" id="alerta" />
 		      	<br>
 		      	<br>
-		      	<p id="erroAlerta"></p>
+		      	<p id="erroAlerta">Erro ao processar. Sistema em desenvolvimento!</p>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->

@@ -49,8 +49,6 @@
 		config.colunas.push({'nome':'uf','titulo':'UF',		'tipo':'text',			'span':'1',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'telefone','titulo':'Telefone',		'tipo':'text',			'span':'2',	'classe':'input-xlarge',	'obrigatorio':'0'});
-		config.colunas.push({'tipo':'linha'});
-		config.colunas.push({'nome':'ambiente','titulo':'AMBIENTE',		'tipo':'text',			'span':'1',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		
 		var form = new Form('configForm', config);
 
@@ -108,6 +106,8 @@
 			form.carregarCamposEntidade();
 			form.load();
 
+			$('#cep').mask('00000-000');
+
 			$('#cep').blur(function(){
 
 				var cep = $(this).val().replace(/\D/g, '');
@@ -122,7 +122,7 @@
 						data:'',
 						success: function(data){
 	
-							$('#endereco').val(data.logradouro);
+							$('#rua').val(data.logradouro);
 							$('#bairro').val(data.bairro);
 							$('#cidade').val(data.localidade);
 							$('#cod_cidade').val(data.ibge);

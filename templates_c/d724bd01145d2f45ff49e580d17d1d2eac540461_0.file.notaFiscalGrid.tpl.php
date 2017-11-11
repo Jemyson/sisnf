@@ -1,19 +1,19 @@
-<?php /* Smarty version 3.1.27, created on 2017-11-11 16:49:27
-         compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaGrid.tpl" */ ?>
+<?php /* Smarty version 3.1.27, created on 2017-11-11 16:50:08
+         compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/notaFiscalGrid.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:2864284295a075447176bf9_98805764%%*/
+/*%%SmartyHeaderCode:933574635a075470a03bf3_56941419%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    'cbb742a2c00e35155ce6e89e55ca7002b4315c24' => 
+    'd724bd01145d2f45ff49e580d17d1d2eac540461' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaGrid.tpl',
-      1 => 1510429766,
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/notaFiscalGrid.tpl',
+      1 => 1510429806,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2864284295a075447176bf9_98805764',
+  'nocache_hash' => '933574635a075470a03bf3_56941419',
   'variables' => 
   array (
     'basePath' => 0,
@@ -21,13 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_5a0754471ba999_25837128',
+  'unifunc' => 'content_5a075470a4d8c4_92491569',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_5a0754471ba999_25837128')) {
-function content_5a0754471ba999_25837128 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5a075470a4d8c4_92491569')) {
+function content_5a075470a4d8c4_92491569 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '2864284295a075447176bf9_98805764';
+$_smarty_tpl->properties['nocache_hash'] = '933574635a075470a03bf3_56941419';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -43,14 +43,14 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 ';
 		
 		config.pk     = 'id';
-		config.modelo = 'venda';
+		config.modelo = 'notaFiscal';
 		
 		config.url    	= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda/dados';
+nota-fiscal/dados';
 		config.form   	= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda/iniciar';
+nota-fiscal/form';
 		config.excluir  = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda/excluir';
+nota-fiscal/excluir';
 		config.botoes 	= ['i','v','a','e'];
 		
 		config.filtros = {}
@@ -74,7 +74,7 @@ venda/excluir';
 		config.colunas.push({'nome':'valor',				'titulo':'VALOR',  	'cssbody':'text-align:right', 	'funcaoFormatter':'Formatter.formatMoedaReal'});
 		config.colunas.push({'nome':'status',				'titulo':'STATUS',  'cssbody':'text-align:center', 	'formatterDados':'{"1":"Iniciada", "2":"Aguardando", "3":"Finalizada", "4":"Emitida", "5":"Excluida"}'});
 	
-		var grid = new Grid('vendaGrid', config);
+		var grid = new Grid('notaFiscalGrid', config);
 
 		grid.acoesFormatter = function(record) {
 			
@@ -315,7 +315,7 @@ venda/excluir';
 		
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Vendas</h1>
+					<h1 class="page-header">Nota-Fiscal</h1>
 				</div>
 			</div>	
 		
@@ -326,10 +326,7 @@ venda/excluir';
 					<div class="panel panel-default">
 					
 						<div class="panel-heading">
-							<a class="pull-right btn btn-primary btn-xs" href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda/form">
-								<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Novo registro
-							</a>Lista de Registros
+							Lista de Registros
 						</div>
 					
 						<div class="panel-body" id="divHTML">

@@ -1,56 +1,19 @@
-<?php /* Smarty version 3.1.27, created on 2017-11-11 16:49:27
-         compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaGrid.tpl" */ ?>
-<?php
-/*%%SmartyHeaderCode:2864284295a075447176bf9_98805764%%*/
-if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-$_valid = $_smarty_tpl->decodeProperties(array (
-  'file_dependency' => 
-  array (
-    'cbb742a2c00e35155ce6e89e55ca7002b4315c24' => 
-    array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaGrid.tpl',
-      1 => 1510429766,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '2864284295a075447176bf9_98805764',
-  'variables' => 
-  array (
-    'basePath' => 0,
-    'dadosCliente' => 0,
-  ),
-  'has_nocache_code' => false,
-  'version' => '3.1.27',
-  'unifunc' => 'content_5a0754471ba999_25837128',
-),false);
-/*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_5a0754471ba999_25837128')) {
-function content_5a0754471ba999_25837128 ($_smarty_tpl) {
+{include file="../../templates/topo.tpl"}
 
-$_smarty_tpl->properties['nocache_hash'] = '2864284295a075447176bf9_98805764';
-echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
-?>
+{literal}
 
-
-
-
-	<?php echo '<script'; ?>
- type="text/javascript" language="javascript">
+	<script type="text/javascript" language="javascript">
 
 		var config = {};
 
-		config.basePath = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-';
+		config.basePath = '{/literal}{$basePath}{literal}';
 		
 		config.pk     = 'id';
-		config.modelo = 'venda';
+		config.modelo = 'notaFiscal';
 		
-		config.url    	= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda/dados';
-		config.form   	= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda/iniciar';
-		config.excluir  = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda/excluir';
+		config.url    	= '{/literal}{$basePath}{literal}nota-fiscal/dados';
+		config.form   	= '{/literal}{$basePath}{literal}nota-fiscal/form';
+		config.excluir  = '{/literal}{$basePath}{literal}nota-fiscal/excluir';
 		config.botoes 	= ['i','v','a','e'];
 		
 		config.filtros = {}
@@ -67,14 +30,13 @@ venda/excluir';
 		
 		config.colunas = [];
 		config.colunas.push({'nome':'id',						'titulo':'#', 			'cssbody':'text-align:center', 	'width':'5%'});
-		config.colunas.push({'nome':'id_cliente',		'titulo':'CLIENTE',	'cssbody':'text-align:left', 		'formatterDados':'<?php echo $_smarty_tpl->tpl_vars['dadosCliente']->value;?>
-'});
+		config.colunas.push({'nome':'id_cliente',		'titulo':'CLIENTE',	'cssbody':'text-align:left', 		'formatterDados':'{/literal}{$dadosCliente}{literal}'});
 		config.colunas.push({'nome':'tipo',					'titulo':'TIPO',		'cssbody':'text-align:center', 	'formatterDados':'{"1":"Or&ccedil;amento", "2":"Venda"}'});
 		config.colunas.push({'nome':'data_venda',		'titulo':'DATA',		'cssbody':'text-align:center',	'funcaoFormatter':'Formatter.data'});
 		config.colunas.push({'nome':'valor',				'titulo':'VALOR',  	'cssbody':'text-align:right', 	'funcaoFormatter':'Formatter.formatMoedaReal'});
 		config.colunas.push({'nome':'status',				'titulo':'STATUS',  'cssbody':'text-align:center', 	'formatterDados':'{"1":"Iniciada", "2":"Aguardando", "3":"Finalizada", "4":"Emitida", "5":"Excluida"}'});
 	
-		var grid = new Grid('vendaGrid', config);
+		var grid = new Grid('notaFiscalGrid', config);
 
 		grid.acoesFormatter = function(record) {
 			
@@ -307,15 +269,14 @@ venda/excluir';
 
 		});
 			
-	<?php echo '</script'; ?>
->
-
+	</script>
+{/literal}
 	
 		<div class="page-wrapper">
 		
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Vendas</h1>
+					<h1 class="page-header">Nota-Fiscal</h1>
 				</div>
 			</div>	
 		
@@ -326,10 +287,7 @@ venda/excluir';
 					<div class="panel panel-default">
 					
 						<div class="panel-heading">
-							<a class="pull-right btn btn-primary btn-xs" href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda/form">
-								<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Novo registro
-							</a>Lista de Registros
+							Lista de Registros
 						</div>
 					
 						<div class="panel-body" id="divHTML">
@@ -348,8 +306,4 @@ venda/form">
 
 
 
-<?php echo $_smarty_tpl->getSubTemplate ("../../templates/base.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
-
-}
-}
-?>
+{include file="../../templates/base.tpl"}

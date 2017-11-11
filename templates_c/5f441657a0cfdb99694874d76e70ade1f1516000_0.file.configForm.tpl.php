@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-11-03 21:50:47
+<?php /* Smarty version 3.1.27, created on 2017-11-11 16:33:14
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/configForm.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:66835127059fd0ee77b19f1_17355639%%*/
+/*%%SmartyHeaderCode:6491388475a07507a584d70_22008679%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5f441657a0cfdb99694874d76e70ade1f1516000' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/configForm.tpl',
-      1 => 1509756646,
+      1 => 1510428791,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '66835127059fd0ee77b19f1_17355639',
+  'nocache_hash' => '6491388475a07507a584d70_22008679',
   'variables' => 
   array (
     'basePath' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_59fd0ee77f4380_41685973',
+  'unifunc' => 'content_5a07507a5d7be4_85094899',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_59fd0ee77f4380_41685973')) {
-function content_59fd0ee77f4380_41685973 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5a07507a5d7be4_85094899')) {
+function content_5a07507a5d7be4_85094899 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '66835127059fd0ee77b19f1_17355639';
+$_smarty_tpl->properties['nocache_hash'] = '6491388475a07507a584d70_22008679';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -89,8 +89,6 @@ index';
 		config.colunas.push({'nome':'uf','titulo':'UF',		'tipo':'text',			'span':'1',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'telefone','titulo':'Telefone',		'tipo':'text',			'span':'2',	'classe':'input-xlarge',	'obrigatorio':'0'});
-		config.colunas.push({'tipo':'linha'});
-		config.colunas.push({'nome':'ambiente','titulo':'AMBIENTE',		'tipo':'text',			'span':'1',	'classe':'input-xlarge',	'obrigatorio':'0'});
 		
 		var form = new Form('configForm', config);
 
@@ -148,6 +146,8 @@ index';
 			form.carregarCamposEntidade();
 			form.load();
 
+			$('#cep').mask('00000-000');
+
 			$('#cep').blur(function(){
 
 				var cep = $(this).val().replace(/\D/g, '');
@@ -162,7 +162,7 @@ index';
 						data:'',
 						success: function(data){
 	
-							$('#endereco').val(data.logradouro);
+							$('#rua').val(data.logradouro);
 							$('#bairro').val(data.bairro);
 							$('#cidade').val(data.localidade);
 							$('#cod_cidade').val(data.ibge);

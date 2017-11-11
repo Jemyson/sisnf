@@ -66,7 +66,7 @@
 
 	</head>
 
-	<body>
+	<body class="skin-blue layout-top-nav">
 	
 	{include file="menu.tpl"}
 	
