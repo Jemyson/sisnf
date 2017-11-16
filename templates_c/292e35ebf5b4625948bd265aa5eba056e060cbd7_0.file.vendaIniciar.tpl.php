@@ -1,9 +1,47 @@
-<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+<?php /* Smarty version 3.1.27, created on 2017-11-16 20:24:05
+         compiled from "C:\xampp\htdocs\sisnf\app\views\vendaIniciar.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:19036588915a0de5d5bcfa74_79491126%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '292e35ebf5b4625948bd265aa5eba056e060cbd7' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\sisnf\\app\\views\\vendaIniciar.tpl',
+      1 => 1510860244,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '19036588915a0de5d5bcfa74_79491126',
+  'variables' => 
+  array (
+    'id' => 0,
+    'idCliente' => 0,
+    'basePath' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => '3.1.27',
+  'unifunc' => 'content_5a0de5d5c3e951_71959050',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_5a0de5d5c3e951_71959050')) {
+function content_5a0de5d5c3e951_71959050 ($_smarty_tpl) {
 
-{include file="../../templates/topo.tpl"}
+$_smarty_tpl->properties['nocache_hash'] = '19036588915a0de5d5bcfa74_79491126';
+?>
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-1.12.3.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"><?php echo '</script'; ?>
+>
 
-{literal}
+<?php echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
+?>
+
+
+
 
 	<style>
 	
@@ -17,7 +55,8 @@
 	
 	</style>
 
-	<script type="text/javascript" language="javascript">
+	<?php echo '<script'; ?>
+ type="text/javascript" language="javascript">
 
 	Venda = function(opcoes){
 
@@ -733,22 +772,37 @@
 
 	var config = {};
 
-	config.id								= '{/literal}{$id}{literal}';
+	config.id								= '<?php echo $_smarty_tpl->tpl_vars['id']->value;?>
+';
 	config.hash							= '';
-	config.idCliente				= '{/literal}{$idCliente}{literal}';
-	config.urlNotaFiscal		= '{/literal}{$basePath}{literal}nota-fiscal';
-	config.urlDadosVenda		= '{/literal}{$basePath}{literal}venda/dados-form';
-	config.urlCliente				= '{/literal}{$basePath}{literal}cliente/dados-form';
-	config.urlVenda 				= '{/literal}{$basePath}{literal}venda';
-	config.urlCategoria			= '{/literal}{$basePath}{literal}categoria/dados-entidade';
-	config.urlSubcategoria	= '{/literal}{$basePath}{literal}subcategoria/dados-entidade';
-	config.urlNova					= '{/literal}{$basePath}{literal}venda/form';
-	config.urlIniciar				= '{/literal}{$basePath}{literal}venda/iniciar';
-	config.urlProduto				= '{/literal}{$basePath}{literal}venda/pesquisar-produto';
-	config.urlProdutoVenda	= '{/literal}{$basePath}{literal}venda/pesquisar-produto-venda';
-	config.urlSalvar				= '{/literal}{$basePath}{literal}venda/finalizar-venda';
-	config.urlAprovar				= '{/literal}{$basePath}{literal}venda/aprovar-venda';
-	config.urlExcluir				= '{/literal}{$basePath}{literal}venda/excluir-venda';
+	config.idCliente				= '<?php echo $_smarty_tpl->tpl_vars['idCliente']->value;?>
+';
+	config.urlNotaFiscal		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+nota-fiscal';
+	config.urlDadosVenda		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/dados-form';
+	config.urlCliente				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+cliente/dados-form';
+	config.urlVenda 				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda';
+	config.urlCategoria			= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+categoria/dados-entidade';
+	config.urlSubcategoria	= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+subcategoria/dados-entidade';
+	config.urlNova					= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/form';
+	config.urlIniciar				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/iniciar';
+	config.urlProduto				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/pesquisar-produto';
+	config.urlProdutoVenda	= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/pesquisar-produto-venda';
+	config.urlSalvar				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/finalizar-venda';
+	config.urlAprovar				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/aprovar-venda';
+	config.urlExcluir				= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/excluir-venda';
 
 	$(document).ready(function(){
 
@@ -839,14 +893,16 @@
 		
 	});	
 			
-	</script>
-{/literal}
+	<?php echo '</script'; ?>
+>
+
 	
 		<div class="page-wrapper">
 		
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header"><a href="{$basePath}venda">Vendas</a> / Cadastro</h1>
+					<h1 class="page-header"><a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda">Vendas</a> / Cadastro</h1>
 				</div>
 			</div>	
 		
@@ -857,9 +913,11 @@
 					<div class="panel panel-default">
 					
 						<div class="panel-heading">
-							<a class="pull-right btn btn-primary btn-xs" href="{$basePath}venda">
+							<a class="pull-right btn btn-primary btn-xs" href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda">
 								Voltar  <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
-							</a>Novo Registro: {$id}
+							</a>Novo Registro: <?php echo $_smarty_tpl->tpl_vars['id']->value;?>
+
 						</div>
 					
 						<div class="panel-body" id="divHTML">
@@ -1104,8 +1162,10 @@
 		      <div class="modal-body" style="text-align: center">
 		      	<p id="processando">Processando os dados. aguarde...</p>
 		      	<br>
-		      	<img src="{$basePath}img/loading.gif" id="loading" />
-		      	<img src="{$basePath}img/alerta.png" width="150px" style="display: none" id="alerta" />
+		      	<img src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+img/loading.gif" id="loading" />
+		      	<img src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+img/alerta.png" width="150px" style="display: none" id="alerta" />
 		      	<br>
 		      	<br>
 		      	<p id="erroAlerta"></p>
@@ -1114,4 +1174,8 @@
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
 		
-{include file="../../templates/base.tpl"}
+<?php echo $_smarty_tpl->getSubTemplate ("../../templates/base.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
+
+}
+}
+?>
