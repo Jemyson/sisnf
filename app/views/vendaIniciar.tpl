@@ -1,5 +1,4 @@
 <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
 
 {include file="../../templates/topo.tpl"}
 
@@ -909,7 +908,6 @@
 							      <button type="button" style="width: 120px" class="btn btn-primary" disabled="disabled"  onclick="javascript:venda.salvar()" id="btnFinalizarVenda">Finalizar Venda</button>
 							      <button type="button" style="width: 120px; display: none" class="btn btn-danger" id="btnExcluir" onclick="javascript:venda.excluirVenda()">Excluir Venda</button>
 							      <button type="button" style="width: 120px" class="btn btn-warning" onclick="venda.nova()" >Nova Venda</button>
-							      <button type="button" style="width: 120px" class="btn btn-info" id="btnPDF" onclick="#" >PDF</button>
 							    </div>
 							  </div>					
 							

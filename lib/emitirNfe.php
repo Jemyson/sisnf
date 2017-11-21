@@ -461,6 +461,11 @@ if(!empty($dadosVenda[0]->chave)){ //já foi emitida
 		//$dados['csc'] = 'FFABDA2E-1A3E-48B7-A964-A9D6782AD664';
 	$dados['xml']     = base64_encode(file_get_contents($nomeArquivo)); //o xml deve ser enviado em formato base64
 
+	echo "<pre>";
+	print_r(phpinfo());
+	echo "</pre>";
+	die();
+	
 		//Inicia comunicação com servidor agilcontabil.net
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

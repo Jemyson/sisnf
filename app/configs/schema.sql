@@ -33,6 +33,7 @@ CREATE TABLE cliente (
 	telefone VARCHAR(255),
 	celular VARCHAR(255),
 	email VARCHAR(255),
+	indicacaoIe VARCHAR(255) DEFAULT '9',
 	excluido INT DEFAULT 0
 
 );
@@ -106,7 +107,7 @@ CREATE TABLE produto (
 	id_categoria INT NOT NULL,
 	id_subcategoria INT NOT NULL,
 	nome VARCHAR(255),
-	unidade_medida VARCHAR(255),
+	unidade_medida VARCHAR(255) DEFAULT 'UN',
 	preco_custo FLOAT(10,2),
 	preco_venda FLOAT(10,2),
 	ncm VARCHAR(255),
@@ -132,6 +133,7 @@ CREATE TABLE vendas (
 	valor FLOAT(10,2),
 	status INT,
 	chave VARCHAR(255),
+	nfe VARCHAR(255),
 	excluido INT DEFAULT 0
 );
 

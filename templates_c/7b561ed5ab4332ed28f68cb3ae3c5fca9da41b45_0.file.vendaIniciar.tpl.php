@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-11-11 16:57:55
+<?php /* Smarty version 3.1.27, created on 2017-11-21 01:03:56
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:12152954985a07564395b339_10174030%%*/
+/*%%SmartyHeaderCode:16679816305a13a5ac277397_59800127%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7b561ed5ab4332ed28f68cb3ae3c5fca9da41b45' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl',
-      1 => 1510430274,
+      1 => 1511237034,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '12152954985a07564395b339_10174030',
+  'nocache_hash' => '16679816305a13a5ac277397_59800127',
   'variables' => 
   array (
     'id' => 0,
@@ -22,14 +22,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_5a0756439c9d80_82155652',
+  'unifunc' => 'content_5a13a5ac30abd1_17532951',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_5a0756439c9d80_82155652')) {
-function content_5a0756439c9d80_82155652 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5a13a5ac30abd1_17532951')) {
+function content_5a13a5ac30abd1_17532951 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '12152954985a07564395b339_10174030';
-echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
+$_smarty_tpl->properties['nocache_hash'] = '16679816305a13a5ac277397_59800127';
+?>
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-1.12.3.min.js"><?php echo '</script'; ?>
+>
+
+<?php echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
 
@@ -820,6 +825,67 @@ venda/excluir-venda';
 		
 		$('#formPesquisarProduto').submit(function(e){
 			e.preventDefault();
+		});
+
+
+		var doc = new jsPDF();
+		var specialElementHandlers = {
+		    '#editor': function (element, renderer) {
+		        return true;
+		    }
+		};
+
+		$('#btnPDF').click(function () {  
+
+			var HTML = '<html><body>';
+
+			HTML += '<p><strong>OR&Ccedil;AMENTO:</strong></p>';
+
+			HTML += '<p>PRISMA AUDIO CENTER EIRELI - ME</p>';
+			HTML += '<p>28.801.726/0001-42</p>';
+			HTML += '<p>53530-480</p>';
+			HTML += '<p>Rua Cento e Noventa e Dois, 16</p>';
+			HTML += '<p>Caet&eacute;s I - Abreu e Lima | PE</p>';
+			HTML += '<p>&nbsp;</p>';
+			HTML += '<p><strong>PRODUTOS</strong></p>';
+
+			var data = venda;
+
+			for(var chave in data.produtos){
+
+				HTML += '<p>1 ' + data.produtos[chave].nome + ' - ' + Formatter.moeda(data.produtos[chave].preco_venda, 2,',','.')+'</p>'; 
+				
+			}
+
+			HTML += '<p>&nbsp;</p>';
+			HTML += '<p><strong>FORMA DE PAGAMENTO</strong></p>';
+
+			for(var chave in data.formaPagamento){
+
+				var tipo = formaPagamento[chave].split(' / ');
+				var parcelas = tipo[1].split(' - ');
+				var valor = parcelas[1];
+						
+				HTML += '<p>Tipo: ' + tipo[0] + ' Parcelas: ' + parcelas[0] + ' Valor:' + valor + '</p>';
+
+			}
+
+			HTML += '<p>&nbsp;</p>';
+			HTML += '<p><strong>VALOR TOTAL</strong></p>';
+
+			console.log(data.retornoPossivel);
+			
+			HTML += '<p>'+Formatter.moeda(data.valorVenda, 2,',','.')+'</p>';
+			
+			HTML += '</body></html>';
+
+			console.log(HTML);
+			
+	    doc.fromHTML(HTML, 15, 15, {
+	        'width': 170,
+	            'elementHandlers': specialElementHandlers
+	    });
+	    doc.save('sample-file.pdf');
 		});
 		
 	});	

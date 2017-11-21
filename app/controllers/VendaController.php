@@ -86,9 +86,128 @@ class VendaController extends AppController{
 			$this->atribuir('idCliente', $dados['id_cliente']);
 			$this->atribuir('hash', md5('sisnf'.$codigo));
 			
+			if($dados['status'] == '2'){
+				$this->renderizar('vendaOrcamento.tpl');
+			}else{
+				$this->renderizar('vendaIniciar.tpl');
+			}
+			
 		}
 		
-		$this->renderizar('vendaIniciar.tpl');
+	}
+	
+	public function orcamentoAction(){
+
+		$model = new VendaModel();
+		
+		$codigo = (int) $_REQUEST['id'];
+		$dados = current($model->read('id = ' . $codigo));
+		
+		$this->atribuir('id', $codigo);
+		$this->atribuir('idCliente', $dados['id_cliente']);
+		$this->atribuir('hash', md5('sisnf'.$codigo));
+		
+		$this->renderizar('vendaOrcamento.tpl');
+			
+	}
+	
+	public function orcamentoPDFAction(){
+		
+		$model = new VendaModel();
+		$produtoModel = new VendaProdutoModel();
+		
+		$codigo = (int) $_REQUEST['id_venda'];
+		$dados = current($model->read('id = ' . $codigo));
+		
+		$produtos = $produtoModel->pesquisar('id_venda = ' . $codigo);
+		
+		//$orcamento = rand(10142, 19742);
+		$orcamento = str_pad($codigo, 5, '0', STR_PAD_LEFT);
+		
+		$html = '<html>';
+		$html .= '<head></head>';
+		$html .= '<body>';
+		$html .= '<div id="pdf">';
+		$html .= '<p style="text-align: center; margin: 0px;"><img alt="" width="300px" src="img/logo-branco.png"></p>';
+		$html .= '<p style="text-align: center; margin: 0px;">PRISMA AUDIO CENTER EIRELI - ME</p>';
+		$html .= '<p style="text-align: center; margin: 0px;">28.801.726/0001-42</p>';
+		$html .= '<p style="text-align: center; margin: 0px;">53530-480</p>';
+		$html .= '<p style="text-align: center; margin: 0px;">Rua Cento e Noventa e Dois, 16</p>';
+		$html .= '<p style="text-align: center; margin: 0px;">Caet&eacute;s I - Abreu e Lima | PE</p>';
+		$html .= '<p style="text-align: center; margin: 0px;">(81) 99696-0347 / (81) 98713-7617</p>';
+									
+		$html .= '<p style="text-align: center; margin-top: 20px;">OR&Ccedil;AMENTO: '.$orcamento.'</p>';
+		$html .= '<p style="margin-bottom: 10px; margin-top: 20px;">PRODUTOS</p>';
+
+		foreach($produtos as $produto){
+			
+			$html .= '<p style="border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black; border-bottom: 0px solid black; padding: 5px; margin: 0px">';
+			$html .= '<span>';
+			$html .= $produto['qtd_produto'];
+			$html .= ' - ';
+			$html .= $produto['nome_produto'];
+			$html .= '</span>';
+			//$html .= '<span style="float: right">';
+			$html .= '<span> - ';
+			$html .= $produto['valor_produto'];
+			$html .= '</span>';
+			$html .= '</p>';
+			
+		}
+		
+		$total = $dados['valor'];
+		
+		$html .= '<p style="border: 1px solid black; padding: 5px; margin: 0px">';
+		$html .= '<span>&nbsp;</span>';
+		$html .= '<span>Valor Total: '.$total.'</span>';
+		//$html .= '<span style="float: right">Valor Total: '.$total.'</span>';
+		$html .= '</p>';
+									
+		$html .= '<p style="margin-bottom: 10px; margin-top: 20px;">PAGAMENTO</p>';
+
+		$formasPagamento = split(';', $dados['forma_pagamento']);
+		
+		foreach($formasPagamento as $formaPagamento){
+			
+			$pagamento = split(' - ', $formaPagamento);
+			
+			$html .= '<p style="border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black; border-bottom: 0px solid black; padding: 5px; margin: 0px">';
+			$html .= '<span>';
+			$html .= str_replace('/', 'em', $pagamento[0]) . 'x';
+			$html .= '</span>';
+			//$html .= '<span style="float: right">';
+			$html .= '<span> - ';
+			$html .= $pagamento[1];
+			$html .= '</span>';
+			$html .= '</p>';
+		
+		}
+		
+		$html .= '<p style="border: 1px solid black; padding: 5px; margin: 0px">';
+		$html .= '<span>Formas de Pagamento: ' . count($formasPagamento) . '</span>';
+		$html .= '</p>';
+		
+
+		$html .= '</div>'; 
+		$html .= '</body>';
+		$html .= '</html>';
+		
+		require_once("lib/dompdf/dompdf_config.inc.php");
+		spl_autoload_register('DOMPDF_autoload');
+		function pdf_create($html, $filename, $paper, $orientation, $stream=TRUE)
+		{
+			$dompdf = new DOMPDF();
+			$dompdf->set_paper($paper,$orientation);
+			$dompdf->load_html($html);
+			$dompdf->render();
+			$dompdf->stream($filename.".pdf");
+		}
+		$filename = 'orcamento_' . $orcamento;
+		$dompdf = new DOMPDF();
+		//$html = file_get_contents('file_html.php'); 
+		pdf_create($html,$filename,'A4','portrait');
+		
+		
 	}
 
 	public function pesquisarProdutoVendaAction(){
