@@ -23,12 +23,12 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body style="background-color: #fff">
 
     <div class="container">
 
       <form class="form-signin" action="{$basePath}login/efetuar-login" method="post">
-				<img alt="logo" src="{$basePath}img/logo.png" class="img-responsive" height="80%">
+				<img alt="logo" src="{$basePath}img/logo-branco.png" class="img-responsive" height="80%">
         <h2 class="form-signin-heading">Login</h2>
         <input type="text" id="login" name="login" class="form-control" placeholder="Usu&aacute;rio" required autofocus>
         <input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" required>
