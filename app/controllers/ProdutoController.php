@@ -1,6 +1,7 @@
 <?php
 
 require_once MODELS.'ProdutoModel.php';
+require_once MODELS.'ProdutoEntradaModel.php';
 
 class ProdutoController extends AppController{
 	
@@ -126,5 +127,78 @@ class ProdutoController extends AppController{
 		die();	
 	}
 	
+	public function entradaAction(){
+		
+		$this->renderizar('produtoEntradaGrid.tpl');
+		
+	}
+	
+	public function dadosEntradaAction(){
+		
+		$model = new ProdutoEntradaModel();
+		
+		$dados = array();
+		
+		if(!isset($_REQUEST['id'])){
+			$codigo = $model->nextKey();
+			
+			$dados['codigo'] = $codigo;
+			$dados['hash'] = md5('sisnf'.$codigo);
+			
+		} else { 
+			$codigo = $_GET['id'];
+			
+			$registros = $model->pesquisar("id = {$_REQUEST['id']}");
+
+			$dados['codigo'] = $_REQUEST['id'];
+			$dados['hash'] = md5('sisnf'.$_REQUEST['id']);
+			$dados['registros'] = current($registros);
+		}
+		
+		print_r(json_encode($dados));
+		
+	}
+	
+	public function formEntradaAction(){
+
+		if(isset($_GET['id'])){
+			$this->atribuir('id', $_GET['id']);
+		}
+		
+		$this->renderizar('produtoEntradaForm.tpl');
+	}
+	
+	public function formEntradaVisualizarAction(){
+
+		$this->atribuir('id', $_GET['id']);
+		$this->atribuir('visualizar', '1');
+		$this->renderizar('produtoEntradaForm.tpl');
+	}
+	
+	public function dadosEntradaFormAction(){
+		
+		$model = new ProdutoEntradaModel();
+		
+		$dados = array();
+		
+		if(!isset($_REQUEST['id'])){
+			$codigo = $model->nextKey();
+			
+			$dados['codigo'] = $codigo;
+			$dados['hash'] = md5('sisnf'.$codigo);
+			
+		} else { 
+			$codigo = $_GET['id'];
+			
+			$registros = $model->pesquisar("id = {$_REQUEST['id']}");
+
+			$dados['codigo'] = $_REQUEST['id'];
+			$dados['hash'] = md5('sisnf'.$_REQUEST['id']);
+			$dados['registros'] = current($registros);
+		}
+		
+		print_r(json_encode($dados));
+		
+	}
 	
 }

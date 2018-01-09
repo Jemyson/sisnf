@@ -165,7 +165,12 @@ class VendaController extends AppController{
 									
 		$html .= '<p style="margin-bottom: 10px; margin-top: 20px;">PAGAMENTO</p>';
 
-		$formasPagamento = split(';', $dados['forma_pagamento']);
+		$formasPagamento = explode(';', $dados['forma_pagamento']);
+
+		echo "<pre>";
+		print_r($formasPagamento);
+		echo "</pre>";
+		die();
 		
 		foreach($formasPagamento as $formaPagamento){
 			

@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-11-10 22:25:31
+<?php /* Smarty version 3.1.27, created on 2018-01-08 22:28:43
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:8149624675a06518ba0c3a5_91628024%%*/
+/*%%SmartyHeaderCode:2911968385a541acb9d8f17_99478955%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6f7ab4b22b3765f67e0e24aa243ceca8b94e1e5d' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/templates/menu.tpl',
-      1 => 1510357647,
+      1 => 1515461321,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '8149624675a06518ba0c3a5_91628024',
+  'nocache_hash' => '2911968385a541acb9d8f17_99478955',
   'variables' => 
   array (
     'basePath' => 0,
@@ -21,13 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_5a06518ba20b98_32925706',
+  'unifunc' => 'content_5a541acba17811_32999449',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_5a06518ba20b98_32925706')) {
-function content_5a06518ba20b98_32925706 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5a541acba17811_32999449')) {
+function content_5a541acba17811_32999449 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '8149624675a06518ba0c3a5_91628024';
+$_smarty_tpl->properties['nocache_hash'] = '2911968385a541acb9d8f17_99478955';
 ?>
 
 <style>
@@ -140,6 +140,10 @@ transportadora"><i class="glyphicon glyphicon-bed"></i> Transportadoras</a>
 						<li class="preview__action--close">
 							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 produto"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
+				  	</li>
+						<li class="preview__action--close">
+							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+produto/entrada"><i class="glyphicon glyphicon-paste"></i> Entrada de Produtos</a>
 				  	</li>
  					</ul>
  				</li>

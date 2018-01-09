@@ -104,6 +104,9 @@
 						<li class="preview__action--close">
 							<a href="{$basePath}produto"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
 				  	</li>
+						<li class="preview__action--close">
+							<a href="{$basePath}produto/entrada"><i class="glyphicon glyphicon-paste"></i> Entrada de Produtos</a>
+				  	</li>
  					</ul>
  				</li>
 				<li class="preview__action--close">

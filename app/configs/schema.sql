@@ -42,21 +42,21 @@ DROP TABLE IF EXISTS fornecedor;
 
 CREATE TABLE fornecedor (
 
-  	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  	nome VARCHAR(255),
-    	cpf VARCHAR(255),
-    	cnpj VARCHAR(255),
-  	cep VARCHAR(255),
-  	endereco VARCHAR(255),
-  	numero VARCHAR(255),
-  	bairro VARCHAR(255),
-  	cidade VARCHAR(255),
-  	cod_cidade VARCHAR(255),
+	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	nome VARCHAR(255),
+  cpf VARCHAR(255),
+  cnpj VARCHAR(255),
+	cep VARCHAR(255),
+	endereco VARCHAR(255),
+	numero VARCHAR(255),
+	bairro VARCHAR(255),
+	cidade VARCHAR(255),
+	cod_cidade VARCHAR(255),
 	uf VARCHAR(255),
-  	telefone VARCHAR(255),
-  	celular VARCHAR(255),
-  	email VARCHAR(255),
-  	excluido INT DEFAULT 0
+	telefone VARCHAR(255),
+	celular VARCHAR(255),
+	email VARCHAR(255),
+	excluido INT DEFAULT 0
 
 );
 
@@ -64,39 +64,39 @@ DROP TABLE IF EXISTS transportadora;
 
 CREATE TABLE transportadora (
 
-  	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  	nome VARCHAR(255),
-    	cpf VARCHAR(255),
-    	cnpj VARCHAR(255),
-  	cep VARCHAR(255),
-  	endereco VARCHAR(255),
-  	numero VARCHAR(255),
-  	bairro VARCHAR(255),
-  	cidade VARCHAR(255),
-  	cod_cidade VARCHAR(255),
+	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	nome VARCHAR(255),
+	cpf VARCHAR(255),
+	cnpj VARCHAR(255),
+	cep VARCHAR(255),
+	endereco VARCHAR(255),
+	numero VARCHAR(255),
+	bairro VARCHAR(255),
+	cidade VARCHAR(255),
+	cod_cidade VARCHAR(255),
 	uf VARCHAR(255),
-  	telefone VARCHAR(255),
-  	celular VARCHAR(255),
-  	email VARCHAR(255),
-  	excluido INT DEFAULT 0
+	telefone VARCHAR(255),
+	celular VARCHAR(255),
+	email VARCHAR(255),
+	excluido INT DEFAULT 0
 
 );
 
 DROP TABLE IF EXISTS categoria;
 
 CREATE TABLE categoria (
-  	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  	nome VARCHAR(255),
-  	excluido INT DEFAULT 0
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	nome VARCHAR(255),
+	excluido INT DEFAULT 0
 );
 
 DROP TABLE IF EXISTS subcategoria;
 
 CREATE TABLE subcategoria (
-  	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  	id_categoria INT NOT NULL,
-  	nome VARCHAR(255),
-  	excluido INT DEFAULT 0
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	id_categoria INT NOT NULL,
+	nome VARCHAR(255),
+	excluido INT DEFAULT 0
 );
 
 DROP TABLE IF EXISTS produto;
@@ -150,4 +150,16 @@ CREATE TABLE vendas_produtos (
 	medida_produto VARCHAR(255),
 	data_realizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
 	excluido INT DEFAULT 0
+);
+
+CREATE TABLE entrada (
+
+	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	nota_fiscal INT,
+	data_nota_fiscal DATE,
+	id_fornecedor INT,
+	nome_fornecedor VARCHAR(255),
+	data_entrada DATE,
+	data_realizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+
 );
