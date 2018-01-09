@@ -137,6 +137,7 @@ class VendaController extends AppController{
 		$html .= '<p style="text-align: center; margin: 0px;">(81) 99696-0347 / (81) 98713-7617</p>';
 									
 		$html .= '<p style="text-align: center; margin-top: 20px;">OR&Ccedil;AMENTO: '.$orcamento.'</p>';
+		$html .= '<p style="text-align: center; margin: 0px;">'.implode("/",array_reverse(explode("-",$dados['data_venda']))).'</p>';
 		$html .= '<p style="margin-bottom: 10px; margin-top: 20px;">PRODUTOS</p>';
 
 		foreach($produtos as $produto){
@@ -158,7 +159,7 @@ class VendaController extends AppController{
 		$total = $dados['valor'];
 		
 		$html .= '<p style="border: 1px solid black; padding: 5px; margin: 0px">';
-		$html .= '<span>&nbsp;</span>';
+		//$html .= '<span>&nbsp;</span>';
 		$html .= '<span>Valor Total: '.$total.'</span>';
 		//$html .= '<span style="float: right">Valor Total: '.$total.'</span>';
 		$html .= '</p>';
@@ -167,11 +168,6 @@ class VendaController extends AppController{
 
 		$formasPagamento = explode(';', $dados['forma_pagamento']);
 
-		echo "<pre>";
-		print_r($formasPagamento);
-		echo "</pre>";
-		die();
-		
 		foreach($formasPagamento as $formaPagamento){
 			
 			$pagamento = split(' - ', $formaPagamento);
@@ -192,7 +188,8 @@ class VendaController extends AppController{
 		$html .= '<span>Formas de Pagamento: ' . count($formasPagamento) . '</span>';
 		$html .= '</p>';
 		
-
+    $html .= '<p>Entrega: de imediato ou 30 dias.</p>';
+		
 		$html .= '</div>'; 
 		$html .= '</body>';
 		$html .= '</html>';
