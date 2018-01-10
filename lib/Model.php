@@ -13,7 +13,7 @@ class Model {
 			$host = $config['db']['host'];
 			$db = $config['db']['dbname'];
 			$user = $config['db']['user'];
-			$pass = $this->encrypt($config['db']['password'], 'SistemaP5153');
+			$pass = $config['db']['password'];
 	
 			$this->db = new PDO('mysql:host='.$host.';dbname='.$db, $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
 			
