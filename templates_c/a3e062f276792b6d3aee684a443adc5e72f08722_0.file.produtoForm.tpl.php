@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-11-11 16:07:59
+<?php /* Smarty version 3.1.27, created on 2018-01-16 22:33:27
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/produtoForm.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:20860723135a074a8f50aee1_60334129%%*/
+/*%%SmartyHeaderCode:11779962375a5ea7e7b525b8_48536029%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'a3e062f276792b6d3aee684a443adc5e72f08722' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/produtoForm.tpl',
-      1 => 1509581697,
+      1 => 1516152805,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '20860723135a074a8f50aee1_60334129',
+  'nocache_hash' => '11779962375a5ea7e7b525b8_48536029',
   'variables' => 
   array (
     'basePath' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_5a074a8f556377_45181718',
+  'unifunc' => 'content_5a5ea7e7bd3b28_46127195',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_5a074a8f556377_45181718')) {
-function content_5a074a8f556377_45181718 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5a5ea7e7bd3b28_46127195')) {
+function content_5a5ea7e7bd3b28_46127195 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '20860723135a074a8f50aee1_60334129';
+$_smarty_tpl->properties['nocache_hash'] = '11779962375a5ea7e7b525b8_48536029';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -83,6 +83,10 @@ subcategoria', 'dependencia':'id_categoria', 'tituloDependencia':'Categoria',			
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'preco_venda','titulo':'Pre&ccedil;o Venda',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		config.colunas.push({'tipo':'linha'});
+		config.colunas.push({'nome':'preco_venda_avista','titulo':'Pre&ccedil;o A Vista',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
+		config.colunas.push({'tipo':'linha'});
+		config.colunas.push({'nome':'qtd','titulo':'Qtd',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
+		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'ncm','titulo':'NCM',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'cfop','titulo':'CFOP',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
@@ -102,9 +106,8 @@ subcategoria', 'dependencia':'id_categoria', 'tituloDependencia':'Categoria',			
 
 				$('#preco_custo').val($('#preco_custo').maskMoney('unmasked')[0]);
 				$('#preco_venda').val($('#preco_venda').maskMoney('unmasked')[0]);
+				$('#preco_venda_avista').val($('#preco_venda_avista').maskMoney('unmasked')[0]);
 
-				console.log($('#preco_custo').val());
-				
 				jQuery.ajax({
 					type:'POST',
 					global:true,
@@ -115,6 +118,7 @@ subcategoria', 'dependencia':'id_categoria', 'tituloDependencia':'Categoria',			
 
 						$('#preco_custo').maskMoney('mask');
 						$('#preco_venda').maskMoney('mask');
+						$('#preco_venda_avista').maskMoney('mask');
 						
 						_this.reset();
 						
@@ -161,6 +165,11 @@ subcategoria', 'dependencia':'id_categoria', 'tituloDependencia':'Categoria',			
 			$('#preco_venda').attr('data-decimal', ',');
 			$('#preco_venda').maskMoney();
 			$('#preco_venda').maskMoney('mask');
+			
+			$('#preco_venda_avista').attr('data-thousands', '.');
+			$('#preco_venda_avista').attr('data-decimal', ',');
+			$('#preco_venda_avista').maskMoney();
+			$('#preco_venda_avista').maskMoney('mask');
 			
 		});
 

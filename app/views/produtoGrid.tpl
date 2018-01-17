@@ -19,8 +19,9 @@
 		config.filtros = {}
 		config.filtrosDados = {}
 
-		config.filtros.CD_ESPORTE  = {'titulo':'id','campo':'id' ,'tipo':'numero'};
-		config.filtros.DS_ESPORTE  = {'titulo':'Nome','campo':'nome' ,'tipo':'texto'};
+		config.filtros.id  = {'titulo':'id','campo':'id' ,'tipo':'numero'};
+		config.filtros.nome  = {'titulo':'Nome','campo':'nome' ,'tipo':'texto'};
+		config.filtros.qtd  = {'titulo':'Qtd','campo':'qtd' ,'tipo':'numero'};
 		
 		config.filtrosDados.tipo = [];
 		config.filtrosDados.tipo.push({"id":"1","value":"Visualizar"});
@@ -31,6 +32,7 @@
 		config.colunas = [];
 		config.colunas.push({'nome':'id',		'titulo':'#' 		,'width':'5%', 	'cssbody':'text-align:center'});
 		config.colunas.push({'nome':'nome',		'titulo':'NOME'	,								'cssbody':'text-align:left'});
+		config.colunas.push({'nome':'qtd',	'titulo':'QTD'	, 'width':'10%', 	'cssbody':'text-align:center'});
 		config.colunas.push({'nome':'preco_venda',	'titulo':'PRE&Ccedil;O'	, 'width':'20%', 	'funcaoFormatter':'Formatter.formatMoedaReal', 								'cssbody':'text-align:right'});
 	
 		var grid = new Grid('produtoGrid', config);

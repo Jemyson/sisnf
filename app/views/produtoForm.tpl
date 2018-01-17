@@ -41,6 +41,10 @@
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'preco_venda','titulo':'Pre&ccedil;o Venda',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		config.colunas.push({'tipo':'linha'});
+		config.colunas.push({'nome':'preco_venda_avista','titulo':'Pre&ccedil;o A Vista',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
+		config.colunas.push({'tipo':'linha'});
+		config.colunas.push({'nome':'qtd','titulo':'Qtd',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
+		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'ncm','titulo':'NCM',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
 		config.colunas.push({'tipo':'linha'});
 		config.colunas.push({'nome':'cfop','titulo':'CFOP',		'tipo':'text',			'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
@@ -60,9 +64,8 @@
 
 				$('#preco_custo').val($('#preco_custo').maskMoney('unmasked')[0]);
 				$('#preco_venda').val($('#preco_venda').maskMoney('unmasked')[0]);
+				$('#preco_venda_avista').val($('#preco_venda_avista').maskMoney('unmasked')[0]);
 
-				console.log($('#preco_custo').val());
-				
 				jQuery.ajax({
 					type:'POST',
 					global:true,
@@ -73,6 +76,7 @@
 
 						$('#preco_custo').maskMoney('mask');
 						$('#preco_venda').maskMoney('mask');
+						$('#preco_venda_avista').maskMoney('mask');
 						
 						_this.reset();
 						
@@ -119,6 +123,11 @@
 			$('#preco_venda').attr('data-decimal', ',');
 			$('#preco_venda').maskMoney();
 			$('#preco_venda').maskMoney('mask');
+			
+			$('#preco_venda_avista').attr('data-thousands', '.');
+			$('#preco_venda_avista').attr('data-decimal', ',');
+			$('#preco_venda_avista').maskMoney();
+			$('#preco_venda_avista').maskMoney('mask');
 			
 		});
 

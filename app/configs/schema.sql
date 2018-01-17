@@ -110,6 +110,8 @@ CREATE TABLE produto (
 	unidade_medida VARCHAR(255) DEFAULT 'UN',
 	preco_custo FLOAT(10,2),
 	preco_venda FLOAT(10,2),
+	preco_venda_avista FLOAT(10,2),
+	qtd INT DEFAULT 0,
 	ncm VARCHAR(255),
 	cfop VARCHAR(255),
 	excluido INT DEFAULT 0

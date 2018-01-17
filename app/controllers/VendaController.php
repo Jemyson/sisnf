@@ -170,7 +170,7 @@ class VendaController extends AppController{
 
 		foreach($formasPagamento as $formaPagamento){
 			
-			$pagamento = split(' - ', $formaPagamento);
+			$pagamento = explode(' - ', $formaPagamento);
 			
 			$html .= '<p style="border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black; border-bottom: 0px solid black; padding: 5px; margin: 0px">';
 			$html .= '<span>';

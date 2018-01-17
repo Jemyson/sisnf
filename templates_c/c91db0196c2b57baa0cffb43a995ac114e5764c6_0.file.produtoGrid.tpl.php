@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-11-11 16:07:54
+<?php /* Smarty version 3.1.27, created on 2018-01-16 22:39:19
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/produtoGrid.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:6868572435a074a8a27b290_71844799%%*/
+/*%%SmartyHeaderCode:1487448455a5ea947520a30_57329617%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c91db0196c2b57baa0cffb43a995ac114e5764c6' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/produtoGrid.tpl',
-      1 => 1508991754,
+      1 => 1516153146,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '6868572435a074a8a27b290_71844799',
+  'nocache_hash' => '1487448455a5ea947520a30_57329617',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_5a074a8a2b5360_74344946',
+  'unifunc' => 'content_5a5ea947562571_33915996',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_5a074a8a2b5360_74344946')) {
-function content_5a074a8a2b5360_74344946 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5a5ea947562571_33915996')) {
+function content_5a5ea947562571_33915996 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '6868572435a074a8a27b290_71844799';
+$_smarty_tpl->properties['nocache_hash'] = '1487448455a5ea947520a30_57329617';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -55,8 +55,9 @@ produto/excluir';
 		config.filtros = {}
 		config.filtrosDados = {}
 
-		config.filtros.CD_ESPORTE  = {'titulo':'id','campo':'id' ,'tipo':'numero'};
-		config.filtros.DS_ESPORTE  = {'titulo':'Nome','campo':'nome' ,'tipo':'texto'};
+		config.filtros.id  = {'titulo':'id','campo':'id' ,'tipo':'numero'};
+		config.filtros.nome  = {'titulo':'Nome','campo':'nome' ,'tipo':'texto'};
+		config.filtros.qtd  = {'titulo':'Qtd','campo':'qtd' ,'tipo':'numero'};
 		
 		config.filtrosDados.tipo = [];
 		config.filtrosDados.tipo.push({"id":"1","value":"Visualizar"});
@@ -67,6 +68,7 @@ produto/excluir';
 		config.colunas = [];
 		config.colunas.push({'nome':'id',		'titulo':'#' 		,'width':'5%', 	'cssbody':'text-align:center'});
 		config.colunas.push({'nome':'nome',		'titulo':'NOME'	,								'cssbody':'text-align:left'});
+		config.colunas.push({'nome':'qtd',	'titulo':'QTD'	, 'width':'10%', 	'cssbody':'text-align:center'});
 		config.colunas.push({'nome':'preco_venda',	'titulo':'PRE&Ccedil;O'	, 'width':'20%', 	'funcaoFormatter':'Formatter.formatMoedaReal', 								'cssbody':'text-align:right'});
 	
 		var grid = new Grid('produtoGrid', config);
