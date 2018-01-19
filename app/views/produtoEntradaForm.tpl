@@ -130,7 +130,7 @@
 		
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header"><a href="{$basePath}venda">Vendas</a> / Cadastro</h1>
+					<h1 class="page-header"><a href="{$basePath}produto/entrada">Entrada Produtos</a> / Cadastro</h1>
 				</div>
 			</div>	
 		
@@ -141,7 +141,7 @@
 					<div class="panel panel-default">
 					
 						<div class="panel-heading">
-							<a class="pull-right btn btn-primary btn-xs" href="{$basePath}venda">
+							<a class="pull-right btn btn-primary btn-xs" href="{$basePath}produto/entrada">
 								Voltar  <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
 							</a>Novo Registro: {$id}
 						</div>

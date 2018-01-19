@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2018-01-18 21:16:57
+<?php /* Smarty version 3.1.27, created on 2018-01-18 21:23:29
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/produtoEntradaForm.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:4876163035a6138f9dd0e17_55726537%%*/
+/*%%SmartyHeaderCode:3991044055a613a81a72745_16022237%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '599b39937471620946a69157a35b70d1909ccf09' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/produtoEntradaForm.tpl',
-      1 => 1516321017,
+      1 => 1516321394,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '4876163035a6138f9dd0e17_55726537',
+  'nocache_hash' => '3991044055a613a81a72745_16022237',
   'variables' => 
   array (
     'id' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_5a6138f9e1be39_97812694',
+  'unifunc' => 'content_5a613a81ab8d66_44946522',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_5a6138f9e1be39_97812694')) {
-function content_5a6138f9e1be39_97812694 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5a613a81ab8d66_44946522')) {
+function content_5a613a81ab8d66_44946522 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '4876163035a6138f9dd0e17_55726537';
+$_smarty_tpl->properties['nocache_hash'] = '3991044055a613a81a72745_16022237';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -170,7 +170,7 @@ venda/salvar';
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header"><a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-venda">Vendas</a> / Cadastro</h1>
+produto/entrada">Entrada Produtos</a> / Cadastro</h1>
 				</div>
 			</div>	
 		
