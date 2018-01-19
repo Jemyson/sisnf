@@ -124,4 +124,34 @@ class FornecedorController extends AppController{
 		die();	
 	}
 	
+	public function dadosEntidade(){
+		$model = new FornecedorModel();
+		
+		$dados = $model->pesquisar(null, array('id', 'nome AS valor')); 
+		
+		$dadosSaida = array();
+		
+		foreach($dados as $valor){
+			$dadosSaida[$valor['id']] = $valor['valor'];
+		}
+		
+		return json_encode($dadosSaida);
+	}
+	
+	public function dadosEntidadeAction(){
+		$model = new FornecedorModel();
+		
+		$dados = $model->pesquisar(null, array('id', 'nome AS valor')); 
+		
+		$dadosSaida = array();
+		
+		foreach($dados as $valor){
+			$dadosSaida[$valor['id']] = $valor['valor'];
+		}
+		
+		print_r(json_encode($dadosSaida));
+		die();
+		
+	}
+	
 }

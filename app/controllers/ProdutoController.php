@@ -161,10 +161,22 @@ class ProdutoController extends AppController{
 	
 	public function formEntradaAction(){
 
-		if(isset($_GET['id'])){
-			$this->atribuir('id', $_GET['id']);
-		}
+		$model = new ProdutoEntradaModel();
 		
+		if(!isset($_REQUEST['id'])){
+			
+			$codigo = $model->nextKey();
+			$this->atribuir('id', $codigo);
+			$this->atribuir('hash', md5('sisnf'.$codigo));
+			
+		}else{
+			
+			$codigo = $_REQUEST['id'];
+			$this->atribuir('id', $codigo);
+			$this->atribuir('hash', md5('sisnf'.$codigo));
+			
+		}
+
 		$this->renderizar('produtoEntradaForm.tpl');
 	}
 	

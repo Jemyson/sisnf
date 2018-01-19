@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2018-01-08 22:35:55
+<?php /* Smarty version 3.1.27, created on 2018-01-18 21:16:57
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/produtoEntradaForm.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:4371066425a541c7b5798f3_63681881%%*/
+/*%%SmartyHeaderCode:4876163035a6138f9dd0e17_55726537%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,26 +9,26 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '599b39937471620946a69157a35b70d1909ccf09' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/produtoEntradaForm.tpl',
-      1 => 1515461754,
+      1 => 1516321017,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '4371066425a541c7b5798f3_63681881',
+  'nocache_hash' => '4876163035a6138f9dd0e17_55726537',
   'variables' => 
   array (
-    'basePath' => 0,
     'id' => 0,
-    'visualizar' => 0,
+    'basePath' => 0,
+    'hash' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_5a541c7b5bf014_19330491',
+  'unifunc' => 'content_5a6138f9e1be39_97812694',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_5a541c7b5bf014_19330491')) {
-function content_5a541c7b5bf014_19330491 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5a6138f9e1be39_97812694')) {
+function content_5a6138f9e1be39_97812694 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '4371066425a541c7b5798f3_63681881';
+$_smarty_tpl->properties['nocache_hash'] = '4876163035a6138f9dd0e17_55726537';
 echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 ?>
 
@@ -38,133 +38,142 @@ echo $_smarty_tpl->getSubTemplate ("../../templates/topo.tpl", $_smarty_tpl->cac
 	<?php echo '<script'; ?>
  type="text/javascript" language="javascript">
 
-		var config = {};
-	
-		config.basePath = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-';
-		
-		config.pk     = 'id';
-		config.modelo = 'produtoEntradaForm';
-	
-		config.url    = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-produto/dados-entrada-form<?php if (isset($_smarty_tpl->tpl_vars['id']->value)) {?>?id=<?php echo $_smarty_tpl->tpl_vars['id']->value;
-}?>';
-		config.form   = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-produto/form-entrada';
-		config.salvar = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-produto/salvar-entrada';
-		config.voltar = '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-produto/entrada';
-	
-		
+	Entrada = function(opcoes){
 
-		<?php if (isset($_smarty_tpl->tpl_vars['visualizar']->value) && $_smarty_tpl->tpl_vars['visualizar']->value == '1') {?>
-
-		config.visualizar = '1';
+		this.opcoes = opcoes;
 		
-		<?php }?>
+		this.validarCampoObrigatorio = function(){
+			var erro = 0;
 			
-		
+			$('input[obrigatorio=obrigatorio]').each(function(){
 				
-		config.botoes = ['b','s'];
+				if(!App.isset($(this).val()) || $(this).val() == ''){
+					erro = 1;
+					$(this).parent().addClass( "control-group error" );
+					$(this).parent().css("color", "#b94a48");
+				}else{
+					$(this).parent().removeClass( "control-group error" );
+					$(this).parent().css("color", "");
+				}
+				
+			});
+			
+			$('select[obrigatorio=obrigatorio]').each(function(){
+				
+				if(!App.isset($(this).val()) || $(this).val() == '-1' || ($(this).val() == '0' && App.isset($(this).attr('entidade')) )){
+					erro = 1;
+					$(this).parent().parent().addClass( "has-error" );
+				}else{
+					$(this).parent().parent().removeClass( "has-error" );
+				}
+				
+			});
+			
+			if(erro != 0){
+				return false;
+			}else{
+				return true;
+			}
+			
+		}
 
-		config.colunas = [];
-		config.colunas.push({'nome':'id',	'titulo':'C&oacute;digo',	'tipo':'text',			'span':'6',	'classe':'input-mini',		'obrigatorio':'1', 'disabled':'readonly'});
-		config.colunas.push({'tipo':'linha'});
-		config.colunas.push({'nome':'id_fornecedor',	'titulo':'Fornecedor',		'tipo':'entidade',	'carregaDadosEntidade':'<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-fornecedor',	'span':'6',	'classe':'input-xlarge',	'obrigatorio':'1'});
-		config.colunas.push({'tipo':'linha'});
-		
-		var form = new Form('produtoForm', config);
-
-		form.salvar = function(){
+		this.pesquisarFornecedor = function(){
 
 			var _this = this;
-			
-			_this.reset();
-			
-			$('.salvar').hide();
-			$('.disabled').show();
-			
+
+			$.ajax({
+				type:'POST',
+				global:true,
+				url:_this.opcoes.urlFornecedor,
+				dataType:'json',
+				data:'',
+				success: function(data){
+
+					var select = '<option value="0">Selecione</option>';
+					for(var chave in data){
+
+						select += '<option value="'+chave+'">'+data[chave]+'</option>';
+						
+					}						
+
+					$('#id_fornecedor').html(select);
+					
+				},
+				error: function(){
+				}
+			});
+		
+		}
+		
+		this.iniciar = function(){
+
+			var _this = this;
+
 			if(this.validarCampoObrigatorio()){
 
-				$('#preco_custo').val($('#preco_custo').maskMoney('unmasked')[0]);
-				$('#preco_venda').val($('#preco_venda').maskMoney('unmasked')[0]);
-
-				console.log($('#preco_custo').val());
-				
-				jQuery.ajax({
+				$.ajax({
 					type:'POST',
 					global:true,
-					url:_this.opcoes.salvar,
+					url:_this.opcoes.urlSalvar,
 					dataType:'json',
-					data:$('#form_'+_this.modelo).serialize(),
+					data:$('#form').serialize(),
 					success: function(data){
 
-						$('#preco_custo').maskMoney('mask');
-						$('#preco_venda').maskMoney('mask');
-						
-						_this.reset();
-						
-						$('.btn-primary').show();
-						$('.disabled').hide();
-						
-						if(data.error == '1'){
+						if(data.error == 0){
+							window.location = _this.opcoes.urlIniciar + '?id=' + _this.opcoes.id;
+						}else{
 							$('#divError').show();
 							$('#divError').html(data.msg);
-						}else{
-							$('#divSuccess').show();
-							$('#divSuccess').html(data.msg + ' <a style="cursor: pointer" onclick="javascript:form.novo()">clique aqui</a> para inserir um novo registro.</a>');
 						}
 						
 					},
-					failure: function(){
+					error: function(){
 					}
 				});
-				
+
 			}else{
 
 				alert("Os Campos em vermelho sao obrigatorios.");
-				$('.salvar').show();
+				$('.btn-success').show();
 				$('.disabled').hide();
-				
+
 			}
 			
-		
 		}
 
-		
-		$(document).ready(function(){
-	
-			form.criarFormulario();
-			form.carregarCamposEntidade();
-			form.load();
+	}
 
-			$('#preco_custo').attr('data-thousands', '.');
-			$('#preco_custo').attr('data-decimal', ',');
-			$('#preco_custo').maskMoney();
-			$('#preco_custo').maskMoney('mask');
-			
-			$('#preco_venda').attr('data-thousands', '.');
-			$('#preco_venda').attr('data-decimal', ',');
-			$('#preco_venda').maskMoney();
-			$('#preco_venda').maskMoney('mask');
-			
-		});
+	var config = {};
 
+	config.id						= '<?php echo $_smarty_tpl->tpl_vars['id']->value;?>
+';
+	config.urlIniciar		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/iniciar';
+	config.urlFornecedor		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+fornecedor/dados-entidade';
+	config.urlSalvar		= '<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+venda/salvar';
+
+	$(document).ready(function(){
+
+		entrada = new Entrada(config);
+		entrada.pesquisarFornecedor();
+
+	});	
+			
 	<?php echo '</script'; ?>
 >
 
-
+	
 		<div class="page-wrapper">
-
+		
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header"><a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-produto/entrada">Entrada Produtos</a> / Cadastro</h1>
+venda">Vendas</a> / Cadastro</h1>
 				</div>
 			</div>	
-
+		
 			<div class="row">
 
 				<div class="col-lg-12">
@@ -173,12 +182,104 @@ produto/entrada">Entrada Produtos</a> / Cadastro</h1>
 					
 						<div class="panel-heading">
 							<a class="pull-right btn btn-primary btn-xs" href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-produto/entrada">
+venda">
 								Voltar  <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
-							</a>Novo Registro
+							</a>Novo Registro: <?php echo $_smarty_tpl->tpl_vars['id']->value;?>
+
 						</div>
 					
 						<div class="panel-body" id="divHTML">
+						
+							<form class="form-horizontal" method="post" id="form" name="form">
+							
+								<p id="divSuccess" class="bg-success" style="padding: 15px; display: none"></p>
+								<p id="divError" class="bg-danger" style="padding: 15px; display: none"></p>
+							
+								<input type="hidden" id="id" name="id" value="<?php echo $_smarty_tpl->tpl_vars['id']->value;?>
+">
+								<input type="hidden" id="hash" name="hash" value="<?php echo $_smarty_tpl->tpl_vars['hash']->value;?>
+">
+							
+								<div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">Nota Fiscal*</label>
+							    <div class="col-sm-1">
+											<input type="text" class="form-control" id="produto" name="produto" />
+							    </div>
+							  </div>							
+								<div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">Data Nota Fiscal*</label>
+							    <div class="col-sm-2">
+											<input type="text" class="form-control" id="produto" name="produto" />
+							    </div>
+							  </div>							
+								<div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">Fornecedor*</label>
+							    <div class="col-sm-3">
+							      <select class="form-control" id="id_fornecedor" name="id_fornecedor" obrigatorio="obrigatorio" entidade="entidade">
+										</select>
+							    </div>
+							  </div>		
+							  <div class="form-group">
+							    <div class="col-sm-offset-2 col-sm-10">
+							      <button type="button" onclick="entrada.iniciar()" class="btn btn-primary">Salvar Entrada</button>
+							    </div>
+							  </div>					
+							
+							</form>
+						
+							<hr>
+						
+							<form action="#" method="post" id="formAdicionarProduto" name="formAdicionarProduto">
+								<!-- ADICIONAR PRODUTO -->
+								<div id="divAdicionarProduto">
+									<div class="row">
+										<div class="form-group col-md-2">
+											<label>Categoria</label>
+											<select class="form-control" id="id_categoria" name="id_categoria" onchange="javascript:venda.carregarSubcategoria()">
+											</select>
+										</div>
+										<div class="form-group col-md-2" style="padding-left: 5px">
+											<label>Sub-Categoria</label>
+											<select class="form-control" id="id_subcategoria" name="id_subcategoria">
+												<option>Categoria n&atilde;o informado(a)</option>
+											</select>
+										</div>
+										<div class="form-group col-md-3" style="padding-left: 5px">
+											<label>Produto</label>
+											<input type="text" class="form-control" id="produto" name="produto" />
+										</div>
+										<div class="form-group col-md-2" style="padding-left: 5px">
+											<label>&nbsp;</label>
+											<br>
+											<button type="button" class="btn btn-primary" onclick="venda.carregarProdutos()">Pesquisar</button>
+										</div>
+									</div>
+								</div>
+							</form>
+					
+							<div class="box-body table-responsive no-padding">
+					
+								<table id="tabelaProdutosVenda" class="table table-condensed table-striped">
+								
+									<thead>
+										<tr>
+											<th style="text-align: center"></th>
+											<th style="text-align: center">Produto</th>
+											<th style="text-align: center">Qtd</th>
+											<th style="text-align: center">Val unit</th>
+											<th style="text-align: center">Total</th>
+											<th style="text-align: center">Tributo</th>
+											<th style="text-align: center">A&ccedil;&otilde;es</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								
+								</table>
+
+							</div>
+
+						
 						</div>
 						
 					</div>
@@ -186,13 +287,13 @@ produto/entrada">
 				</div>
 
 			</div>		
-
+		
 		</div>
-		
-		
-		
-		
-		
+
+
+
+
+
 
 <?php echo $_smarty_tpl->getSubTemplate ("../../templates/base.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 
