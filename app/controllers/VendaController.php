@@ -156,7 +156,7 @@ class VendaController extends AppController{
 			$html .= '<span>';
 			$html .= $produto['qtd_produto'];
 			$html .= ' - ';
-			$html .= $produto['nome_produto'];
+			$html .= iconv('UTF-8', 'windows-1252', $produto['nome_produto']);
 			$html .= '</span>';
 			//$html .= '<span style="float: right">';
 			$html .= '<span> - ';
