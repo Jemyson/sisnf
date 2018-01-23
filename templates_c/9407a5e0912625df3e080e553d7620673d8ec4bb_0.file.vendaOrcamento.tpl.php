@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-11-21 01:05:43
+<?php /* Smarty version 3.1.27, created on 2018-01-22 21:43:16
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaOrcamento.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:3827358345a13a6173a7921_92299704%%*/
+/*%%SmartyHeaderCode:21151005235a6685241b19e0_71473570%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9407a5e0912625df3e080e553d7620673d8ec4bb' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaOrcamento.tpl',
-      1 => 1511236993,
+      1 => 1516668195,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '3827358345a13a6173a7921_92299704',
+  'nocache_hash' => '21151005235a6685241b19e0_71473570',
   'variables' => 
   array (
     'id' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_5a13a617412559_23892027',
+  'unifunc' => 'content_5a6685242316e5_58693235',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_5a13a617412559_23892027')) {
-function content_5a13a617412559_23892027 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5a6685242316e5_58693235')) {
+function content_5a6685242316e5_58693235 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '3827358345a13a6173a7921_92299704';
+$_smarty_tpl->properties['nocache_hash'] = '21151005235a6685241b19e0_71473570';
 ?>
 <?php echo '<script'; ?>
  src="https://code.jquery.com/jquery-1.12.3.min.js"><?php echo '</script'; ?>
@@ -756,7 +756,15 @@ $_smarty_tpl->properties['nocache_hash'] = '3827358345a13a6173a7921_92299704';
 		}
 
 		this.pdf = function(){
-			window.location = this.opcoes.urlPDF + '?id_venda=' + this.opcoes.id;
+
+			window.location = this.opcoes.urlPDF + '?id_venda=' + this.opcoes.id + '&tipo=' + $('#tipo_impressao').val();
+			
+		}
+
+		this.modalPDF = function(){
+
+			$('#modalPDF').modal();
+			
 		}
 
 	}
@@ -896,7 +904,7 @@ venda">
 							      <button type="button" style="width: 120px; display: none" class="btn btn-success" onclick="javascript:venda.aprovarVenda()" id="btnAprovar">Aprovar Venda</button>
 							      <button type="button" style="width: 120px; display: none" class="btn btn-danger" id="btnExcluir" onclick="javascript:venda.excluirVenda()">Excluir Venda</button>
 							      <button type="button" style="width: 120px" class="btn btn-warning" onclick="venda.nova()" >Nova Venda</button>
-							      <button type="button" style="width: 120px" class="btn btn-info" id="btnPDF" onclick="javascript:venda.pdf()" >PDF</button>
+							      <button type="button" style="width: 120px" class="btn btn-info" id="btnPDF" onclick="javascript:venda.modalPDF()" >PDF</button>
 							    </div>
 							  </div>					
 							
@@ -944,6 +952,30 @@ venda">
 			</div>		
 		
 		</div>
+
+		<div class="modal fade" tabindex="-1" role="dialog" id="modalPDF">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Gerar PDF</h4>
+		      </div>
+		      <div class="modal-body">
+		      	<p>Selecione o tipo de impress&atilde;o</p>
+		        <p>
+							<select class="form-control" id="tipo_impressao" name="tipo_impressao">
+								<option value="1">Venda</option>
+								<option value="2">Servi&ccedil;o</option>
+							</select>
+		        </p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary" id="btnPDF" name="ptnPDF" onclick="javascript:venda.pdf()">Gerar</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->		
 		
 <?php echo $_smarty_tpl->getSubTemplate ("../../templates/base.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
 

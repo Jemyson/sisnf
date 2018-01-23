@@ -138,7 +138,17 @@ class VendaController extends AppController{
 									
 		$html .= '<p style="text-align: center; margin-top: 20px;">OR&Ccedil;AMENTO: '.$orcamento.'</p>';
 		$html .= '<p style="text-align: center; margin: 0px;">'.implode("/",array_reverse(explode("-",$dados['data_venda']))).'</p>';
-		$html .= '<p style="margin-bottom: 10px; margin-top: 20px;">PRODUTOS</p>';
+		
+		if($_REQUEST['tipo'] == '1'){
+			
+			$html .= '<p style="margin-bottom: 10px; margin-top: 20px;">PRODUTOS</p>';
+			
+		}else{
+			
+			$html .= '<p style="margin-bottom: 10px; margin-top: 20px;">SERVI&Ccedil;OS</p>';
+			
+		}
+		
 
 		foreach($produtos as $produto){
 			
@@ -188,7 +198,11 @@ class VendaController extends AppController{
 		$html .= '<span>Formas de Pagamento: ' . count($formasPagamento) . '</span>';
 		$html .= '</p>';
 		
-    $html .= '<p>Entrega: de imediato ou 30 dias.</p>';
+		if($_REQUEST['tipo'] == '1'){
+			
+	    $html .= '<p>Entrega: de imediato ou 30 dias.</p>';
+		
+		}
 		
 		$html .= '</div>'; 
 		$html .= '</body>';

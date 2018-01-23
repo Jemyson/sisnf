@@ -719,7 +719,15 @@
 		}
 
 		this.pdf = function(){
-			window.location = this.opcoes.urlPDF + '?id_venda=' + this.opcoes.id;
+
+			window.location = this.opcoes.urlPDF + '?id_venda=' + this.opcoes.id + '&tipo=' + $('#tipo_impressao').val();
+			
+		}
+
+		this.modalPDF = function(){
+
+			$('#modalPDF').modal();
+			
 		}
 
 	}
@@ -839,7 +847,7 @@
 							      <button type="button" style="width: 120px; display: none" class="btn btn-success" onclick="javascript:venda.aprovarVenda()" id="btnAprovar">Aprovar Venda</button>
 							      <button type="button" style="width: 120px; display: none" class="btn btn-danger" id="btnExcluir" onclick="javascript:venda.excluirVenda()">Excluir Venda</button>
 							      <button type="button" style="width: 120px" class="btn btn-warning" onclick="venda.nova()" >Nova Venda</button>
-							      <button type="button" style="width: 120px" class="btn btn-info" id="btnPDF" onclick="javascript:venda.pdf()" >PDF</button>
+							      <button type="button" style="width: 120px" class="btn btn-info" id="btnPDF" onclick="javascript:venda.modalPDF()" >PDF</button>
 							    </div>
 							  </div>					
 							
@@ -887,5 +895,29 @@
 			</div>		
 		
 		</div>
+
+		<div class="modal fade" tabindex="-1" role="dialog" id="modalPDF">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Gerar PDF</h4>
+		      </div>
+		      <div class="modal-body">
+		      	<p>Selecione o tipo de impress&atilde;o</p>
+		        <p>
+							<select class="form-control" id="tipo_impressao" name="tipo_impressao">
+								<option value="1">Venda</option>
+								<option value="2">Servi&ccedil;o</option>
+							</select>
+		        </p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary" id="btnPDF" name="ptnPDF" onclick="javascript:venda.pdf()">Gerar</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->		
 		
 {include file="../../templates/base.tpl"}
