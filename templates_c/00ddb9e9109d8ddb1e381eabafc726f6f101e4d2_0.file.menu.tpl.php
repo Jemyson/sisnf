@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-11-16 18:05:37
+<?php /* Smarty version 3.1.27, created on 2018-01-26 18:19:17
          compiled from "C:\xampp\htdocs\sisnf\templates\menu.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:13171352825a0dc561f10e03_52566970%%*/
+/*%%SmartyHeaderCode:18090763555a6b63158f8e79_17691911%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '00ddb9e9109d8ddb1e381eabafc726f6f101e4d2' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\templates\\menu.tpl',
-      1 => 1510850280,
+      1 => 1516122075,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '13171352825a0dc561f10e03_52566970',
+  'nocache_hash' => '18090763555a6b63158f8e79_17691911',
   'variables' => 
   array (
     'basePath' => 0,
@@ -21,13 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_5a0dc561f17525_15148204',
+  'unifunc' => 'content_5a6b631596b9f5_08865033',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_5a0dc561f17525_15148204')) {
-function content_5a0dc561f17525_15148204 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5a6b631596b9f5_08865033')) {
+function content_5a6b631596b9f5_08865033 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '13171352825a0dc561f10e03_52566970';
+$_smarty_tpl->properties['nocache_hash'] = '18090763555a6b63158f8e79_17691911';
 ?>
 
 <style>
@@ -140,6 +140,10 @@ transportadora"><i class="glyphicon glyphicon-bed"></i> Transportadoras</a>
 						<li class="preview__action--close">
 							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 produto"><i class="glyphicon glyphicon-barcode"></i> Produtos</a>
+				  	</li>
+						<li class="preview__action--close">
+							<a href="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
+produto/entrada"><i class="glyphicon glyphicon-paste"></i> Entrada de Produtos</a>
 				  	</li>
  					</ul>
  				</li>

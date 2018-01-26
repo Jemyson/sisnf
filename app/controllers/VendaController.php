@@ -119,6 +119,9 @@ class VendaController extends AppController{
 		$codigo = (int) $_REQUEST['id_venda'];
 		$dados = current($model->read('id = ' . $codigo));
 		
+		$clienteModel = new ClienteModel();
+		$dadosCliente = current($clienteModel->read('id = ' . $dados['id_cliente']));
+		
 		$produtos = $produtoModel->pesquisar('id_venda = ' . $codigo);
 		
 		//$orcamento = rand(10142, 19742);
@@ -138,6 +141,13 @@ class VendaController extends AppController{
 									
 		$html .= '<p style="text-align: center; margin-top: 20px;">OR&Ccedil;AMENTO: '.$orcamento.'</p>';
 		$html .= '<p style="text-align: center; margin: 0px;">'.implode("/",array_reverse(explode("-",$dados['data_venda']))).'</p>';
+
+		$html .= '<p style="text-align: left; margin: 0px; margin-top: 20px"><img alt="" width="300px" src="img/logo-branco.png"></p>';
+		$html .= '<p style="text-align: left; margin: 0px;">'.$dadosCliente['nome'].'</p>';
+		$html .= '<p style="text-align: left; margin: 0px;">'.$dadosCliente['cpf'] . $dadosCliente['cnpj'].'</p>';
+		$html .= '<p style="text-align: left; margin: 0px;">'.$dadosCliente['cep'].'</p>';
+		$html .= '<p style="text-align: left; margin: 0px;">'.$dadosCliente['endereco'].', '.$dadosCliente['numero'].'</p>';
+		$html .= '<p style="text-align: left; margin: 0px;">'.$dadosCliente['bairro'].' - '.$dadosCliente['cidade'].' | '.$dadosCliente['uf'].'</p>';
 		
 		if($_REQUEST['tipo'] == '1'){
 			

@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2017-11-16 18:05:31
+<?php /* Smarty version 3.1.27, created on 2018-01-26 18:19:15
          compiled from "C:\xampp\htdocs\sisnf\app\views\login.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:3199331265a0dc55ba57442_56615434%%*/
+/*%%SmartyHeaderCode:20212150965a6b6313971fa9_43878929%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b58541dbc4aad6b00563258c11bf6cb3f7395a2f' => 
     array (
       0 => 'C:\\xampp\\htdocs\\sisnf\\app\\views\\login.tpl',
-      1 => 1508936194,
+      1 => 1516122074,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '3199331265a0dc55ba57442_56615434',
+  'nocache_hash' => '20212150965a6b6313971fa9_43878929',
   'variables' => 
   array (
     'basePath' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_5a0dc55bad6706_71107112',
+  'unifunc' => 'content_5a6b63139ef779_70252239',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_5a0dc55bad6706_71107112')) {
-function content_5a0dc55bad6706_71107112 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5a6b63139ef779_70252239')) {
+function content_5a6b63139ef779_70252239 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '3199331265a0dc55ba57442_56615434';
+$_smarty_tpl->properties['nocache_hash'] = '20212150965a6b6313971fa9_43878929';
 ?>
 
 <!DOCTYPE html>
@@ -60,14 +60,14 @@ css/signin.css" rel="styleSheet">
     <![endif]-->
   </head>
 
-  <body>
+  <body style="background-color: #fff">
 
     <div class="container">
 
       <form class="form-signin" action="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
 login/efetuar-login" method="post">
 				<img alt="logo" src="<?php echo $_smarty_tpl->tpl_vars['basePath']->value;?>
-img/logo.png" class="img-responsive" height="80%">
+img/logo-branco.png" class="img-responsive" height="80%">
         <h2 class="form-signin-heading">Login</h2>
         <input type="text" id="login" name="login" class="form-control" placeholder="Usu&aacute;rio" required autofocus>
         <input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" required>
