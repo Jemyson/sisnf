@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2018-01-22 21:49:20
+<?php /* Smarty version 3.1.27, created on 2018-02-23 23:34:05
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:8619441925a668690a9faf5_98998283%%*/
+/*%%SmartyHeaderCode:1697168675a90cf1d11d032_37855570%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7b561ed5ab4332ed28f68cb3ae3c5fca9da41b45' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/sisnf/app/views/vendaIniciar.tpl',
-      1 => 1516668015,
+      1 => 1519439643,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '8619441925a668690a9faf5_98998283',
+  'nocache_hash' => '1697168675a90cf1d11d032_37855570',
   'variables' => 
   array (
     'id' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_5a668690b19892_74837436',
+  'unifunc' => 'content_5a90cf1d18ff56_28253097',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_5a668690b19892_74837436')) {
-function content_5a668690b19892_74837436 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5a90cf1d18ff56_28253097')) {
+function content_5a90cf1d18ff56_28253097 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '8619441925a668690a9faf5_98998283';
+$_smarty_tpl->properties['nocache_hash'] = '1697168675a90cf1d11d032_37855570';
 ?>
 <?php echo '<script'; ?>
  src="https://code.jquery.com/jquery-1.12.3.min.js"><?php echo '</script'; ?>
@@ -188,7 +188,13 @@ $_smarty_tpl->properties['nocache_hash'] = '8619441925a668690a9faf5_98998283';
 
 					if(App.isset(data.registros.forma_pagamento) && data.registros.forma_pagamento != ''){
 
-						var formaPagamento = data.registros.forma_pagamento.split(';');
+						var formaPagamento = null;
+
+						if(data.registros.forma_pagamento != null){
+
+							formaPagamento = data.registros.forma_pagamento.split(';');
+						
+						}
 
 						for(var chave in formaPagamento){
 
@@ -366,7 +372,7 @@ $_smarty_tpl->properties['nocache_hash'] = '8619441925a668690a9faf5_98998283';
 							htmlProduto += '<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>';
 							htmlProduto += '</tr>';
 	
-							_this.produtos[data.produtos[chave].id_produto] = {'id':data.produtos[chave].id_produto, 'produto':data.produtos[chave].nome_produto, 'preco_venda':data.produtos[chave].valor_produto, 'qtd':data.produtos[chave].qtd_produto};
+							_this.produtos[data.produtos[chave].id_produto] = {'id':data.produtos[chave].id_produto, 'produto':data.produtos[chave].nome_produto, 'preco_venda':data.produtos[chave].valor_produto, 'qtd':data.produtos[chave].qtd_produto, 'desconto':0};
 							$('#tabelaProdutosVenda tbody').append(htmlProduto);
 							
 						}
@@ -554,6 +560,8 @@ $_smarty_tpl->properties['nocache_hash'] = '8619441925a668690a9faf5_98998283';
 
 							var produto = data.produtos;
 							
+							console.log(produto);
+							
 							$('#produto_'+produto.id).remove();
 							
 							if(_this.produtos.hasOwnProperty(produto.id)){
@@ -567,10 +575,10 @@ $_smarty_tpl->properties['nocache_hash'] = '8619441925a668690a9faf5_98998283';
 							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda(produto.preco_venda, 2,',','.')+'</td>';
 							htmlProduto += '<td style="text-align: right;">'+Formatter.moeda((produto.preco_venda * qtd), 2,',','.')+'</td>';
 							htmlProduto += '<td style="text-align: center;">n/d</td>';
-							htmlProduto += '<td style="text-align: center;"><a href="#"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>';
+							htmlProduto += '<td style="text-align: center;"><a href="javascript:venda.exibirProduto('+produto.id+')"><i class="glyphicon glyphicon-usd" style="color: green"></i></a></td>';
 							htmlProduto += '</tr>';
 	
-							_this.produtos[produto.id] = {'id':produto.id, 'produto':produto.nome, 'preco_venda':produto.preco_venda, 'qtd':qtd};
+							_this.produtos[produto.id] = {'id':produto.id, 'produto':produto.nome, 'preco_venda':produto.preco_venda, 'preco_venda_avista':produto.preco_venda_avista, 'qtd':qtd, 'desconto': 0};
 	
 							_this.atualizarQtdProdutos();
 							_this.calcularRetornoPossivel();
@@ -600,6 +608,24 @@ $_smarty_tpl->properties['nocache_hash'] = '8619441925a668690a9faf5_98998283';
 
 		}
 
+		this.exibirProduto = function(id){
+
+			$('#labelProduto').html(this.produtos[id].produto);
+			$('#labelQtd').html(this.produtos[id].qtd);
+			$('#labelPrecoVenda').html(this.produtos[id].preco_venda);
+			$('#labelPrecoAvista').html(this.produtos[id].preco_venda_avista);
+			$('#labelDesconto').html(this.produtos[id].desconto);
+			$('#labelValorTotal').html(Formatter.moeda(((this.produtos[id].preco_venda * this.produtos[id].qtd) - this.produtos[id].desconto), 2,',','.'));
+
+			console.log(this.produtos[id].valor_produto);
+			console.log(this.produtos[id].qtd_produto);
+			console.log(this.produtos[id].desconto);
+			
+			$('#modalExibirProduto').modal();
+			
+			console.log(this.produtos[id]);
+			
+		}
 			
 		this.removerProduto = function(id){
 
@@ -827,7 +853,7 @@ venda/excluir-venda';
 			e.preventDefault();
 		});
 
-
+	/*
 		var doc = new jsPDF();
 		var specialElementHandlers = {
 		    '#editor': function (element, renderer) {
@@ -887,6 +913,8 @@ venda/excluir-venda';
 	    });
 	    doc.save('sample-file.pdf');
 		});
+
+		*/
 		
 	});	
 			
@@ -1081,7 +1109,7 @@ venda">
 												<th style="text-align: center">Val unit</th>
 												<th style="text-align: center">Total</th>
 												<th style="text-align: center">Tributo</th>
-												<th style="text-align: center">A&ccedil;&otilde;es</th>
+												<th style="text-align: center"></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -1143,6 +1171,45 @@ venda">
 		      	</form>
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 		        <button type="button" class="btn btn-primary" onclick="javascript:venda.adicionarProduto()">Adicionar</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+		<div class="modal fade" tabindex="-1" role="dialog" id="modalExibirProduto">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Detalhes do Produto</h4>
+		      </div>
+		      <div class="modal-body" style="text-align: center">
+		      	<form class="form-horizontal">
+							<div class="form-group">
+						    <label for="inputEmail3" class="col-sm-3 control-label">Produto</label>
+				        <label class="col-sm-2 control-label" style="font-weight: normal" id="labelProduto" name="labelProduto"></label>
+					    </div>		
+							<div class="form-group">
+						    <label for="inputEmail3" class="col-sm-3 control-label">Qtd</label>
+				        <label class="col-sm-2 control-label" style="font-weight: normal" id="labelQtd" name="labelQtd"></label>
+					    </div>		
+							<div class="form-group">
+						    <label for="inputEmail3" class="col-sm-3 control-label">Pre&ccedil;o de Venda</label>
+				        <label class="col-sm-2 control-label" style="font-weight: normal" id="labelPrecoVenda" name="labelPrecoVenda"></label>
+					    </div>		
+							<div class="form-group">
+						    <label for="inputEmail3" class="col-sm-3 control-label">Pre&ccedil;o &agrave; Vista</label>
+				        <label class="col-sm-2 control-label" style="font-weight: normal" id="labelPrecoAvista" name="labelPrecoAvista"></label>
+					    </div>		
+							<div class="form-group">
+						    <label for="inputEmail3" class="col-sm-3 control-label">Desconto Unit&aacute;rio</label>
+				        <label class="col-sm-2 control-label" style="font-weight: normal" id="labelDesconto" name="labelDesconto"></label>
+					    </div>		
+							<div class="form-group">
+						    <label for="inputEmail3" class="col-sm-3 control-label">Total</label>
+				        <label class="col-sm-2 control-label" style="font-weight: normal" id="labelValorTotal" name="labelValorTotal"></label>
+					    </div>		
+		      	</form>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
